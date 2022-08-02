@@ -1,0 +1,46 @@
+/* components/video-button-bar.wxss */
+@import '../../../styles/me_common.wxss';
+
+
+.icon-container{
+  width: 100%;position: absolute;
+  bottom:0;left:0;
+  z-index:999;color:#fff;
+  background-color:rgba(0,0,0,0.5);
+  padding:20rpx;box-sizing:border-box;
+}
+.daizhi-img{
+  width:32rpx;height:32rpx;
+}
+.title-text{
+  font-size:32rpx;color:#fff;max-width:236rpx;
+  font-weight:bold;margin:0 10rpx;
+}
+.member-label{
+  font-size:20rpx;background-color:#FF0000;
+  padding:5rpx 10rpx;border-radius:6rpx;
+}
+
+.symbol{font-size:24rpx;color:#fff;font-weight:bold;}
+.amount-num{font-size:36rpx;color:#fff;font-weight:bold;padding-right:5rpx;}
+
+
+.introduce-box{margin-top:20rpx;}
+.introduce{
+  width:500rpx;font-size:20rpx;
+  color:#fff;
+  -webkit-line-clamp: 2;
+}
+.buy-btn{
+  font-size:26rpx;color:#fff;
+  font-weight:bold;padding:10rpx;
+  background-color:#E23E3E;
+  border-radius:8rpx;
+}
+
+
+.shop-entry{
+  position:absolute;bottom:220rpx;
+  right:30rpx;width:88rpx;height:88rpx;
+  z-index:999;
+}

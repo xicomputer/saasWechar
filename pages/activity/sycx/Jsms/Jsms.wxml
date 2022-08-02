@@ -1,0 +1,49 @@
+<!-- 秒杀头部 -->
+<view class="seckill_body">
+  <view class="seckill-top">
+    <image src="https://xssj.letterbook.cn/applet/images/seckill.png" style="width:100%;height:200rpx;display:block"></image>
+    <scroll-view scroll-x="true" >
+      <view class="seckill-time-list">
+        <view class="seckill-time-box"  wx:for="{{seckillTimeList}}" wx:key="index" bindtap="selectTime" data-index="{{index}}" data-id="{{item.id}}">
+          <view class="seckill-time {{index==timeAcitve?'seckill-time-active':''}}">{{item.startTime}}</view>
+          <view class="seckill-statu {{index==timeAcitve?'seckill-statu-active':''}}" wx:if="{{item.state==1}}">{{item.showTxet}}</view>
+          <view class="seckill-statu {{index==timeAcitve?'seckill-statu-active':''}}" wx:if="{{item.state==2}}">抢购中</view>
+          <view class="seckill-statu {{index==timeAcitve?'seckill-statu-active':''}}" wx:if="{{item.state==3}}">抢购结束</view>
+        </view>
+      </view>
+    </scroll-view>
+  </view>
+  <!-- 秒杀商品列表 -->
+  <view class="seckill-goods-list">
+    <navigator class="secklii-good-item" wx:for="{{goodsList}}" wx:key="index"
+    url="../ActivityGoodsDetail/ActivityGoodsDetail?id={{item.activityCommoditySku[0].activityCommodityId}}&seckillId={{item.seckillId}}">
+      <image class="seckill-good-img" src="{{item.commodity.thumbnail}}" mode="aspectFill" style="width:200rpx;height:200rpx"></image>
+      <view class="seckill-good-info">
+        <view class="seckill-good-top">
+          <view class="seckill-good-name">{{item.commodity.commodityName}}</view>
+          <view class="seckill-good-describe">{{item.commodity.description}}</view>
+        </view>
+        <view class="seckill-good-bottom">
+          <view class="seckill-good-price-box">
+            <view class="seckill-good-activity-price"><text style="font-size:22rpx">￥</text>{{item.activityCommoditySku[0].lowPrice}}</view>
+            <view class="seckill-good-original-price">￥{{item.activityCommoditySku[0].originalPrice}}</view>
+          </view>
+          <view class="seckill-buy-btn {{item.sold==100?'sold-all':''}}" wx:if="{{item.state==2}}">
+            <text class="seckill-buy-btn-statu">{{item.sold==100?'已售罄':'去抢购'}}</text>
+            <view class="seckill-buy-btn-bottom">
+              <view class="seckill-buy-btn-progress">
+                <view class="seckill-buy-btn-progress-statu" style="width:{{item.sold}}%"></view>
+              </view>
+              <view class="sold-num">{{item.sold}}%</view>
+            </view>
+          </view>
+          <view class="seckill-buy-btn sold-all" wx:if="{{item.state==1}}">
+            <text class="seckill-buy-btn-statu">尚未开始</text>
+          </view>
+        </view>
+      </view>
+    </navigator>
+  </view>
+  <!-- 底部 -->
+  <view class="daodile"><text>——信书技术支持——</text></view>
+</view>

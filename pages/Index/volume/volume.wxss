@@ -1,0 +1,129 @@
+/* pages/shopHome/components/volume/volume.wxss */
+/* 新优惠券弹窗样式 */
+page {
+  min-height: 100%;
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  background-color: #f7f7f7 !important;
+}
+
+.coupon-window-bgc {
+  position: fixed;
+  background-color: rgba(43, 43, 43, 0.274);
+  top: 0;
+  right: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.coupon-window-bgc .coupon-window {
+  width: 600rpx;
+  height: 1148rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.coupon-window-bgc .coupon-window .accept {
+  width: 324rpx;
+  height: 88rpx;
+  margin-top: 15rpx;
+  z-index: 30;
+}
+
+.coupon-window-bgc .coupon-window .coupon-image {
+  position: absolute;
+  top: 0;
+  width: 600rpx;
+  height: 974rpx;
+}
+
+.coupon-window-bgc .coupon-window .coupon-image-shadow {
+  position: absolute;
+  bottom: 26px;
+  width: 605rpx;
+  height: 1144rpx;
+  z-index: 24;
+}
+
+.coupon-window-bgc .coupon-window .coupon-content-container {
+  width: 536rpx;
+  max-height: 600rpx;
+}
+
+.coupon-window-bgc .coupon-window .coupon-content-container .coupon-content-single {
+  justify-content: space-between;
+  display: flex;
+  position: relative;
+  margin-bottom: 10rpx;
+  width: 540rpx;
+  height: 140rpx;
+}
+
+.coupon-window-bgc .coupon-window .coupon-content-container .coupon-content-single>image {
+  position: absolute;
+  top: 0;
+  width: 535rpx;
+  height: 132rpx;
+}
+
+.coupon-window-bgc .coupon-window .coupon-content-container .coupon-content-single .price {
+  position: relative;
+  left: -3rpx;
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 155rpx;
+  height: 130rpx;
+}
+
+.coupon-window-bgc .coupon-window .coupon-content-container .coupon-content-single .price text:nth-of-type(1) {
+  color: #E81D31;
+  font-size: 26rpx;
+  margin: 10px -2px 0 0px;
+}
+
+.coupon-window-bgc .coupon-window .coupon-content-container .coupon-content-single .price text:nth-of-type(2) {
+  color: #E81D31;
+  font-size: 48rpx;
+  font-weight: 500;
+  letter-spacing: -1rpx;
+}
+
+.coupon-window-bgc .coupon-window .coupon-content-container .coupon-content-single .text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  z-index: 1;
+  top: 0;
+  width: 400rpx;
+  height: 140rpx;
+  left: 30rpx;
+}
+
+.coupon-window-bgc .coupon-window .coupon-content-container .coupon-content-single .text text:nth-of-type(1) {
+  font-size: 33rpx;
+  color: #AB3007;
+}
+
+.coupon-window-bgc .coupon-window .coupon-content-container .coupon-content-single .text text:nth-of-type(2) {
+  font-size: 22rpx;
+  letter-spacing: 2rpx;
+  color: #ff926e;
+}
+
+.close {
+  width: 68rpx;
+  height: 68rpx;
+  margin-top: 60rpx;
+}
+
+

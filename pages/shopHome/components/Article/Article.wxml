@@ -1,0 +1,15 @@
+
+<view style="margin-top:40rpx">
+    <view class="Article me-fx-col">
+        <block wx:for="{{ArticleList}}" :key="{{index}}">
+            <view class="me-fx-row" bindtap="toWebViewPage" data-link='{{item.linkurl}}' >
+                <image mode='aspectFit'  class='culture-img' src='{{item.articlecover}}'></image>
+                <view class="me-fx-col me-fx-sb Article_info">
+                    <text class="culture_title me-full-text">{{item.articletitle}}</text>
+                    <text class="culture_time">{{item.createtime}}</text>
+                </view>
+            </view>
+            <view wx:if="{{ArticleList.length-1!=index}}" class="line"></view>
+        </block>
+    </view>
+</view>

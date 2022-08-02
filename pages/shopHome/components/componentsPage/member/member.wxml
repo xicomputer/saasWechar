@@ -1,0 +1,50 @@
+
+
+<view>
+    <!-- 会员 -->
+    <view style="background:#fff;min-height:100vh">
+    <!-- 会员信息 -->
+    <!-- 会员信息 -->
+<view>
+  <navigator class="member-info" url="/pages/member/card/card?marchantId={{marchantId}}" style="background-image:url({{detailData.memberLeve?'https://xssj.letterbook.cn/applet/images/goods_member_card_bg.png':'https://xssj.letterbook.cn/applet/images/good_member_card_bg.png'}})">
+  <view class="member-content">
+    <view wx:if="{{detailData.memberLeve}}" class="member-text">
+      {{detailData.memberLeve.name}}
+      <text style="font-size:20rpx" wx:if="{{detailData.memberLeve.discount<10}}">（当前会员享受{{detailData.memberLeve.discount}}折折扣）</text>
+      <text style="font-size:20rpx" wx:if="{{detailData.memberLeve.discount==10}}">（升级会员等级享受优惠！）</text>
+    </view>
+    <view wx:if="{{!detailData.memberLeve}}" class="member-text">
+      未激活会员
+      <text style="font-size:20rpx">（点击这里，快速激活）</text>
+    </view>
+  </view>
+  <view class="member-bottom-text">商家发起活动时如商家价格低于会员价以活动价为优先</view>
+</navigator>
+</view>
+    <!-- 浮窗 -->
+    <view class="right-bottom-btn-container">
+        <image class="right-bottom-btn-img" bindtap="toMember" src="/pages/img/index/right_bottom_icon1.png"></image>
+    </view>
+    <view wx:if="{{!memberGoodsList.length}}" class="no-dynamic me-fx-col me-fx-c-c">
+        <image class="no-dynamic-img" src="https://xssj.letterbook.cn/applet/images/sj_no_data_img0.png"></image>
+        <view class="no-dynamic-text">暂无会员商品</view>
+    </view>
+    <view class='member-goods-list' wx:else>
+        <view class='me-fx-row goods-item-box'  bindtap="goshop" data-id="{{item.id}}" data-name="{{item.commodityName}}" wx:for="{{memberGoodsList}}" wx:key="index">
+        <image class='goods-img' src='{{item.thumbnail}}'></image>
+        <view class='me-fx-col me-fx-sb goods-info'>
+            <view class='goods-item-top'>
+            <view class='me-fx-row me-fx-start-c'>
+                <view class='goods-name'>{{item.commodityName}}</view>
+            </view>
+            <view class='introduce'>{{item.description}}</view>
+            </view>
+            <view class='me-fx-row me-fx-sb-c goods-item-price'>
+            <view class='price-str'>￥<text class='price-num'>{{ item.lowPrice }}</text></view>
+            <image src='../../../../static/cart.png' class='item-cart'></image>
+            </view>
+        </view>
+        </view>
+    </view>
+    </view>
+</view>

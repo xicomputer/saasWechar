@@ -1,0 +1,126 @@
+<!--pages/smallShop/Scart/Scart.wxml-->
+
+<view class="index">
+  <image class="xiaoxingxing" animation="{{animation1}}" src="/pages/img/smallShop/1.png"></image>
+  <image class="xiaoxingxing" animation="{{animation1}}" style="left:660rpx" src="/pages/img/smallShop/2.png"></image>
+  <image class="xiaoxingxing" animation="{{animation1}}"style="left:680rpx" src="/pages/img/smallShop/3.png"></image>
+  <menu navs="{{navs}}" cartnum="{{cartNum}}" />
+  <view class="index-head">
+    <view class="index-head-left">
+      <image src="{{userInfoSj.headImgUrl}}" mode="aspectFill" class="index-head-left-img"></image>
+      <view class="index-head-left-info">
+        <view class="index-head-left-info-name">{{userInfoSj.nickName}}的小店</view>
+        <view class="index-head-left-info-desc">
+          <view class="index-head-left-info-desc-text">人缘口碑</view>
+          <view class="index-head-left-info-desc-starList">
+            <image src="/pages/img/smallShop/star_s.png" class="index-head-left-info-desc-starItem" wx:for="{{5}}" wx:key="index"></image>
+          </view>
+        </view>
+        <view class="index-head-left-info-desc">
+          <view class="index-head-left-info-desc-text">颜值指数</view>
+          <view class="index-head-left-info-desc-starList">
+            <image src="/pages/img/smallShop/star_s.png" class="index-head-left-info-desc-starItem" wx:for="{{5}}" wx:key="index"></image>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="index-head-right">
+      <view class="index-head-right-item" style="margin-left:0rpx">
+        <view class="index-head-right-item-upText">点赞数</view>
+        <image src="/pages/img/smallShop/like.png" class="index-head-right-item-icon" animation="{{animation}}"></image>
+        <view class="index-head-right-item-downText">{{userInfoSj.praise}}</view>
+      </view>
+      <view class="index-head-right-item" bindtap="share">
+          <view class="index-head-right-item-upText">分享</view>
+          <image src="/pages/img/smallShop/shop_icon.png" class="index-head-right-item-icon"></image>
+      </view>
+      <view class="index-head-right-item" >
+          <view class="index-head-right-item-upText">收藏数</view>
+          <image src="/pages/img/smallShop/star_b.png" class="index-head-right-item-icon"></image>
+          <view class="index-head-right-item-downText" wx:if="{{countFavoriteUser>0}}">{{countFavoriteUser}}</view>
+      </view>
+    </view>
+  </view>
+  <view class="index-content">
+    <!-- <view class="index-content-title">
+      <view class="index-content-title-recommend">推荐</view>
+      <image src="/pages/img/smallShop/star.png" wx:if="{{!isFavorite}}" bindtap="operaFavorite" class="index-content-title-icon"></image>
+      <image src="/pages/img/smallShop/star_b.png" wx:if="{{isFavorite}}" bindtap="operaFavorite" class="index-content-title-icon"></image>
+      <view class="index-content-title-text" wx:if="{{isFavorite}}">您已收藏小店</view>
+      <view class="index-content-title-text" wx:if="{{!isFavorite}}" bindtap="operaFavorite">收藏TA的小店</view>
+    </view> -->
+    <view class="index-content-title" wx:if="{{userList.length}}">
+      <view style="display:flex;align-items:center">
+        <!-- <van-icon name="browsing-history" color="#f5a283"  size="50rpx" /> -->
+        <image src="/pages/img/smallShop/small_shop.png" style="width:53rpx;height:53rpx"></image>
+        <view class="index-content-title-tag">
+          <text style="margin-bottom:10rpx">小店</text>
+          <text>访客</text>
+        </view>
+      </view>
+      <scroll-view scroll-x="true" class="user-list">
+        <view class="user-item">
+          <image src="{{item.headimgurl}}"  class="index-content-title-image" wx:for="{{userList}}"   wx:key='index'></image>
+        </view>
+      </scroll-view>
+    </view>
+    <scroll-view scroll-y="true"  class="index-content-content" refresher-enabled="true" bindscrolltolower="goodsTobottom" bindrefresherrefresh="refrenshHotSale" refresher-triggered="{{isLoad}}"> 
+      <view class="index-content-content-data">       
+        <view class="store-no-good" wx:if="{{goodsList.length==0}}">
+           <image class="no-data-img" style="width: 326rpx;height: 278rpx;margin-top:60rpx;" src="https://xssj.letterbook.cn/applet/images/no_shop.png"></image>
+           <view class="no-good-text">您的小店还没有商品</view>
+        </view>
+        
+        <view class="index-content-content-data-item" url="/pages/Index/GoodsDetails/GoodsDetails?id={{item.commodityId}}&sid={{item.tempSpecId}}&pid={{item.saleUniqueId}}&form=store&storeId={{storeId}}" wx:for="{{goodsList}}" wx:key='index'>
+          <image hidden="{{!item.isHotSale}}" src="/pages/img/smallShop/hot_bg.png" style="width:160rpx;height:160rpx;position:absolute;right:0;top:0;z-index:99"></image>
+          <image src="{{item.imagList[0]}}" class="index-content-content-data-item-logo" mode="aspectFill">
+            <view class="count-down-box" wx:if="{{item.countdown}}" hidden="{{item.ishide}}">
+              <text style="margin: 0 14rpx">活动倒计时</text>
+              <van-count-down time="{{ item.countdown  }}" bind:finish="finishedCountDown" data-idx="{{index}}" format=" HH : mm : ss " />
+            </view>
+          </image>
+          <view class="index-content-content-data-item-info">
+            <view class="index-content-content-data-item-info-name">{{item.commodityName}}</view>
+            <view class="index-content-content-data-item-info-foot">
+              <view class="index-content-content-data-item-info-foot-price">¥{{item.activityType?item.lowPrice:item.originalPrice}}</view>
+              <view class="scartDel">
+                <!-- <image  bindtap="shareScart" data-source="{{item}}" src='/pages/img/smallShop/share.png' style="width:32rpx;height:32rpx;margin-right:40rpx;"></image> -->
+                <image  bindtap="showManagement" data-source="{{item}}" src='/pages/img/smallShop/guanli.png' style="width:32rpx;height:32rpx;"></image>
+              </view>
+            </view>
+          </view>
+          <!-- 管理商品 -->
+          <view class="management-container" hidden="{{!item.showManage}}">
+            <view class="management-item management-item-bottom" bindtap="setHot">
+              <image src="/pages/img/smallShop/hot.png" style="width:32rpx;height:32rpx;margin:0 30rpx 0 14rpx"></image>
+              <view class="management-text">{{item.isHotSale?'取消热销':'设为热销'}}</view>
+            </view>
+            <!-- <view class="management-item management-item-bottom" bindtap="setActivity">
+              <image src="/pages/img/smallShop/setmanage.png" style="width:32rpx;height:32rpx;margin:0 30rpx 0 14rpx"></image>
+              <view class="management-text">设置抢购</view>
+            </view> -->
+            <view class="management-item" bindtap="delScart">
+              <image src="/pages/img/scartDel.png" style="width:32rpx;height:32rpx;margin:0 30rpx 0 14rpx"></image>
+              <view class="management-text">移除商品</view>
+            </view>
+          </view>
+          <!-- end index-content-content-data-item-info-->
+        </view>
+      </view>
+    </scroll-view>
+  </view>
+  
+    
+</view>
+<view class="foot">
+        <view class="foot_table me-fx-row">
+            <view class="me-fx-col me-fx-1 me-fx-c-c br-r" bindtap="goSmallIndex">
+                <image class="foot_table_img" src="/static/image/tabbar/tabbar_01.png"></image>
+                <text>首页</text>
+            </view>
+            <view class="me-fx-col me-fx-1 me-fx-c-c " bindtap="goScart">
+                <image class="foot_table_img" src="/static/image/tabbar/scartHover.png"></image>
+                <text class="cur">小店</text>
+            </view>
+        </view>
+    </view>

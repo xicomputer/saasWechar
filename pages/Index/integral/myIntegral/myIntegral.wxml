@@ -1,0 +1,52 @@
+<view class="my-integral-container">
+  <!-- 时间选择头部 -->
+  <view class="integral-time-select-container">
+    <view class="integral-time-bg">
+      <view class="integral-content-box">
+        <view class="start-time-box" bindtap="slectTime" data-type="1">
+          <text class="time-text">{{startTime}}</text>
+          <image src="/pages/img/index/arrow.png" class="time-select-img"></image>
+        </view>至
+        <view class="start-time-box" bindtap="slectTime" data-type="2">
+          <text class="time-text">{{endTime}}</text>
+          <image src="/pages/img/index/arrow.png" class="time-select-img"></image>
+        </view>
+      </view>
+      <image bindtap="getMyInteList" style="width:86rpx;height:54rpx;margin-left:4rpx" src="/pages/img/index/inqurey.png"></image>
+    </view>
+  </view>
+  <!-- 积分列表 -->
+  <scroll-view scroll-y="true" class="integral-list-box">
+    <view class="integral-list" wx:if="{{scoreList.length}}">
+      <view class="integral-item" wx:for="{{scoreList}}" wx:key="index">
+        <view class="integral-top">
+          <view class="integral-title" wx:if="{{item.source==1}}">发表动态</view>
+          <view class="integral-title" wx:if="{{item.source==2}}">购买商品</view>
+          <view class="integral-title" wx:if="{{item.source==3}}">商品转发</view>
+          <view class="integral-title" wx:if="{{item.source==4}}">店铺转发</view>
+          <view class="integral-title" wx:if="{{item.source==5}}">积分转发</view>
+          <view class="integral-title" wx:if="{{item.source==6}}">打卡签到</view>
+          <view class="integral-change">+{{item.score}}</view>
+        </view>
+        <view class="integral-bottom">{{item.description}}</view>
+      </view>
+    </view>
+    <view wx:if="{{!scoreList.length}}" class="no-dynamic">
+        <image class="no-dynamic-img" src="/pages/img/no_notice.png"></image>
+        <view class="no-dynamic-text">没有此时间段的数据</view>
+    </view>
+  </scroll-view>
+</view>
+<!-- 时间选择 -->
+<van-popup show="{{ showTimeSelect }}" bind:close="closeSelect" position="bottom">
+    <van-datetime-picker
+    type="date"
+    title="请选择年月日"
+    value="{{ currentDate }}"
+    bind:confirm="onInput"
+    bind:cancel="closeSelect"
+    min-date="{{ minDate }}"
+    max-date="{{ maxDate }}"
+    formatter="{{ formatter }}"
+  />
+</van-popup>

@@ -1,0 +1,71 @@
+<!--pages/shopHome/activity/activity.wxml-->
+<!--pages/shopHome/components/componentsPage/activity/activity.wxml-->
+<!-- 活动 -->
+<view class="activity-container">
+  <!-- 喊价 -->
+  <view class="activity-container-type" wx:if="{{auctionList.length}}">
+    <view class="activity-container-top">
+      <text>喊价商品进行中</text>
+      <navigator class="activity-container-top-right" url="/pages/activity/pmhd/list/list?merchantId={{marchantId}}">查看更多>></navigator>
+    </view>
+    <view class="activity-container-goods-box">
+      <block wx:for="{{auctionList}}" wx:key="index">
+        <navigator url="/pages/activity/pmhd/details/details?auctionId={{item.auctionId}}" class="activity-container-item">
+          <image src="{{item.logoImg}}" mode="aspectFill" style="width:100%;height:320rpx;position:relative">
+            <!-- 预约人数 -->
+            <view class="subscribe-box" wx:if="{{item.status == 1}}">预约人数:{{item.reserveNumber||0}}</view>
+            <!-- 起步价 -->
+            <view class="subscribe-box"  wx:if="{{item.status == 2}}" style="background: linear-gradient(180deg, #FA5151 0%, #FF0000 100%);">起歩价:{{item.xsAuctionItem.startingPrice||0}}</view>
+          </image>
+          <view class="activity-container-item-content">
+            <!-- 开喊时间 -->
+            <view class="paimai-time" bind:finish="getAuctionList" wx:if="{{item.status==1}}" style="background:#07C160">
+              <van-count-down time="{{ item.startTime }}" format="开喊时间: DD天HH:mm:ss"></van-count-down>
+            </view>
+            <!-- 距喊品结束 -->
+            <view class="paimai-time" bind:finish="getAuctionList" wx:if="{{item.status==2}}">
+              <van-count-down time="{{ item.endTime1 }}" format="距离喊价结束:DD天HH:mm:ss"></van-count-down></view>
+            <!-- 已结束 -->
+            <view class="paimai-time"  wx:if="{{item.status==3}}" style="background:#999">已结束 {{item.endTime}}</view>
+            <view class="activity-container-item-name">{{item.xsAuctionItem.auctionItemName}}</view>
+            <view class="activity-container-item-explain">{{item.xsAuctionItem.description}}</view>
+            <view class="activity-container-bottom">
+              <view class="activity-container-price">
+                <text style="font-size:24rpx">{{item.auctionPrice? item.status == 3 ? '成交价' :'当前价':'起步价'}}：￥</text>
+                {{item.auctionPrice||item.xsAuctionItem.startingPrice||0}}</view>
+              <view wx:if="{{item.status == 3}}" class="activity-container-btn" style="background: #999999;">已结束</view>
+              <view wx:else class="activity-container-btn">参与</view>
+            </view>
+          </view>
+        </navigator>
+      </block>
+    </view>
+  </view>
+
+
+  <!-- 促销 -->
+  <view class="activity-container-type" wx:if="{{saleGoodsList.length}}">
+    <view class="activity-container-top">
+      <text>促销商品进行中</text>
+      <navigator class="activity-container-top-right" url="/pages/Index/saleList/saleList?marchantId={{marchantId}}&orderType={{orderType}}">查看更多>></navigator>
+    </view>
+    <view class="sale-container-goods-box">
+      <navigator class="sale-container-item" wx:for="{{saleGoodsList}}" wx:key="index" url="/pages/Index/GoodsDetails/GoodsDetails?id={{item.id}}&sid={{item.tempSpecId}}">
+        <image src="{{item.thumbnail}}" mode="aspectFill" style="width:200rpx;height:200rpx;border-radius: 20rpx;"></image>
+        <view class="sale-container-item-content">
+          <view class="sale-container-top">
+            <view class="sale-container-item-name">{{item.commodityName}}</view>
+            <view class="sale-container-item-explain">{{item.description}}</view>
+          </view>
+          <view class="sale-container-bottom">
+            <view class="sale-container-price">
+              <text style="font-size:24rpx">￥</text>{{item.activityType==1?item.lowPrice:item.originalPrice}}</view>
+            <view class="sale-container-btn"  catchtap="goBuy" data-item="{{item}}">购买</view>
+          </view>
+        </view>
+      </navigator>
+    </view>
+  </view>
+  <no-data wx:if="{{!saleGoodsList.length&&!auctionList.length}}" text="暂无活动" url="https://xssj.letterbook.cn/applet/images/sj_no_data_img1.png"></no-data>
+</view>
+

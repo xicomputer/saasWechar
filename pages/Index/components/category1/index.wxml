@@ -1,0 +1,36 @@
+<view class="category">
+  <view class="item" wx:for="{{goodsList}}" wx:for-index="key" wx:key="index"
+    wx:if="{{item.commodityList.length>0}}">
+    <view class="title">
+      <view class="left">
+        <view class="tips"></view>
+        <view class="name">{{item.classifyName}}系列</view>
+      </view>
+      <navigator
+        url="/pages/Index/GoodsList/GoodsList?category={{item.classifyName}}&marchantId={{marchantId}}&classifyId={{item.id}}&orderType={{orderType}}"
+        class="right">
+        <view class="more">更多</view>
+        <image src="/pages/img/my/more.png" class="img" />
+      </navigator>
+    </view>
+    <scroll-view scroll-x style="height: 325rpx;">
+      <view style="display: flex;">
+        <navigator url="/pages/Index/GoodsDetails/GoodsDetails?id={{item.id}}" wx:for="{{item.commodityList}}"
+          wx:key="index">
+          <view class="content">
+            <view class="left">
+              <image class="img" src="{{item.thumbnail}}" mode="aspectFill" />
+            </view>
+            <view class="right">
+              <view class="name">{{item.commodityName}}</view>
+              <view class="price">￥<text
+                  class="money">{{item.activityType==1||(item.activityType==2&&item.isMember)?item.lowPrice:item.originalPrice}}</text>
+              </view>
+              <view class="desc">产品介绍：{{item.description}}</view>
+            </view>
+          </view>
+        </navigator>
+      </view>
+    </scroll-view>
+  </view>
+</view>

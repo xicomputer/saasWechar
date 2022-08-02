@@ -1,0 +1,200 @@
+.application {
+  width: 100%;
+  min-height: 100vh;
+  padding-bottom: 66rpx;
+}
+
+.application_video {
+  width: 100%;
+  vertical-align: bottom;
+}
+
+.application_image image {
+  width: 100%;
+  height: 1000rpx;
+  vertical-align: bottom;
+}
+
+.application_image image:nth-child(7) {
+  width: 100%;
+  height: 869rpx;
+  vertical-align: bottom;
+}
+
+/* 注册 */
+.register{
+  margin: 0 auto 160rpx;
+  padding: 6rpx;
+  width: 405rpx;
+  height: 129rpx;
+  background: #F8E8C0;
+  background-color: rgba(248,232,192,0.6);
+  border-radius: 20rpx;
+  box-sizing: border-box;
+}
+.register_box{
+  width: 100%;
+  height: 100%;
+  border: 2rpx dashed #E9BF78;
+  border-radius: 20rpx;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+.register_text{
+  font-size: 30rpx;
+  font-weight: 500;
+  color: #2C1300;
+}
+/* 按钮 */
+.application_btn {
+  width: 100%;
+  text-align: center;
+  position: relative;
+}
+
+.application_btn image {
+  text-align: center;
+  width: 100%;
+  height: 150rpx;
+  position: relative;
+}
+
+.application_btn button {
+  height: 92rpx;
+  border-radius: 50rpx;
+  position: absolute;
+  top: 24rpx;
+  left: 34rpx;
+  right: 34rpx;
+  opacity: 0.1;
+}
+
+.application_btn view {
+  height: 92rpx;
+  border-radius: 50rpx;
+  position: absolute;
+  top: 24rpx;
+  left: 34rpx;
+  right: 34rpx;
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+/* 文档 */
+.application_doc {
+  font-size: 12px;
+  font-weight: 400;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.application_doc image {
+  width: 24rpx;
+  height: 24rpx;
+}
+
+.application_doc span{
+  color: #666;
+  margin-left: 12rpx
+}
+
+/* 联系我们 */
+.application_contactus {
+  width: 60%;
+  font-size: 14px;
+  font-weight: 400;
+  color: rgba(51, 51, 51, 1);
+  margin: 0 auto;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-top: 40rpx;
+}
+
+.application_contactus image {
+  width: 30rpx;
+  height: 30rpx;
+}
+
+.application_contactus_tel {
+  margin-left: 20rpx;
+  font-size: 28rpx;
+  font-weight: 400;
+  color: rgba(51, 51, 51, 1);
+}
+
+
+
+/* 平台分类 */
+.application_class {
+  padding: 0 30rpx;
+}
+
+.application_class_head {
+  display: flex;
+  justify-content: space-between;
+}
+
+.application_class_title {
+  font-size: 30rpx;
+  color: #222222;
+}
+
+.application_class_desc {
+  font-size: 20rpx;
+  color: #FF0000;
+  margin-top: 10rpx;
+}
+
+.application_class_icon {
+  font-size: 24rpx;
+  color: #E9354D;
+  display: flex;
+  align-items: center;
+}
+
+.upTriangle {
+  width: 0;
+  height: 0;
+  border-right: 12rpx solid transparent;
+  border-left: 12rpx solid transparent;
+  border-bottom: 14rpx solid red;
+}
+
+.downTriangle {
+  width: 0;
+  height: 0;
+  border-right: 12rpx solid transparent;
+  border-left: 12rpx solid transparent;
+  border-top: 14rpx solid red;
+}
+
+.application_class_content {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.application_class_content_item {
+  white-space: nowrap;
+  font-size: 25rpx;
+  font-weight: 400;
+  line-height: 34rpx;
+  padding: 15rpx 30rpx;
+  margin: 20rpx 20rpx 0 0;
+  box-sizing: border-box;
+}
+
+.application_class_content_item_noActive {
+  background: #F8F8FB;
+  border: 2rpx solid #E2E2E2;
+  color: #999999;
+}
+
+.application_class_content_item_isSctive {
+  background: #DAB47E;
+  border: 2rpx solid #DAB47E;
+  color: #FFFFFF;
+}

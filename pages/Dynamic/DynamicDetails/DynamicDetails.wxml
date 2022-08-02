@@ -1,0 +1,77 @@
+<!-- 我的动态 -->
+<view style="width:100%;height:1rpx;background:#e5e5e5"></view>
+<view class="dynamic-item">
+  <view class="dynamic-top">
+    <view class="touxiang-box"> 
+      <image class="my-touxiang" src="{{commentListItem.userInfo.headimgurl}}"></image>
+      <image wx:if="{{commentListItem.userInfo.sex==1}}" class="sex" src="../../img/man.png"></image>
+      <image wx:if="{{commentListItem.userInfo.sex==2}}" class="sex" src="../../img/woman.png"></image>
+    </view>
+    <view class="my-info-box">
+      <view class="name-box">
+        {{commentListItem.userInfo.nickname}}
+        <!-- <image class="set" src="../../img/set.png"></image> -->
+      </view>
+      <view class="autograngh">{{commentListItem.userInfo.signature}}</view>
+    </view>
+  </view>
+  <rich-text nodes="{{commentListItem.content}}" class="dynamic-text"></rich-text>
+  <view class="dynamic-img-list">
+    <image class="dynamic-img-item" mode="aspectFill" wx:for="{{commentListItem.picture}}" wx:for-item="pitem" wx:for-index="pindex" wx:key="pindex" src="{{pitem}}"  bindtap="imgClick" data-list="{{commentListItem.picture}}" data-src="{{pitem}}"></image>
+  </view>
+  <view class="dynamic-bottom">
+    <view class="dynamic-time">{{commentListItem.addTime}}</view>
+    <view class="dynamic-zan-box">
+      <view class="comment">
+        <image style="width:30rpx;height:28rpx" src="../../img/comment.png"></image>
+        <view class="comment-text">{{commentListItem.reply==0?'评论':commentListItem.reply}}</view>
+      </view>
+      <view class="comment dianzan" bindtap="liketap" data-id="{{commentListItem.id}}" data-index="{{0}}">
+        <image style="width:30rpx;height:28rpx;" wx:if="{{commentListItem.isPraise}}" src="../../img/gooded.png"></image>
+        <image style="width:30rpx;height:28rpx" wx:else src="../../img/good.png"></image>
+        <view class="comment-text">{{commentListItem.praise==0?'赞':commentListItem.praise}}</view>
+      </view>
+    </view>
+  </view>
+</view>
+<!-- 评论 -->
+<view class="discuss-box">
+  <view class="discuss-top">精彩评论</view>
+  <view class="discuss-item" wx:for="{{commentReply}}" wx:for-item="item" wx:for-index="index" wx:key="index">
+    <image style="width:60rpx;height:60rpx;border-radius:50%" 
+    bindtap="reply" 
+    data-id="{{item.id}}"
+    data-name="{{item.userInfo.nickname}}"
+    data-userid="{{item.userId}}"
+    src="{{item.isMarchant==0?item.userInfo.headimgurl:item.userInfo.logoPic}}"
+    ></image>
+    <view class="discuss-content">
+      <view class="discuss-nickname">{{item.userInfo.nickname}}</view>
+      <view class="discuss-text">{{item.content}}</view>
+      <view class="discuss-detail" wx:if="{{item.replytoreply.length!=0}}">
+        <view class="discuss-detail-box huifu-box"
+         wx:for="{{item.replytoreply}}" 
+         wx:for-item="ritem" 
+         wx:for-index="rindex" 
+         wx:key="rindex"
+         bindtap="reply" 
+         data-id="{{item.id}}"
+         data-name="{{ritem.userName}}"
+         data-userid="{{ritem.userId}}"
+         >
+          <text class="discuss-nickname">{{ritem.userName}}</text>
+          <text class="discuss-huifu">回复</text>
+          <text class="discuss-nickname">{{ritem.userReplyName}}:</text>
+          <text class="discuss-huifu">{{ritem.content}}</text>
+        </view>
+      </view>
+      <view class="discuss-time">{{item.addTime}}</view>
+    </view>
+  </view>
+</view>
+<!-- 发布评论 -->
+<view class="release-dynamic-box">
+  <input maxlength="80" placeholder="{{fabu}}" value="{{value}}" focus="{{isfocus}}" bindinput="getvalue" placeholder-style="font-size:24rpx;font-weight:400;color:#033333;" class="release-dynamic-input"></input>
+  <view class="release-dynamic-btn" bindtap="fasong">发表</view>
+</view>
+<van-toast id="van-toast" />

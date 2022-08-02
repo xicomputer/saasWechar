@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText":"",
+  "usingComponents": {
+    "van-popup": "@vant/weapp/popup/index",
+    "van-count-down": "@vant/weapp/count-down/index"
+  }
+}

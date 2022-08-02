@@ -1,0 +1,25 @@
+<!--pages/shopHome/column/column.wxml-->
+<view class="goods-list">
+    <view class="me-fx-col list-container2">
+    <view class="me-fx-row goods2" bindtap="goshop" data-id="{{item.commodityId}}" data-name="{{item.commodityName}}"  wx:for='{{recommends}}' wx:key='index'>
+        <image src='{{item.thumbnail}}' class='goods2-img'></image>
+        <view class="goods2-info me-fx-1 me-fx-col me-fx-sb">
+            <view>
+                <view class='describe-text'>{{item.commodityName}}</view>
+                <view class="describe-desc">{{item.description}}</view>
+            </view>
+            <view class="me-fx-row me-fx-start-c me-fx-sb">
+            <view class='price-box'>￥<text class='price-num'>{{item.lowPrice}}</text></view>
+            <view class="btn_cart11 me-fx-row me-fx-start-c">
+                <image class="cart-img2" src="../../static/cart11.png"></image>
+                <text>{{btnTitle}}</text>
+            </view>
+            </view>
+        </view>
+    </view>
+</view>
+<!-- <view class="share-box me-fx-col me-fx-c-c"  bindtap="{{detailData.subscribe?'':'showDingYue'}}">
+        <image src="{{detailData.subscribe?'https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/static/shop-dingyue-not.png':'https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/static/shop-dingyue-Ok.png'}}" class="goods-share-icon" />
+        <text>{{detailData.subscribe?'已通知':'商品变更通知'}}</text>
+    </view> -->
+</view>

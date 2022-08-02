@@ -1,0 +1,183 @@
+<view>
+  <view class="swiper-container">
+  <swiper indicator-dots="true" autoplay="true" interval="3000" style="height:500rpx;" indicator-active-color="#fff">
+    <block wx:for="{{detailData.commodity.imagList}}" wx:key="index">
+      <swiper-item>
+        <image src="{{item}}"  style="width:100%;height:500rpx" mode="aspectFill" data-list="{{detailData.commodity.imagList}}" data-src="{{item}}" bindtap="imgClick" />
+      </swiper-item>
+    </block>
+  </swiper>
+  <view class="count-down"  wx:if="{{!isApp}}">
+    <van-count-down wx:if="{{detailData.state==2}}" time="{{ time }}" class="aaa" format="距活动结束还剩：DD 天 HH 时 mm 分 ss 秒" bind:finish="countDownOver" data-state="2" />
+    <van-count-down wx:if="{{detailData.state==1}}" time="{{ time }}" class="aaa" format="距活动开始还剩：DD 天 HH 时 mm 分 ss 秒" bind:finish="countDownOver" data-state="1"/>
+  </view>
+</view>
+<view class="goods-head">
+  <view class="goods-price" style="width:100%" wx:if="{{detailData.commodity.activityType==0}}">
+    <view style="font-size: 14px;">￥<text class="price">{{DefaultSpec.originalPrice}}</text></view>
+    <view class="share-box"  bindtap="showShare">
+      <image src="../../img/share.png" class="goods-share-icon" />
+      分享
+    </view>
+  </view>
+  <van-sticky style="width:100%" wx:else>
+  <!-- https://xssj.letterbook.cn/applet/images/sale_bg.png -->
+    <view class="goods-sale-price-content"  wx:if="{{detailData.commodity.activityType==1}}" style="background-image: url(https://xssj.letterbook.cn/applet/images/sale_bg1.png);">
+      <view class="goods-price-box">
+        <view class="no-sale-box">
+          ￥<text class="origin-price">{{DefaultSpec.lowPrice}}</text>
+        </view>
+        <view class="sale-box">
+          ￥<text style="text-decoration: line-through; margin-left: 5px;">{{DefaultSpec.originalPrice}}</text>
+        </view>
+      </view>
+      <view class="sale-text">{{detailData.commodity.commodityName}}</view>
+    </view>
+  </van-sticky>
+</view>
+<view
+  wx:if="{{detailData.commodity.activityType==0}}"
+  class="goods-title"
+  >
+  <image src="../../img/ziying.png" class="ziying" />{{detailData.commodity.commodityName}}
+</view>
+<view wx:if="{{detailData.commodity.activityType==0}}" class="goods-subtitle">{{detailData.commodity.description}}</view>
+<view wx:if="{{detailData.commodity.activityType}}" class="goods-subtitle-pro">
+  <view class="des-box">
+    <image src="../../../img/ziying.png" class="ziying" />
+    {{detailData.commodity.description}}
+  </view>
+  <view class="share-box"  bindtap="showShare">
+    <image src="../../../img/share.png" class="goods-share-icon" />
+    分享
+  </view>
+</view>
+<!--间隔-->
+<view class="fenge1"></view>
+<view class="label" wx:if="{{detailData.commodity.labels.length!=0&&detailData.commodity.labels!=null}}" bindtap="showLabel">
+  <view style="display:flex;flex:1">
+    <text style="color:#E7A124;font-weight:bold;margin-right:10rpx">放心购</text>
+    <view class="label-item" wx:for="{{detailData.commodity.labels}}" wx:key="index">
+      <image src="../../../img/hdui.png" class="hdui" />
+      <view class="label-text">{{item}}</view>
+    </view>
+  </view>
+  <image style="width:11rpx;height:20rpx;" src="../../../img/back-icon.png"></image>
+</view>
+
+<!-- 运费 -->
+<view class="freight-box">
+  <text style="font-weight:bold;color:#333">运费</text>
+  <text>运费</text>
+</view>
+<!--间隔-->
+<view class="fenge1"></view>
+<!-- 库存 -->
+<view class="freight-box">
+  <text style="font-weight:bold;color:#333">库存</text>
+  <text wx:if="{{DefaultSpec.liveStock==-1}}">有货</text>
+  <text wx:else>{{DefaultSpec.liveStock}}件</text>
+</view>
+<!--间隔-->
+<view class="fenge1"></view>
+<!--规格-->
+<view class="goods-spec">
+  <view class="goods-num" wx:if="{{!isApp}}">
+    <view class="goods-num-text">数量</view>
+    <van-stepper value="{{value}}" :decimal-length="0" max="99" integer bind:change="changeBuyNum"/>
+  </view>
+  <view class="spec-title">规格</view>
+  <view class="norms-list">
+    <view
+      class="{{normsIndex==index?'norms-item norms-active':'norms-item'}}"
+      wx:for="{{detailData.activityCommoditySku}}"
+      wx:key="index"
+      bindtap="selectNorms"
+      data-index="{{index}}"
+    >
+      <image style="width: 48rpx;height: 48rpx;vertical-align: middle;" src="{{item.imageUrl}}" wx:if="{{item.imageUrl!=null&&item.imageUrl!=''}}" />
+      <span class="goods-spec-name">{{item.itemText}}</span>
+    </view>
+  </view>
+  
+</view>
+<!--宝贝详情-->
+<view class="fenge2">
+  <view class="divLine"></view>
+  <view class="shangpin-text">商品详情</view>
+  <view class="divLine"></view>
+</view>
+<!--产品规格-->
+<view class="content">
+  <view class="cp-speci">产品规格</view>
+  <view class="specifications-detail" wx:for="{{detailData.commodity.preferences}}" wx:key="index">
+    <view class="p-title">{{item.paramText}}</view>
+    <view class="p-detail">{{item.paramValue}}</view>
+  </view>
+</view>
+<!--商品详情图-->
+<view class="fenge1"></view>
+<view class="zhutu-content">
+  <image
+    wx:for="{{detailData.commodity.descrList}}"
+    wx:key="index"
+    style="width:100%;display:block"
+    src="{{item}}"
+    mode="widthFix"
+    data-list="{{detailData.commodity.descrList}}" data-src="{{item}}" bindtap="imgClick"
+  ></image>
+</view>
+<!-- 为你推荐 -->
+<view class="detail-recommend" wx:if="{{recommendGoodsList.length>0}}">
+  <view class="detail-recommmed-top">
+    <view class="detail-line"></view>
+    <view class="detail--recommend-title">为你推荐</view>
+    <view class="detail-line"></view>
+  </view>
+  <view class="detail-recommend-list">
+    <view class="detail-recommend-item" wx:for="{{recommendGoodsList}}" wx:key="index" bindtap="showDetail" data-id="{{item.commodityId}}">
+      <image src="{{item.thumbnail}}" alt="" class="detail-recommend-img" />
+      <view class="detail-recommend-content">
+        <view class="detail-recommend-name">{{item.commodityName}}</view>
+        <view class="detail-recommend-price">
+          <text wx:if="{{item.activityType}}" class="cuxiao-box">促销</text>
+          ￥<text style="font-size: 16px;">{{item.lowPrice}}</text>
+          <text style="text-decoration: line-through; margin-left: 5px; color: #ccc;">￥{{item.originalPrice}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+<view class="daodile">
+  —— 信书技术支持 ——
+</view>
+<!-- 底部条 -->
+<van-goods-action  wx:if="{{!isApp}}">
+  <van-goods-action-icon icon="shop-o" text="店铺" bind:click="toStore" />
+  <van-goods-action-icon icon="cart-o" text="购物车" bind:click="toShopCart" />
+  <van-goods-action-button wx:if="{{canBuy&&canNotBuyText!='已售罄'&&canNotBuyText!='活动未开始'}}" text="立即购买" bind:click="doBuy" />
+  <van-goods-action-button wx:else color="#cccccc" text="{{canNotBuyText}}" />
+</van-goods-action>
+</view>
+  <!-- 分享 -->
+  <van-overlay show="{{showShare}}" bindtap="showShare = false" z-index="999" bind:click="hideShare">
+    <view class="activeIndex-share">
+      <view class="activeIndex-share-text">亲，请点击右上角</view>
+      <view class="activeIndex-share-text">
+        即可分享
+        <text class="activeIndex-share-text activeIndex-share-text-span">好友</text>
+      </view>
+    </view>
+  </van-overlay>
+  <!-- 商家自营 -->
+  <van-popup show="{{showXS}}" position="bottom" z-index="999" closeable close-icon="close" bind:close="hideLabel">
+		<view class="xs-content">
+			<view class="xs-top">商家自营保障</view>	
+			<view class="xs-des">服务说明</view>
+			<view class="xs-item" wx:for="{{labelList}}" wx:key="index">
+				<view class="xs-title"><image src="../../../img/hdui.png" class="dui" />【{{item.dict_label}}】</view>
+				<view class="xs-text">{{item.remark}}</view>
+			</view>
+			<view class="xs-btn" bindtap="hideLabel">确认</view>
+		</view>
+		</van-popup>

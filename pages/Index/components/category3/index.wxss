@@ -1,0 +1,93 @@
+.category{
+  width: 100%;
+}
+.category_item{
+  width: 100%;
+  height: 370rpx;
+  background: linear-gradient(90deg, #FF3236 0%, #FF8163 100%);
+  border-radius: 12rpx;
+  padding: 10rpx;
+  box-sizing: border-box;
+  margin-top: 16rpx;
+}
+.category-top{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20rpx;
+}
+.classify-name{
+  height: 44rpx;
+  font-size: 32rpx;
+  font-family: PingFang SC;
+  font-weight: bold;
+  color: #FFFFFF;
+}
+.category-left-btn{
+  width: 138rpx;
+  height: 40rpx;
+  background: #FFFFFF;
+  box-shadow: 0rpx 2rpx 6rpx #FF4742;
+  border-radius: 26rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24rpx;
+  font-family: PingFang SC;
+  font-weight: bold;
+  color: #FF0000;
+}
+.category-list{
+  display: flex;
+  flex-wrap: nowrap;
+  height: 284rpx;
+  background: #fff;
+  padding: 0 6rpx;
+}
+.category-list-goods{
+  width: 164rpx;
+  height: 284rpx;
+  padding: 0 10rpx;
+  background: #fff;
+}
+.category-list-goods-img{
+  width: 164rpx;
+  height: 164rpx;
+  margin: 12rpx auto;
+  border-radius: 8rpx;
+}
+.category-list-goods-name{
+  width: 164rpx;
+  height: 34rpx;
+  font-size: 24rpx;
+  font-family: PingFang SC;
+  font-weight: bold;
+  color: #333333;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin-bottom: 8rpx;
+}
+.category-list-goods-price-box{
+  width: 100%;
+  height: 42rpx;
+  display: flex;
+  align-items: flex-end;
+}
+.category-list-goods-nowprice{
+  height: 42rpx;
+  font-size: 30rpx;
+  font-family: PingFang SC;
+  font-weight: bold;
+  color: #FF0000;
+}
+.category-list-goods-origin-price{
+  height: 28rpx;
+  font-size: 20rpx;
+  font-family: PingFang SC;
+  font-weight: 400;
+  color: #999999;
+  text-decoration: line-through;
+  margin-left: 10rpx;
+}

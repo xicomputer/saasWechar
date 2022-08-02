@@ -1,0 +1,65 @@
+/* pages/Index/components/hotel/index.wxss *//* 推荐酒店 */
+.hotel-swiper{
+    width: 100%;
+    height: 130rpx;
+    margin-top: 20rpx;
+  }
+  .hotel-item{
+    width: 100%;
+    height: 130rpx;
+    box-sizing: border-box;
+    background-size: 100% 130rpx;
+    position: relative;
+    overflow: hidden;
+  }
+  .hotel-item:after{
+    position: absolute;
+    left: -30%;
+    top: 0;        
+    width: 30%;
+    height: 100%;
+    content: "";
+    background: linear-gradient(to right,rgba(255,255,255,0) 0,rgba(255,255,255,.8) 50%,rgba(255,255,255,0) 100%);transform: skewX(45deg);
+    animation: biubiu 3s linear -2s infinite;
+  }
+  @keyframes biubiu{
+    0%{left: -30%;}30%{left: -30%;}100%{left: 100%;}
+  }
+  .index-hotel-name-box{
+    width: 420rpx;
+    height: 90rpx;
+    margin-left: 330rpx;
+    padding-top: 22rpx;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+  }
+  .index-hotel-name-border{
+    width: fit-content;padding: 0rpx 8rpx 0 10rpx;
+    height: 56rpx;
+    border: 2rpx solid #A5A6A8;box-sizing: border-box;
+  }
+  .index-hotel-name{
+    font-size: 32rpx;font-family: PingFang SC;
+    font-weight: bold;color: #000000;
+    display: flex;justify-content: center;line-height: 44rpx;
+    width: fit-content;
+    height: 56rpx;
+    border: 2rpx solid #A5A6A8;
+    margin-top: 8rpx;padding: 0 10rpx;box-sizing: border-box;
+  }
+  .index-hotel-ads{
+    width: 100%;
+    height: 32rpx;
+    font-size: 22rpx;
+    font-family: PingFang SC;
+    font-weight: bold;
+    line-height: 32rpx;
+    color: #0077FF;
+    letter-spacing: 8rpx;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;text-overflow: ellipsis;
+    white-space: nowrap;
+  }

@@ -1,0 +1,7 @@
+<view class="explain-container">
+  <view class="explain-title">会员说明：</view>
+  <view class="explaine-text">1、会员卡是商家为您提供尊贵服务的凭证，持有会员卡在购买会员商品时能享受会员折扣;</view>
+  <view class="explaine-text">2、点击“激活会员卡”向商家申请会员卡，需要商家进行审核，若审核通过后即可成为普通会员；若审核不通过，会在本页面显示商家拒绝理由，您可以联系商家进行沟通后重新激活会员卡;</view>
+  <view class="explaine-text">3、首次成为会员，成为基础会员等级 “普通会员”，普通会员不享受会员折扣权益，但能通过购买商品获得积分，升级会员等级，级别越高，折扣力度越大；</view>
+  <view class="explaine-text">4、不同商家的会员规则稍有不同，具体会员规则详情请成为会员后，在会员卡区查看。</view>
+</view>

@@ -1,0 +1,32 @@
+/* pages/shopHome/prize/prize.wxss */
+@import '/styles/me_common.wxss';
+page{
+    background-color: #F7F7F7;
+}
+.prize>view{margin-bottom: 20rpx;}
+.isfalse{
+    background-color: #fff;
+    position: absolute;
+    height: 338rpx;
+    width: 686rpx;
+    top: 0;
+    opacity: 0.7;
+}
+.prizeInfo{
+    position: relative;
+    width: 686rpx;
+    height: 338rpx;
+    background-size: 100% 100%;
+    margin-top: 20rpx;
+    border-radius: 30rpx;
+    overflow: hidden;
+}
+.prize_img{
+    width: 634rpx;
+    height: 184rpx;
+    margin: 20rpx 30rpx;
+}
+.prize_txt{margin: 20rpx 30rpx;}
+.prize_Number{font-size: 24rpx;color: #666666;font-weight: bold;}
+.prize_date{font-size: 20rpx;color: #666666;}
+.prize_ok{font-size: 24rpx;color: #F95244;font-weight: bold;}

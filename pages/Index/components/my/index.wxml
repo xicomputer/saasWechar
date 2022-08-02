@@ -1,0 +1,135 @@
+<view class="my" >
+  <!-- 头部 -->
+  <view class="my_header">
+    <view class="my_header_up">
+      <image src="{{userInfo.avatarUrl}}" mode="aspectFill" class="my_header_up_left"></image>
+      <view class="my_header_up_right">
+        <view class="my_header_up_right_name">
+          {{userInfo.nickName}}
+          <navigator url="/pages/PersonalCenter/setUp/setUp" class="system-notice-icon-container" style="right:100rpx">
+						<image style="width:40rpx;height:44rpx;" src="/pages/img/setup.png"></image>
+					</navigator>
+					<navigator url="/pages/Notice/Notice?from=store" class="system-notice-icon-container">
+						<image style="width:44rpx;height:44rpx;" src="/pages/img/my/system_notice_icon.png"></image>
+						<view class="noticeNum" wx:if="{{noticeNum>0}}">{{noticeNum}}</view>
+					</navigator>
+        </view>
+        <image class="member-bg-img" bindtap="toMember" wx:if="{{userInfo.status==1&&userInfo.memberLeve}}" src="/pages/img/index/member_bg.png">
+          <text class="member-bg-text">{{userInfo.memberLeve.name}}</text>
+        </image>
+        <image class="member-bg-img" bindtap="toMember" wx:if="{{userInfo.status==1&&!userInfo.memberLeve}}" src="/pages/img/index/no_member_bg.png">
+          <text class="member-bg-text">未激活会员</text>
+        </image>
+        <view class="my_header_up_right_text" wx:if="{{!userInfo.status}}">{{userInfo.signature||'该用户暂未设置签名~'}}</view>
+      </view>
+    </view>
+
+    <!-- <view class="my_header_down">
+      <block wx:for="{{headList}}" wx:key="index">
+        <view class="my_header_down_item" bindtap="toDetail" data-idx="{{index}}"
+          url="/pages/Index/couponList/couponList">
+          <view class="my_header_down_item_price">
+            <view class="my_header_down_item_price_num">{{item.num}}</view>
+            <view class="my_header_down_item_price_text">{{item.unit}}</view>
+          </view>
+          <view class="my_header_down_item_text">{{item.name}}</view>
+        </view>
+      </block>
+    </view> -->
+
+    <view class='me-fx-row me-fx-sa-c num-info-box'>
+      <view class='me-fx-col me-fx-c-c' wx:for='{{3}}' wx:key='index'>
+        <text class='count-num'>0</text>
+        <text>余额</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 订单 -->
+  <view style='margin-top:58rpx;'>
+    <!-- 订单 物流配送-->
+    <view class="my_order" wx:if="{{isWuliu}}">
+      <view class="my_order_title">物流订单</view>
+      <view class="my_order_content">
+        <navigator class="my_order_content_item" wx:for="{{deliveryOrderList}}" wx:key="index"
+          url="/pages/order/orderList/orderList?activeTab=2&marchantId={{marchantId}}&tabsItem={{index}}">
+          <view class="img-container">
+            <image src="{{item.icon}}"></image>
+            <view class="number" wx:if="{{orderNum[index]}}">{{orderNum[index]}}</view>
+          </view>
+          <view>{{item.name}}</view>
+        </navigator>
+      </view>
+    </view>
+    <!-- 订单 同城配送-->
+    <!-- <view class="my_order" wx:if="{{isToCity}}">
+      <view class="my_order_title">同城配送</view>
+      <view class="my_order_content">
+        <navigator class="my_order_content_item" wx:for="{{cityOrderList}}" wx:key="index"
+          url="/pages/order/orderListCity/orderListCity?marchantId={{marchantId}}&tabsitem={{index}}">
+          <view class="img-container">
+            <image src="{{item.icon}}"></image>
+            <view class="number" wx:if="{{cityOrderNum[index]>0}}">{{cityOrderNum[index]}}</view>
+          </view>
+          <view>{{item.name}}</view>
+        </navigator>
+      </view>
+    </view> -->
+    <!-- 订单 同城自取-->
+    <!-- <view class="my_order" wx:if="{{isToStore}}">
+      <view class="my_order_title">预订/自取</view>
+      <view class="my_order_content" style="justify-content: space-around;">
+        <navigator class="my_order_content_item" wx:for="{{selfOrderList}}" wx:key="index"
+          url="/pages/order/orderListTake/orderListTake?tabsitem={{index}}&marchantId={{marchantId}}">
+          <view class="img-container">
+            <image src="{{item.icon}}"></image>
+            <view class="number" wx:if="{{toStoreOrderNum[index]}}">{{toStoreOrderNum[index]}}</view>
+          </view>
+          <view>{{item.name}}</view>
+        </navigator>
+      </view>
+    </view> -->
+  </view>
+  
+  <!-- 我的工具-->
+  <view class="my_order">
+    <view class="my_order_title">我的工具</view>
+    <view class="my_tool">
+      <block wx:for="{{toolOrderList}}" wx:key="index">
+        <view class="my_order_content_item my_tool_item" bindtap="pagesTo" data-idx="{{index}}">
+          <image style="width:64rpx;height:64rpx;margin-bottom:6rpx" src="{{item.icon}}"></image>
+          <view>{{item.name}}</view>
+        </view>
+      </block>
+    </view>
+  </view>
+
+  <!-- 我的足迹 -->
+  <view class='me-fx-row me-fx-sb my_order plate-box'>
+      <view class='my_order_title' style='border:none;'>我的足迹</view>
+      <navigator hover-class='none' class='more-navigor' url="/pages/Index/myFootPrint/myFootPrint">更多>></navigator>
+  </view>
+  <!-- 专属小店申请-->
+  <!-- <view class="my_order" wx:if="{{isDistribution}}" bindtap="toFenXiao">
+    <view class="my_order_title">专属小店申请</view>
+    <view class="my_shop">
+      <view class="my_shop_text_one">专属小店申请，好货带不停</view>
+      <view class="my_shop_text_two">佣金赚不停</view>
+      <view class="my_shop_btn">
+        <view class="my_shop_btn_text">立即申请</view>
+      </view>
+    </view>
+  </view> -->
+  <!-- 商家注册申请-->
+  <!-- <view class="my_order" bindtap="toRegister">
+    <view class="my_order_title">商家注册申请</view>
+    <view class="my_shop">
+      <view class="my_shop_text_one">一键入驻 开店注册</view>
+      <view class="my_shop_text_two">实体零售店可入驻</view>
+      <view class="my_shop_btn">
+        <view class="my_shop_btn_text">立即申请</view>
+      </view>
+    </view>
+  </view> -->
+  <image class="my_to_register" src="/pages/img/my/index_me_store_apply.png" style="width:100%;height:244rpx;margin-top:20rpx;padding:0 20rpx;box-sizing:border-box"  bindtap="toRegister"></image>
+</view>

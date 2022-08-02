@@ -1,0 +1,53 @@
+<view class="coupon-container">
+  <!-- tabs栏 -->
+  <view class="coupon-tabs-top">
+    <view class="coupon-tabs-item {{tabsActive==index?'coupon-tabs-active':''}}" wx:for="{{tabsList}}" wx:key="index" bindtap="changeTabs" data-idx="{{index}}">
+      {{item.name}}
+      <view hidden="{{tabsActive!=index}}" class="coupon-tabs-active-bottom"></view>
+    </view>
+  </view>
+  <!-- 优惠券列表 -->
+  <view class="coupon-list-container">
+    <no-data text="没有可用的优惠券哦！" url="https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/Saas/youhuijuan"  wx:if="{{!showCouponList.length}}"></no-data>
+    
+    <!-- <view wx:if="{{showCouponList.length}}" class="coupon-item" style="background-image:url(https://xssj.letterbook.cn/applet/images/coupon-bg{{tabsActive+1}}.png);background-size:100% 236rpx;background-repeat:no-repeat;" wx:for="{{showCouponList}}" wx:key="index">
+      <view class="coupon-item-left">
+        <view class="coupon-reduce">优惠券减{{item.commodityCoupons.deduct}}</view>
+        <view class="coupon-condition" style="{{tabsActive==1?'color:#666':tabsActive==2?'color:#999':''}}">购物满{{item.commodityCoupons.confine}}元使用</view>
+        <view class="coupon-overtime">过期时间：{{item.commodityCoupons.endTime}}</view>
+      </view>
+      <view class="coupon-item-right">
+        <view class="coupon-limit">单人独享</view>
+        <view class="coupon-range">全场通用</view>
+        <view class="coupon-btn-state" bindtap="toStoreUse"  style="{{tabsActive==1?'color:#666':tabsActive==2?'color:#999':''}}">{{tabsActive==1?'已使用':tabsActive==2?'已过期':'立即使用'}}</view>
+      </view>
+    </view> -->
+    <view class="Coupons_list" wx:for="{{showCouponList}}" wx:key="index">
+      <view class="Coupons_item" bindtap="showAdd" data-index="{{index}}" style="background-image:url('https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/static/Coupons_bg{{tabsActive}}.png')">
+        <view class="Coupons_top">
+          <text class="Coupons_top_class">满减</text>
+          <image class="Coupons_top_image" src="../../static/Coupons_ge.png"></image>
+        </view>
+        <view class="Coupons_bottom">
+          <text class="Coupons_price">￥{{item.commodityCoupons.deduct}}</text>
+          <view class="Coupons_right">
+            <text class="Coupons_right_name">{{item.commodityCoupons.couponName}}</text>
+            <text class="Coupons_right_condition">满{{item.commodityCoupons.confine}}元可使用</text>
+            <text class="Coupons_right_time">优惠券时效：{{item.commodityCoupons.startTime}}-{{item.commodityCoupons.endTime}}</text>
+          </view>
+        </view>
+      </view>
+      <view class="Coupons_white" wx:if="{{item.showFlag}}">
+        <view class="Coupons_btn_c" wx:if="{{tabsActive == 0}}"><view class="Coupons_btn" bindtap="toStoreUse">立即使用</view></view>
+        <view class="Coupons_white_text">
+          <text class="Coupons_white_title">优惠说明</text>
+          <text class="Coupons_white_desc">可优惠{{item.commodityCoupons.deduct}}元</text>
+        </view>
+        <view class="Coupons_white_text">
+          <text class="Coupons_white_title">使用须知</text>
+          <text class="Coupons_white_desc">满{{item.commodityCoupons.confine}}元可使用</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

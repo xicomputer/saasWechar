@@ -1,0 +1,221 @@
+/* pages/Index/integral/integralRecord/integralRecord.wxss */
+.exchange-record-container{
+  width: 100%;
+  min-height: 100vh;
+  background-color: #f7f7f7;
+  padding: 20rpx;
+  box-sizing: border-box;
+}
+/* 订单头部 */
+.exchange-record-item{
+  width: 100%;
+  background-color: #fff;
+  box-shadow: 0rpx 6rpx 12rpx #F7F7F7;
+  border-radius: 20rpx;
+  padding: 20rpx;
+  margin-bottom: 20rpx;
+  box-sizing: border-box;
+}
+.exchange-record-list .exchange-record-item:last-child{
+  margin-bottom: 0rpx;
+}
+.exchange-top-box{
+  width: 100%;
+  height: 34rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between; 
+}
+.exchange-order-num{
+  height: 34rpx;
+  font-size: 24rpx;
+  font-family: PingFang SC;
+  font-weight: bold;
+  line-height: 34rpx;
+  color: #333333;
+}
+.exchange-order-state-box{
+  height: 34rpx;
+  font-size: 24rpx;
+  font-family: PingFang SC;
+  font-weight: 400;
+  line-height: 34rpx;
+  color: #333;
+}
+.exchange-order-state-text{
+  color: #FE4A0B;
+}
+/* 商品信息 */
+.goods-info-box{
+  width: 100%;
+  height: 160rpx;
+  margin-top: 20rpx;
+  display: flex;
+  align-items: center;
+}
+.goods-img{
+  width: 160rpx;
+  height: 160rpx;
+  border-radius: 12rpx;
+}
+.goods-info-content{
+  flex: 1; 
+  height: 160rpx;
+  margin-left: 20rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.goods-name{
+  width: 360rpx;
+  max-height: 68rpx;
+  font-size: 24rpx;
+  font-family: PingFang SC;
+  font-weight: bold;
+  line-height: 34rpx;
+  color: #333333;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display:-webkit-box;
+  -webkit-box-orient:vertical;
+  -webkit-line-clamp:2;
+}
+.goods-price{
+  width: 100%;
+  text-align: right;
+  height: 34rpx;
+  font-size: 24rpx;
+  font-family: PingFang SC;
+  font-weight: bold;
+  line-height: 34rpx;
+  color: #333333;
+}
+.goods-time{
+  height: 34rpx;
+  font-size: 24rpx;
+  font-family: PingFang SC;
+  font-weight: bold;
+  line-height: 34rpx;
+  color: #333333;
+}
+/* 联系人信息 */
+.person-info-container{
+  width: 100%;
+  margin: 20rpx 0;
+}
+.person-info-item{
+  width: 100%;
+  display: flex;
+  font-size: 28rpx;
+  font-family: PingFang SC;
+  font-weight: 400;
+  line-height: 40rpx;
+  color: #333333;
+  margin-top: 10rpx;
+}
+.person-info-title{
+  width: 120rpx;
+  height: 40rpx;
+  font-size: 28rpx;
+  font-family: PingFang SC;
+  font-weight: 400;
+  line-height: 40rpx;
+  color: #333333;
+  text-align:justify;
+  text-align-last: justify;
+}
+.person-info-title:after{
+  content:"";
+  display:inline-block;
+  width:100%;
+}
+.person-info-right-text{
+  width: 0;
+  flex: 1;
+  font-size: 24rpx;
+  font-family: PingFang SC;
+  font-weight: 400;
+  line-height: 40rpx;
+  max-height: 80rpx;
+  color: #999999;
+  margin-left: 32rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display:-webkit-box; 
+  -webkit-box-orient:vertical; 
+  -webkit-line-clamp:2; 
+}
+/* 按钮 */
+.integral-btn-container{
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
+.integral-btn{
+  width: 124rpx;
+  height: 50rpx;
+  background: #E23E3E;
+  border-radius: 8rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 28rpx;
+  font-family: PingFang SC;
+  font-weight: bold;
+  color: #FFFFFF;
+}
+.integral-btn-no{
+  background-color: #999;
+}
+/* 二维码 */
+.QR-box{
+  width: 280px;
+  height: 270px;
+  border-radius: 20rpx;
+  background: #fff;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+}
+.QR-top{
+	width: 100%;
+  padding: 30rpx;
+  box-sizing: border-box;
+	background: #F9F9F9;
+	border-radius: 8px 8px 0px 0px;
+	font-size: 30rpx;
+	font-family: PingFang SC;
+	font-weight: 400;
+  color: #333333;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.close-icon{
+  width: 40rpx;
+  height: 40rpx;
+}
+.click-number{
+  text-align: center;
+  height: 34rpx;
+  font-size: 24rpx;
+  font-family: PingFang SC;
+  font-weight: 400;
+  line-height: 34rpx;
+  color: #BBBBBB;
+}
+.clicked-number{
+  height: 34rpx;
+  font-size: 24rpx;
+  font-family: PingFang SC;
+  font-weight: 400;
+  line-height: 34rpx;
+  color: #333333;
+  letter-spacing: 20rpx;
+  text-align: center;
+}
+.copy_img{
+  width: 40rpx;
+  height: 40rpx;
+}

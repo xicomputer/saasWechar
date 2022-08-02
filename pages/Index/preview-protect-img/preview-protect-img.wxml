@@ -1,0 +1,6 @@
+<!--pages/Index/preview-protect-img/preview-protect-img.wxml-->
+
+<view class='me-fx-col me-fx-c-c preview-img-page'>
+    <image src='{{showImg}}' class='img'></image>
+    <image src='{{watermarkUrl}}' class='watermark-img'></image>
+</view>

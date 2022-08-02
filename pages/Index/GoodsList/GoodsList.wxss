@@ -1,0 +1,515 @@
+page{
+    padding: 20rpx;
+    box-sizing: border-box;
+    background: #f2f2f2;
+  }
+  /* 头部 */
+  .goods-head{
+    height: 160rpx;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .goods-head-img{
+    width: 42rpx;
+    height: 42rpx;
+  }
+  .good-head-text{
+    font-size: 36rpx;
+    font-family: PingFang SC;
+    font-weight: bold;
+    color: #FFFFFF;
+  }
+  /* 秒杀商品列表 */
+  .good-item{
+    display: flex;
+    padding: 20rpx;
+    box-sizing: border-box;
+    background-color: white;
+    margin-top: 20rpx;
+    border-radius: 20rpx;
+  }
+  .good-info-list{
+    width: 0;
+    flex: 1;
+    margin-left: 20rpx;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .good-top{
+    margin-top: 10rpx;
+  }
+  .good-name{
+    height: 40rpx;
+    font-size: 28rpx;
+    font-family: PingFang SC;
+    font-weight: bold;
+    line-height: 40rpx;
+    color: #333333;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    word-break: break-all;
+    word-wrap: break-word;
+  }
+  .good-describe{
+    font-size: 24rpx;
+    font-family: PingFang SC;
+    font-weight: 400;
+    line-height: 36rpx;
+    color: #999999;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    word-break: break-all;
+    word-wrap: break-word;
+  }
+  .good-bottom{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+  .good-price-box{
+    display: flex;
+    align-items: center;
+  }
+  .good-activity-price{
+    height: 40rpx;
+    font-size: 28rpx;
+    font-family: PingFang SC;
+    font-weight: bold;
+    line-height: 40rpx;
+    color: #FF5340;
+  }
+  .good-original-price{
+    height: 30rpx;
+    font-size: 22rpx;
+    font-family: PingFang SC;
+    font-weight: 300;
+    line-height: 30rpx;
+    color: #CCCCCC;
+    margin-left: 5rpx;
+    text-decoration: line-through;
+  }
+  .buy-btn{
+    width: 128rpx;
+    height: 60rpx;
+    background: #FF5340;
+    border-radius: 5rpx;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .buy-btn-statu{
+    height: 30rpx;
+    font-size: 28rpx;
+    font-family: PingFang SC;
+    font-weight: 400;
+    line-height: 30rpx;
+    color: #FFFFFF;
+  }
+  .sold-all{
+    background-color: #999;
+  }
+  /* 底部 */
+  .daodile{
+    font-size: 20rpx;
+    text-align: center;
+    color: #999999;
+    font-weight: bold;
+  }
+  .popup-content-header {
+    display: flex;
+    padding: 24px 0 8px 18px;
+    border-bottom: 1px solid #cccccc;
+
+  }
+  .goods-img {
+    width: 107px;
+    height: 107px;
+  }
+
+  .goods-info {
+    flex: 1;
+    padding-left: 13px;
+
+  }
+  .money {
+    font-size: 18px;
+    color: #ec1919;
+  }
+  .stock {
+    font-size: 14px;
+    color: #999999;
+    margin-top: 21px;
+  }
+  .tips {
+    font-size: 12px;
+    color: #999999;
+    margin-top: 18px;
+  }
+  .popup-content-body {
+    padding: 15px 0 0 25px;
+    border-bottom: 1px solid #cccccc;
+  }
+  .title {
+    font-size: 14px;
+  }
+
+  .norms-list {
+    display: flex;
+    flex-wrap: wrap;
+    padding-bottom: 20px;
+  }
+
+  .norms-item {
+    padding-left: 4px;
+    padding-right: 4px;
+    font-size: 12px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    line-height: 36px;
+    height: 36px;
+    background: #f6f6f6;
+    margin-right: 15px;
+    margin-top: 7px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    border: 1px solid transparent;
+  }
+  .sku-img {
+    width: 29px;
+    height: 29px;
+    line-height: 36px;
+  }
+  .spec-name{
+    margin: 0 10px;
+  }
+  .norms-active {
+    background: rgba(250, 51, 78, 0.05);
+    border: 1px solid rgba(236, 25, 25, 1);
+    border-radius: 3px;
+  }
+  .buy-num {
+    margin-bottom: 40px;
+    display: flex;
+    align-items: center;
+  }
+  .label {
+    flex: 1;
+    font-size: 14px;
+  }
+  .c-btn {
+    background: #f6f6f6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 8px;
+    width: 34px;
+    height: 22px;
+  }
+  .num {
+    width: 40px;
+  }
+  .num.disabled {
+    color: #999999;
+  }
+  .footer {
+    height: 85px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .span {
+    width: 160px;
+    line-height: 44px;
+    text-align: center;
+    border-radius: 22px;
+    color: #ffffff;
+    font-size: 16px;
+  }
+
+  .add {
+    background: #e7a124;
+    margin-right: 25px;
+  }
+
+  .purchase {
+    background: #101010;
+  }
+  .good-info {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  .good-info .good-des{
+    width: 100%;
+    height: 283rpx;
+    border-bottom: 1rpx solid #ECECEC;
+    padding: 50rpx 40rpx 0rpx 40rpx;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    background: #fff;
+  }
+  .good-info .good-des .good-img{
+    width: 214rpx;
+    height: 214rpx;
+    
+  }
+  .good-info .good-des .good-img .img{
+    width: 214rpx;
+    height: 214rpx;
+  }
+  .good-info .good-des .good-des-inner{
+    flex: 1;
+    height: 90%;
+    padding-left: 30rpx;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    /* justify-content: space-between; */
+  }
+  .good-price-area, .good-inventory, .good-select-specifications {
+    flex: 1;
+    color: #999999;
+  }
+  .good-price-area {
+    font-size: 36rpx;
+    font-weight: bold;
+    color: #FF3950;
+  }
+  .good-price-area .good-tag {
+    font-size: 24rpx;
+  }
+  .good-inventory {
+    font-size: 28rpx;
+  }
+  .good-inventory .inventory {
+    color: #FF3950;
+  }
+  .good-select-specifications {
+    font-size: 24rpx;
+  }
+  .good-info .good-edit{
+    padding: 30rpx 40rpx;
+    background: #fff;
+    overflow: hidden;
+    overflow-y: scroll;
+  }
+  .good-info .good-edit .good-specifications{
+    overflow: hidden;
+  }
+  .good-info .good-edit .list-black {
+    padding: 20rpx 0;
+    box-sizing: border-box;
+  }
+  .good-info .good-edit .list-black .list-item {
+    float: left;
+    overflow: hidden;
+    padding: 4rpx 20rpx;
+    box-sizing: border-box;
+    background: #fff;
+    border: 1rpx solid #ECECEC;
+    margin-bottom: 20rpx;
+    margin-right: 20rpx;
+    border-radius: 6rpx;
+  }
+  .good-info .good-edit .list-black .active {
+    background: rgba(250, 51, 78, 0.05);
+    border: 1rpx solid #FA334E;
+  }
+  .list-item-img {
+    width: 58rpx;
+    height: 58rpx;
+    vertical-align: middle;
+    margin-right: 15rpx;
+  }
+  .good-info .good-edit .by-num{
+    margin: 20rpx 0 50rpx 0;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+    .good-info .good-edit .by-num .edit-num-btn{
+      display: inline-block;
+      width: 68rpx;
+      height: 44rpx;
+      margin-left: 15rpx;
+      text-align: center;
+      background: #F6F6F6;
+      border-radius: 6rpx;
+    }
+    .good-info .good-edit .by-num .edit-num{
+      display: inline-block;
+      width: 80rpx;
+      height: 44rpx;
+      margin-left: 15rpx;
+      text-align: center;
+      background: #F6F6F6;
+      border-radius: 6rpx;
+  }
+  .good-info .btn-area {
+    width: 100%;
+    height: 169rpx;
+    padding-top: 40rpx;
+    box-sizing: border-box;
+    border-top: 1rpx solid #ECECEC;
+    background: #fff;
+    display: flex;
+    flex-direction: row;
+  }
+  .good-info .btn-area .btn-area-inner {
+    flex: 1;
+    height: 100%;
+  }
+  .good-info .btn-area .btn {
+    width: 86%;
+    height: 88rpx;
+    line-height: 88rpx;
+    border-radius: 44rpx;
+    color: #fff;
+    font-size: 32rpx;
+  }
+  .good-info .btn-area .add-cart-btn {
+    background: #E7A124;
+  }
+  .good-info .btn-area .buy-btn {
+    background: #101010;
+  }
+  .overlay .box {
+    width: 100%;
+    height: 550rpx;
+    background: #fff;
+    border-radius: 40rpx 40rpx 0 0;
+    padding: 0 50rpx 0 20rpx;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    box-sizing: border-box;
+  }
+  .overlay .box .title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 115rpx;
+  }
+  .overlay .box .title .flex {
+    flex: 1;
+  }
+  .overlay .box .title .text {
+    flex: 3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 34rpx;
+    font-family: PingFang SC;
+    font-weight: bold;
+    line-height: 48rpx;
+    color: #20252D;
+    opacity: 1;
+  }
+  .overlay .box .title .icon {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+  }
+  .overlay .box .title .img {
+    width: 44rpx;
+    height: 44rpx;
+  }
+  .overlay .box .psfw {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 102rpx;
+    border-top: 1rpx solid #E2E2E2;
+  }
+  .overlay .box .psfw .active {
+    width: 240rpx;
+    height: 64rpx;
+    border: 1rpx solid #FF5340;
+    position: relative;
+  }
+  .overlay .box .psfw .active .check {
+    width: 28rpx;
+    height: 29rpx;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+  }
+  .overlay .box .psfw .psfw-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .overlay .box .psfw .psfw-box .icon {
+    width: 44rpx;
+    height: 34rpx;
+  }
+  .overlay .box .psfw .psfw-box .text {
+    margin-left: 18rpx;
+    font-size: 30rpx;
+    font-family: PingFang SC;
+    font-weight: 300;
+    line-height: 43rpx;
+    color: #999999;
+    opacity: 1;
+  }
+  .overlay .box .dnxf {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 102rpx;
+    border-top: 1rpx solid #E2E2E2;
+  }
+  .overlay .box .dnxf .active {
+    width: 240rpx;
+    height: 64rpx;
+    border: 1rpx solid #FF5340;
+    position: relative;
+  }
+  .overlay .box .dnxf .active .check {
+    width: 28rpx;
+    height: 29rpx;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+  }
+  .overlay .box .dnxf .dnxf-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .overlay .box .dnxf .dnxf-box .icon {
+    width: 42rpx;
+    height: 38rpx;
+  }
+  .overlay .box .dnxf .dnxf-box .text {
+    margin-left: 18rpx;
+    font-size: 30rpx;
+    font-family: PingFang SC;
+    font-weight: 300;
+    line-height: 43rpx;
+    color: #999999;
+    opacity: 1;
+  }
+  .overlay .box .btn {
+    text-align: center;
+    margin-top: 38rpx;
+    margin-left: 5rpx;
+  }
+  .overlay .box .btn .img {
+    width: 560rpx;
+    height: 110rpx;
+  }

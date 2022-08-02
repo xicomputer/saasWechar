@@ -1,0 +1,8 @@
+
+<!-- 头像、昵称授权 -->
+<view wx:if='{{showInfoMask}}' bindtap='getUserInfo' class='auto-get-user-info-btn'></view>
+
+<!-- 绑定手机号 -->
+<button wx:if='{{showPhoneMask}}' class='get-phone-btn' open-type='getPhoneNumber' 
+    bindgetphonenumber='getPhoneNumber' catchtap='getPhoneNumber'
+></button>

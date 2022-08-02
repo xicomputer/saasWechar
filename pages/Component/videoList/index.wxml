@@ -1,0 +1,30 @@
+<view class="selling_list">
+    <view class="selling_left">
+      <block wx:for="{{videoList}}" wx:key="index">
+        <view wx:if="{{index%2==0}}" class="selling_item">
+          <image mode="widthFix" class="selling_item_image" src="{{item.coverUrl}}" bindtap="toVideo" data-item="{{item}}"></image>
+          <view class="selling_item_info">
+            <view class="selling_item_info_up">
+              <image class="selling_item_info_up-image" src="/pages/img/selling_icon.png"></image>
+              <view class="selling_item_info_up-text">{{item.commodityName}}</view>
+            </view>
+            <view class="me-full-text desc">产品介绍：{{item.description}}</view>
+          </view>
+        </view>
+      </block>
+    </view>
+    <view class="selling_right">
+      <block wx:if="{{index%2!=0}}" wx:for="{{videoList}}" wx:key="index">
+        <view class="selling_item">
+          <image mode="widthFix" class="selling_item_image" src="{{item.coverUrl}}" bindtap="toVideo" data-item="{{item}}"></image>
+          <view class="selling_item_info">
+            <view class="selling_item_info_up">
+              <image class="selling_item_info_up-image" src="/pages/img/selling_icon.png"></image>
+              <view class="selling_item_info_up-text">{{item.commodityName}}</view>
+            </view>
+            <view class="me-full-text desc">产品介绍：{{item.description}}</view>
+          </view>
+        </view>
+      </block>
+    </view>
+  </view>

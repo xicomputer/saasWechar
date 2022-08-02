@@ -1,0 +1,295 @@
+<store-close wx:if="{{isClose}}"></store-close>
+<view  class="orderDetail">
+    <!-- 订单头部 -->
+    <view class="head3" wx:if="{{orderState===3}}">
+        <view class="head-left">
+            <image src="../../img/order/wait.png" class="head-wait" />
+            <view class="head-text">{{orderStateList[orderState].state}}</view>
+        </view>
+        <view class="head-right">
+            <image src="../../img/order/delivery.png" class="head-icon" />
+        </view>
+    </view>
+    <view class="head" wx:else>
+        <view class="head-left">
+            <image src="../../img/order/wait.png" class="head-wait" />
+        </view>
+        <view class="head-right">
+            <view class="head-info">
+                <view class="head-text">{{orderStateList[orderState].state}}</view>
+                <view class="head-prompt" wx:if="{{orderState!=0}}">{{orderStateList[orderState].prompt}}</view>
+                <!-- 倒计时 -->
+                <van-count-down class="control-count-down" wx:if="{{orderState==0}}" time="{{ citInfo.endTime }}" class="head-prompt" format="剩余mm分钟ss秒自动取消" bind:finish="countDownOver"/>
+                <view class="head-prompt" wx:if="{{orderState===1}}">并退款给您</view>
+            </view>
+            <view class="head-delivery">
+                <image src="../../img/order/delivery.png" class="head-icon" />
+            </view>
+        </view>
+    </view>
+    <!-- 退款状态 -->
+    <view class="return" wx:if="{{orderState>4}}">
+        <view class="return-state">
+            {{returnStateList[orderState-5].state}}
+            <view class="return-money" wx:if="{{orderState===8}}">￥{{citInfo.totalPrice}}</view>
+        </view>
+        <view class="return-prompt">
+            <view class="return-tip" wx:if="{{returnStateList[orderState-5].prompt}}"></view>
+            <view class="return-text">
+                {{returnStateList[orderState-5].prompt}}
+                <view class="return-money" wx:if="{{orderState===8}}">￥{{citInfo.totalPrice}}</view>
+            </view>
+        </view>
+        <view wx:if="{{orderState===7}}">
+            <view class="return-tips">
+                <view class="return-tips-item" wx:for="{{prompts}}">
+                    <view class="return-tip"></view>
+                    <view class="return-text">
+                        {{item}}
+                    </view>
+                </view>
+            </view>
+            <view class="return-btn" bindtap="logistics">
+                <view class="return-btn-box">
+                    <view class="return-btn-up">我已寄出</view>
+                    <view class="return-btn-down">点击填写物流单号</view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <!-- 退款信息 -->
+    <view class="return-info" wx:if="{{orderState>4}}">
+        <view class="return-info-title">退款信息</view>
+        <view class="return-info-goods" wx:if="{{!refundInfo.list.length}}">
+            <view class="return-info-left">
+                <image src="{{citInfo.thumbnail}}" mode="aspectFill" class="return-info-logo" />
+            </view>
+            <view class="return-info-right">
+                <view class="return-info-name">{{citInfo.commodityName}}</view>
+                <view class="return-info-spec">规格：{{citInfo.itemText}}</view>
+                <view class="return-info-num">数量：{{citInfo.amount}}</view>
+                <view class="return-info-price">￥{{citInfo.actualMoney}}</view>
+            </view>
+        </view>
+        <view class="return-info-goods" wx:if="{{refundInfo.list.length}}" wx:for="{{refundInfo.list}}" wx:key="index">
+            <view class="return-info-left">
+                <image src="{{item.thumbnail}}" mode="aspectFill" class="return-info-logo" />
+            </view>
+            <view class="return-info-right">
+                <view class="return-info-name">{{item.commodityName}}</view>
+                <view class="return-info-spec">规格：{{item.itemText}}</view>
+                <view class="return-info-num">数量：{{item.amount}}</view>
+                <view class="return-info-price">￥{{item.actualMoney}}</view>
+            </view>
+        </view>
+        <view class="return-info-desc">
+            <view class="return-info-desc-item">退款原因：{{refundInfo.list.length?refundInfo.refundReason:citInfo.refundReason}}</view>
+            <view class="return-info-desc-item">退款金额：￥{{refundInfo.list.length?refundInfo.totalPrice:citInfo.totalPrice}}</view>
+            <view class="return-info-desc-item">申请时间：{{refundInfo.list.length?refundInfo.applyRefundTime:citInfo.applyRefundTime}}</view>
+        </view>
+    </view>
+    <!-- 购买的商品 -->
+    <view class="goods" wx:if="{{orderState<4}}">
+        <!-- 商家 -->
+        <view class="goods-shop">
+            <image src="{{cartShop.headImage}}" mode="aspectFill" class="shop-logo" />
+            <view class="shop-title">{{cartShop.appName}}</view>
+            <image src="../../img/back-icon.png" class="shop-enter" />
+        </view>
+        <view class="goods-list">
+            <view class="goods-item" wx:for="{{citInfo.commList}}" wx:for-item="items" wx:key="index">
+                <view class="goods-left">
+                    <image src="{{items.thumbnail}}" mode="aspectFill" class="goods-logo" />
+                </view>
+                <view class="goods-right">
+                    <view class="goods-info">
+                        <view class="goods-name">{{items.commodityName}}</view>
+                        <view class="goods-spec">规格：{{items.itemText}}</view>
+                        <view class="goods-num">数量：{{items.amount}}</view>
+                        <view class="goods-price">
+                            ￥{{items.actualMoney}}
+                            <view wx:if="{{orderState===3}}" style="display:flex;">
+                                <text wx:if="{{items.refundState!=5&&items.refundState!=0}}">退款中</text>
+                                <text wx:if="{{items.refundState==5}}">已退款</text>
+                                <!-- <view class="goods-btn" style="margin-right:20rpx" catchtap="comment" data-index="{{index}}" wx:if="{{items.refundState==0&&items.singleEvaluate==0}}">评价几句</view> -->
+                                <navigator class="goods-btn" wx:if="{{items.refundState==0&&!citInfo.isSettle&&citInfo.isSupportRefund==1}}"
+                            url="../applyReturn/applyReturn?uniqueId={{citInfo.uniqueId}}&selfUniqueId={{items.uniqueId}}">申请退货</navigator>
+                            </view>
+                        </view>
+                    </view>
+                    <view class="goods-labels" wx:if="{{orderState!==3}}">
+                        <view class="labels-item" wx:for="{{items.labeList}}" wx:key="index">
+                            <view class="label">{{item}}</view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <!-- 地址 -->
+    <view class="address" wx:if="{{orderState<4}}">
+        <view class="address-left">
+            <image src="../../img/order/addr.png" class="address-img" />
+        </view>
+        <view class="address-right">
+            <view class="address-up">
+                <view class="address-info">
+                    <view class="address-name">{{citInfo.shipping.contacts}}</view>
+                    <view class="address-tel">{{citInfo.shipping.contactWay}}</view>
+                </view>
+                <!-- <view class="address-btn" wx:if="{{orderState===0}}">
+                    <view class="address-update">修改</view>
+                </view> -->
+            </view>
+            <view class="address-down">地址：{{citInfo.shipping.provincesName}}{{citInfo.shipping.cityName}}{{citInfo.shipping.areaName}}{{citInfo.shipping.address}}</view>
+        </view>
+    </view>
+    <!-- 订单信息 -->
+    <view class="info" wx:if="{{orderState<5}}">
+        <view class="info-item info-flex">
+            <view class="info-orderNo">
+                <view class="info-label">订单编号</view>：
+                {{citInfo.orderNumber}}
+            </view>
+            <view class="info-btn" bindtap="copy">
+                <view class="info-copy">复制</view>
+            </view>
+        </view>
+        <view class="info-item" wx:if="{{orderState!==4}}">
+            <view class="info-label">支付方式</view>：
+            微信支付
+        </view>
+        <view class="info-item" wx:if="{{orderState!==4}}">
+            <view class="info-label">下单时间</view>：
+            {{citInfo.orderTime}}
+        </view>
+        <view class="info-item" wx:if="{{orderState!==4}}">
+            <view class="info-label">留言</view>：
+            <text style="width:0;flex:1;flex-wrap:wrap;word-wrap:break-word">{{citInfo.message?citInfo.message:'您没有任何留言哦'}}</text>
+        </view>
+        <view class="info-item" wx:if="{{orderState===4}}">
+            <view class="info-label">申请时间</view>：
+            {{citInfo.applyRefundTime}}
+        </view>
+        <view class="info-item" wx:if="{{orderState===4}}">
+            <view class="info-label">退款金额</view>：
+            ￥{{citInfo.totalPrice}}
+        </view>
+        <view class="info-item" wx:if="{{orderState===4}}">
+            <view class="info-label">退款原因</view>：
+            {{citInfo.refundReason}}
+        </view>
+    </view>
+    <!-- 订单统计 -->
+    <view class="total" wx:if="{{orderState<4}}">
+        <view class="total-item">
+            <view class="total-label">商品总额</view>
+            <view class="total-number">￥{{citInfo.totalPrice}}</view>
+        </view>
+        <view class="total-item">
+            <view class="total-label">运费</view>
+            <view class="total-number">￥{{citInfo.freight}}</view>
+        </view>
+        <view class="total-item">
+            <view class="total-label">商品优惠</view>
+            <view class="total-number">￥{{citInfo.sumDeduct}}</view>
+        </view>
+    </view>
+    <!-- 物流 -->
+    <view class="logistics" wx:if="{{(orderState===2 || orderState===3)&&citInfo.expressNo}}">
+        <view class="logistics-item">快递公司：{{citInfo.expressCompany}}</view>
+        <view class="logistics-line"></view>
+        <view class="logistics-item" style="display:flex;align-items:center;justify-content: space-between">快递单号：{{citInfo.expressNo}} 
+            <view class="info-copy" bindtap="copyTd">复制</view>
+        </view>
+    </view>
+    <!-- 底部填充 -->
+    <view class="bottom-fill" wx:if="{{orderState<4}}"></view>
+    <!-- 底部按钮 -->
+    <view class="bottom">
+        <navigator class="bottom-item" url="../contact/contact?logoPic={{citInfo.logoPic}}&marchantId={{citInfo.marchantId}}&marchantName={{citInfo.nickName}}">
+            <view class="bottom-btn">联系卖家</view>
+        </navigator>
+        <!-- <view class="bottom-item" wx:if="{{orderState>=3}}">
+            <view class="bottom-btn">电话联系</view>
+        </view> -->
+        <view class="bottom-item" wx:if="{{(orderState==5||orderState==6||orderState==7)&&citInfo.chargebackCount==0}}" bindtap="cancelRefund">
+            <view class="bottom-btn">撤销申请</view>
+        </view>
+        <view class="bottom-item" wx:if="{{orderState===0}}" bindtap="updateCityOrder" data-uniqueId="{{citInfo.uniqueId}}" data-id="3" data-marchantId="{{citInfo.marchantId}}">
+            <view class="bottom-btn">取消订单</view>
+        </view>
+        <view class="bottom-item" wx:if="{{orderState===0}}" bindtap="payOrder" data-item="{{citInfo}}" wx:if="{{citInfo.orderState==0}}">
+            <view class="bottom-btn bottom-active">支付订单</view>
+        </view>
+        <view class="bottom-item" wx:if="{{orderState===1&&citInfo.chargebackAllCount==0}}" bindtap="refund">
+            <view class="bottom-btn">申请退款</view>
+        </view>
+        <view class="bottom-item" wx:if="{{orderState===1}}" bindtap="updateCityOrder" data-uniqueId="{{citInfo.uniqueId}}" data-id="2" data-marchantId="{{citInfo.marchantId}}">
+            <view class="bottom-btn bottom-active">提醒发货</view>
+        </view>
+        <view class="bottom-item" wx:if="{{orderState===2&&citInfo.expressNo}}" bindtap="checkWl">
+            <view class="bottom-btn">查看物流</view>
+        </view>
+        <view class="bottom-item" wx:if="{{orderState===2}}">
+            <view class="bottom-btn bottom-active" bindtap="getOrderGoods" data-uniqueId="{{citInfo.uniqueId}}" data-id="4" data-marchantId="{{citInfo.marchantId}}">确认收货</view>
+        </view>
+        <view class="bottom-item" wx:if="{{orderState===3&&citInfo.commList[0].tempSpecId}}" bindtap="rebuy">
+            <view class="bottom-btn">再来一单</view>
+        </view>
+        <!-- <view class="bottom-item" wx:if="{{orderState===3}}">
+            <navigator class="bottom-btn bottom-active" url="../applyReturn/applyReturn?uniqueId={{citInfo.uniqueId}}">一键退货</navigator>
+        </view> -->
+        <!-- <view class="bottom-item" wx:if="{{orderState===4}}">
+            <view class="bottom-btn bottom-active">申请投诉</view>
+        </view> -->
+    </view>
+    <!-- 退款原因 -->
+    <van-popup show="{{ reasonBox }}" bind:close="refundOnClose" round position="bottom" class="reasonBox">
+        <view class="reason-title">退款原因</view>
+        <view class="reason-content">
+            <radio-group bindchange="radioChange">
+                <label class="reason-item" wx:for="{{refundReasonList}}" wx:key="{{item.name}}">
+                    <view class="reason-name">{{item.name}}</view>
+                    <radio value="{{item.name}}" checked="{{item.checked}}" color="#101010" />
+                </label>
+            </radio-group>
+            <textarea value="{{refundReason}}" maxlength="50" placeholder-style="color: #CCCCCC;" placeholder="输入你的退款原因" bindfocus="inputFocus" bindinput="inputContent" class="reason-textarea"></textarea>
+            <view class="reason-btn" bindtap="confirmCancel">立即提交</view>
+        </view>
+    </van-popup>
+    <!-- 填写物流单号 -->
+    <van-popup show="{{ logisticsBox }}" round bind:close="logisticsOnClose">
+        <view class="logisticsBox">
+            <view class="logistics-item">
+                <view class="logistics-label">快递公司</view>
+                <input class="logistics-input" bindinput="inputDeliveryCompany" maxlength="10" placeholder="请选择快递公司" />
+            </view>
+            <view class="logistics-item">
+                <view class="logistics-label">快递单号</view>
+                <input class="logistics-input" type="number" maxlength="20" value="{{deliveryNumber}}" bindinput="inputDeliveryNumber" placeholder="请选择快递单号" />
+            </view>
+            <view class="logistics-btn" bindtap="wroteDelivery">提交</view>
+        </view>
+    </van-popup>
+</view>
+<!-- 收货 -->
+<van-overlay show="{{isTake}}">
+    <view class="istake-container">
+        <image src="https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/basics-New%2F%E9%A6%96%E9%A1%B5_slices%2FMy%2F%E6%88%91%E7%9A%84_%E6%94%B6%E8%B4%A7%E5%9B%BE%E7%89%87.png" class="istake-img"></image>
+        <view class="istake-content">
+            <view>请选择收货方式：</view>
+            <view>1、确认无误收货：如果需要退货,需要自行和商家协商处理。</view>
+            <view>2、仅收货：支持7天内退货。</view>
+            <view class="is-read-content" bindtap="read">
+                <image src="{{isCheck?'/pages/img/order/is_comfirm_taked.png':'/pages/img/order/is_comfirm_take.png'}}" class="is-read-img"></image>
+                <text>我已知悉（默认不选中，需要勾选后才能收货）</text>
+            </view>
+        </view>
+        <view class="istake-bottom">
+            <view class="istake-btn" bindtap="confirmTake" data-type="1">确认无误收货</view>
+            <view class="istake-btn" bindtap="confirmTake" data-type="0">仅收货</view>
+        </view>
+    </view>
+    <image src="/pages/img/order/order_close.png" class="close-take" bindtap="cancelTake"></image>
+</van-overlay>

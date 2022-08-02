@@ -1,0 +1,389 @@
+<view class="details">
+  <image bindtap="isShowGuanzhuTankuang" class="guanzhu" src="https://xssj.letterbook.cn/applet/images/icon_remind.png"></image>
+  <view style="position: relative">
+    <swiper class="details_swiper" autoplay circular bindchange="getCurrentIndex">
+      <block wx:for="{{auctionDetail.carouselPictureList}}" wx:key="item.id">
+        <swiper-item class="details_swiper_item">
+          <image bindtap="imgClick" data-list="{{auctionDetail.carouselPictureList}}" data-src="{{item.httpAddress}}"
+            mode="aspectFill" src="{{item.httpAddress}}"></image>
+        </swiper-item>
+      </block>
+    </swiper>
+    <view class="details_swiper_count">
+      {{currentIndex + 1}}<view class="details_swiper_sumcount">/{{auctionDetail.carouselPictureList.length}}</view>
+    </view>
+  </view>
+  <view class="details_goods_name" style="{{auctionDetail.status == '3'?'background: #999999;':'background: #C48D44;'}}">
+    {{auctionDetail.xsAuctionItem.auctionItemName}}
+  </view>
+  <view class="details_goods">
+    <view class="details_goods_left">{{auctionDetail.xsAuctionItem.description}}</view>
+    <view class="details_goods_right">
+      <image mode="aspectFill" src="/image/pmhd/icon_share.png"></image>
+      <view>分享</view>
+      <button open-type="share"></button>
+    </view>
+  </view>
+  <view class="details_auction">
+      <view class="details_auction_bottom">
+        <view class="details_auction_bottom_left">
+          <view class="details_auction_bottom_left_text" style="font-weight: 400;">
+            <view style="font-size: 28rpx;">RMB</view>
+            <view style="font-size: 22rpx;">原价</view>
+          </view>
+          <view style="font-size: 56rpx;margin-left: 10rpx;">{{auctionDetail.xsAuctionItem.price}}</view>
+        </view>
+        <view class="details_auction_bottom_left">
+          <view class="details_auction_bottom_left_text">
+            <view style="font-size: 28rpx;color: #0B7EFF;">RMB</view>
+            <view style="font-size: 22rpx;color: #FF0000;">保底价</view>
+          </view>
+          <view class="details_auction_bottom_left_price">{{auctionDetail.xsAuctionItem.startingPrice}}</view>
+        </view>
+      </view>
+    </view>
+  <view class="yanchibox">
+    <view bindtap="showYanChi" class="yanchiTime">
+      <view>延</view>
+      <view>迟</view>
+      <view>{{auctionDetail.timeCycle}}</view>
+      <block wx:if="{{auctionDetail.timeUnit == '1'}}">
+        <view>秒</view>
+      </block>
+      <block wx:else>
+        <view>分</view>
+        <view>钟</view>
+      </block>
+      <view>/</view>
+      <view>次</view>
+      <image src="/image/pmhd/icon_help.png"></image>
+    </view>
+    <view hidden="{{!isShowYanChi}}" class="yanchi_textbox">
+      <view>喊价延迟:当喊品的竞喊进入最终倒计时的时候，如果有用户出价竞喊，那么系统将会自动延迟喊品的竞喊时间。防止用户恶性等待喊价结束前出价竞喊。</view>
+      <view>例如：商家设置延迟30秒，当喊价剩余时间不足30秒时有用户出价，则需要在出价后30秒内无人出价才能成功获喊。若有其他用户出价，喊价时间也将自动延迟</view>
+    </view>
+    <view class="yanchi_right">
+      <view wx:if="{{auctionDetail.status != '1' && bidRecordList.length}}" class="first">
+        <view class="details_auction_left_info">
+          <view class="details_auction_left_logo">
+            <image src="/image/pmhd/icon_win.png" class="details_auction_left_win"></image>
+            <image mode="aspectFill" src="{{bidRecordList[0].headImgUrl}}" class="details_auction_left_image"></image>
+          </view>
+          <view class="details_auction_left_name">{{bidRecordList[0].nickName}}</view>
+          <view class="details_auction_left_text">{{auctionDetail.status == '2'? '领先':'获喊'}}</view>
+        </view>
+        <view class="first_money">
+          {{auctionDetail.status == '2'? '当前最高价￥':'成交价￥'}}
+          <text style="margin-left: 6rpx;font-size: 48rpx;color: #F00;">{{bidRecordList.length?bidRecordList[0].price:auctionDetail.xsAuctionItem.startingPrice}}</text>
+        </view>
+      </view>
+      <block wx:if="{{auctionDetail.status != '3'}}">
+        <van-count-down use-slot bind:change="changeTime" bind:finish="overTime"
+          time="{{ auctionDetail.timeMinutes }}">
+          <view class="details_topTime_time">
+            <view class="details_auction_bottom_right">{{auctionDetail.status == '1'?'开始倒计时':'距喊价结束'}}</view>
+            <view wx:if="{{timeData.days!=0}}" class="details_topTime_time_box">{{timeData.days}}</view>
+            <view wx:if="{{timeData.days!=0}}" class="details_topTime_time_box_icon">天</view>
+            <view class="details_topTime_time_box">{{timeData.hours < 10?'0'+timeData.hours:timeData.hours}}</view>
+            <view class="details_topTime_time_box_icon">:</view>
+            <view class="details_topTime_time_box">{{timeData.minutes < 10?'0'+timeData.minutes:timeData.minutes}}</view>
+            <view class="details_topTime_time_box_icon">:</view>
+            <view class="details_topTime_time_box details_topTime_time_box_big">{{timeData.seconds < 10?'0'+timeData.seconds:timeData.seconds}}</view>
+          </view>
+        </van-count-down>
+      </block>
+      <block wx:else>
+        <view class="details_auction_right_endtime">结束时间 {{auctionDetail.endTime}}</view>
+      </block>
+    </view>
+  </view>
+  <view wx:if="{{auctionDetail.status != '1' && bidRecordList.length}}" class="details_bidlist">
+    <view class="details_title details_bidlist_title">
+      <view class="details_title_left">
+        <view class="details_title_icon"></view>
+        <view class="details_title_text">喊价榜</view>
+      </view>
+      <block wx:if="{{auctionDetail.status != '1'}}">
+        <view class="details_bidlist_title_right">
+          <view wx:if="{{auctionDetail.status == '2'}}">延迟{{auctionDetail.delayCount}}次</view>
+          <view wx:if="{{auctionDetail.status == '2'}}" class="details_bidlist_title_line"></view>
+          <view>出价{{auctionDetail.premiumCount}}次</view>
+        </view>
+      </block>
+    </view>
+    <block wx:for="{{bidRecordList}}">
+      <view class="details_bidlist_item">
+        <view class="details_bidlist_left">
+          <view style="{{index == 0 ? 'color: #FF0000;' : 'color: #333333;'}}" class="details_bidlist_index">
+            {{index + 1}}</view>
+          <image src="{{item.headImgUrl}}" mode="aspectFill" class="details_bidlist_image"></image>
+          <view class="details_bidlist_name color{{index}}">{{item.nickName}}</view>
+          <view class="details_bidlist_text color{{index}}">{{index == 0 ? '领先' : '被超越'}}</view>
+        </view>
+        <view class="details_bidlist_right color{{index}}">￥{{item.price}}</view>
+      </view>
+    </block>
+    <view bindtap="showBidMask" data-type="1" class="details_bidlist_foot">查看详情</view>
+  </view>
+  <view class="details_info">
+    <view wx:if="{{auctionDetail.userList}}" class="details_title details_onlooker">
+      <view class="details_title_icon"></view>
+      <view class="details_title_text">正在围观</view>
+      <view class="details_onlooker_image">
+        <block wx:for="{{auctionDetail.userList}}" wx:key="timeUnit">
+          <image style="left: {{index * 28}}rpx" src="{{item.headImgUrl}}" mode="aspectFill"></image>
+          <view wx:if="{{index == 19}}" style="left: {{index * 28}}rpx">99+</view>
+        </block>
+      </view>
+    </view>
+    <view class="details_title details_ship">
+      <view class="details_title_icon"></view>
+      <view class="details_title_text">用户保障</view>
+      <view class="details_ship_list">
+        <view>七天无理由退货</view>
+      </view>
+    </view>
+    <view class="details_desc">
+      <view class="details_title details_desc_title">
+        <view class="details_title_icon"></view>
+        <view class="details_title_text">喊价说明</view>
+      </view>
+      <view class="details_desc_content">
+        <view class="details_desc_item">
+          <view class="details_desc_label">
+            <view>喊价类型</view>
+          </view>
+          <view class="details_desc_desc">{{auctionDetail.timeUnit == 1 ? '即时喊' : auctionDetail.timeUnit == 2 ? '短时喊' : '长时喊'}}</view>
+        </view>
+        <!-- <view class="details_desc_item">
+          <view class="details_desc_label">
+            <view>免密支付</view>
+          </view>
+          <view class="details_desc_desc">喊价后自动付款</view>
+        </view> -->
+        <view class="details_desc_item">
+          <view class="details_desc_label">
+            <view>开始时间</view>
+          </view>
+          <view class="details_desc_desc">{{auctionDetail.startTime}}</view>
+        </view>
+        <view class="details_desc_item">
+          <view class="details_desc_label">
+            <view>喊价幅度</view>
+          </view>
+          <view class="details_desc_desc">{{auctionDetail.xsAuctionItem.priceRangeString}}</view>
+        </view>
+        <view class="details_desc_item">
+          <view class="details_desc_label">
+            <view>原价</view>
+          </view>
+          <view class="details_desc_desc">￥{{auctionDetail.xsAuctionItem.price}}</view>
+        </view>
+        <view class="details_desc_item">
+          <view class="details_desc_label">
+            <view>保底价</view>
+          </view>
+          <view class="details_desc_desc">￥{{auctionDetail.xsAuctionItem.startingPrice}}</view>
+        </view>
+        <view class="details_desc_item">
+          <view class="details_desc_label">
+            <view>结束时间</view>
+          </view>
+          <view class="details_desc_desc">{{auctionDetail.endTime}}</view>
+        </view>
+        <view wx:if="{{auctionDetail.timeCycle}}" class="details_desc_item">
+          <view class="details_desc_label">
+            <view>延迟</view>
+          </view>
+          <view class="details_desc_desc">
+            {{auctionDetail.timeCycle}}{{auctionDetail.timeUnit == '1' ? '秒' : '分钟'}}/次</view>
+        </view>
+      </view>
+    </view>
+    <view bindtap="toUserNotice" class="details_notice">用户须知</view>
+  </view>
+  <view class="details_details">
+    <view class="details_title">
+      <view class="details_title_icon"></view>
+      <view class="details_title_text">商品详情</view>
+    </view>
+    <block wx:for="{{auctionDetail.detailPictureList}}" wx:key="item.id">
+      <image bindtap="imgClick" data-list="{{auctionDetail.detailPictureList}}" data-src="{{item.httpAddress}}"
+        mode="widthFix" src="{{item.httpAddress}}"></image>
+    </block>
+  </view>
+  <!-- 底部栏 -->
+  <view style="{{auctionDetail.status == '3' ? '' : 'padding: 16rpx 0 16rpx 36rpx;'}}" class="details_bottom">
+    <block wx:if="{{auctionDetail.status != '3'}}">
+      <view bindtap="contactShop" class="details_bottom_item">
+        <image src="/image/pmhd/icon_cs.png"></image>
+        <view class="details_bottom_item_text">客服</view>
+      </view>
+      <view bindtap="toShop" class="details_bottom_item">
+        <image src="/image/pmhd/icon_shop.png"></image>
+        <view class="details_bottom_item_text">店铺</view>
+      </view>
+      <view bindtap="toList" class="details_bottom_item">
+        <image src="/image/pmhd/icon_more.png"></image>
+        <view class="details_bottom_item_text">更多商品</view>
+      </view>
+      <view wx:if="{{auctionDetail.isApply == 0}}" class="details_bottom_btn">
+        <block wx:if="{{auctionDetail.status == '1'}}">
+          <block wx:if="{{auctionDetail.isSubscribe && auctionDetail.isSubscribe > 0}}">
+            <view class="btn_centern">
+              <view class="btn_centern" style="background: #999999;border-radius: 44rpx 0rpx 0rpx 44rpx;">已预约</view>
+              <view bindtap="showPayMask" data-type="1" class="btn_centern" style="flex-direction: column;">
+                <view>提前报名</view>
+                <view style="font-size: 20rpx;">（参喊）</view>
+              </view>
+            </view>
+          </block>
+          <block wx:else>
+            <view bindtap="reservation" class="btn_centern">预约</view>
+          </block>
+        </block>
+        <block wx:else>
+          <view bindtap="showPayMask" data-type="1" class="btn_centern">立即参喊</view>
+        </block>
+      </view>
+      <block wx:else>
+        <view wx:if="{{auctionDetail.status == '1'}}" class="details_bottom_btn">
+          <view class="btn_centern">
+            <view class="btn_centern" style="background: #999999;border-radius: 44rpx 0rpx 0rpx 44rpx;">已预约</view>
+            <view class="btn_centern" style="background: #07C160;">已报名</view>
+          </view>
+        </view>
+        <view wx:else bindtap="showAddprice" data-type="1" style="{{!isMyPrice?'background: #999999;':''}}" class="details_bottom_btn">
+          <view>我要喊价</view>
+          <view wx:if="{{!isMyPrice}}" class="details_bottom_btn_tips">(等待下一轮喊价)</view>
+        </view>
+      </block>
+    </block>
+    <block wx:else>
+      <view bindtap="toList" class="details_bottom_more">查看更多商品</view>
+    </block>
+  </view>
+</view>
+
+<view hidden="{{!isShowBidMask}}" bindtap="showNotBidMask" class="mask">
+  <view catchtap="showBidMask" class="bid">
+    <view class="bid_title">喊价详情</view>
+    <view catchtap="showNotBidMask" class="bid_close">
+      <image src="/image/pmhd/icon_close.png"></image>
+    </view>
+    <scroll-view scroll-y style="height: 500rpx;">
+      <view wx:for="{{bidList}}" class="details_bidlist_item bid_item">
+        <view class="details_bidlist_left">
+          <view style="{{index == 0 ? 'color: #000000;' : 'color: #999999;'}}" class="details_bidlist_index">
+            {{index + 1}}</view>
+          <image src="{{item.headImgUrl}}" mode="aspectFill" class="details_bidlist_image"></image>
+          <view style="{{index == 0 ? 'color: #000000;' : 'color: #999999;'}}" class="details_bidlist_name">
+            {{item.nickName}}</view>
+          <view style="{{index == 0 ? 'color: #000000;' : 'color: #999999;'}}" class="details_bidlist_text">
+            {{index == 0 ? '领先' : '超越'}}</view>
+        </view>
+        <view style="{{index == 0 ? 'color: #000000;' : 'color: #999999;'}}" class="details_bidlist_right">
+          ￥{{item.price}}</view>
+      </view>
+    </scroll-view>
+  </view>
+</view>
+
+<!-- 加价详情 -->
+<view hidden="{{!isShowAddprice}}" bindtap="showNotAddprice" class="mask"
+  style="height: calc(100vh - 120rpx);bottom: 120rpx;">
+  <view catchtap="showAddpriceDialog" class="addprice">
+    <view class="addprice_item">
+      <view class="addprice_item_left">
+        <view class="addprice_item_name">当前价</view>
+        <view class="addprice_item_btn addprice_item_nowPrice">
+          <text style="font-size: 24rpx;">￥</text>
+          {{bidRecordList.length?bidRecordList[0].price:auctionDetail.xsAuctionItem.startingPrice}}
+        </view>
+      </view>
+      <view class="addprice_item_left">
+        <view class="addprice_item_name">我的报价</view>
+        <view class="addprice_item_btn addprice_item_myPrice">
+          <text style="font-size: 24rpx;">￥</text>
+          {{myPrice}}
+        </view>
+      </view>
+    </view>
+    <view class="addprice_item" style="margin-top: 20rpx;">
+      <view class="addprice_item_left">
+        <view class="addprice_item_name">喊价幅度</view>
+        <view class='me-fx-1 me-fx-row me-fx-start-c' style='flex-wrap:wrap;'>
+          <view catchtap="addPrice" data-index="{{index}}"
+            wx:for="{{auctionDetail.xsAuctionItem.priceRangeArray}}" 
+            class="addprice_item_btn {{addPriceIndex == index ? 'addprice_item_btnActive' : ''}}"
+          >+{{item}}</view>
+        </view>
+      </view>
+      <image catchtap="backAddPrice" class="addprice_item_right" src="/image/pmhd/icon_revoke.png"></image>
+    </view>
+  </view>
+</view>
+
+<!-- 支付 -->
+<view hidden="{{!isShowPayMask}}" bindtap="showNotPayMask" class="mask">
+  <view catchtap="showPayMask" class="payment">
+    <image catchtap="showNotPayMask" src="/image/pmhd/icon_close.png" class="payment_close"></image>
+    <view wx:if='{{auctionDetail.bond>0}}' class='me-fx-row me-fx-c-c deposit-text'
+    >保证金：{{auctionDetail.bond}}元</view>
+    <view class="payment_desc">
+      <image src="/image/pmhd/icon_tips.png"></image>
+      <view style="width: 400rpx;text-align: center;">{{auctionDetail.status == '1' ? '是否确认提前报名本场喊价活动':'是否确认参加本场喊价活动'}}</view>
+    </view>
+    <view class="payment_btn" catchtap="toPayment">
+      <block wx:if="{{auctionDetail.bond == 0}}">
+        {{auctionDetail.status == '1' ? '提前报名' : '立即喊价'}}
+      </block>
+      <block wx:else>去支付</block>
+    </view>
+    <view catchtap="checkDoc" class="payment_doc">
+      <icon type="success" size="24rpx" color="{{isCheckDoc ? '#FF0000':'#999999'}}"></icon>
+      <view class="payment_doc_text">喊价需要同意信书喊价协议</view>
+      <view catchtap="toUserNotice">查看协议</view>
+    </view>
+  </view>
+</view>
+
+<view hidden="{{!isWon}}" class="mask mask_center">
+  <view style="background-image: url(https://xssj.letterbook.cn/applet/images/bg_won.png);" class="won">
+    <image src="{{bidRecordList[0].headImgUrl}}"></image>
+    <view class="won_title">恭喜{{bidRecordList[0].userId == userInfo.userId ? '您' : bidRecordList[0].nickName}}获得购买资格
+    </view>
+    <view class="won_price">成交价￥{{bidRecordList[0].price}}</view>
+    <view class="won_desc">还有更多商品等待您的关注</view>
+    <view class="won_desc">快去参与吧</view>
+  </view>
+  <view class="won_btn">
+    <view bindtap="toList" data-type="1">查看更多商品</view>
+    <view wx:if="{{auctionDetail.biddingStatus == 3}}" bindtap="toPayMoney" style="background: #FA2D2D;border-radius: 0 8rpx 8rpx 0;">立即支付</view>
+  </view>
+</view>
+
+<view wx:if="{{auctionDetail.status == '3' && !bidRecordList.length}}" class="mask mask_center">
+  <view class="pass">
+    <image class="pass_image" src="https://xssj.letterbook.cn/applet/images/icon_pass.png"></image>
+    <view class="pass_box">
+      <view>
+        <view class="pass_text">还有更多商品等待您的关注</view>
+        <view class="pass_text">快去参与吧</view>
+      </view>
+      <view bindtap="backList" class="pass_btn">确定</view>
+    </view>
+  </view>
+</view>
+
+<!-- 是否关注喊价 -->
+<view hidden="{{isShowGuangZhu}}" bindtap="showNotGuanzhuan" class="mask mask_center">
+  <view catchtap="showGuanzhuan" class="han_price">
+    <image src="https://xssj.letterbook.cn/applet/images/icon_hanjiao.png"></image>
+    <view class="han_price_text">是否关注喊价</view>
+    <view class="ban_price_btn">
+      <view catchtap="exit" class="ban_price_cancelbtn">退出</view>
+      <view catchtap="remind" class="ban_price_surelbtn">退出关注喊价</view>
+    </view>
+  </view>
+</view>

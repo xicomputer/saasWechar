@@ -1,0 +1,15 @@
+<view class="integral-component-box" hidden="{{!showTaskPop}}">
+  <view class="integral-component-content">
+    <image class="integral-component-bg" src="https://xssj.letterbook.cn/applet/images/integral-component-bg.png"></image>
+    <view class="integral-component-text-box">
+      <view class="integral-component-text">{{text}}</view>
+      <image bindtap="closePop" src="/pages/img/index/task_btn.png" class="integral-component-btn"></image>
+      <view class="to-exchange-box" bindtap="toExchange">
+        去兑换礼品
+        <image src="/pages/img/index/integral-right.png" class="to-exchange-img"></image>
+      </view>
+    </view>
+    <view class="integral-component-solid"></view>
+    <image bindtap="closePop" style="width:40rpx;height:40rpx" src="/pages/img/index/del.png"></image>
+  </view>
+</view>

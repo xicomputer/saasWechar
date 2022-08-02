@@ -1,0 +1,38 @@
+<!--pages/shopHome/components/culture/culture.wxml-->
+<view class='culture-box' wx:if="{{ArticleList.length}}">
+    <view class='me-fx-row me-fx-c-c title-box'>
+        <!-- <image class='adorn-img' wx:if="{{tempId != 2}}" src='../../../static/img_l2.png'></image> -->
+        <!-- <image class='adorn-img' wx:else src='{{tempBaseUrl+"temp-img/title_adorn.png"}}'></image> -->
+        <!-- <text class='title-text {{"textColor"+tempId}}' style='color:{{tempId==2?"#fff":"#333"}}'>商家文化</text> -->
+        <!-- <image class='adorn-img' wx:if="{{tempId != 2}}" src='../../../static/img_r2.png'></image> -->
+        <!-- <image class='adorn-img' wx:else src='{{tempBaseUrl+"temp-img/title_adorn.png"}}'></image> -->
+        
+        <view class="more" bindtap="goMore" style='color:{{tempId==2?"#fff":"#333"}}'>   
+            <text>商家文化</text>
+            <text class='icon icon-right'></text>
+        </view>
+    </view>
+    <view class='me-fx-row me-fx-sb culture-img-list other_list' wx:if="{{tempId<5}}">
+        <block  wx:for="{{ArticleList}}" wx:key="index">
+            <view class="ArticleList" bindtap='toWebViewPage' data-link='{{item.linkurl}}' >
+                <image mode='aspectFit'  class='culture-img' src='{{item.articlecover}}'
+                ></image>
+                <view class="ArtiBox me-fx-row" style='color:{{tempId==2?"#fff":"#333"}}'>
+                    <text class="me-full-text">{{item.articletitle}}</text>
+                </view>
+            </view>
+        </block>
+    </view>
+    <view  class='me-fx-col culture-list2' wx:if="{{tempId == 6}}">
+        <block wx:for="{{ArticleList}}" wx:key="{{index}}" >
+            <view class="ArticleList2 me-fx-row me-fx-sb"  wx:if="{{index<3}}" bindtap='toWebViewPage' data-link='{{item.linkurl}}'>
+                <view class="culture2_info me-fx-col me-fx-sb">
+                    <text class="culture2_title">{{item.articletitle}}</text>
+                    <text class="culture2_time">{{item.createtime}}</text>
+                </view>
+                <image  mode='aspectFit' class='culture2-img' src='{{item.articlecover}}'></image>
+            </view>
+            <view wx:if="{{ArticleList.length >3?index<2:ArticleList.length-1!=index}}" class="line"></view>
+        </block>
+    </view>
+</view>

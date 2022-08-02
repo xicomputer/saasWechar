@@ -1,0 +1,254 @@
+<!-- 海报生成组件 -->
+<canvas-synthetic class='synthetic' canvas-id='canvas_goods'
+    canvas-width='{{548}}' canvas-height='{{856}}' canvas-bgcolor='#fff'
+    imgs='{{imgs}}' bind:generateComplete='getCompleteImg' texts='{{texts}}'
+    showline='{{false}}' rect-info='{{rectInfo}}'
+></canvas-synthetic>
+
+<view class='detail-page'>
+    <view class='top-banner'>
+        <swiper class='banner-swiper' bindchange='swiperChange'  circular='{{true}}'>
+            <swiper-item wx:if='{{activityInfo.videoUrl}}' class='swiper-item'>
+                <video id='swiperVideo' src="{{activityInfo.videoUrl}}"  class='banner-img'
+                 poster='{{activityInfo.videoCover}}'></video>
+            </swiper-item>
+            <swiper-item class='swiper-item' wx:for='{{activityInfo.bannerImgUrls}}' wx:key='index'>
+                <view class='swiper-content'>
+                    <image src='{{item}}' class='banner-img'></image>
+                </view>
+            </swiper-item>
+        </swiper>
+        <view class='count-text-box'>{{currentBanner+1}}/{{activityInfo.bannerImgUrls?(activityInfo.bannerImgUrls.length):0}}</view>
+    </view>
+
+    <view class='base-info'>
+        <view class='me-fx-row price-down-count'>
+            <view class='me-fx-1 me-fx-row me-fx-start-c price-box'>
+                <image src='../imgs/xsqg-img.png' class='seckill-logo-img'></image>
+                <view class='now-price'>
+                    <text>￥</text>
+                    <text class='price-num'>{{activityInfo.lowPrice}}</text>
+                    <text class='old-price'>¥{{activityInfo.price}}</text>
+                </view>
+            </view>
+            <view class='beautify-box'>
+                <view class='box1'></view>
+                <view class='box2'></view>
+            </view>
+            <view class='me-fx-col me-fx-c-c down-count'>
+                <text>距{{activityInfo.state==1?'开始':'结束'}}还剩</text>
+                <van-count-down time='{{downTimes}}' use-slot='{{true}}' auto-start='{{true}}'
+                    bind:finish='activityEnd' bind:change='changeFun'
+                >
+                    <view class='me-fx-row me-fx-c-c time-row'>
+                        <view class='me-fx-row' wx:if='{{downTimeObj.days!=="00"}}'>
+                            <text class='count-num'>{{downTimeObj.days}}</text>天
+                        </view>
+                        <text class='count-num'>{{downTimeObj.hours}}</text>:
+                        <text class='count-num'>{{downTimeObj.minutes}}</text>:
+                        <text class='count-num'>{{downTimeObj.seconds}}</text>
+                    </view>
+                </van-count-down>
+            </view>
+        </view>
+        <view class='me-fx-row me-fx-start-c labels-container' >
+            <text class='label-text2' wx:if='{{activityInfo.limitBuyCount!=-1}}'>每人限购{{activityInfo.limitBuyCount}}件</text>
+            <text class='remaining-count' wx:if='{{activityInfo.residueCommodityCount!=-1}}'>剩余:{{activityInfo.residueCommodityTotalCount}}</text>
+        </view>
+        <view class='me-fx-row me-fx-sb-c base-info-bottom'>
+            <view class='me-full-text me-full-line2 goods-name'>{{activityInfo.commodityName}}</view>
+            <view class='me-fx-row me-fx-c-c share-box' bindtap='openShare'>
+                <image src='../imgs/wx.png' class='wx-img'></image>
+                <text>分享</text>
+            </view>
+        </view>
+    </view>
+
+    <view class='attr-info'>
+        <!-- <view class='me-fx-row me-fx-start-c info-item'>
+            <text class='attr-title'>运费</text>
+            <image src='../imgs/che.png' class='che-img'></image>
+            <text class='label1-text'>包邮</text>
+        </view> -->
+
+        <view class='me-fx-row me-fx-start-c info-item' 
+            wx:for='{{activityInfo.orderTypeArr}}' wx:key='index'
+        >
+            <text class='attr-title'>{{item==1?'物流发货':item==2?'同城配送':'预订自取'}}</text>
+            <view class='me-fx-row me-fx-start-c'>
+                <text class='label-text2'>购买</text>
+                <view class='connect-line'></view>
+                <text class='label-text2'>{{item==1?'接单发货':item==2?'配送':'门店团购'}}</text>
+                <view class='connect-line'></view>
+                <text class='label-text2'>{{item==1?'收货完成':'完成'}}</text>
+            </view>
+        </view>
+
+        <view class='me-fx-row me-fx-start-c info-item'>
+            <text class='attr-title'>保障</text>
+            <view class='me-fx-1 content-str'>放心购·材质保障·假一罚十</view>
+            <image src='../imgs/point-adorn.png' class='point-adorn-img'></image>
+        </view>
+    </view>
+
+    <view class='explain-info'>
+        <view class='me-fx-row me-fx-start-c block-title-box'>
+            <text class='col-line'></text>
+            <text>活动规则</text>
+        </view>
+        <view class='explain-text'>
+            <view>1.活动有效期</view>
+            <view>秒杀有效期由商家设置本商品在该场活动中持续时间。</view>
+            <view>2.秒杀成功</view>
+            <view>在有效期内完成支付即为成功。</view>
+            <view>3.秒杀失败</view>
+            <view>活动结束后，未完成支付的订单即为失败。</view>
+            <view>4.退货说明</view>
+            <view>活动商品如有保质期、品质、假冒伪劣问题请及时保留证据进行线上协商退货。</view>
+            <view>5.限购规则</view>
+            <view>商家如设置每人购买次数，达到限制后，将无法再次购买</view>
+        </view>
+    </view>
+
+    <view class='detail-imgs'>
+        <view class='me-fx-row me-fx-start-c block-title-box'>
+            <text class='col-line'></text>
+            <text>商品详情</text>
+        </view>
+        <view>
+            <image src='{{item}}' class='detail-img' mode='widthFix' 
+                wx:for='{{activityInfo.detailImgUrls}}' wx:key='index'
+            ></image>
+        </view>
+    </view>
+
+    <view class='me-fx-row me-fx-sb-c floot-container'>
+        <view class='me-fx-row me-fx-start-c service'>
+            <view class='me-fx-col me-fx-c-c link-item' bindtap='jumpChat'>
+                <image src='../imgs/msg-img.png' class='icon-img'></image>
+                <text>客服</text>
+            </view>
+            <view class='me-fx-col me-fx-c-c link-item' bindtap='jumpShop'>
+                <image src='../imgs/shop-img.png' class='icon-img'></image>
+                <text>店铺</text>
+            </view>
+            <view class='me-fx-col me-fx-c-c link-item' bindtap='jumpMS'>
+                <image src='../imgs/dingdan.png' class='icon-img'></image>
+                <text>订单</text>
+            </view>
+            
+        </view>
+        
+        <bottom class='handel-btn disable-btn' wx:if='{{activityInfo.residueCommodityTotalCount==0}}'>商品已售罄</bottom>
+        <bottom wx:else class='handel-btn' bindtap='handleFlootBtn'>立即抢购</bottom>
+
+
+        <button wx:if='{{!loginInfo.userPhone}}' class='get-phone-btn' open-type='getPhoneNumber' 
+            bindgetphonenumber='getPhoneNumber' catchtap='getPhoneNumber'
+        ></button>
+    </view>
+</view>
+
+
+<!-- 选择规格弹窗 -->
+<van-popup show="{{ showSelSpecification }}" position='bottom' close-on-click-overlay='{{true}}'
+    bind:click-overlay='closePopup' bind:close='closePopup' 
+    closeable='{{true}}' data-attrname='showSelSpecification'
+>
+    <view class='sel-specification-popup'>
+        <view class='me-fx-row me-fx-sb-c goods-base-info'>
+            <image class='goods-img' src='{{currentSku.imageUrl}}'></image>
+            <view class='me-fx-1 me-fx-col me-fx-sb right-info'>
+                <view class='price-text'>¥{{currentSku.livePrice}}</view>
+                <view class='me-fx-row  me-fx-sb-c'>
+                    <view class='me-full-text me-full-line2'>{{activityInfo.commodityName}}</view>
+                    <view>库存：{{currentSku.residueCommoditySkuCount}}</view>
+                </view>
+            </view>
+        </view>
+        <view class='specification-list'>
+            <view class='title-text'>规格分类</view>
+            <view class='me-fx-row'>
+                <block wx:for='{{skuList}}' wx:key='index'>
+                    <text class='specification-item {{goodsSkuId==item.skuId?"sel-item":""}}' data-skuitem='{{item}}' bindtap='selGoodsSku'>{{item.skuName}}</text>
+                </block>
+            </view>
+        </view>
+        <view class='me-fx-row me-fx-sb-c buy-count'>
+            <view class='me-fx-row me-fx-start-end'>
+                <text class='title-text'>购买数量</text>
+                <text class='msg-text' wx:if='{{activityInfo.limitBuyCount!=-1}}'>此商品限购{{activityInfo.limitBuyCount}}件</text>
+            </view>
+            <add-subtract-num bind:change='countChange' bind:minusCount='minusCount' desabled='{{isCountDesabled}}'></add-subtract-num>
+        </view>
+        <button class='down-order-btn' bindtap='jumpConfirmOrder'>确认</button>
+    </view>
+</van-popup>
+
+
+<!-- 分享弹窗 -->
+<van-popup show='{{showShare}}' position='bottom' close-on-click-overlay='{{true}}'
+    bind:click-overlay='showShare' data-attrname='showShare'
+>
+    <view class='share-content-popup'>
+        <view class='me-fx-row me-fx-sa-c'>
+            <button class='me-fx-col me-fx-c-c share-btn' open-type='share'>
+                <image src='../imgs/wx-logo.png' class='share-img'></image>
+                <text>分享至微信</text>
+            </button>
+            <view class='me-fx-col me-fx-c-c' bindtap='createPosters'>
+                <image src='../imgs/save-img.png' class='share-img'></image>
+                <text>保存海报</text>
+            </view>
+        </view>
+        <button class='cancel-btn' bindtap='closePopup' data-attrname='showShare'>取消</button>
+    </view>
+</van-popup>
+
+<!-- 海报展示弹窗 -->
+<view wx:if='{{showPoster}}' class='poster-popup' bindtap='closePosterPopup'>
+    <image class='poster-img' src='{{testimgUrl}}'></image>
+    <view class='me-fx-row me-fx-c-c footer-save'>
+        <button class='save-btn' catchtap='savePoster'>保存海报</button>
+    </view>
+</view>
+
+
+<!-- 限购弹窗 -->
+<van-popup show='{{showPurchasing}}' position='center' close-on-click-overlay='{{true}}'
+    bind:click-overlay='closePopup' data-attrname='showPurchasing'
+    custom-style='border-radius:22rpx;'
+>
+    <view class='me-fx-col me-fx-c-c purchasing-content'>
+        <view class='title-text'>超过限购件数</view>
+        <view class='msg-text'>该商品限购{{activityInfo.limitBuyCount}}件，已达购买总上限，</view>
+        <view class='msg-text'>请修改购买数量</view>
+        <view class='me-fx-row goods-info'>
+            <image src='{{currentSku.imageUrl}}' class='goods-img'></image>
+            <view class='me-fx-1 me-fx-col me-fx-sb'>
+                <view class='goods-name'>{{activityInfo.commodityName}}</view>
+                <view class='me-fx-row me-fx-sb-c'>
+                    <text class='price'>¥{{currentSku.livePrice}}</text>
+                    <text class='count'>x{{buyCount}}</text>
+                </view>
+            </view>
+        </view>
+        <button class='zd-btn' bindtap='closePopup' data-attrname='showPurchasing'>我知道了</button>
+    </view>
+</van-popup>
+
+<van-popup show="{{isEnd}}" close-on-click-overlay='{{true}}' custom-style='border-radius:28rpx;'
+    close-on-click-overlay='{{true}}' bind:click-overlay='hideEndPopup'
+>
+    <view class='me-fx-col me-fx-c-c activity-end-popup-content'>
+        <view class='title-text'>秒杀活动已结束</view>
+        <view class='goods-name'>{{activityInfo.commodityName}}</view>
+        <image class='activity-end-img' src='../imgs/activity_end_img.png'></image>
+        <!-- <button class='popup-btn' bindtap='jumpJoinUserList'>查看推荐订单</button> -->
+    </view>
+</van-popup>
+
+
+<!-- 授权组件 -->
+<auth-get-info></auth-get-info>
+

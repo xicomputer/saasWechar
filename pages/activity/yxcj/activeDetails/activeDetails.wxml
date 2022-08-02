@@ -1,0 +1,3 @@
+<!-- <navigator wx:if="{{buton}}" url="/pages/AuthLogin/AuthLogin" class="butt" >授权登录</navigator> -->
+<view wx:if="{{buton}}"></view>
+<web-view wx:else src="https://xssj.letterbook.cn/?applet_token={{token}}&activityId={{activityId}}&marchant={{marchant}}#/yxcj/{{tag}}"></web-view>    

@@ -1,0 +1,218 @@
+/* pages/ImproveInformation/ImproveInformation.wxss */
+.ifo_bigBox {
+  width: 100%;
+  min-height: 100vh;
+  background: #F2F2F2;
+}
+
+.fareninfo {
+  height: 50rpx;
+  padding: 26rpx;
+  font-size: 36rpx;
+  font-family: PingFang SC;
+  font-weight: 500;
+  line-height: 50rpx;
+  color: #333333;
+  opacity: 1;
+  text-align: center;
+}
+
+.info {
+  width: 690rpx;
+  height: 319rpx;
+  margin: 0 15px;
+  background: #fff;
+  border-radius: 20rpx;
+}
+
+.info .van-field__label{
+  width: 221rpx;
+}
+
+.info_xx {
+  font-size: 32rpx;
+  color: #FF0000;
+}
+
+
+
+.info_name input {
+  margin-top: 4rpx;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-top: 40rpx;
+  padding: 0 30rpx;
+}
+
+.delete {
+  width: 300rpx;
+  height: 210rpx;
+  background: #FFFFFF;
+  border: 1px dashed #E7A124;
+  opacity: 1;
+  text-align: center;
+}
+
+.ziz {
+  width: 269rpx;
+  height: 171rpx;
+  padding: 19.5rpx 14.5rpx;
+}
+
+.show {
+  visibility: visible;
+}
+
+.hidden {
+  visibility: hidden;
+}
+
+.icon {
+  width: 35rpx;
+  height: 35rpx;
+}
+
+.zhong {
+  width: 300rpx;
+  height: 210rpx;
+  background: #FFFFFF;
+  border: 1px dashed #E7A124;
+  opacity: 1;
+  /* flex: 5; */
+  /* position: relative; */
+}
+
+.thirdOne {
+  width: 300rpx;
+  height: 210rpx;
+  background: #FFFFFF;
+  border: 1px dashed #E7A124;
+  opacity: 1;
+  margin-top: 13rpx;
+}
+
+.im1 {
+  position: absolute;
+  width: 96%;
+  margin-left: 2%;
+}
+
+.im2 {
+  width: 84%;
+  height: 266rpx;
+  margin-left: 8%;
+  margin-top: 4%;
+}
+
+.add {
+  flex: 1;
+  text-align: center;
+}
+
+/* 商家信息 */
+.sj_info {
+  width: 690rpx;
+  height: 375rpx;
+  margin: 0 auto;
+  background: #FFFFFF;
+  opacity: 1;
+  border-radius: 10rpx;
+}
+.sj_info .van-field__label ,.sj_info input{
+  font-size: 28rpx;
+  color: #333333;
+}
+.sj_category{
+  height: 106rpx;
+}
+
+/*营业执照*/
+.business {
+  height: 264px;
+  margin: 0 15px;
+  border-radius: 5px;
+  background: #fff;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.license{
+  width: 310rpx;
+  height: 380rpx;
+}
+.business-text {
+  height: 34rpx;
+  font-size: 24rpx;
+  font-family: PingFang SC;
+  font-weight: 400;
+  line-height: 34rpx;
+  color: rgba(255, 0, 0, 1);
+  opacity: 1;
+  margin-top: 10rpx
+}
+
+.submit {
+  width: 670rpx;
+  text-align: center;
+  height: 100rpx;
+  line-height: 100rpx;
+  background: rgba(16, 16, 16, 1);
+  box-shadow: 0rpx 10rpx 20rpx rgba(0, 0, 0, 0.16);
+  opacity: 1;
+  border-radius: 100rpx;
+  margin: 0 auto;
+  color: #fff;
+  margin-top: 60rpx;
+  margin-bottom: 80rpx;
+  font-size: 32rpx;
+}
+/* 精品分类 */
+.categories-body-left{
+  background: #F4F5F7;
+  width: 160rpx;
+  height:73vh;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  flex: 1;
+}
+.categories-nav-item {
+  display: block;
+  height: 120rpx;
+  line-height:120rpx;
+  text-align: center;
+  color: #666666;
+  position: relative;
+  font-size: 32rpx;
+
+  
+}
+.active {
+  background: #ffffff;
+}
+.categories-body-right{
+  background: #ffffff;
+  height:70vh;
+  overflow-y: scroll;
+  padding: 20rpx 0;
+  flex: 3;
+}
+.categories-nav-right-item{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20rpx;
+  width: 33.33%;
+  float: left;
+}
+.van-sidebar-item{
+  width: 188rpx;
+  }
+ 

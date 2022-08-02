@@ -1,0 +1,531 @@
+<store-close wx:if="{{isClose}}"></store-close>
+<view>
+  <view class="swiper-container">
+  <swiper indicator-dots="true" interval="3000" style="height:{{appWidth}}px" indicator-active-color="#fff" bindchange='swiperChange'>
+    <swiper-item wx:if='{{detailData.videoUrl}}'>
+      <video id='swiperVideo' src="{{detailData.videoUrl}}"  style="width:100%;height:{{appWidth}}px;" 
+      mode="aspectFit" poster='{{detailData.videoCover}}' />
+    </swiper-item>
+    <block wx:for="{{detailData.imagList}}" wx:key="index">
+      <swiper-item>
+        <image src="{{item}}"  style="width:100%;height:{{appWidth}}px;" mode="aspectFit" data-list="{{detailData.imagList}}" data-src="{{item}}" bindtap="imgClick" />
+      </swiper-item>
+    </block>
+  </swiper>
+  <image  wx:if="{{ detailData.remainingTime}}" class="sale-hot-img" src="https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/static/sale-hot.png"></image>
+</view>
+<view class="goods-head">
+<!--   -->
+  <view class="goods-price" style="width:100%">
+    <view  wx:if="{{!(detailData.activityType==1||(detailData.activityType==2&&detailData.isMember))}}">
+      <view style="font-size: 14px;">
+        ￥<text class="price">{{DefaultSpec.originalPrice}}</text>
+      </view>
+    </view>
+    <view wx:else>
+      <view>￥<text class="origin-price">{{DefaultSpec.lowPrice}}</text></view>
+      <view class="sale-box" wx:if="{{DefaultSpec.originalPrice!=DefaultSpec.lowPrice}}">
+        ￥<text style="text-decoration: line-through; margin-left: 5px;">{{DefaultSpec.originalPrice}}</text>
+      </view>
+    </view>
+    <view class="like-share-box">
+      <!-- <view class="share-box" bindtap="selectIsLike">
+        <image wx:if="{{!isLike}}" src="/pages/img/goods/like.png" class="goods-share-icon" />
+        <image wx:else src="/pages/img/goods/liked.png" class="goods-share-icon" />
+        {{!isLike?'收藏':'已收藏'}}
+      </view> -->
+      <view class="share-box"  bindtap="{{detailData.subscribe?'':'showDingYue'}}">
+        <image src="{{detailData.subscribe?'https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/static/shop-dingyue-not.png':'https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/static/shop-dingyue-Ok.png'}}" class="goods-share-icon" />
+        {{detailData.subscribe?'已通知':'降价通知'}}
+      </view>
+    </view>
+  </view>
+  <!-- <van-sticky style="width:100%" wx:else>
+    <view class="goods-sale-price-content" style="background-image: url(https://xssj.letterbook.cn/applet/images/sale_bg1.png)">
+    <view class="goods-price-box">
+      <view class="no-sale-box">
+        ￥<text class="origin-price">{{DefaultSpec.lowPrice}}</text>
+      </view>
+      <view class="sale-box" wx:if="{{DefaultSpec.originalPrice!=DefaultSpec.lowPrice}}">
+        ￥<text style="text-decoration: line-through; margin-left: 5px;">{{DefaultSpec.originalPrice}}</text>
+      </view>
+      <view class="goods-price-box-member" wx:if="{{detailData.activityType==2}}">{{detailData.memberLevel.discount==10?'普通会员无优惠':detailData.memberLevel.name+'已优惠￥'+(DefaultSpec.originalPrice*1000-DefaultSpec.lowPrice*1000)/1000}}</view>
+    </view>
+    <view class="sale-text">{{detailData.commodityName}}</view>
+  </view>
+  </van-sticky> -->
+</view>
+<view
+  wx:if="{{!(detailData.activityType==1||(detailData.activityType==2&&detailData.isMember))}}"
+  class="goods-title"
+  >
+  <image src="/pages/img/ziying.png" class="ziying" />{{detailData.commodityName}}
+</view>
+<view wx:if="{{!(detailData.activityType==1||(detailData.activityType==2&&detailData.isMember))}}" class="goods-subtitle">{{detailData.description}}</view>
+<view wx:if="{{(detailData.activityType==1||(detailData.activityType==2&&detailData.isMember))}}" class="goods-subtitle-pro">
+  <view class="des-box">
+    <image src="/pages/img/ziying.png" class="ziying" />
+    {{detailData.description}}
+  </view>
+  <view class="like-share-box">
+      <!-- <view class="subscribe-box">
+        <view style="width:100%;height:100%;" wx:if="{{!detailData.subscribe}}" bindtap="showDingYue">
+          <view>订阅</view>
+          <view>商品</view>
+        </view>
+        <view style="width:100%;height:100%;background-color:#ccc" wx:if="{{detailData.subscribe}}">
+          <view>订阅</view>
+          <view>成功</view>
+        </view>
+      </view> -->
+      <!-- <view class="share-box" bindtap="selectIsLike">
+        <image wx:if="{{!isLike}}" src="/pages/img/goods/like.png" class="goods-share-icon" />
+        <image wx:else src="/pages/img/goods/liked.png" class="goods-share-icon" />
+        {{!isLike?'收藏':'已收藏'}}
+      </view> -->
+      <!-- <view class="share-box"  bindtap="{{detailData.subscribe?'':'showDingYue'}}">
+        <image src="{{detailData.subscribe?'/pages/img/goods/yidingyue.png':'/pages/img/goods/dingyue.png'}}" class="goods-share-icon" />
+        {{detailData.subscribe?'已订阅':'订阅'}}
+      </view> -->
+    </view>
+</view>
+<!--间隔-->
+<view class="fenge1" wx:if="{{!showCountDown}}"></view>
+<!-- 限时抢购 -->
+<view class="activity-container" wx:if="{{ detailData.remainingTime}}">
+  <view class="activity-container-content ">
+    <image class="activity-container-content-image" src="/pages/img/goods/xsqg.png"></image>
+    <view  class="rematr-sale">
+      <view>距结束还剩：</view>
+      <van-count-down class="activity-container-content-count-down" time="{{ detailData.remainingTime*1000}}" bind:finish="finishedCountDown"  bind:change="changeTime"  use-slot >
+        <view class="list_item_onLookers">
+            <text wx:if="{{detailData.timeData.days!=0}}">{{detailData.timeData.days}}</text>
+            <text wx:if="{{detailData.timeData.days!=0}}" style="padding-right:10rpx">天</text>
+            <text class="time-box">{{detailData.timeData.hours<10?'0'+detailData.timeData.hours:detailData.timeData.hours}}</text>
+            <text class="time-sybmol">:</text>
+            <text class="time-box">{{detailData.timeData.minutes<10?'0'+detailData.timeData.minutes:detailData.timeData.minutes}}</text>
+            <text  class="time-sybmol">:</text>
+            <text class="time-box">{{detailData.timeData.seconds<10?'0'+detailData.timeData.seconds:detailData.timeData.seconds}}</text>
+        </view>
+      </van-count-down>
+    </view>
+  </view>
+</view>
+<!-- 会员信息 -->
+<view wx:if="{{memberShow =='1'||detailData.memberLevel.name}}">
+  <navigator class="member-info" wx:if="{{detailData.memberSetting.status&&detailData.activityType==2&&!fromShop}}" url="/pages/member/card/card?marchantId={{marchantId}}" style="background-image:url({{detailData.memberLevel?'https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/basics-New%2F%E5%95%86%E5%93%81%E8%AF%A6%E6%83%85%E9%A1%B5%2F%E4%BC%9A%E5%91%98%E5%95%86%E5%93%81%E9%95%BF%E6%9D%A1.png':'https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/basics-New%2F%E5%95%86%E5%93%81%E8%AF%A6%E6%83%85%E9%A1%B5%2F%E6%9C%AA%E6%BF%80%E6%B4%BB%E4%BC%9A%E5%91%98%E5%95%86%E5%93%81%E9%95%BF%E6%9D%A1.png'}})">
+  <view class="member-content">
+    <view wx:if="{{detailData.memberLevel}}" class="member-text">
+      {{detailData.memberLevel.name}}
+      <text style="font-size:20rpx" wx:if="{{detailData.memberLevel.discount<10}}">（当前会员享受{{detailData.memberLevel.discount}}折折扣）</text>
+      <text style="font-size:20rpx" wx:if="{{detailData.memberLevel.discount==10}}">（升级会员等级享受优惠！）</text>
+    </view>
+    <view wx:if="{{!detailData.memberLevel}}" class="member-text">
+      未激活会员
+      <text style="font-size:20rpx">（点击这里，快速激活）</text>
+    </view>
+  </view>
+  <view class="member-bottom-text">商家发起活动时如商家价格低于会员价以活动价为优先</view>
+</navigator>
+</view>
+<!--间隔-->
+<view class="fenge1"  wx:if="{{detailData.memberSetting.status&&detailData.isSetMember}}"></view>
+<!-- 所选参数 -->
+<view class="select-params">
+  <view class="select-params-item" bindtap="showSale">
+    <view class="params-title">优惠</view>
+    <view class="yhq-style">
+      <text class="yhq-text-btn">{{saleState}}</text>
+      <scroll-view scroll-x="true" style="width:0;flex:1;">
+        <view class="yhq-scroll">
+          <view class="yhq-box" wx:for="{{saleCanList}}" wx:key="index">
+            满{{item.confine}}减{{item.deduct}}
+            <!-- <image class="left-yuan" src="/pages/img/goods/left-yuan.png"></image>
+            <image class="right-yuan" src="/pages/img/goods/right-yuan.png"></image> -->
+          </view>
+        </view>
+      </scroll-view>
+    </view>
+    <image style="width:32rpx;height:40rpx" src="/pages/img/goods/more.png"></image>
+  </view>
+  <!-- <view class="select-params-item" bindtap="noActivity">
+    <view class="params-title">活动</view>
+    <text class="params-content-text">无活动</text>
+    <image style="width:32rpx;height:40rpx" src="/pages/img/goods/more.png"></image>
+  </view> -->
+</view>
+<!--间隔-->
+<view class="fenge1"></view>
+<!-- 所选参数 -->
+<view class="select-params">
+  <view class="select-params-item" bindtap="{{orderSwitch?'selectSpec':''}}" data-type="1">
+    <view class="params-title">规格</view>
+    <text class="params-content-text"><text class="params-content-text-guige">{{DefaultSpec.itemText}}</text></text>
+    <image style="width:32rpx;height:40rpx" src="/pages/img/goods/more.png"></image>
+  </view>
+  <view class="select-params-item select-params-item-address" bindtap="{{reserve?'':'selectAddress'}}">
+    <view class="params-title">{{reserve?'商家地址':'送至'}}</view>
+    <view class="params-content-text">
+      <image src="/pages/img/goods/position.png" style="width:28rpx;height:28rpx;margin-right:8rpx"></image>
+      <block  wx:if="{{reserve}}">
+        <text>{{shopInfo.merchant.address}}</text>
+      </block>
+      <block wx:else>
+        <text wx:if="{{shipping.provincesName}}">{{shipping.provincesName}}{{shipping.cityName}}{{shipping.areaName}}{{shipping.address}}</text>
+        <text wx:if="{{!shipping.provincesName}}" style="color:#aaa">请选择收货地址</text>
+      </block>
+    </view>
+    <image style="width:32rpx;height:40rpx" src="/pages/img/goods/more.png"></image>
+  </view>
+  <!-- <view class="select-params-item" wx:if="{{haveWuliu||haveTongCheng}}">
+    <view class="params-title">支持配送</view>    
+    <image  src="/pages/img/goods/goodsCar.png" style="width:32rpx;height:32rpx;margin-left:20rpx;" wx:if="{{haveWuliu}}" /> 
+    <text class="yhq-text-btn" wx:if="{{haveWuliu}}">支持物流配送</text>
+    <image  src="/pages/img/goods/city.png" wx:if="{{haveTongCheng}}" style="width:32rpx;height:32rpx;margin-left:20rpx;" /> 
+    <text class="yhq-text-btn" wx:if="{{haveTongCheng}}">支持同城配送</text>
+  </view> -->
+  <!-- haveTongCheng&&activityId==0 -->
+  <view class="select-params-item" wx:if="{{!city&&!reserve}}">
+    <view class="params-title" style="margin-right:24rpx">物流发货</view> 
+    <text class="take-type-btn" style="background: linear-gradient(93deg, #FF972A 0%, #FD5C00 100%);">购买</text>
+    <view class="take-type-solid" style="background: linear-gradient(263deg, #FF972A 0%, #FD5C00 100%);"></view>
+    <text class="take-type-btn" style="background: linear-gradient(93deg, #FF972A 0%, #FD5C00 100%);width:120rpx">接单发货</text>
+    <view class="take-type-solid" style="background: linear-gradient(263deg, #FF972A 0%, #FD5C00 100%);width:88rpx"></view>
+    <text class="take-type-btn" style="background: linear-gradient(93deg, #FF972A 0%, #FD5C00 100%);width:120rpx">收货完成</text>
+  </view>
+  <view class="select-params-item" wx:elif="{{city}}">
+    <view class="params-title" style="margin-right:24rpx">同城配送</view>    
+    <text class="take-type-btn" style="background: linear-gradient(90deg, #FF8B50 0%, #FF5700 100%);">购买</text>
+    <view class="take-type-solid" style="background: linear-gradient(270deg, #FF8B50 0%, #FF5700 100%);"></view>
+    <text class="take-type-btn" style="background: linear-gradient(90deg, #FF8B50 0%, #FF5700 100%);">配送</text>
+    <view class="take-type-solid" style="background: linear-gradient(270deg, #FF8B50 0%, #FF5700 100%);"></view>
+    <text class="take-type-btn" style="background: linear-gradient(90deg, #FF8B50 0%, #FF5700 100%);">完成</text>
+  </view>
+  <view class="select-params-item" wx:elif="{{reserve}}">
+    <view class="params-title" style="margin-right:24rpx">预订自取</view>    
+    <text class="take-type-btn" style="background: linear-gradient(90deg, #EE7C51 0%, #E73D2C 100%);">购买</text>
+    <view class="take-type-solid" style="background: linear-gradient(270deg, #EE7C51 0%, #E73D2C 100%);"></view>
+    <text class="take-type-btn" style="background: linear-gradient(90deg, #EE7C51 0%, #E73D2C 100%);width:120rpx">门店团购</text>
+    <view class="take-type-solid" style="background: linear-gradient(270deg, #EE7C51 0%, #E73D2C 100%);width:88rpx"></view>
+    <text class="take-type-btn" style="background: linear-gradient(90deg, #EE7C51 0%, #E73D2C 100%);">完成</text>
+  </view>
+</view>
+<!--间隔-->
+<view class="fenge1"></view>
+<!-- 标签 -->
+<view class="select-params">
+  <view class="select-params-item select-params-item-label" wx:if="{{detailData.arrLabels.length!=0&&detailData.arrLabels!=null}}" bindtap="showLabel">
+    <view class="params-title">保障</view>
+    <view class="params-label-box">
+      <view class="label-item" wx:for="{{detailData.arrLabels}}" wx:key="index">
+        <image src="/pages/img/goods/fxbuy.png" style="width:19rpx;height:19rpx" />
+        <view class="label-text">{{item}}</view>
+      </view>
+    </view>
+    <image style="width:32rpx;height:40rpx" src="/pages/img/goods/more.png"></image>
+  </view>
+</view>
+<!--间隔-->
+<view class="fenge1" ></view>
+<view class="shop_info" bindtap="goBusinessInfo">
+  <image src="{{shopInfo.merchant.logoPic}}" class="shop_img"></image>
+  <view class="shop_msg">
+    <view class="shop_title me-full-text"><text>{{shopInfo.appletInfo.nickName}}</text><image class="goodsCommentList-enter" src="../../static/shop_return.png"></image></view>
+    <text class="shop_desc me-full-text">{{shopInfo.appletInfo.signature}}</text>
+    <text class="shop_btn">企业认证</text>
+  </view>
+</view>
+<view class="fenge1" wx:if="{{goodsCommentList.length>0}}"></view>
+<!-- 评论 -->
+<view class="goodsCommentList" wx:if="{{goodsCommentList.length>0}}">
+  <view class="goodsCommentLis-title">
+    <view class="goodsCommentLis-title-left">
+      <view class="spec-title-style"></view>
+      <view class="goodsCommentLis-title-left-text">评价</view>
+      {{detailData.countCommodityComment>100?'100+':detailData.countCommodityComment}}
+    </view>
+    <view class="goodsCommentLis-title-right" bindtap="goCommentList">
+      好评度{{detailData.probabilityComment}}
+      <image class="goodsCommentList-enter" src="/pages/img/enter.png"></image>
+    </view>
+  </view>
+  <view class="goodsCommentList-item" wx:for="{{goodsCommentList}}" wx:key="index">
+    <view class="item-headinfo">
+      <view class="headinfo-left">
+        <image src="{{item.headimgurl}}" class="headinfo-img"></image>
+      </view>
+      <view class="headinfo-right">
+        <view class="headinfo-name">{{item.nickname}}</view>
+        <view class="headinfo-start">
+          <image wx:for="{{5}}" wx:key="index" wx:for-item="sitem" wx:for-index="sindex" src="/pages/img/order/start_b{{item.grade>sindex?6-item.grade+sindex:0}}.png" class="start-img"></image>
+        </view>
+      </view>
+    </view>
+    <view class="item-text">{{item.content}}</view>
+    <view class="item-image" wx:if="{{item.imagList.length}}">
+      <image wx:for="{{item.imagList}}" wx:key="index" wx:for-item="iitem" src="{{iitem}}" mode="aspectFill" class="image-img" bindtap="zoomImg" data-list="{{item.imagList}}" data-src="{{iitem}}"></image>
+    </view>
+    <view class="item-footer">
+      <view class="footer-time">{{item.addTime}}发表</view>
+      <view class="footer-operate">
+        <item bindtap="toComment" data-item="{{item}}" class="operate-item">
+          <image src="/pages/img/comment.png" class="operate-icon"></image>
+          <view class="operate-num">{{item.reply}}</view>
+        </item>
+        <view bindtap="liketap" data-index="{{index}}" data-id="{{item.id}}" class="operate-item">
+          <image wx:if="{{!item.myPraise}}" src="/pages/img/good.png" class="operate-icon"></image>
+          <image wx:else src="/pages/img/gooded.png" class="operate-icon"></image>
+          <view class="operate-num">{{item.praise}}</view>
+        </view>
+      </view>
+    </view>
+    <view class="goodsCommentList-cut"></view>
+  </view>
+  <view class="goodsCommentList-footer" bindtap="goCommentList">查看全部评价</view>
+</view>
+<!--间隔-->
+<view class="fenge1"></view>
+<!--产品规格-->
+<view class="content">
+  <view class="cp-speci">
+    <view class="spec-title-style"></view>
+    详情
+  </view>
+  <view class="specifications-detail" wx:for="{{detailData.preferences}}" wx:key="index">
+    <view class="p-title">{{item.paramText}}</view>
+    <view class="p-detail">{{item.paramValue}}</view>
+  </view>
+</view>
+
+<!--商品详情图-->
+<view class="zhutu-content">
+  <image
+    wx:for="{{detailData.descrList}}"
+    wx:key="index"
+    style="width:100%;display:block"
+    src="{{item}}"
+    mode="widthFix"
+    data-list="{{detailData.descrList}}" data-src="{{item}}" bindtap="imgClick"
+  ></image>
+</view>
+<!-- 间隔 -->
+<view class="fenge1"></view>
+<!-- 服务 -->
+<view class="goods-detail-explain">
+  <view class="cp-speci">
+    <view class="spec-title-style"></view>
+    服务
+  </view>
+  <view class="goods-detail-explain-top">
+    <view class="goods-detail-explain-top-solid"></view>
+    <text>价格说明</text>
+    <view class="goods-detail-explain-top-solid"></view>
+  </view>
+  <view class="goods-detail-explain-text">1、销售价：销售价为商品的最终购买价， 是您最终决定是否购买商品的依据，销售价有可能是原价、促销价、会员价。 如果您是普通消费者购买价则是原价， 如果您是店铺会员购买价则是会员价，如果商家商品有促销活动购买价则是促销价。如有疑问， 您可在购买前联系商家进行咨询。</view>
+  <view class="goods-detail-explain-text"> 2、划线价：商品展示的划横线价格为商家店铺原价， 由于地区、 时间的差异性和市场行情波动， 原价不是一成不变的， 具体原价由商家定价。</view>
+  <view class="goods-detail-explain-text">3、异常问题：商品的具体售价以订单结算页价格为准； 如您发现活动商品售价或促销信息或会员信息有异常， 建议购买前先联系商家咨询。</view>
+</view>
+<!--间隔-->
+<view class="fenge1"></view>
+<!-- 为你推荐 -->
+<view class="detail-recommend" wx:if="{{recommendGoodsList.length>0}}">
+  <view class="cp-speci detail-recommend-top">
+    <view class="spec-title-style"></view>
+    为你推荐
+  </view>
+  <view class="detail-recommend-list">
+    <view class="detail-recommend-item" wx:for="{{recommendGoodsList}}" wx:key="index" bindtap="showDetail" data-id="{{item.commodityId}}">
+      <image src="{{item.thumbnail}}" mode="aspectFill" class="detail-recommend-img" />
+      <view class="detail-recommend-content">
+        <view class="detail-recommend-name">{{item.commodityName}}</view>
+        <view class="detail-recommend-price">
+          <!-- <text class="cuxiao-box">促销</text> -->
+          ￥<text style="font-size: 16px;">{{(item.activityType==1||(item.activityType==2&&item.isMember))?item.lowPrice:item.originalPrice}}</text>
+          <text style="text-decoration: line-through; margin-left: 5px; color: #ccc;" wx:if="{{(item.activityType==1||(item.activityType==2&&item.isMember))}}">￥{{item.originalPrice}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+<!-- <view class="daodile"> -信书技术支持-</view> -->
+<view style="width: 750rpx;display: flex;align-items: center;justify-content: center;height: 50rpx;line-height: 50rpx;">
+      <image style="width: 182rpx;height:30rpx;" mode="aspectFit" src="https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/Saas/dibutab.png"></image>
+      </view>
+<view class='foot'></view>
+<!-- <view class='place-empty'></view> -->
+
+
+<van-goods-action>
+  <van-goods-action-icon icon="chat-o" text="客服" bind:click="toKeFu" />
+  <van-goods-action-icon wx:if="{{(!fromShop && isShare) && formpage!='home'}}" icon="shop-o" text="店铺" bindtap="toIndex" />
+  <van-goods-action-icon wx:if="{{(!isShare) && formpage!='home' }}" icon="shop-o" text="{{activityId?'店铺':'店铺'}}" bindtap="toBack" />
+  <van-goods-action-icon wx:if="{{personnel==0&&!city&&!reserve&&orderSwitch}}" icon="cart-o" text="购物车" info="{{countTrolley?countTrolley:''}}" bindtap="toCart"/>
+  <van-goods-action-icon wx:if="{{fromShop&&isShare}}" icon="shop-o" text="返回店铺" bindtap="toStore" />
+  <van-goods-action-button wx:if="{{personnel==0&&!city&&!reserve&&orderSwitch}}" text="加入购物车" type="warning" bindtap="selectSpec" data-type="2"/>
+  <van-goods-action-button wx:if="{{orderSwitch}}" text="{{city?'同城商家配送':reserve?'预订门店团购':'立即购买'}}" bindtap="selectSpec" data-type="3"/>
+  <view class="bbb" wx:if='{{orderSwitch===0}}'><text>本店商品价格只展示不售卖</text></view>
+</van-goods-action>
+  <!-- 分享 -->
+  <van-popup show="{{showShare}}" round z-index="999" position="bottom" bind:close="hideShare">
+    <view class="share-top">
+      分享
+      <image bindtap="hideShare" style="width:41rpx;height:41rpx" src="/pages/img/goods/share_close.png"></image>
+    </view>
+    <view class="share-bottom">
+      <view class="share-content-box">
+        <button class="share-btn-box" open-type="share">
+          <image style="width:110rpx;height:110rpx" src="/pages/img/goods/wxchat.png"></image>
+          <text class="share-btn-text">分享给好友</text>
+        </button>
+        <!-- <view class="share-line"></view>
+        <view class="share-btn-box">
+          <image style="width:110rpx;height:110rpx" src="/pages/img/goods/friend.png"></image>
+          <text class="share-btn-text">生成分享海报</text>
+        </view> -->
+      </view>
+      <view class="share-bottom-text">商品推荐，快分享给您的亲朋好友吧！！！</view>
+    </view>
+  </van-popup>
+    <!-- 商家自营 -->
+    <van-popup show="{{showXS}}" position="bottom" z-index="999" closeable close-icon="close" bind:close="hideLabel">
+		<view class="xs-content">
+			<view class="xs-top">商家自营保障</view>	
+			<view class="xs-des">服务说明</view>
+			<view class="xs-item" wx:for="{{labelList}}" wx:key="index">
+				<view class="xs-title"><image src="/pages/img/hdui.png" class="dui" />【{{item.dict_label}}】</view>
+				<view class="xs-text">{{item.remark}}</view>
+			</view>
+			<view class="xs-btn" bindtap="hideLabel">确认</view>
+		</view>
+    </van-popup>
+    <!-- 规格 -->
+    <van-popup
+    show="{{ showSpec }}"
+    round
+    closeable
+    position="bottom"
+    bind:close="onClose"
+    close-on-click-overlay="false"
+    >
+    <view class="good-info">
+      <view class="good-des">
+        <view class="good-img">
+          <image class="img" src="{{DefaultSpec.imageUrl?DefaultSpec.imageUrl:detailData.thumbnail}}"></image>
+        </view>
+        <view class="good-des-inner">
+          <view class="good-price-area">
+            <text class="good-price">￥{{(detailData.activityType==1||(detailData.activityType==2&&detailData.isMember))?DefaultSpec.lowPrice:DefaultSpec.originalPrice}}</text>
+            <text wx:if="{{detailData.activityType==2&&detailData.isMember}}" style="color:#FF5340;font-size:24rpx;margin-left:20rpx">{{detailData.memberLevel.discount==10?'普通会员无优惠':detailData.memberLevel.name+'已优惠￥'+(DefaultSpec.originalPrice*1000-DefaultSpec.lowPrice*1000)/1000}}</text>
+          </view>
+          <view class="good-inventory">
+            库存：<text class="inventory">{{activityId?DefaultSpec.liveStock:DefaultSpec.stock}}</text>
+          </view>
+          <view class="good-select-specifications">
+            <text>{{DefaultSpec.itemText}}</text>
+          </view>
+        </view>
+      </view>
+      <view class="good-edit">
+        <view class="good-specifications">
+          <view>
+            <text>规格</text>
+          </view>
+          <scroll-view scroll-y="true" style="max-height:400rpx">
+            <view class="list-black">
+              <view
+                  class="list-item {{normsIndex==index ? 'active' : ''}}"
+                  wx:for="{{detailData.skuList}}"
+                  wx:for-item="skuitem"
+                  wx:key="id"
+                  data-index="{{index}}"
+                  catchtap="selectNorms"
+                >
+                  <image class="list-item-img" wx:if="{{skuitem.imageUrl||skuitem.thumbnail}}" src="{{skuitem.imageUrl?skuitem.imageUrl:skuitem.thumbnail}}"></image>
+                  <text>{{skuitem.itemText}}</text>
+              </view>
+            </view>
+          </scroll-view>
+        </view>
+        <view class="by-num">
+          <view>
+            <text>购买数量</text>
+          </view>
+          <view>
+            <text class="edit-num-btn" data-type="minus" catchtap="handleEdit">-</text>
+            <text class="edit-num">{{buyNum}}</text>
+            <text class="edit-num-btn" data-type="add" catchtap="handleEdit">+</text>
+          </view>
+        </view>
+      </view>
+      <view class="btn-area">
+        <button class="btn buy-btn" wx:if="{{specType==2||specType==3}}" catchtap="comfirmSpec">确认</button>
+        <view class="btn-area-inner" wx:if="{{specType==1&&personnel==0&&!city&&!reserve}}">
+          <button class="btn add-cart-btn" catchtap="addCart">加入购物车</button>
+        </view>
+        <view class="btn-area-inner" wx:if="{{specType==1}}">
+          <button class="btn buy-btn" catchtap="doBuy">{{city?'下单配送':reserve?'立即预订':'立即购买'}}</button>
+        </view>
+      </view>
+    </view>
+  </van-popup>
+  <!-- 优惠券 -->
+<van-popup show="{{ showSale }}" bind:close="closeSale" round closeable position="bottom">
+    <view class="sale-box-pop">
+        <view class="sale-title">优惠券</view>
+        <scroll-view scroll-y="true" class="scroll-box">
+            <view class="sale-list">
+                <view class="sale-item" wx:for="{{saleCanList}}" wx:key="index" bindtap="selectSale" data-index="{{index}}" style="background-image:url(https://xssj.letterbook.cn/applet/images/sale_bg_sub.png);background-size:100% 173rpx;background-repeat:no-repeat;">
+                    <view class="coupon-left">
+                      <view>￥{{item.deduct}}</view>
+                      <view style="font-size:24rpx;margin-left:18rpx">满{{item.confine}}元使用</view>
+                    </view>
+                    <view class="coupon-right">
+                      <view class="coupon-title">{{item.couponName}}</view>
+                      <view class="coupon-time">截止日期：{{item.endTime}}</view>
+                      <view class="coupon-state">{{item.isDraw==1?'已领取':'未领取'}}</view>
+                    </view>
+                </view>
+            </view>
+        </scroll-view>
+        <view bindtap="receiveSale" wx:if="{{!receivedSale}}" class="sale-receive-btn">
+          立即领取
+        </view>
+        <view bindtap="receivedSale" wx:if="{{receivedSale}}" class="sale-receive-btn received">
+          已领取
+        </view>
+    </view>
+</van-popup>
+</view>
+<!-- <button  wx:if="{{!buton}}" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo" class="butt">授权登录</button> -->
+<view class="bg_nocity" wx:if="{{nocityFlag}}" bindtap="closeBgNocity">
+    <image class="nocity_img" src="../imgs/xiajia.png"></image>
+    <image class="nocity_close_img" src="../../static/close.png"></image>
+</view>
+
+<!-- 授权用户信息 -->
+<view wx:if="{{NickFlag}}" bindtap="bindGetUserInfo" class="mask_login"></view>
+
+<!-- 授权手机号 -->
+<button wx:if='{{!userPhone}}' class='get-phone-btn' open-type='getPhoneNumber' 
+  bindgetphonenumber='getPhoneNumber' catchtap='getPhoneNumber'
+></button>
+
+
+<van-popup show="{{isEnd}}" close-on-click-overlay='{{true}}' custom-style='border-radius:28rpx;'
+  close-on-click-overlay='{{true}}' bind:click-overlay='hideEndPopup'
+>
+  <view class='me-fx-col me-fx-c-c activity-end-popup-content'>
+    <view class='title-text'>活动已结束</view>
+    <view class='goods-name'>{{detailInfo.commodityName}}</view>
+    <image class='activity-end-img' src='../imgs/activity_end_img.png'></image>
+    <button class='popup-btn' bindtap='viewMoreActivity'>查看更多活动</button>
+  </view>
+</van-popup>
+
+
+<!-- 浏览用户 -->
+<view class='me-fx-row me-fx-start-c browse-user {{showHideStyle}}'>
+  <image src='{{browseUser[subscriptIndex].headUrl || "/pages/static/def-user.png"}}' 
+  class='user-avatar-img'></image>
+  <text>{{browseUser[subscriptIndex].nickName || '游客'}}在{{browseUser[subscriptIndex].humanize}}浏览商品</text>
+</view>

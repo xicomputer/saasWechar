@@ -1,0 +1,19 @@
+.userNotice{
+  min-height: 100vh;
+  background: #F8F8F8;
+  padding-top: 26rpx;
+  box-sizing: border-box;
+}
+.title{
+  font-size: 28rpx;
+  font-weight: bold;
+  color: #000000;
+  padding: 0 20rpx 8rpx;
+}
+.content{
+  font-size: 24rpx;
+  font-weight: 400;
+  color: #000000;
+  line-height: 34rpx;
+  padding: 0 20rpx 8rpx;
+}

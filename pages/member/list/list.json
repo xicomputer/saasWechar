@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "no-data": "/pages/Component/noData/index"
+  },
+  "navigationBarTitleText": "我的会员卡"
+}

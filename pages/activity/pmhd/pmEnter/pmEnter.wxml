@@ -1,0 +1,23 @@
+<view class="pmEnter">
+  <view class="order">
+    <block wx:for="{{list}}" wx:key="index">
+      <view bindtap="toOrderList" data-status="{{index}}" class="order_item">
+        <view class="order_icon">
+          <image src="/image/pmhd/icon_pmorder{{index+2}}.png"></image>
+          <view wx:if="{{item.num}}" class="order_num">{{item.num>99?'...':item.num}}</view>
+        </view>
+        <view class="order_name">{{item.name}}</view>
+      </view>
+    </block>
+  </view>
+  <view bindtap="toPmList" class="mypm" wx:for="{{statusList}}" data-index="{{index}}" wx:key="{{index}}">
+    <view class="mypm_left">{{item}}</view>
+    <view class="mypm_right" >
+      <block wx:for="{{numList}}"  wx:key="{{itemIndex}}" wx:for-item="itemNum" wx:for-index="itemIndex" wx:index="{{index}}">
+      <!--  wx:if="{{itemNum.status==index+1}}" -->
+        <view wx:if="{{itemNum.status==index+1}}">{{itemNum.count}}</view>
+      </block>
+      <image src="/image/pmhd/icon_enter.png"></image>
+    </view>
+  </view>
+</view>

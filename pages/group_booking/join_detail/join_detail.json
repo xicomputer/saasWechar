@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText":"拼团详情",
+  "usingComponents": {
+    "auth-get-info":"../../Component/auth-get-info/auth-get-info",
+    "van-count-down": "@vant/weapp/count-down/index"
+  },
+  "enablePullDownRefresh":true
+}

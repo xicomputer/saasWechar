@@ -1,0 +1,6 @@
+{
+    "component": true,
+    "usingComponents": {
+        "view-more-title":"../view-more-title/view-more-title"
+    }
+}

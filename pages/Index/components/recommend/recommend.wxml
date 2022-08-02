@@ -1,0 +1,59 @@
+<view>
+    <!-- <view class=' top-container'>
+        <view class='me-fx-row me-fx-sb-c top-search-container'>
+            <view class='me-fx-row me-fx-start-c top-search'>
+                <image class='search-icon' src='../../static/search-icon.png'></image>
+                <view>请输入商品名称</view>
+            </view>
+            <button class='notice-btn'>商品通知</button>
+        </view>
+        <view class='me-fx-row me-fx-sb-c top-tab-list'>
+            <view class='top-tab-item {{selTabItem==item.id?"sel-tab-item":""}}' 
+                wx:for='{{topTabList}}' wx:key='index' bindtap='switchTopTab'
+                data-tid='{{item.id}}'
+            >{{item.name}}</view>
+        </view>
+    </view> -->
+
+    <view class='goods-list'>
+        <!-- 横向 -->
+        <scroll-view wx:if="{{typeModel == 0}}" scroll-y='{{true}}' class='goods-scroll'>
+            <view class='me-fx-row me-fx-sb list-container'>
+                <view class='goods-item' wx:for='{{recommends}}' wx:key='index'>
+                    <image src='{{item.thumbnail}}' class='goods-img'></image>
+                    <view class='goods-info'>
+                        <view class='describe-text'>{{item.commodityName}}</view>
+                        <view class="describe-desc">{{item.description}}</view>
+                        <view class='me-fx-row me-fx-sb-c'>
+                            <view class='price-box'>￥<text class='price-num'>{{item.lowPrice}}</text></view>
+                            <image src='../../static/red_cart.png' class='cart-img'
+                                bindtap='addCartGoods' data-item='{{item}}'
+                            ></image>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </scroll-view>
+        <!-- 竖向 -->
+        <scroll-view scroll-y='{{true}}' class='goods-scroll' wx:else>
+            <view class="me-fx-col list-container2">
+                <view class="me-fx-row goods2"  wx:for='{{recommends}}' wx:key='index'>
+                    <image src='{{item.thumbnail}}' class='goods2-img'></image>
+                    <view class="goods2-info me-fx-1 me-fx-col me-fx-sb">
+                       <view>
+                            <view class='describe-text'>{{item.commodityName}}</view>
+                            <view class="describe-desc">{{item.description}}</view>
+                       </view>
+                       <view class="me-fx-row me-fx-start-c me-fx-sb">
+                        <view class='price-box'>￥<text class='price-num'>{{item.lowPrice}}</text></view>
+                        <view class="btn_cart11 me-fx-row me-fx-start-c">
+                            <image class="cart-img2" src="../../static/cart11.png"></image>
+                            <text>立即购买</text>
+                        </view>
+                       </view>
+                    </view>
+                </view>
+            </view>
+        </scroll-view>
+    </view>
+</view>

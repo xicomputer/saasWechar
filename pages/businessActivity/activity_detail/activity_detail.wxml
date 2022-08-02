@@ -1,0 +1,239 @@
+<view>
+    <view class='top-swiper-container'>
+        <swiper style='height:750rpx' :indicator-dots='false' bindchange='swiperChange'>
+            <swiper-item wx:if='{{detailInfo.videoUrl}}' class='swiper-item-box'>
+                <video id='swiperVideo' src="{{detailInfo.videoUrl}}"  class='banner-img'
+                 poster='{{detailInfo.videoCover}}'></video>
+            </swiper-item>
+            <swiper-item class='swiper-item-box' wx:for='{{detailInfo.detailImgUrls}}' wx:key='index'>
+                <image mode='aspectFill' class='banner-img' src='{{item}}'></image>
+            </swiper-item>
+        </swiper>
+        <view class='me-fx-row me-fx-sb-c top-activity-info'>
+            <view class='me-full-text goods-name'>{{detailInfo.commodityName}}</view>
+            <button open-type="share" class='me-fx-row me-fx-c-c share-btn'>
+                <image class='share-icon' src='../imgs/share-icon.png'></image>
+                <text>{{detailInfo.templateName}}</text>
+            </button>
+        </view>
+        <!-- <view class='join-user-show'>
+            <view class='me-fx-row line-row'>
+                <view class='me-fx-row me-fx-c-c user-item remove-item'
+                    wx:for='{{joinUserList1}}' wx:key='index'
+                >
+                    <image src='{{item.headimgurl}}' class='user-avatar'></image>
+                    <view style='flex-shrink:0;'>{{item.nickname}}已下单，正在分享好友购买</view>
+                </view>
+            </view>
+            <view class='me-fx-row line-row'>
+                <view class='me-fx-row me-fx-c-c user-item remove-item'
+                    wx:for='{{joinUserList2}}' wx:key='index'
+                >
+                    <image src='{{item.headimgurl}}' class='user-avatar'></image>
+                    <view style='flex-shrink:0;'>{{item.nickname}}已下单，正在分享好友购买</view>
+                </view>
+            </view>
+        </view> -->
+    </view>
+
+    <view class='base-info'>
+        <view class='me-fx-row me-fx-sb-c goods-describe'>
+            <view class='me-full-text describe-text'>剩余:{{detailInfo.residueCommodityTotalCount}}</view>
+            <view class='me-fx-row me-fx-c-c goods-price'>
+                <text>￥</text>
+                <text class='price-num'>{{detailInfo.livePrice}}</text>
+            </view>
+        </view>
+        <view class='me-fx-row me-fx-sb-c down-count'>
+            <view class='me-full-text template-name'>活动名称：{{detailInfo.templateName}}</view>
+            <van-count-down time='{{detailInfo.diffTimes}}' bind:change="timeChange"
+                auto-start='{{true}}' use-slot='{{true}}'  bind:finish='activityEnd'
+            >
+                <view class='me-fx-row me-fx-c-c times-str'>
+                    <text>{{detailInfo.state==1?'距开始':'距结束'}}：</text>
+                    <block wx:if='{{activityTimes.days!=="00"}}'>
+                        <text class='num-val-box'>{{activityTimes.days}}</text>天
+                    </block>
+                    <view class='num-val-box'>{{activityTimes.hours}}</view>时
+                    <view class='num-val-box'>{{activityTimes.minutes}}</view>分
+                    <view class='num-val-box' wx:if='{{!recommendTimes.days}}'>{{activityTimes.seconds}}</view>秒
+                </view>
+            </van-count-down>
+        </view>
+    </view>
+    <view class='msg-container' wx:for='{{hasPushed}}' wx:key='index'>
+        <view class='me-fx-row me-fx-sb-c task-status-msg {{(item.status==2 || item.status==3)?"complete":"ongoing"}}' wx:if='{{item.status==2 || item.status==3 }}'>
+            <view>
+                您已完成{{item.alreadyOrder}}单任务，您购买商品已退还金额({{item.income}}元) 
+                <text wx:if='{{item.status==2}}'>服务费：{{item.serviceCharge}}</text>
+            </view>
+            <text class='view-detail' data-item='{{item}}' bindtap='viewOrder'>订单</text>
+        </view>
+    </view>
+
+    <!-- 参与活动公告 -->
+    <view class='notice-container' wx:if='{{userList.length}}'>
+        <view class='list-data-container'>
+            <view class='me-fx-col me-fx-c-c title-box'>
+                <text>已下单{{detailInfo.activityJoinNumberTotal || 0}}人数, 已邀请{{detailInfo.activityVisitTotal || 0}}人数, 已完成任务{{detailInfo.activityJoinNumberSuccessTotal || 0}}人数</text>
+            </view>
+            <view class='data-list'>
+                <view class='list-box' style='animation-duration:{{userList.length*3}}s'>
+                    <view class='me-fx-row me-fx-start-c item-data' wx:for='{{userList}}' wx:key='index'>
+                        <image src='{{item.headimgurl}}' class='user-avatar'></image>
+                        <text class='msg-content'>{{item.nickname}}已下单，正在分享好友购买</text>
+                        <text class='me-full-text'>下单时间 {{item.createTime}}</text>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+
+    <!-- 属性列表 -->
+    <view class='attr-list'>
+        <!-- <view class='me-fx-row me-fx-sb-c attr-item'>
+            <text class='attr-name'>已选</text>
+            <view class='me-fx-1'>
+                <text class='product-specification'>{{detailInfo.itemText}}</text>
+            </view>
+        </view> -->
+        <view class='me-fx-row me-fx-sb-c attr-item' bindtap='selectAddress'>
+            <text class='attr-name'>送至</text>
+            <view class='me-fx-1 me-fx-row me-fx-start-c'>
+                <image class='location-img' src='../imgs/location-icon.png'></image>
+                <text>{{addressFill || '请选择收货地址'}}</text>
+            </view>
+            <image class='point-adorn' src='../imgs/point-adorn-img.png'></image>
+        </view>
+        <view class='me-fx-row me-fx-sb-c attr-item' bindtap='selectAddress'>
+            <text class='attr-name'>服务</text>
+            <view class='me-fx-1 me-fx-row me-fx-start-c'>
+                <text><text>付款后{{detailInfo.shipmentsDay || 0}}天发货</text></text>
+            </view>
+        </view>
+        <!-- <view class='me-fx-row me-fx-sb-c attr-item' bindtap='hideLabel'>
+            <text class='attr-name'>保障</text>
+            <view class='me-fx-1 me-fx-row me-fx-start-c security-label-list'>
+                <view class='me-fx-row me-fx-start-c security-label-item'
+                    wx:for='{{securityLabel}}' wx:key='index'
+                >
+                    <text class='point-adorn-text' wx:if='{{index!==0}}'>·</text>
+                    <text>{{item}}</text>
+                </view>
+            </view>
+            <image class='point-adorn' src='../imgs/point-adorn-img.png'></image>
+        </view> -->
+        <view class='me-fx-row me-fx-sb-c attr-item' 
+            wx:for='{{detailInfo.orderTypeArr}}' wx:key='index'
+        >
+            <text class='attr-name'>{{item==1?'物流发货':item==2?'同城配送':'预订自取'}}</text>
+            <view class='me-fx-1 me-fx-row me-fx-start-c'>
+                <text class='logistics-label'>购买</text>
+                <view class='connect-line'></view>
+                <text class='logistics-label'>{{item==1?'接单发货':item==2?'配送':'门店团购'}}</text>
+                <view class='connect-line'></view>
+                <text class='logistics-label'>{{item==1?'收货完成':'完成'}}</text>
+            </view>
+        </view>
+    </view>
+
+    <!-- 参与用户 与 活动说明 -->
+    <view class='join-user-explain'>
+        <view class='explain-content'>
+            <view class='me-fx-row me-fx-start-c title-box'>
+                <view class='v-line'></view>
+                <text class='title-text'>{{detailInfo.templateName}}活动规则</text>
+            </view>
+            <view class='me-fx-col text-content'>
+                <view>1.用户需要购买本次活动商品获取参与资格。</view>
+                <view>2.购买后用户通过分享推荐三位朋友购买</view>
+                <view>3.一位朋友购买成功您购买的商品按比例进行退还金额直到推荐三位朋友购买成功，商家会把您购买的商品免费赠送</view>
+                <view>4.活动商品如有保质期，品质，假冒伪劣商品问题商家无条件支持退货，如有损坏可以退换，其它不给予支持退货</view>
+                <view>5.活动参与名额/次数/时间：商家设定后无法更改，直到活动结束</view>
+                <view>6.如需退货请及时保留证据并联系商家进行线下协调退货</view>
+                <view>7.参与名额为{{detailInfo.limitPeopleNumber==-1?'不限':detailInfo.limitPeopleNumber}}，每人参与次数{{detailInfo.limitJoinNumber==-1?'不限':('为'+detailInfo.limitJoinNumber+'次')}}</view>
+            </view>
+            <view style='height:20rpx;'></view>
+            <!-- <view class='me-fx-row me-fx-start-c title-box'>
+                <view class='v-line'></view>
+                <text class='title-text'>活动说明</text>
+            </view>
+            <view class='me-fx-col text-content'>
+                <text>{{detailInfo.activityExplain}}</text>
+            </view> -->
+        </view>
+    </view>
+
+    <view class='detail-content'>
+        <view class='me-fx-row me-fx-start-c title-box'>
+            <view class='v-line'></view>
+            <text class='title-text'>详情</text>
+        </view>
+        <image wx:for='{{detailInfo.detailImgUrls}}' wx:key='index' class='detail-img' src='{{item}}' mode='widthFix'></image>
+    </view>
+
+    <view class='place-empty'></view>
+    <view class='me-fx-row me-fx-sb-c foot-container'>
+        <view class='me-fx-row me-fx-c-c service'>
+            <view class='me-fx-col me-fx-c-c entrance-item' bindtap='jumpChat'>
+                <image class='foot-icon' src='../imgs/msg-icon.png'></image>
+                <text>客服</text>
+            </view>
+            <view class='me-fx-col me-fx-c-c entrance-item' bindtap='jumpShop'>
+                <image class='foot-icon' src='../imgs/foot-shop-icon.png'></image>
+                <text>店铺</text>
+            </view>
+        </view>
+        <view class='me-fx-1 me-fx-col me-fx-c-c buy-btn ongoing' bindtap='viewOrder'wx:if='{{ detailInfo.currentJoinStatus==1 }}' >
+            <text>已推{{hasPushed[0].alreadyOrder || 0}}单，商品金额退还{{hasPushed[0].income || 0}} 只差{{hasPushed[0].residueOrder}}单赚取商品</text>
+        </view>
+        <view wx:else class='me-fx-1 me-fx-row me-fx-sb-c buy-btn {{(detailInfo.joinNumberResidue===0 || detailInfo.residueCommodityTotalCount==0)?"disabled-btn":""}}' bindtap='jumpConfirmOrder'>
+            <view wx:if='{{detailInfo.residueCommodityTotalCount==0}}'>商品已售罄</view>
+            <view wx:else class='me-fx-col me-fx-c-c'>
+                <text style='font-size:30rpx;font-weight:bold;'>立即购买参与活动</text>
+                <text style='font-size:20rpx;' wx:if='{{detailInfo.joinNumberResidue!==-1}}'>({{detailInfo.joinNumberResidue>0?('可参与次数: '+detailInfo.joinNumberResidue):'已无参与次数'}})</text>
+            </view>
+            <view class='me-fx-row me-fx-c-c'>
+                <text class='amount-symbol'>￥</text>
+                <text class='foot-amount'>{{detailInfo.livePrice}}</text>
+            </view>
+        </view>
+    </view>
+
+    <van-popup show="{{showXS}}" position="bottom" z-index="999" closeable close-icon="close" bind:close="hideLabel">
+		<view class="xs-content">
+			<view class="xs-top">商家自营保障</view>	
+			<view class="xs-des">服务说明</view>
+			<view class="xs-item" wx:for="{{labelList}}" wx:key="index">
+				<view class="xs-title"><image src="/pages/img/hdui.png" class="dui-img" />【{{item.dict_label}}】</view>
+				<view class="xs-text">{{item.remark}}</view>
+			</view>
+			<view class="xs-btn" bindtap="hideLabel">确认</view>
+		</view>
+    </van-popup>
+
+    <van-popup show="{{isEnd}}" close-on-click-overlay='{{true}}' custom-style='border-radius:28rpx;'
+        close-on-click-overlay='{{true}}' bind:click-overlay='hideEndPopup'
+    >
+        <view class='me-fx-col me-fx-c-c activity-end-popup-content'>
+            <view class='title-text'>推三返一活动已结束</view>
+            <view class='goods-name'>{{detailInfo.commodityName}}</view>
+            <image class='activity-end-img' src='../imgs/activity_end_img.png'></image>
+            <button class='popup-btn' bindtap='jumpJoinUserList'>查看推荐订单</button>
+        </view>
+    </van-popup>
+
+    <van-popup show="{{showAddressPopup}}" close-on-click-overlay='{{true}}' custom-style='border-radius:28rpx;'
+        close-on-click-overlay='{{true}}' bind:click-overlay='hideAddressPopup'
+    >
+        <view class='me-fx-col me-fx-c-c not-address-popup'>
+            <text>您好</text>
+            <text>你还没填入收货地址</text>
+            <image class='not-address-img' src='../imgs/not-address.png'></image>
+            <button class='jump-btn' bindtap='selectAddress'>请填入收货地址</button>
+        </view>
+    </van-popup>
+
+    <!-- 授权组件 -->
+    <auth-get-info></auth-get-info>
+</view>

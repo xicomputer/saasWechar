@@ -1,0 +1,7 @@
+{
+    "component": true,
+    "usingComponents": {
+        "no-data": "/pages/Component/noData/index",
+        "add-subtract-num":"/pages/Component/add-subtract-num/add-subtract-num"
+    }
+}

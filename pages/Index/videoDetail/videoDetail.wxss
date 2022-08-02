@@ -1,0 +1,110 @@
+/* pages/Index/videoDetail/videoDetail.wxss */
+.video-container{
+  width: 100%;
+  height: 100vh;
+}
+.video-container-sp{
+  width: 100%;
+  height: calc(100vh - 68rpx);
+}
+.video-detail{
+  width: 100%;
+  height: 100%;
+  vertical-align: bottom;
+}
+.news-goods-container{
+  width: 100%;
+  height: 138rpx;
+  background: rgba(0, 0, 0, 0.3);
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 16rpx 20rpx 40rpx;
+  box-sizing: border-box;
+}
+.news-goods-top{
+  width: 100%;
+  height: 50%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+.news-goods-name{
+  height: 44rpx;
+  font-size: 32rpx;
+  font-family: PingFang SC;
+  font-weight: bold;
+  line-height: 44rpx;
+  color: #FFFFFF;
+  flex: 60%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.news-goods-price{
+  flex: 1;
+  white-space: nowrap;
+  display: flex;
+  align-items: flex-end;
+}
+.news-goods-sale-price{
+height: 50rpx;
+font-size: 36rpx;
+font-family: PingFang SC;
+font-weight: bold;
+line-height: 50rpx;
+color: #FFFFFF;
+}
+.news-goods-origin-price{
+  height: 28rpx;
+  font-size: 20rpx;
+  font-family: PingFang SC;
+  font-weight: 400;
+  line-height: 28rpx;
+  color: #F7F7F7;
+  text-decoration: line-through;
+}
+.news-goods-bottom{
+  width: 100%;
+  height: 50%;
+  display: flex;
+  align-items: center;
+  margin-top: 10rpx;
+  justify-content: space-between;
+}
+.news-goods-introduction{
+  width:  500rpx;
+  height: 56rpx;
+  font-size: 20rpx;
+  font-family: PingFang SC;
+  font-weight: 400;
+  line-height: 28rpx;
+  color: #FFFFFF;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display:-webkit-box;
+  -webkit-box-orient:vertical;
+  -webkit-line-clamp:2;
+}
+.news-goods-btn{
+  width: 132rpx;
+  height: 48rpx;
+  background: #E23E3E;
+  border-radius: 8rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26rpx;
+  font-family: PingFang SC;
+  font-weight: bold;
+  color: #FFFFFF;
+}
+.to-store-icon{
+  width: 88rpx;
+  height: 88rpx;
+  position: absolute;
+  bottom: 20%;
+  right: 20rpx;
+}

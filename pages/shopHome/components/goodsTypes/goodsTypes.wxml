@@ -1,0 +1,62 @@
+<!-- 商品类型类别 -->
+
+<!-- 滑动类 -->
+<view wx:if='{{tempId==5}}' class='goods-types-list'>
+    <scroll-view scroll-x='{{true}}'>
+        <view class='me-fx-row me-fx-start-c scroll-content'>
+            <view class='type-item0' wx:for='{{goodsList}}' wx:key='index' bindtap="navito" data-name='{{item.classifyName}}' data-id='{{item.id}}'>
+                <image class='type-img' src='{{item.imageUuid}}'></image>
+                <view class='type-name-box'>
+                    <text class='type-name me-full-text'>{{item.classifyName}}</text>
+                </view>
+            </view>
+        </view>
+    </scroll-view>
+</view>
+
+<!-- 平铺类 -->
+<swiper wx:if="{{tempId == 1}}" class='{{list[0].length <= 5 ? "swiper1" : "swiper2"}}'>
+    <swiper-item wx:for="{{list}}" wx:for-item="its" wx:key='index'>
+        <view class='me-fx-row me-fx-start-c goods-types-list'>
+            <view class='me-fx-col me-fx-c-c type-item1 type-item2' wx:for='{{its}}' wx:for-index="idx" wx:key='idx' bindtap="navito" data-name='{{item.classifyName}}' data-id='{{item.id}}'>
+                <image wx:if='{{item.imageUuid}}' class='type-img' src='{{item.imageUuid}}'></image>
+                <view wx:else class='me-fx-col me-fx-c-c fill-elem {{fillElemBg}}'>
+                    <text class='fill-elem-text me-full-text'>{{item.classifyName}}</text>
+                </view>
+                <text class='me-full-text'>{{item.classifyName}}</text>
+            </view>
+        </view>
+    </swiper-item>
+</swiper>
+
+<!-- 平铺类2 -->
+<scroll-view wx:elif="{{tempId == 2||tempId == 6||tempId >7}}" class='swiper1'  scroll-x='true' >
+    <block wx:for="{{list}}" wx:for-item="its" wx:key='index' >
+        <view class='me-fx-row me-fx-start-c '>
+            <view class='me-fx-col me-fx-c-c type-item1 type-item2 ' wx:for='{{its}}' wx:for-index="idx" wx:key='idx' bindtap="navito" data-name='{{item.classifyName}}' data-id='{{item.id}}'>
+                <image wx:if='{{item.imageUuid}}' class='type-img' src='{{item.imageUuid}}'></image>
+                <view wx:else class='me-fx-col me-fx-c-c fill-elem {{fillElemBg}}'>
+                    <text class='fill-elem-text me-full-text'>{{item.classifyName}}</text>
+                </view>
+                <text class='me-full-text'>{{item.classifyName}}</text>
+            </view>
+        </view>
+    </block>
+</scroll-view>
+
+<!-- 平铺类3 -->
+<scroll-view wx:elif="{{tempId == 3||tempId == 4||tempId == 7}}" class='swiper1'  scroll-x='true' >
+    <block wx:for="{{list}}" wx:for-item="its" wx:key='index' >
+        <view class='me-fx-row me-fx-start-c '>
+            <view class='me-fx-col me-fx-c-c type-item1 type-item3 ' wx:for='{{its}}' wx:for-index="idx" wx:key='idx' bindtap="navito" data-name='{{item.classifyName}}' data-id='{{item.id}}'>
+                <image wx:if='{{item.imageUuid}}' class='type-img' src='{{item.imageUuid}}'></image>
+                <view wx:else class='me-fx-col me-fx-c-c fill-elem {{fillElemBg}}'>
+                    <text class='fill-elem-text me-full-text'>{{item.classifyName}}</text>
+                </view>
+                <text class='me-full-text'>{{item.classifyName}}</text>
+            </view>
+        </view>
+    </block>
+</scroll-view>
+
+

@@ -1,0 +1,5 @@
+/* components/canvas_synthetic/canvas_synthetic.wxss */
+.canvas-style{
+    position:absolute;
+    visibility:hidden;opacity:0;
+}

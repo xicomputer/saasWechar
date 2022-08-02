@@ -1,0 +1,189 @@
+<!-- 小店 -->
+<view class="small-shop-box" hidden="{{tabActive!=0}}">
+  <view class="index">
+    <image class="xiaoxingxing" animation="{{animation1}}" src="/pages/img/smallShop/1.png"></image>
+    <image class="xiaoxingxing" animation="{{animation1}}" style="left:460rpx" src="/pages/img/smallShop/2.png"></image>
+    <image class="xiaoxingxing" animation="{{animation1}}"style="left:480rpx" src="/pages/img/smallShop/3.png"></image>
+    <view class="index-head">
+      <view class="index-head-left">
+        <image src="{{storeData.headImgUrl}}" mode="aspectFill" class="index-head-left-img"></image>
+        <view class="index-head-left-info">
+          <view class="index-head-left-info-name">{{storeData.nickName}}的小店</view>
+          <view wx:if="{{!isFavorite}}" class="already-sc" bindtap="operaFavorite">收藏小店</view>
+          <view wx:if="{{isFavorite}}"class="no-sc" bindtap="operaFavorite">已收藏</view>
+          <!-- <view class="index-head-left-info-desc">
+            <view class="index-head-left-info-desc-text">人缘口碑</view>
+            <view class="index-head-left-info-desc-starList">
+              <image src="/pages/img/smallShop/star_s.png" class="index-head-left-info-desc-starItem" wx:for="{{storeData.excellent}}" wx:key="index"></image>
+            </view>
+          </view>
+          <view class="index-head-left-info-desc">
+            <view class="index-head-left-info-desc-text">颜值指数</view>
+            <view class="index-head-left-info-desc-starList">
+              <image src="/pages/img/smallShop/star_s.png" class="index-head-left-info-desc-starItem" wx:for="{{storeData.score}}" wx:key="index"></image>
+            </view>
+          </view> -->
+        </view>
+      </view>
+      <view class="index-head-right">
+        <view class="index-head-right-item" style="margin-left:0rpx" bindtap="operaFavoritePraise">
+          <view class="index-head-right-item-upText">点赞</view>
+          <image src="/pages/img/smallShop/like.png" class="index-head-right-item-icon" animation="{{animation}}"></image>
+          <view class="index-head-right-item-downText">{{storeData.praise}}</view>
+        </view>
+        <navigator class="index-head-right-item" url="../PosterScart/PosterScart?storeId={{storeId}}&nickName={{storeData.nickName}}">
+            <view class="index-head-right-item-upText">分享</view>
+            <image src="/pages/img/smallShop/wx_friend.png" class="index-head-right-item-icon"></image>
+        </navigator>
+        <!-- <view class="index-head-right-item" bindtap="operaFavorite">
+            <view class="index-head-right-item-upText">{{isFavorite?'已收藏':'收藏小店'}}</view>
+            <image src="{{isFavorite?'/pages/img/smallShop/star_b.png':'/pages/img/smallShop/star.png'}}" class="index-head-right-item-icon"></image>
+        </view> -->
+      </view>
+    </view>
+    <view class="index-content">
+      <scroll-view scroll-y="true"  class="index-content-content" bindscrolltolower="goodsTobottom" scroll-top="{{top}}">
+        <view class="index-content-content-data">
+          <navigator class="index-content-content-data-item" url="/pages/Index/GoodsDetails/GoodsDetails?id={{item.commodityId}}&sid={{item.tempSpecId}}&pid={{item.saleUniqueId}}&form=store&storeId={{storeId}}&salesUserId={{salesUserId}}" wx:for="{{goodsList}}" wx:key='index'>
+            <image src="{{item.imagList[0]}}" class="index-content-content-data-item-logo" mode="aspectFill">
+              <view class="count-down-box" wx:if="{{item.countdown}}" hidden="{{item.ishide}}">
+                <text style="margin: 0 14rpx">活动倒计时</text>
+                <van-count-down time="{{ item.countdown  }}" bind:finish="finishedCountDown" data-idx="{{index}}" format=" HH : mm : ss " />
+              </view>
+            </image>
+            <view class="index-content-content-data-item-info">
+              <view style="display:flex;align-items:center;width:100%">
+                <text class="index-content-content-data-item-info-name">{{item.commodityName}}</text>
+              </view>
+              <view class="index-content-content-data-item-info-foot">
+                <view class="index-content-content-data-item-info-foot-price">¥{{(item.activityType==1||(item.activityType==2&&item.isMember))?item.lowPrice:item.originalPrice}}</view>
+                <!-- <view class="index-content-content-data-item-info-foot-shopname">来自{{item.nickName}}</view> -->
+              </view>
+              <image wx:if="{{item.isHotSale}}" class="hot-img" src="/pages/img/smallShop/hot.png"></image>
+            </view>
+            <!-- end index-content-content-data-item-info-->
+          </navigator>
+        </view> 
+      </scroll-view>
+    </view>
+  </view>
+</view>
+<!-- 小店热卖 -->
+<view class="hot-sale" hidden="{{tabActive!=1}}">
+  <no-data wx:if="{{!hotSaleList.length}}" text="暂无热销产品"></no-data>
+  <scroll-view scroll-y="true" wx:else style="max-height:calc(100vh - 110rpx);" bindscrolltolower="hotSaleTobottom" refresher-enabled="true" bindrefresherrefresh="refrenshHotSale" scroll-top="{{top}}">
+    <view class="hot-sale-goods" wx:for="{{hotSaleList}}" wx:key="index">
+      <image class="hot-sale-goods-img" src="{{item.imagList[0]}}"></image>
+      <view style="padding:0 20rpx">
+        <view class="hot-sale-goods-name">{{item.commodityName}}</view>
+        <view class="hot-sale-goods-content">
+          <view class="hot-sale-goods-left">
+            <view class="hot-sale-goods-from">来自{{item.nickName}}</view>
+            <view class="hot-sale-goods-price">
+              <view class="hot-sale-goods-buy-price"><text style="font-size:24rpx">￥</text>{{(item.activityType==1||(item.activityType==2&&item.isMember))?item.lowPrice:item.originalPrice}}</view>
+              <view class="hot-sale-goods-origin-price" wx:if="{{(item.activityType==1||(item.activityType==2&&item.isMember))}}">￥{{item.originalPrice}}</view>
+            </view>
+          </view>
+          <navigator class="hot-sale-goods-right" url="/pages/Index/GoodsDetails/GoodsDetails?id={{item.commodityId}}&sid={{item.tempSpecId}}&pid={{item.saleUniqueId}}&form=store&storeId={{storeId}}&salesUserId={{salesUserId}}">￥<text style="font-size:36rpx">{{(item.activityType==1||(item.activityType==2&&item.isMember))?item.lowPrice:item.originalPrice}}</text>去购买</navigator>
+        </view>
+      </view>
+      <view class="hot-sale-already-buy-box" wx:if="{{item.headimgurls.length}}">
+        <view class="hot-sale-already-buy-box-text">已购买</view>
+        <swiper indicator-dots="{{false}}" circular="true" autoplay="true" interval="3000" style="width:100%;height:100%;" indicator-active-color="#E7A124"  class="already-buy-box-list">
+          <block wx:for="{{item.headimgurls}}" wx:key="index">
+            <swiper-item class="already-buy-box-item">
+              <image class="already-buy-box-image" src="{{item}}"></image>
+            </swiper-item>
+          </block>
+        </swiper>
+      </view>
+    </view>
+  </scroll-view>
+</view>
+<!-- 小店订阅通知 -->
+<view class="small-shop-community" hidden="{{tabActive!=2}}">
+  <view style="width:100%;height:1rpx;background:#e5e5e5"></view>
+    <view class="index-content-title">
+      <view style="display:flex;align-items:center">
+        <image src="/pages/img/smallShop/small_shop.png" style="width:53rpx;height:53rpx"></image>
+        <view class="index-content-title-tag">
+          <text style="margin-bottom:10rpx">小店</text>
+          <text>访客</text>
+        </view>
+      </view>
+      <scroll-view scroll-x="true" class="user-list">
+        <view class="user-item">
+          <image src="{{item.headimgurl}}"  class="index-content-title-image" wx:for="{{userList}}"   wx:key='index'></image>
+        </view>
+      </scroll-view>
+    </view>
+  <!-- </van-sticky> -->
+  <view wx:if="{{!dynamicList.length}}" class="no-dynamic">
+    <image class="no-dynamic-img" src="/pages/img/no_notice.png"></image>
+    <view class="no-dynamic-text">该小店还没有动态……</view>
+  </view>
+  <scroll-view scroll-y="true" wx:else style="max-height:calc(100vh - 220rpx);" bindscrolltolower="dynamicTobottom" refresher-enabled="true" bindrefresherrefresh="refrenshDynamic" scroll-top="{{top}}">
+    <view class="dynamic-item" wx:for="{{dynamicList}}" wx:for-item="item" wx:for-index="index" wx:key="index">
+      <view class="dynamic-top">
+        <view class="touxiang-box">
+          <image class="my-touxiang" mode="aspectFill" src="{{item.userRegister.headimgurl}}"></image>
+          <!-- <image wx:if="{{item.userRegister.sex==1}}" class="sex" src="../../img/man.png"></image>
+          <image wx:if="{{item.userRegister.sex==2}}" class="sex" src="../../img/woman.png"></image> -->
+        </view>
+        <view class="my-info-box">
+          <view class="name-box">
+            {{item.userRegister.nickname}}
+            <!-- <image class="set" src="../../img/set.png"></image> -->
+          </view>
+          <view class="autograngh">{{item.userRegister.signature?item.userRegister.signature:'该用户没有设置签名'}}</view>
+        </view>
+      </view>
+      <rich-text nodes="{{item.content}}" class="dynamic-text"></rich-text>
+      <scroll-view scroll-x="true" style="width:100%">
+        <view class="dynamic-img-list">
+          <image class="dynamic-img-item" mode="aspectFill" lazy-load wx:for="{{item.imagList}}" wx:for-item="pitem" wx:for-index="pindex" wx:key="pindex" src="{{pitem}}" bindtap="imgClick" data-list="{{item.imagList}}" data-src="{{pitem}}"></image>
+        </view>
+      </scroll-view>
+      <view class="dynamic-bottom">
+        <view class="dynamic-time">{{item.addTime}}发表</view>
+        <view class="dynamic-zan-box">
+          <!-- <view class="comment" bindtap="toComment" data-item="{{item}}">
+            <image style="width:30rpx;height:28rpx;" src="../../img/comment.png"></image>
+            <view class="comment-text">{{item.reply==0?'评论':item.reply}}</view>
+          </view> -->
+          <view class="comment dianzan" bindtap="liketap" data-id="{{item.id}}" data-index="{{index}}">
+            <image style="width:30rpx;height:28rpx" wx:if="{{item.isPraise}}" src="../../img/gooded.png"></image>
+            <image style="width:30rpx;height:28rpx" wx:else src="../../img/good.png"></image>
+            <view class="comment-text">{{item.praise==0?'赞':item.praise}}</view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </scroll-view >
+</view>
+<!-- Tabbar栏 -->
+<van-tabbar active="{{ tabActive }}" bind:change="changeTabbar" active-color="#EB1918">
+  <van-tabbar-item >
+    <image slot="icon" src="/pages/img/smallShop/tab1.png" style="width: 40rpx; height: 40rpx;"/>
+    <image slot="icon-active" src="/pages/img/smallShop/tab1_active.png" style="width: 40rpx; height: 40rpx;"/>
+    小店
+  </van-tabbar-item>
+  <van-tabbar-item >
+    <image slot="icon" src="/pages/img/smallShop/tab2.png" style="width: 40rpx; height: 40rpx;"/>
+    <image slot="icon-active" src="/pages/img/smallShop/tab2_active.png" style="width: 40rpx; height: 40rpx;"/>
+    热销
+  </van-tabbar-item>
+  <!-- <van-tabbar-item >
+    <image slot="icon" src="/pages/img/smallShop/tab3.png" style="width: 40rpx; height: 40rpx;"/>
+    <image slot="icon-active" src="/pages/img/smallShop/tab3_active.png" style="width: 40rpx; height: 40rpx;"/>
+    圈子
+  </van-tabbar-item> -->
+</van-tabbar>
+<menu navs="{{navs}}" cartnum="{{cartNum}}" bindtest="toTop" />
+<view style="position: fixed;bottom:350rpx;right:40rpx;">
+  <view style="display:flex;align-items:center;flex-direction:column;position:absolute;bottom:0;right:0;opacity:0" animation="{{idx==index?animation2:''}}" wx:for="{{headimgurlList}}" wx:key="index">
+    <image src="{{item.headimgurl}}" style="width:60rpx;height:60rpx;border-radius:50%;"/>
+    <text style="font-size:20rpx;color:#f44336;font-weight:bold">购买过</text>
+  </view>
+</view>
+<!-- <navigator wx:if="{{buton}}" url="/pages/shopHome/home/home" class="butt">授权登录</navigator> -->

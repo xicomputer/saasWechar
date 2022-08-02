@@ -1,0 +1,177 @@
+
+page{background-color:#F1F1F1;}
+
+
+/* 头部信息 */
+.top-box{
+    padding:20rpx 30rpx;box-sizing:border-box;
+    background-color:#fff;margin:10rpx 0 20rpx;
+    color:#FF7E28;
+}
+.top-box .col-line{
+    width:8rpx;height:34rpx;margin-right:20rpx;
+    background-color:#FF7E28;border-radius:4rpx;
+}
+.top-box .cancel-title{margin-left:28rpx;font-size:36rpx;font-weight:bold;}
+.top-box .title-text{font-size:28rpx;font-weight:bold;}
+.top-box .sub-title{font-size:24rpx;margin-top:22rpx;}
+.top-box .adorn-img{width:236rpx;height:142rpx;}
+
+
+/* 物流信息 */
+.logistics-info{
+    background-color:#fff;padding:30rpx;
+    box-sizing:border-box;margin-bottom:10rpx;
+}
+.logistics-info .info-content{margin:0 30rpx;}
+.logistics-info .info-content .describe-msg{
+    font-size:28rpx;color:#000;font-weight:bold;
+}
+.logistics-info  .time-str{
+    font-size:24rpx;color:#0F0F0F;margin-top:10rpx;
+}
+.logistics-info .wl-icon-img{width:56rpx;height:56rpx;}
+.logistics-info .jiantou-img{width:20rpx;height:34rpx;}
+
+
+/* 地址信息 */
+.address-info{
+    background-color:#fff;font-size:24rpx;color:#0F0F0F;
+    padding:10rpx 30rpx;box-sizing:border-box;height:138rpx;
+    margin-bottom:10rpx;
+}
+.address-info .location-img{width:56rpx;height:56rpx;margin-right:28rpx;}
+.address-info .user-name{font-size:28rpx;color:#000;font-weight:bold;}
+.address-info .user-phone{color:#ACACAC;}
+
+.address-info .address-empty-title{font-size:30rpx;font-weight:bold;color:#ACACAC;}
+.address-info .jiantou-img{width:20rpx;height:34rpx;}
+
+
+/* 商品信息 */
+.goods-info{
+    background-color:#fff;padding:20rpx;
+    box-sizing:border-box;margin-bottom:10rpx;
+}
+.goods-info .info-content{
+    border-bottom:2rpx solid #E5E5E5;padding-bottom:20rpx;
+    margin-bottom:20rpx;
+}
+.goods-info .info-content .goods-img{
+    width:156rpx;height:156rpx;background-color:#ccc;
+    border-radius:8rpx;margin-right:16rpx;
+}
+.goods-info .info-content .goods-name{font-size:28rpx;color:#0F0F0F;}
+.goods-info .info-content .goods-specification{color:#ACACAC;font-size:24rpx;}
+.goods-info .info-content .price-str{font-size:40rpx;color:#EB1918;font-weight:bold;}
+.goods-info .info-content .old-price{
+    font-size:22rpx;color:#ACACAC;margin-left:20rpx;
+    text-decoration:line-through;
+}
+.goods-info .info-content .count-num{font-size:30rpx;color:#333;}
+
+.goods-info .summary{font-size:24rpx;color:#ACACAC;}
+.goods-info .summary .summary-amount{
+    color:#EB1918;font-size:28rpx;font-weight:800;
+    margin-left:20rpx;
+}
+
+
+/* 订单信息 */
+.order-info{
+    background-color:#fff;font-size:26rpx;color:#999;
+    padding:20rpx;box-sizing:border-box;margin-bottom:10rpx;
+    line-height:45rpx;
+}
+
+/* 取消订单的订单信息 */
+.cancel-order-info{
+    background-color:#fff;border-radius:8rpx;
+    font-size:26rpx;color:#000;line-height:50rpx;
+    padding:22rpx 30rpx;box-sizing:border-box;
+}
+.cancel-order-info .leave-msg{color:#999;}
+
+/* 费用信息 */
+.cost-info{
+    background-color:#fff;font-size:28rpx;color:#000;
+    padding:0 30rpx;box-sizing:border-box;margin-bottom:10rpx;
+}
+.cost-info .cost-itme{height:82rpx;}
+.cost-info .amount-str{font-size:26rpx;font-weight:800;}
+.cost-info .red-text{color:#EB1918;}
+.cost-info .cost-itme:not(:last-child){border-bottom:1rpx solid #E5E5E5;}
+
+
+/* 支付方式 */
+.pay-way{
+    background-color:#fff;font-size:28rpx;color:#333;
+    padding:22rpx 30rpx;box-sizing:border-box;
+    border-radius:8rpx;margin-bottom:10rpx;
+}
+
+
+/* 留言 */
+.leave-msg-box{
+    background-color:#fff;font-size:28rpx;color:#000;
+    padding:22rpx 30rpx;box-sizing:border-box;
+    border-radius:8rpx;margin-bottom:200rpx;
+}
+.leave-msg-box .leave-textarea{
+    width:640rpx;height:90rpx;
+    margin-top:20rpx;font-size:24rpx;
+}
+
+
+
+/* 底部按钮 */
+.footer-btns{
+    background-color:#fff;height:132rpx;
+    position:fixed;bottom:0;left:0;width:100%;
+    padding:0 30rpx;box-sizing:border-box;
+}
+.footer-btns .btn{
+    width:180rpx;height:60rpx;border-radius:30rpx;
+    margin:0;font-size:26rpx;padding:0;
+    line-height:60rpx;background-color:transparent;
+}
+.footer-btns .btn:after{border:0;}
+.footer-btns .hollow-btn{
+    color:#999;border:2rpx solid #999;margin-right:20rpx;
+}
+.footer-btns .solid-btn{
+    background: linear-gradient(180deg, #F2180C 0%, #EA2610 100%);
+    box-shadow: 0px 6px 12px rgba(235, 35, 15, 0.17); color:#fff;
+}
+
+
+
+
+
+
+/* 取消订单原因弹窗 */
+.cancel-why-content{
+    background-color:#fff;width:710rpx;
+    padding:30rpx;box-sizing:border-box;
+    font-size:30rpx;
+}
+.cancel-why-content .top-box{font-weight:bold;font-size:30rpx;}
+.cancel-why-content .top-box .cancel-btn{color:#ACACAC;}
+.cancel-why-content .top-box .title-text{color:#000;}
+.cancel-why-content .top-box .confirm-btn{color:#1577FF;}
+
+.cancel-why-content .radio-list{margin-top:80rpx;}
+.cancel-why-content .radio-list .why-item:not(:first-child){margin-top:20rpx;}
+.cancel-why-content .radio-list .radio-box{
+    width:30rpx;height:30rpx;border-radius:50%;
+    background-color:#fff;border:2rpx solid #707070;
+    margin-right:30rpx;box-sizing:border-box;
+}
+.cancel-why-content .radio-list .checked-radio{
+    border-width:10rpx;border-color:#1577FF;
+}
+.cancel-why-content .radio-list .why-textarea{
+    width:534rpx;height:242rpx;margin:20rpx 0 0 50rpx;
+    border:1rpx solid #ACACAC;border-radius:16rpx;
+    padding:15rpx;box-sizing:border-box;font-size:22rpx;
+}

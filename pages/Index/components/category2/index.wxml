@@ -1,0 +1,21 @@
+<view class="category">
+  <view class="category_item" wx:for="{{goodsList}}" wx:for-index="key" wx:key="index" wx:if="{{item.commodityList.length>0}}">
+    <view class="category-left">
+      <text class="classify-name">{{item.classifyName}}</text>
+      <navigator class="category-left-btn" url="/pages/Index/GoodsList/GoodsList?category={{item.classifyName}}&marchantId={{marchantId}}&classifyId={{item.id}}&orderType={{orderType}}">进入专柜></navigator>
+    </view>
+    <scroll-view scroll-x style="height: 252rpx;width:532rpx;margin-left: 10rpx;">
+      <view class="category-list">
+        <navigator class="category-list-goods" wx:for="{{item.commodityList}}"
+          wx:key="index"  url="/pages/Index/GoodsDetails/GoodsDetails?id={{item.id}}">
+          <image class="category-list-goods-img" src="{{item.thumbnail}}" mode="aspectFill"></image>
+          <view class="category-list-goods-name">{{item.commodityName}}</view>
+          <view class="category-list-goods-price-box">
+            <text class="category-list-goods-nowprice"><text style="font-size:20rpx">￥</text>{{item.activityType==1||(item.activityType==2&&item.isMember)?item.lowPrice:item.originalPrice}}</text>
+            <text class="category-list-goods-origin-price" wx:if="{{item.activityType==1||(item.activityType==2&&item.isMember)}}">￥{{item.originalPrice}}</text>
+          </view>
+        </navigator>
+      </view>
+    </scroll-view>
+  </view>
+</view>

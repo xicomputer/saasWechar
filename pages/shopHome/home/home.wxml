@@ -1,0 +1,1089 @@
+<!-- 导入骨架屏 -->
+<!-- <import src="home.skeleton.wxml"/>
+<template is="skeleton" wx:if="{{loading}}" /> -->
+
+<!-- 顶部滚动切换 -->
+<!-- <view class="headpo {{isshowHead ? 'xpactive' :''}}" wx:if="{{nowTabbarText=='首页'}}">
+  <view class='head-shop-info-box{{topBoxBg}}'>
+    <view style="height:70px;" class='me-fx-row me-fx-sb-c {{nowTabbarText=="首页"?"title-bar":""}}'>
+      <view class="me-fx-row header">
+        <view class="header_Info me-fx-col">
+          <view>
+            <text style="color: #000;" class="appName_info app-name">{{appName}}</text>
+          </view>
+          <view class="tscl">
+            <text class="btn_sales">访问：{{accessCount}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view> -->
+<!-- <block wx:else> -->
+  <block wx:if="{{isToStore&& mainBusinessModel == 3}}">
+  <!-- 头 -->
+    <view class="headpo {{isshowHead ? 'xpactive' :''}}" wx:if="{{nowTabbarText=='首页'}}" style="background-color: #1B78F4;">
+      <view class='head-shop-info-box{{topBoxBg}}'>
+        <view style="height:70px;" class='me-fx-row me-fx-sb-c {{nowTabbarText=="首页"?"title-bar":""}}'>
+          <view class="me-fx-row header">
+            <view class="header_Info me-fx-col">
+              <view>
+                <text style="color: rgb(255, 255, 255);" class="appName_info app-name">{{appName}}</text>
+              </view>
+              <view class="tscl">
+                <text class="btn_sales" style="font-size: 18rpx;">访问：{{accessCount}}</text>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 主体 -->
+    <view class='home-page   {{(currentIndex == "全国发货" || currentIndex == "秒杀专区")?pageBg:""}} {{nowTabbarText=="首页"?"":"bg_white"}}' style="overflow-x: hidden;">
+  <view class='{{pageBg}}' bindtouchstart="touchMove" bindtouchend="touchEnd" style="overflow-x: hidden;background-color: whitesmoke; ">
+    <view wx:if="{{nowTabbarText=='首页' && tempId>4}}">
+
+      <!-- 全国发货  -->
+      <view class="{{'bg_body'+tempId}}" wx:if="{{nowMenuItem.code == 'LOGISTICS' }}">
+        <top-banner settingImg='{{settingImg}}' banners='{{markerInfo.recommendList}}' appName='{{appName}}' temp-id='{{tempId}}'></top-banner>
+        <product orderSwitch='{{orderSwitch}}' marchantId='{{marchantId}}' product-list='{{goodsList}}' temp-id='{{tempId}}' isWuliu='{{isWuliu}}'></product>
+      </view>
+
+      <!-- 拼团专区 -->
+      <view class="{{'bg_body'+tempId}}" wx:if="{{tempId>4 && nowMenuItem.code == 'TTPT'}}">
+        <activity-product orderSwitch='{{orderSwitch}}' marchantId='{{marchantId}}' temp-id='{{tempId}}' template-tag='TTPT' countdown='{{true}}'></activity-product>
+      </view>
+
+      <!-- 推荐返利 -->
+      <view style='background-color:#000;' wx:if="{{tempId>4 && nowMenuItem.code == 'TJFL'}}">
+        <tjfl-classify></tjfl-classify>
+      </view>
+
+      <!-- 门店团购 -->
+      <view style="background:#F9F9F9;padding-top:40rpx;" wx:if="{{nowMenuItem.code == 'RESERVE'}}">
+        <to-city isToCity="{{isToCity}}" address="{{markerInfo.address}}" msg="本店可预定商品，用户需到店取货或消费" isToStore="{{isToStore}}" temp-id='{{tempId}}' marchantId='{{marchantId}}' shop-list="{{toShoplist2}}" shopType="book" activityInfo="{{userInfo}}"></to-city>
+      </view>
+
+      <!-- 同城配送 -->
+
+      <view style="background:#F9F9F9;padding-top:40rpx;" wx:if="{{nowMenuItem.code == 'DELIVERY'}}">
+        <to-city isToCity="{{isToCity}}" address="{{markerInfo.address}}" msg="本店可同城配送商品，用户下单同城可配送" isToStore="{{isToStore}}" temp-id='{{tempId}}' marchantId='{{marchantId}}' shop-list="{{toShoplist}}" shopType="city" activityInfo="{{userInfo}}"></to-city>
+      </view>
+
+      <!-- 秒杀专区 -->
+      <view wx:if="{{tempId>4 && nowMenuItem.code == 'JSMS'}}">
+        <activity-product orderSwitch='{{orderSwitch}}' marchantId='{{marchantId}}' product-list='{{goodsList}}' countdown='{{true}}' temp-id='{{tempId}}' template-tag='JSMS'></activity-product>
+      </view>
+
+      <!-- 会员专区 -->
+      <view wx:if="{{nowMenuItem.code == 'MEMBER'}}" style='margin-top:5rpx;'>
+        <member detailData="{{memberInfo}}" memberGoodsList="{{memberGoodsList}}" marchantId='{{marchantId}}'></member>
+      </view>
+
+      <!-- 商家文化 -->
+      <view wx:if="{{nowMenuItem.code == 'CULTURE'}}" style='margin-top:40rpx;'>
+        <Article ArticleList="{{ArticleList}}" marchantId='{{marchantId}}'></Article>
+      </view>
+
+      <view class="foot"></view>
+    </view>
+
+
+
+
+    <!-- 首页 -->
+    <view wx:elif="{{nowTabbarText=='首页'&& tempId<5}}" style=" overflow-x: hidden;background: #F7F7F7;">
+      <view class="hoem-title">
+
+      </view>
+
+      <!-- 新版首页开始22.5.26 -->
+      <view class="home">
+        <!-- 视频 -->
+      <view class="video" wx:if="{{settingImg.top.fileurl.length > 1}}" >
+        <video src="{{settingImg.top.fileurl[1]}}" mode="aspectFit" class="index1_img2" loop="{{true}}" autoplay="true" muted="false" controls="{{false}}" show-mute-btn="false" show-play-btn="false" style="width: 750rpx;height: 425rpx;border-radius: 0;">视频</video>
+    </view>
+
+      <!-- 描述部分 -->
+      <view style="position: relative;top: 0rpx;z-index: 1;">
+        <view style="width: 700rpx;border-radius: 20rpx;background-color: rgb(255, 255, 255);margin: 0 auto;margin-top: -80rpx;">
+          <view>
+            <view style="position: absolute;top: -60rpx;right: 40rpx;display: flex;align-items: center;">
+            	<!-- <view style="width:700rpx;margin:0rpx auto;display:flex;align-items:center;"> -->
+                  <!-- <view style="display:flex;align-items:center;flex-direction:column;margin-left: 10rpx;" wx:if="{{codeInfo[0]}}" bindtap="goimg">
+                    <image style="width:60rpx;height:60rpx;" src="https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/tuijianguan/icon11.png" mode></image>
+                  </view>
+                  <view style="display:flex;align-items:center;flex-direction:column;margin-left: 10rpx;" wx:else bindtap="jumpDefault">
+                    <image style="width:60rpx;height:60rpx;" src="https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/tuijianguan/icon11.png" mode></image>
+                  </view> -->
+                  <view style="display:flex;align-items:center;flex-direction:column;margin-left: 15rpx;" wx:if="{{addcouponList1[0] || addcouponList2[0] || addcouponList3[0]}}" bindtap="goCoupons">
+                    <image style="width:80rpx;height:80rpx;" src="https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/Saas/992.png" mode></image>
+                  </view>
+                  <view style="display:flex;align-items:center;flex-direction:column;margin-left: 15rpx;" wx:else bindtap="jumpDefault">
+                    <image style="width:80rpx;height:80rpx;" src="https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/Saas/992.png" mode></image>
+                  </view>
+                  <view style="display:flex;align-items:center;flex-direction:column;margin-left: 15rpx;"  bindtap="jumptuiguan">
+                    <image style="width:80rpx;height:80rpx;" src="https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/Saas/995.png" mode></image>
+                  </view>
+                  <!-- <view style="display:flex;align-items:center;flex-direction:column;margin-left: 10rpx;"  >       
+                    <coupon marchantId="{{marchantId}}" mainBusinessModel="{{mainBusinessModel}}"></coupon>
+                    <image style="width:60rpx;height:60rpx;" src="https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/Saas/huiyuanhuodong.gif" mode></image>
+                  </view> -->
+
+                  <!-- <view style="display:flex;align-items:center;flex-direction:column;margin-left: 10rpx;"  wx:if="{{commentList2s.length > 0}}">
+                    <activity-list  wx:if="{{commentList2s.length > 0}}" shopList='{{shopList}}' commentList="{{commentList2s}}" marchantId="{{marchantId}}" activityInfo="{{userInfo}}" hotelList='{{hotelList}}' temp-id='{{50}}'>
+                  </activity-list>
+                    <image style="width:60rpx;height:60rpx;" src="https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/tuijianguan/icon55.png" mode></image>
+                  </view>
+                  <view style="display:flex;align-items:center;flex-direction:column;margin-left: 10rpx;"  wx:else bindtap="jumpDefault">
+                    <image style="width:60rpx;height:60rpx;" src="https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/tuijianguan/icon55.png" mode></image>
+                  </view> -->
+                  <view style="display:flex;align-items:center;flex-direction:column;margin-left: 15rpx;" wx:if="{{businessInfo.notify[0]}}" bindtap="isShowTiktok">
+                    <image  style="width:80rpx;height:80rpx;" src="https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/Saas/996.png" mode></image>
+                  </view>
+                  <view style="display:flex;align-items:center;flex-direction:column;margin-left: 15rpx;" wx:else bindtap="jumpDefault" data-index="5">
+                    <image  style="width:80rpx;height:80rpx;" src="https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/Saas/996.png" mode></image>
+                  </view>
+                
+                  <view style="display:flex;align-items:center;flex-direction:column;margin-left: 15rpx;" bindtap="jumpPayMoney">
+                    <image  style="width:80rpx;height:80rpx;" src="https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/Saas/993.png" mode></image>
+                  </view>
+                  <view style="display:flex;align-items:center;flex-direction:column;margin-left: 10rpx;" bindtap="jumpTel" >
+                    <image  style="width:95rpx;height:95rpx;" src="https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/Saas/tel.png" mode></image>
+                  </view>
+	
+            </view>
+            <view>
+              <view style="position: absolute;right: 60rpx;top: 130rpx;">
+                <view  style="padding: 5rpx 20rpx;align-items: center;display: flex;font-size: 22rpx;border-radius: 5rpx;margin-right: 10rpx;background-color: #1B78F4;color: #fff;justify-content: space-around;"  bindtap="showDingYue" wx:if="{{isShowSub}}">
+              <image src="https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/Saas/999.png" style="width:30rpx;height:40rpx;"></image>
+               <view style="margin-left: 15rpx;">订阅</view>
+              </view>
+              </view>
+            </view>
+            <view style="padding: 20rpx;padding-bottom: 0;">
+              <image style="width:60rpx;height:60rpx;" src="{{businessInfo.headImage}}" mode></image>
+              <text style="font-size:22rpx;margin-top:10rpx;font-weight: 550;margin-left: 20rpx;">{{businessInfo.nickName}}</text>
+            </view>
+            <view style="padding:5rpx 20rpx;display: flex;align-items: center;">
+              <view wx:for="{{businessInfo.labelsList}}" style="padding: 1rpx 10rpx;border: 1rpx solid #1B78F4;color: #1B78F4;display: inline-block;font-size: 16rpx;border-radius: 20rpx;margin-right: 10rpx;">
+                {{item}}
+              </view>
+            </view>
+            <view style="padding:5rpx 20rpx;display: flex;align-items: center;">
+              <view  style="padding: 1rpx 10rpx;align-items: center;color: #1B78F4;display: flex;font-size: 16rpx;border-radius: 20rpx;margin-right: 10rpx;background-color: #D9E8FD;">
+              <image src="https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/Saas/666.png" style="width:20rpx;height:20rpx;"></image>
+               商家已认证
+              </view>
+              <view  style="padding: 1rpx 10rpx;color: #1B78F4;display:flex;font-size: 16rpx;border-radius: 20rpx;margin-right: 10rpx;background-color: #D9E8FD;align-items: center;">
+              <image src="https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/Saas/777.png" style="width:20rpx;height:20rpx;"></image>
+               服务
+              </view>
+              <view  style="padding: 1rpx 10rpx;align-items: center;color: #1B78F4;display: flex;font-size: 16rpx;border-radius: 20rpx;margin-right: 10rpx;background-color: #D9E8FD;">
+              <image src="https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/Saas/888.png" style="width:20rpx;height:20rpx;"></image>
+               访问人数{{accessCount}}
+              </view>
+            </view>
+            <view style="padding:5rpx 20rpx;display: flex;flex-direction: column;font-weight: 700;">
+              <view  style="display: flex;margin-top: 15rpx;">
+               <image src="https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/Saas/111.png" style="width:28rpx;height:28rpx;margin-top: 6rpx;"></image>
+               <text style="font-size: 24rpx;color: #333333;margin-left: 10rpx;flex: 1;">营业时间: {{businessInfo.openingTime || '09:00'}}</text>
+              </view>
+              <!-- <view  style="display: flex;margin-top: 15rpx;" wx:if="{{businessInfo.telephone}}">
+               <image src="https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/Saas/telephone.png" style="width:28rpx;height:28rpx;margin-top: 6rpx;"></image>
+               <text style="font-size: 24rpx;color: #333333;margin-left: 10rpx;flex: 1;">联系方式: {{businessInfo.telephone}}</text>
+              </view> -->
+              <view  style="display: flex;margin-top: 15rpx;" wx:if="{{businessInfo.entirelyAddress}}">
+               <image src="https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/Saas/222.png" style="width:28rpx;height:28rpx;margin-top: 6rpx;"></image>
+               <text style="font-size: 24rpx;color: #333333;margin-left: 10rpx;flex: 1;">{{businessInfo.entirelyAddress}}</text>
+              </view>
+              <view  style="display: flex;margin-top: 15rpx;" wx:if="{{businessInfo.personalDetails}}">
+               <image src="https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/Saas/333.png" style="width:28rpx;height:28rpx;margin-top: 6rpx;"></image>
+               <text style="font-size: 24rpx;color: #333333;margin-left: 10rpx;flex: 1;">{{businessInfo.personalDetails}}</text>
+              </view>
+            </view>
+          </view>
+        </view>
+		  </view>
+      <!-- 中间分类图片 -->
+      <!-- <view style="margin-top: 20rpx;">
+        <image src="https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/Saas/444.png" style="width: 100%;height: 130rpx;border-radius: 0;" mode="aspectFill"></image>
+        <image src="https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/Saas/555.png" style="width: 100%;height: 130rpx;margin-top: 20rpx;border-radius: 0;" mode="aspectFill"></image>
+      </view> -->
+<!-- <view >
+  <view class="column {{isFixedTop ?'fixed':''}}" id="navbar"  style="padding-top:{{settingImg.top.fileurl.length > 1?'10rpx':'40rpx'}}">
+		<view style="width:700rpx;margin:0rpx auto;display:flex;align-items:center;">
+			<view style="width:20%;display:flex;align-items:center;flex-direction:column;" wx:if="{{codeInfo[0]}}" bindtap="goimg">
+				<image style="width:60rpx;height:60rpx;" src="https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/tuijianguan/icon11.png" mode></image><text
+					style="font-size:22rpx;margin-top:10rpx;font-weight: 550;">粉丝群</text>
+			</view>
+      <view style="width:20%;display:flex;align-items:center;flex-direction:column;" wx:else bindtap="jumpDefault">
+				<image style="width:60rpx;height:60rpx;" src="https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/tuijianguan/icon11.png" mode></image><text
+					style="font-size:22rpx;margin-top:10rpx;font-weight: 550;">粉丝群</text>
+			</view>
+			<view style="width:20%;display:flex;align-items:center;flex-direction:column;" wx:if="{{addcouponList1[0] || addcouponList2[0] || addcouponList3[0]}}" bindtap="goCoupons">
+				<image style="width:60rpx;height:60rpx;" src="https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/Saas/mianfeilipin.gif" mode></image><text
+					style="font-size:22rpx;margin-top:10rpx;font-weight: 550;">优惠劵</text>
+			</view>
+      <view style="width:20%;display:flex;align-items:center;flex-direction:column;" wx:else bindtap="jumpDefault">
+				<image style="width:60rpx;height:60rpx;" src="https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/Saas/mianfeilipin.gif" mode></image><text
+					style="font-size:22rpx;margin-top:10rpx;font-weight: 550;">优惠劵</text>
+			</view>
+      <view style="width:20%;display:flex;align-items:center;flex-direction:column;"  bindtap="jumptuiguan">
+				<image style="width:60rpx;height:60rpx;" src="https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/Saas/tuiguan.png" mode></image><text
+					style="font-size:22rpx;margin-top:10rpx;font-weight: 550;">推广中心</text>
+			</view>
+			<view style="width:20%;display:flex;align-items:center;flex-direction:column;"  >       
+        <coupon marchantId="{{marchantId}}" mainBusinessModel="{{mainBusinessModel}}"></coupon>
+				<image style="width:60rpx;height:60rpx;" src="https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/Saas/huiyuanhuodong.gif" mode></image><text
+					style="font-size:22rpx;margin-top:10rpx;font-weight: 550;">会员专区</text>
+			</view>
+
+			<view style="width:20%;display:flex;align-items:center;flex-direction:column;"  wx:if="{{commentList2s.length > 0}}">
+        <activity-list  wx:if="{{commentList2s.length > 0}}" shopList='{{shopList}}' commentList="{{commentList2s}}" marchantId="{{marchantId}}" activityInfo="{{userInfo}}" hotelList='{{hotelList}}' temp-id='{{50}}'>
+      </activity-list>
+				<image style="width:60rpx;height:60rpx;" src="https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/tuijianguan/icon55.png" mode></image><text
+					style="font-size:22rpx;margin-top:10rpx;font-weight: 550;">商家推荐</text>
+			</view>
+      <view style="width:20%;display:flex;align-items:center;flex-direction:column;"  wx:else bindtap="jumpDefault">
+				<image style="width:60rpx;height:60rpx;" src="https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/tuijianguan/icon55.png" mode></image><text
+					style="font-size:22rpx;margin-top:10rpx;font-weight: 550;">商家推荐</text>
+			</view>
+			<view style="width:20%;display:flex;align-items:center;flex-direction:column;" wx:if="{{businessInfo.notify[0]}}" bindtap="isShowTiktok">
+				<image  style="width:60rpx;height:60rpx;" src="https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/tuijianguan/icon66.png" mode></image><text
+					style="font-size:22rpx;margin-top:10rpx;font-weight: 550;">抖音小店</text>
+			</view>
+      <view style="width:20%;display:flex;align-items:center;flex-direction:column;" wx:else bindtap="jumpDefault" data-index="5">
+				<image  style="width:60rpx;height:60rpx;" src="https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/tuijianguan/icon66.png" mode></image><text
+					style="font-size:22rpx;margin-top:10rpx;font-weight: 550;">抖音小店</text>
+			</view>
+		</view>
+	</view>
+  <view class="column "  wx:if="{{isFixedTop}}"></view>
+</view> -->
+
+
+	<!-- <view>
+		<view
+			style="width:700rpx;margin:0 auto;background:#fff;padding:20rpx;border-radius:20rpx;" wx:if="{{JSMSactivity.length > 0}}">
+			<view style="display:flex;align-items: center;justify-content:space-between;">
+				<image style="width:128rpx;height:30rpx;border-radius:0;" src="https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/tuijianguan/miaosha.png" mode></image>
+				<text style="font-size:22rpx;font-weight: 550;"  bindtap='jumpMore' data-activityTag="{{JSMSactivity[0].templateTag}}">正在进行</text>
+			</view>
+			<view style="width:100%;display:flex;align-items:center;margin-top:20rpx;"  
+      
+      bindtap='jumpMore' data-activityTag="{{JSMSactivity[0].templateTag}}">
+				<block wx:for="{{JSMSactivity}}" wx:for-item="item" wx:for-index="index"  wx:if="{{index<4}}">
+					<view style="display:flex;flex-direction:column;align-items:left;margin-right:12rpx;">
+						<image style="width:160rpx;height:160rpx;" src="{{item.imageUrl}}" mode></image>
+            <text	style="width:160rpx;height: 60rpx;font-size: 20rpx;font-weight: 550;" class="u-line-2">{{item.commodityName}}</text>
+            <text	style="color:red;font-size:20rpx;margin-top:10rpx;font-weight: 550;">￥{{item.showPrice}}</text>
+            <text	style="color:#999999;text-decoration:line-through;font-size:20rpx;margin-top:10rpx;">￥{{item.price}}</text>
+					</view>
+				</block>
+			</view>
+		</view>
+	</view> -->
+
+       
+
+	<!-- 中间部分开始 -->
+  <!-- <to-city isToCity="{{isToCity}}" isWuliu='{{isWuliu}}' isToStore="{{isToStore}}" address="{{markerInfo.address}}" msg="本店可预定商品，用户需到店取货或消费" tempId='{{tempId}}' marchantId='{{marchantId}}' logisticsList='{{logisticsList}}' shopList2="{{toShoplist2}}" shop-list="{{toShoplist}}" shopType="book" activityInfo="{{userInfo}}" main-order-type='{{mainBusinessModel}}' headImage="{{businessInfo.headImage}}" nickName="{{markerInfo.nickName}}">
+      </to-city> -->
+
+<!-- <activity-list  wx:if="{{commentList2s.length > 0}}" shopList='{{shopList}}' commentList="{{commentList2s}}" marchantId="{{marchantId}}" activityInfo="{{userInfo}}" hotelList='{{hotelList}}' temp-id='{{tempId}}'>
+      </activity-list>
+  <view style="display: flex;align-items: center;width: 300rpx;margin: 0 auto;margin-top: 60rpx;">
+    <text style="color: #999;">——</text>
+  <image src="https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/Saas/jinrituijian.png" style="width: 200rpx;height:50rpx;" mode="aspectFill"></image>
+  <text style="color: #999;">——</text>
+  </view> -->
+ 
+  <!-- <product wx:if='{{marchantId}}' orderSwitch='{{orderSwitch}}' marchantId='{{marchantId}}' product-list='{{mainGoodsList}}' temp-id='{{tempId}}' isWuliu='{{isWuliu}}' isToCity="{{isToCity}}" isToStore="{{isToStore}}" main-order-type='{{mainBusinessModel}}'>
+  </product> -->
+  <view style="width:700rpx;height:64rpx;margin: 0 auto;border-radius:20rpx 20rpx 0 0;position:relative;background-color: #D9E8FD;margin-top: 30rpx;color: #1B78F4;font-size: 24rpx;line-height: 64rpx;text-align: center;background-image: url('https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/Saas/5bd814dad65d8.jpg');background-position:20% 70%" class="u-line-1">
+    <!-- <view class="marquee_box"  wx:for='{{businessInfo.notify}}'>
+      <view class="marquee_text" wx:key='index' style="transform: translateX(-{{marqueeDistance}}rpx)">
+        <text >{{item.content}}</text>
+      </view>
+    </view> -->
+  <tomap longitude="{{businessInfo.longitude}}" address="{{businessInfo.address}}" latitude="{{businessInfo.latitude}}"></tomap>
+
+    <!-- <image src="https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/Saas/5bd814dad65d8.jpg" mode="widthFix"></image> -->
+
+  </view>
+
+  <!-- <map id="map" longitude="{{businessInfo.longitude}}" address="{{businessInfo.address}}" latitude="{{businessInfo.latitude}}"  scale="18"  style="width: 100%; height: 300px;background:#000 ;" bindtap="clickMap"></map> -->
+  <goods-recommend wx:if="{{mainGoodsList.length !== 0}}" orderSwitch='{{orderSwitch}}' bind:relogin="reLogin" bind:myManager="changeTab" marchantId='{{marchantId}}' mainGoodsList='{{mainGoodsList}}' temp-id='{{6}}' main-order-type='{{mainBusinessModel}}'>
+  </goods-recommend>
+  <!-- 秒杀 -->
+  <view>
+		<view
+			style="width:700rpx;margin:0 auto;background:#fff;padding:20rpx;border-radius:20rpx;" wx:if="{{JSMSactivity.length > 0}}">
+			<view style="display:flex;align-items: center;justify-content:space-between;">
+				<image style="width:128rpx;height:30rpx;border-radius:0;" src="https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/tuijianguan/miaosha.png" mode></image>
+				<text style="font-size:22rpx;font-weight: 550;"  bindtap='jumpMore' data-activityTag="{{JSMSactivity[0].templateTag}}">正在进行</text>
+			</view>
+			<view style="width:100%;display:flex;align-items:center;margin-top:20rpx;"  
+      
+      bindtap='jumpMore' data-activityTag="{{JSMSactivity[0].templateTag}}">
+				<block wx:for="{{JSMSactivity}}" wx:for-item="item" wx:for-index="index"  wx:if="{{index<4}}">
+					<view style="display:flex;flex-direction:column;align-items:left;margin-right:12rpx;">
+						<image style="width:160rpx;height:160rpx;" src="{{item.imageUrl}}" mode></image>
+            <text	style="width:160rpx;height: 60rpx;font-size: 20rpx;font-weight: 550;" class="u-line-2">{{item.commodityName}}</text>
+            <text	style="color:red;font-size:20rpx;margin-top:10rpx;font-weight: 550;">￥{{item.showPrice}}</text>
+            <text	style="color:#999999;text-decoration:line-through;font-size:20rpx;margin-top:10rpx;">￥{{item.price}}</text>
+					</view>
+				</block>
+			</view>
+		</view>
+	</view>
+		<!-- 中间部分开始 -->
+    <to-city isToCity="{{isToCity}}" isWuliu='{{isWuliu}}' isToStore="{{isToStore}}" address="{{markerInfo.address}}" msg="本店可预定商品，用户需到店取货或消费" tempId='{{tempId}}' marchantId='{{marchantId}}' logisticsList='{{logisticsList}}' shopList2="{{toShoplist2}}" shop-list="{{toShoplist}}" shopType="book" activityInfo="{{userInfo}}" main-order-type='{{mainBusinessModel}}' headImage="{{businessInfo.headImage}}" nickName="{{markerInfo.nickName}}">
+    </to-city>
+		<!-- 中间部分结束 -->
+  <view>
+    <view style="width: 100%;margin:20rpx auto;background-color: #fff;">
+      <view style="padding: 20rpx;color: #1B78F4;font-weight: bold;">设备</view>
+      <view style="width: 710rpx;margin: 0 auto;display: flex;align-items: center;justify-content: flex-start;flex-wrap: wrap;">
+     
+      <view style="display: flex;align-items: center;width: 25%;justify-content: center;">
+        <image src="https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/Saas/bbb.png" style="width: 25rpx;height: 25rpx;"></image>
+        <text style="font-size: 24rpx;margin-left: 10rpx;">无线上网</text>
+      </view>
+      <view style="display: flex;align-items: center;width: 25%;justify-content: center;">
+        <image src="https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/Saas/ccc.png" style="width: 25rpx;height: 25rpx;"></image>
+        <text style="font-size: 24rpx;margin-left: 10rpx;">有停车场</text>
+      </view>
+      <view style="display: flex;align-items: center;width: 25%;justify-content: center;">
+        <image src="https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/Saas/ddd.png" style="width: 25rpx;height: 25rpx;"></image>
+        <text style="font-size: 24rpx;margin-left: 10rpx;">交通便利</text>
+      </view>
+      <view style="display: flex;align-items: center;width: 25%;justify-content: center;">
+        <image src="https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/Saas/eee.png" style="width: 25rpx;height: 25rpx;"></image>
+        <text style="font-size: 24rpx;margin-left: 10rpx;">服务周到</text>
+      </view>
+      <view style="display: flex;align-items: center;width: 25%;justify-content: center;">
+        <image src="https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/Saas/fff.png" style="width: 25rpx;height: 25rpx;"></image>
+        <text style="font-size: 24rpx;margin-left: 10rpx;">质量保障</text>
+      </view>
+      </view>
+      <view style="height: 20rpx;width: 100%;"></view>
+    </view>
+  </view>
+
+  <!-- <view>
+    <view style="width: 100%;margin:20rpx auto;background-color: #fff;">
+      <view style="padding: 20rpx;color: #1B78F4;font-weight: bold;">门店简介</view>
+      <view style="width: 710rpx;margin: 0 auto;color: #101010;font-size: 24rpx;text-indent : 20px; ">
+        {{businessInfo.personalDetails}}
+      </view>
+      <view style="height: 20rpx;width: 100%;"></view>
+    </view>
+  </view> -->
+
+  <!-- <view>
+  <view style="width: 100%;margin:20rpx auto;background-color: #fff;">
+      <view style="padding: 20rpx;color: #1B78F4;font-weight: bold;">服务之星</view>
+       <scroll-view scroll-x='true' class="product1_list"  style="width: 100%;margin-top: 20rpx;">
+                <view class="me-fx-row me-fx-start-c">
+                    <block wx:for="{{8}}" wx:key="index">
+                        <view class="me-fx-col me-fx-sb-c product_info" style=" margin-right: 20rpx;border-radius: 10rpx;background-color: #fff;" data-id="{{item.commodityId}}" data-type="2" bindtap="jumpGoodsDetail">
+                            <image style="width: 132rpx;height: 132rpx;border-radius: 10rpx 10rpx 0 0 ;" src='https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/dealer/0008c77245274eba80e5247b35ec443b.jpg'></image>
+                            <view class="u-line-2" style="font-weight: 550;font-size: 24rpx;text-align: center;width: 100%;">
+                              冯敏
+                            </view>
+                        </view>
+                    </block>
+                </view>
+            </scroll-view>
+      <view style="height: 20rpx;width: 100%;"></view>
+    </view>
+  </view> -->
+ 
+  <view>
+  <view style="width: 100%;margin:20rpx auto;background-color: #fff;">
+      <view style="padding: 20rpx;color: #1B78F4;font-weight: bold;">文化</view>
+      <view class="slogan-container">
+        <!-- 上半部分 -->
+        <!-- 下半部分 --> 
+        <view class="single" bindtap="toWebViewPage" data-link='{{item.linkurl}}' wx:for="{{ArticleList}}" wx:key="index">
+            <image src="{{item.articlecover}}" mode="aspectFill"></image>
+            <text class="line-clamp2" style="font-weight: 700;">{{item.articletitle}}</text>
+        </view>
+    </view>
+      <view style="height: 20rpx;width: 100%;"></view>
+    </view>
+  </view>
+
+</view>
+
+      <view class="coupon-window-bgc" style='display:{{isDiscount?"flex":"none"}}' catchtouchmove="true">
+        <view class="coupon-window">
+          <scroll-view bindtap="a" scroll-y="true" class="coupon-content-container">
+            <view class="coupon-content-single" wx:for="{{saleCanList}}" wx:key="index">
+              <view class="price">
+                <text>￥</text>
+                <text>{{item.deduct}}</text>
+              </view>
+              <view class="text">
+                <text>满 {{item.confine}} 可用</text>
+                <text>{{item.startTime}}-{{item.endTime}}</text>
+              </view>
+              <image src="https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/basics-New%2F%E4%BC%98%E6%83%A0%E5%88%B8%E5%BC%B9%E7%AA%97_slices%2FGroup%202999%402x.png" mode="aspectFill"></image>
+            </view>
+          </scroll-view>
+          <image class="accept" bindtap="receiveSale" src="https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/basics-New%2F%E4%BC%98%E6%83%A0%E5%88%B8%E5%BC%B9%E7%AA%97_slices%2F%E5%BC%80%E5%BF%83%E6%94%B6%E4%B8%8B.png"></image>
+          <!-- <image class="accept" bindtap="jumpVolume" src="https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/basics-New%2F%E4%BC%98%E6%83%A0%E5%88%B8%E5%BC%B9%E7%AA%97_slices%2F%E5%BC%80%E5%BF%83%E6%94%B6%E4%B8%8B.png"></image> -->
+          <image class="close" src="https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/basics-New%2F%E4%BC%98%E6%83%A0%E5%88%B8%E5%BC%B9%E7%AA%97_slices%2FFrame%402x(1).png" bindtap="closeSale"></image>
+        </view>
+      </view>
+      <!-- 抖音 -->
+      <view>
+          <view class="tiktok-window-bgc" style='display:{{isTiktok ? "flex":"none"}}'>
+            <view class="tiktok-cont">
+              <image class="tiktok-bgc" src="https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/basics-New%2F%E6%8A%96%E9%9F%B3%E5%A4%8D%E5%88%B6%E5%BC%B9%E7%AA%97_slices%2FGroup%201624%402x.png"></image>
+              <text> 复制口令
+                访问抖音小店</text>
+              <image class="copy" bindtap="copyTiktok" src="https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/basics-New%2F%E6%8A%96%E9%9F%B3%E5%A4%8D%E5%88%B6%E5%BC%B9%E7%AA%97_slices%2FGroup%203001%402x.png"></image>
+              <image class="close-tiktok" bindtap="closeTiktok" src="https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/basics-New%2F%E6%8A%96%E9%9F%B3%E5%A4%8D%E5%88%B6%E5%BC%B9%E7%AA%97_slices%2FFrame%402x(1).png"></image>
+            </view>
+         </view>
+         
+      </view>
+     
+      <!--  banner -->
+      <top-banner settingImg='{{settingImg}}' bind:myManager="changeTab" userInfo="{{userInfo}}" banners='{{mainGoodsList}}' appName='{{appName}}' temp-id='{{tempId}}' main-order-type='{{mainBusinessModel}}' mainBanner="{{mainBanner}}" addcoupon-list='{{addcouponList}}' jifen-num='{{jifenNum}}'>
+      </top-banner>
+
+      <!-- 签到有惊喜 -->
+      <view class="signIn" bindtap="toSignActivity" wx:if="{{isOpenSignIn == 1}}">
+        <image src="https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/basics-New%2F%E9%A6%96%E9%A1%B5_slices%2F%E7%AD%BE%E5%88%B0%E5%85%A5%E5%8F%A3.gif" mode="widthFix"></image>
+      </view>
+      <!-- 下面是首次进入提示的签到弹窗 -->
+      <view class="signIn-window-bgc" wx:if="{{isOpenSignIn == 1}}" style='display:{{isShowSignInPopup ? "flex":"none"}}'>
+        <view class="signIn-cont">
+          <image class="signIn-bgc" bindtap="toSignActivity" src="https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/basics-New%2F%E9%A6%96%E9%A1%B5_slices%2F%E9%A6%96%E9%A1%B5%E7%AD%BE%E5%88%B0%E5%BC%B9%E7%AA%97.png" mode="widthFix"></image>
+          
+          <view class="jumpToSignIn" bindtap="toSignActivity">
+             <text>马上领商品</text>
+            <image src="https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/basics-New%2F%E7%AD%BE%E5%88%B0h5%2F%E7%AD%BE%E5%88%B0_%E5%88%86%E4%BA%AB%E6%8C%89%E9%92%AE%E5%BA%95%E5%9B%BE.png" mode="widthFix"></image>
+          </view>
+          <image class="close-signIn" bindtap="closeSignInPopup" src="https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/basics-New%2F%E6%8A%96%E9%9F%B3%E5%A4%8D%E5%88%B6%E5%BC%B9%E7%AA%97_slices%2FFrame%402x(1).png"></image>
+        </view>
+      </view>
+  
+      <view class="support bgF8 support2 {{'page-foot'+tempId}}">
+      <image style="width: 182rpx;height:30rpx;" mode="aspectFit" src="https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/Saas/dibutab.png"></image>
+      </view>
+      <view class="foot"></view>
+      <view class="page_right_img me-fx-col">
+
+      </view>
+    </view>
+
+    <!-- 我的 -->
+    <view hidden="{{!(nowTabbarText==='我的')}}">
+      <my orderSwitch="{{orderSwitch}}" userInfo="{{userInfo}}" orderNum="{{orderNum}}" cityOrderNum="{{cityOrderNum}}" activityInfo="{{userInfo}}" toStoreOrderNum="{{toStoreOrderNum}}" noticeNum="{{noticeNum}}" toolsListNums='{{toolsListNums}}' marchantId="{{marchantId}}" bindpagesTo="pagesTo" CouponsNum='{{CouponsNum}}' bindtoDetail="toDetail" jifenNum='{{jifenNum}}' isDistribution="{{markerInfo.isDistribution}}" isWuliu="{{isWuliu}}" bind:reload="reload" mainBusinessModel="{{mainBusinessModel}}" isToCity="{{isToCity}}" isToStore="{{isToStore}}" wx:if="{{loadedList['我的']}}" list='{{noticeContent}}' signData="{{signData}}" codeInfo="{{codeInfo}}" id="myInfos"></my>
+      <!-- <view class="support bgF8 support2">-<text>信书技术支持</text>-</view> -->
+      <view class="support bgF8 support2">
+      <image style="width: 182rpx;height:30rpx;" mode="aspectFit" src="https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/Saas/dibutab.png"></image>
+      </view>
+      <view class="foot bgF8"></view>
+    </view>
+
+
+    
+
+    <!-- 分类 -->
+    <view wx:if='{{nowTabbarText=="商品"}}'>
+      <view style='height:{{statusBarHeight+menuButtonHeight}}px'></view>
+      <view class="home-top-container bgFFF">
+        <view style="height:{{statusBarHeight}}px"></view>
+        <view class='me-fx-row me-fx-start-c font-cc' style="height:{{menuButtonHeight}}px">
+          <view class="appName">商品</view>
+        </view>
+      </view>
+      <view>
+        <category-pages id="classify" wx:if='{{marchantId!=-1}}' marchantId="{{marchantId}}" temp-id='{{tempId}}' main-order-type='{{mainBusinessModel}}'>
+          addcouponList="{{addcouponList}}"
+        </category-pages>
+      </view>
+    </view>
+    <!-- 商家文化 -->
+    <view hidden='{{!(nowTabbarText=="商家文化")}}' style='background-color:#F7F7F7;' >
+      <view style='height:{{statusBarHeight+menuButtonHeight}}px'></view>
+      <view class="home-top-container bgFFF">
+        <view style="height:{{statusBarHeight}}px"></view>
+        <view class='me-fx-row me-fx-start-c font-cc' style="height:{{menuButtonHeight}}px">
+          <view class="appName">故事</view>
+        </view>
+      </view>
+      <!-- 商家文化 -->
+      <shops-slogan marchantId="{{marchantId}}" ArticleList="{{ArticleList}}" settingImg="{{settingImg}}" mainBusinessModel="{{mainBusinessModel}}">
+      </shops-slogan>
+    </view>
+    <!-- 购物车 -->
+    <view hidden='{{!(nowTabbarText=="购物车")}}' style='background-color:#F7F7F7;'>
+      <view style='height:{{statusBarHeight+menuButtonHeight}}px'></view>
+      <view class="home-top-container bgFFF">
+        <view style="height:{{statusBarHeight}}px"></view>
+        <view class='me-fx-row me-fx-start-c font-cc' style="height:{{menuButtonHeight}}px">
+          <view class="appName">购物车</view>
+        </view>
+      </view>
+      <shop-cart wx:if="{{loadedList['购物车']}}" main-order-type='{{mainBusinessModel}}' marchantId="{{marchantId}}" shopCartlist="{{shopCartlist}}"></shop-cart>
+    </view>
+    <view hidden='{{!(nowTabbarText=="购物车")}}' style='background-color:#F7F7F7;'>
+    </view>
+    <!-- 底部tabbar栏 -->
+    <tabbar tab-list='{{tabList}}' bind:myManager="changeTab" now-tabbar-text='{{nowTabbarText}}' marker-info='{{markerInfo}}'>
+    </tabbar>
+  </view>
+</view>
+  </block>
+  <block wx:else>
+    <view class="headpo {{isshowHead ? 'xpactive' :''}}" wx:if="{{nowTabbarText=='首页'}}">
+      <view class='head-shop-info-box{{topBoxBg}}'>
+        <view style="height:70px;" class='me-fx-row me-fx-sb-c {{nowTabbarText=="首页"?"title-bar":""}}'>
+          <view class="me-fx-row header">
+            <view class="header_Info me-fx-col">
+              <view>
+                <text style="color: #000;" class="appName_info app-name">{{appName}}</text>
+              </view>
+              <view class="tscl">
+                <text class="btn_sales" style="font-size: 18rpx;">访问：{{accessCount}}</text>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+
+
+<view class='home-page   {{(currentIndex == "全国发货" || currentIndex == "秒杀专区")?pageBg:""}} {{nowTabbarText=="首页"?"":"bg_white"}}' style="overflow-x: hidden;">
+  <view class='{{pageBg}}' bindtouchstart="touchMove" bindtouchend="touchEnd" style="overflow-x: hidden;background-color: whitesmoke; ">
+    <view wx:if="{{nowTabbarText=='首页' && tempId>4}}">
+      <!-- 头部切换导航 -->
+      <!-- <view  style="height:90rpx;">
+        <view  class="Index_Item_info {{!settingImg.hasMiddle?pageBg:''}}"
+          style="top:{{statusBarHeight+menuButtonHeight}}px"
+        >
+          <scroll-view scroll-x='true' class="product1_list">
+            <view class="me-fx-row me-fx-start-c">
+                <view class="List3_title {{'text-color'+tempId}}  me-fx-col me-fx-sb-c {{currentIndex == item.name ?'cur':''}}" wx:for="{{topMenuList}}" wx:key="index">
+                    <view bindtap="titleClick" data-item='{{item}}' > {{item.name}}</view>
+                    <view class='findIndex {{"cur-temp"+tempId}}'></view>
+                </view>
+            </view>
+          </scroll-view>
+        </view>
+      </view> -->
+
+      <!-- 全国发货  -->
+      <view class="{{'bg_body'+tempId}}" wx:if="{{nowMenuItem.code == 'LOGISTICS' }}">
+        <top-banner settingImg='{{settingImg}}' banners='{{markerInfo.recommendList}}' appName='{{appName}}' temp-id='{{tempId}}'></top-banner>
+        <product orderSwitch='{{orderSwitch}}' marchantId='{{marchantId}}' product-list='{{goodsList}}' temp-id='{{tempId}}' isWuliu='{{isWuliu}}'></product>
+      </view>
+
+      <!-- 拼团专区 -->
+      <view class="{{'bg_body'+tempId}}" wx:if="{{tempId>4 && nowMenuItem.code == 'TTPT'}}">
+        <activity-product orderSwitch='{{orderSwitch}}' marchantId='{{marchantId}}' temp-id='{{tempId}}' template-tag='TTPT' countdown='{{true}}'></activity-product>
+      </view>
+
+      <!-- 推荐返利 -->
+      <view style='background-color:#000;' wx:if="{{tempId>4 && nowMenuItem.code == 'TJFL'}}">
+        <tjfl-classify></tjfl-classify>
+      </view>
+
+      <!-- 门店团购 -->
+      <view style="background:#F9F9F9;padding-top:40rpx;" wx:if="{{nowMenuItem.code == 'RESERVE'}}">
+        <to-city isToCity="{{isToCity}}" address="{{markerInfo.address}}" msg="本店可预定商品，用户需到店取货或消费" isToStore="{{isToStore}}" temp-id='{{tempId}}' marchantId='{{marchantId}}' shop-list="{{toShoplist2}}" shopType="book" activityInfo="{{userInfo}}"></to-city>
+      </view>
+
+      <!-- 同城配送 -->
+
+      <view style="background:#F9F9F9;padding-top:40rpx;" wx:if="{{nowMenuItem.code == 'DELIVERY'}}">
+        <to-city isToCity="{{isToCity}}" address="{{markerInfo.address}}" msg="本店可同城配送商品，用户下单同城可配送" isToStore="{{isToStore}}" temp-id='{{tempId}}' marchantId='{{marchantId}}' shop-list="{{toShoplist}}" shopType="city" activityInfo="{{userInfo}}"></to-city>
+      </view>
+
+      <!-- 秒杀专区 -->
+      <view wx:if="{{tempId>4 && nowMenuItem.code == 'JSMS'}}">
+        <activity-product orderSwitch='{{orderSwitch}}' marchantId='{{marchantId}}' product-list='{{goodsList}}' countdown='{{true}}' temp-id='{{tempId}}' template-tag='JSMS'></activity-product>
+      </view>
+
+      <!-- 会员专区 -->
+      <view wx:if="{{nowMenuItem.code == 'MEMBER'}}" style='margin-top:5rpx;'>
+        <member detailData="{{memberInfo}}" memberGoodsList="{{memberGoodsList}}" marchantId='{{marchantId}}'></member>
+      </view>
+
+      <!-- 商家文化 -->
+      <view wx:if="{{nowMenuItem.code == 'CULTURE'}}" style='margin-top:40rpx;'>
+        <Article ArticleList="{{ArticleList}}" marchantId='{{marchantId}}'></Article>
+      </view>
+
+      <view class="foot"></view>
+    </view>
+
+
+
+
+    <!-- 首页 -->
+    <view wx:elif="{{nowTabbarText=='首页'&& tempId<5}}" style=" overflow-x: hidden;background: #fff;">
+      <view class="hoem-title">
+        <!-- <text>访问量:999</text> -->
+        <!-- <text>{{markerInfo.nickName}}</text> -->
+        <!-- 原订阅按钮 -->
+        <!-- <view class="subscription" catchtap="showDingYue">
+            <text>+</text>
+            <text>订阅</text>
+        </view> -->
+      </view>
+
+      <!-- 新版首页开始22.5.26 -->
+      <view class="home">
+	<!-- <view class="home-navbar"
+		style="{{'height:'+(statusBarHeight+navBarHeight+'px')+';'+('background-color:'+(titleNViewBackground?titleNViewBackground:'')+';')}}">
+	</view>
+	<view class="navbar">
+		<view class="navbar-fixed">
+			<view style="{{'height:'+(statusBarHeight-1+'px')+';'}}"></view>
+			<view class="{{['navbar-content',(isSearch)?'search':'']}}"
+				style="{{'height:'+(navBarHeight-2+'px')+';'+('width:'+(100+'%')+';')}}">
+				<view style="{{'text-align:right;font-size:32rpx;'+('color:'+(font)+';')}}"></view>
+			</view>
+		</view>
+		<view style="{{'height:'+(statusBarHeight+navBarHeight+'px')+';'}}"></view>
+	</view> -->
+	<!-- <view class="carousel-section"> -->
+		<!-- <view class="titleNview-placing"></view>
+		<view class="titleNview-background"
+			style="{{'background-color:'+(titleNViewBackground?titleNViewBackground:'')+';'}}"></view> -->
+		<!-- <view class="carousel" style="width:716rpx;margin: 0 auto;"> -->
+      <view class="video" wx:if="{{settingImg.top.fileurl.length > 1}}">
+        <video src="{{settingImg.top.fileurl[1]}}" mode="aspectFit" class="index1_img2" autoplay="true" muted="true" controls="true" show-mute-btn="true" show-play-btn="true">视频</video>
+    </view>
+		<!-- </view> -->
+	<!-- </view> -->
+   
+	<!-- <view>
+		<view
+			style="width:700rpx;margin:0rpx auto;display:flex;align-items:center;justify-content:space-evenly;padding:20rpx;border-bottom: 1px solid #f7f7f7;">
+			<view style="width:20%;display:flex;align-items:center;">
+				<image style="width:32rpx;height:32rpx;" src="https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/tuijianguan/icon1.png" mode></image><text
+					style="font-size:20rpx;margin-left:10rpx;">售后无忧</text>
+			</view>
+			<view style="width:20%;display:flex;align-items:center;">
+				<image style="width:32rpx;height:32rpx;" src="https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/tuijianguan/icon2.png" mode></image><text
+					style="font-size:20rpx;margin-left:10rpx;">慢必赔</text>
+			</view>
+			<view style="width:20%;display:flex;align-items:center;">
+				<image style="width:32rpx;height:32rpx;" src="https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/tuijianguan/icon3.png" mode></image><text
+					style="font-size:20rpx;margin-left:10rpx;">酒好价好</text>
+			</view>
+			<view style="width:20%;display:flex;align-items:center;">
+				<image style="width:32rpx;height:32rpx;" src="https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/tuijianguan/icon4.png" mode></image><text
+					style="font-size:20rpx;margin-left:10rpx;">正品保障</text>
+			</view>
+		</view>
+	</view> -->
+
+<!-- 吸顶 -->
+<!-- <view class="headpo {{isshowHead ? 'xpactive' :''}}" wx:if="{{nowTabbarText=='首页'}}">
+  <view class='head-shop-info-box{{topBoxBg}}'>
+    <view style="height:40px;margin-top: 100rpx;" class='me-fx-row me-fx-sb-c {{nowTabbarText=="首页"?"title-bar":""}}'>
+     
+        
+        <view>
+		<view style="width:700rpx;margin:10rpx auto;display:flex;align-items:center;margin-top:10rpx;padding:0 20rpx;">
+			<view style="width:20%;display:flex;align-items:center;flex-direction:column;"  bindtap="goimg">
+				<image style="width:60rpx;height:60rpx;" src="https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/tuijianguan/icon11.png" mode></image><text
+					style="font-size:22rpx;margin-top:10rpx;font-weight: 550;">粉丝群</text>
+			</view>
+			<view style="width:20%;display:flex;align-items:center;flex-direction:column;" bindtap="goCoupons">
+				<image style="width:60rpx;height:60rpx;" src="https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/tuijianguan/icon22.png" mode></image><text
+					style="font-size:22rpx;margin-top:10rpx;font-weight: 550;">优惠劵</text>
+			</view>
+			<view style="width:20%;display:flex;align-items:center;flex-direction:column;" bindtap="goIntegral">
+				<image style="width:60rpx;height:60rpx;" src="https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/tuijianguan/icon33.png" mode></image><text
+					style="font-size:22rpx;margin-top:10rpx;font-weight: 550;">积分乐园</text>
+			</view>
+			<view style="width:20%;display:flex;align-items:center;flex-direction:column;"  bindtap="membersEnt">       
+				<image style="width:60rpx;height:60rpx;" src="https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/tuijianguan/icon44.png" mode></image><text
+					style="font-size:22rpx;margin-top:10rpx;font-weight: 550;">会员专区</text>
+			</view>
+		
+			<view style="width:20%;display:flex;align-items:center;flex-direction:column;"  bindtap="isShowTiktok">
+				<image  style="width:60rpx;height:60rpx;" src="https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/tuijianguan/icon66.png" mode></image><text
+					style="font-size:22rpx;margin-top:10rpx;font-weight: 550;">抖音小店</text>
+			</view>
+		</view>
+	</view>
+
+    </view>
+  </view>
+</view> -->
+<view >
+  <view class="column {{isFixedTop ?'fixed':''}}" id="navbar"  style="padding-top:{{settingImg.top.fileurl.length > 1?'10rpx':'40rpx'}}">
+		<view style="width:700rpx;margin:0rpx auto;display:flex;align-items:center;">
+			<view style="width:20%;display:flex;align-items:center;flex-direction:column;" wx:if="{{codeInfo[0]}}" bindtap="goimg">
+				<image style="width:60rpx;height:60rpx;" src="https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/tuijianguan/icon11.png" mode></image><text
+					style="font-size:22rpx;margin-top:10rpx;font-weight: 550;">粉丝群</text>
+			</view>
+      <view style="width:20%;display:flex;align-items:center;flex-direction:column;" wx:else bindtap="jumpDefault">
+				<image style="width:60rpx;height:60rpx;" src="https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/tuijianguan/icon11.png" mode></image><text
+					style="font-size:22rpx;margin-top:10rpx;font-weight: 550;">粉丝群</text>
+			</view>
+			<view style="width:20%;display:flex;align-items:center;flex-direction:column;" wx:if="{{addcouponList1[0] || addcouponList2[0] || addcouponList3[0]}}" bindtap="goCoupons">
+				<image style="width:60rpx;height:60rpx;" src="https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/Saas/mianfeilipin.gif" mode></image><text
+					style="font-size:22rpx;margin-top:10rpx;font-weight: 550;">优惠劵</text>
+			</view>
+      <view style="width:20%;display:flex;align-items:center;flex-direction:column;" wx:else bindtap="jumpDefault">
+				<image style="width:60rpx;height:60rpx;" src="https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/Saas/mianfeilipin.gif" mode></image><text
+					style="font-size:22rpx;margin-top:10rpx;font-weight: 550;">优惠劵</text>
+			</view>
+      <view style="width:20%;display:flex;align-items:center;flex-direction:column;"  bindtap="jumptuiguan">
+				<image style="width:60rpx;height:60rpx;" src="https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/Saas/tuiguan.png" mode></image><text
+					style="font-size:22rpx;margin-top:10rpx;font-weight: 550;">推广中心</text>
+			</view>
+			<!-- <view style="width:20%;display:flex;align-items:center;flex-direction:column;" bindtap="goIntegral">
+				<image style="width:60rpx;height:60rpx;" src="https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/tuijianguan/icon33.png" mode></image><text
+					style="font-size:22rpx;margin-top:10rpx;font-weight: 550;">积分乐园</text>
+			</view> -->
+			<!-- <view style="width:20%;display:flex;align-items:center;flex-direction:column;"   bindtap="membersEnt">        -->
+			<view style="width:20%;display:flex;align-items:center;flex-direction:column;"  >       
+        <coupon marchantId="{{marchantId}}" mainBusinessModel="{{mainBusinessModel}}"></coupon>
+				<image style="width:60rpx;height:60rpx;" src="https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/Saas/huiyuanhuodong.gif" mode></image><text
+					style="font-size:22rpx;margin-top:10rpx;font-weight: 550;">会员专区</text>
+			</view>
+      <!-- <view style="width:20%;display:flex;align-items:center;flex-direction:column;" wx:else bindtap="jumpDefault"  data-index="3">       
+				<image style="width:60rpx;height:60rpx;" src="https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/tuijianguan/icon44.png" mode></image><text
+					style="font-size:22rpx;margin-top:10rpx;font-weight: 550;">会员专区</text>
+			</view> -->
+
+			<view style="width:20%;display:flex;align-items:center;flex-direction:column;"  wx:if="{{commentList2s.length > 0}}">
+        <activity-list  wx:if="{{commentList2s.length > 0}}" shopList='{{shopList}}' commentList="{{commentList2s}}" marchantId="{{marchantId}}" activityInfo="{{userInfo}}" hotelList='{{hotelList}}' temp-id='{{50}}'>
+      </activity-list>
+				<image style="width:60rpx;height:60rpx;" src="https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/tuijianguan/icon55.png" mode></image><text
+					style="font-size:22rpx;margin-top:10rpx;font-weight: 550;">商家推荐</text>
+			</view>
+      <view style="width:20%;display:flex;align-items:center;flex-direction:column;"  wx:else bindtap="jumpDefault">
+				<image style="width:60rpx;height:60rpx;" src="https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/tuijianguan/icon55.png" mode></image><text
+					style="font-size:22rpx;margin-top:10rpx;font-weight: 550;">商家推荐</text>
+			</view>
+			<view style="width:20%;display:flex;align-items:center;flex-direction:column;" wx:if="{{businessInfo.notify[0]}}" bindtap="isShowTiktok">
+				<image  style="width:60rpx;height:60rpx;" src="https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/tuijianguan/icon66.png" mode></image><text
+					style="font-size:22rpx;margin-top:10rpx;font-weight: 550;">抖音小店</text>
+			</view>
+      <view style="width:20%;display:flex;align-items:center;flex-direction:column;" wx:else bindtap="jumpDefault" data-index="5">
+				<image  style="width:60rpx;height:60rpx;" src="https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/tuijianguan/icon66.png" mode></image><text
+					style="font-size:22rpx;margin-top:10rpx;font-weight: 550;">抖音小店</text>
+			</view>
+		</view>
+	</view>
+  <view class="column "  wx:if="{{isFixedTop}}"></view>
+</view>
+
+
+	<view>
+		<view
+			style="width:700rpx;margin:0 auto;background:#fff;padding:20rpx;border-radius:20rpx;" wx:if="{{JSMSactivity.length > 0}}">
+			<view style="display:flex;align-items: center;justify-content:space-between;">
+				<image style="width:128rpx;height:30rpx;border-radius:0;" src="https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/tuijianguan/miaosha.png" mode></image>
+				<text style="font-size:22rpx;font-weight: 550;"  bindtap='jumpMore' data-activityTag="{{JSMSactivity[0].templateTag}}">正在进行</text>
+			</view>
+			<view style="width:100%;display:flex;align-items:center;margin-top:20rpx;"  
+      
+      bindtap='jumpMore' data-activityTag="{{JSMSactivity[0].templateTag}}">
+				<block wx:for="{{JSMSactivity}}" wx:for-item="item" wx:for-index="index"  wx:if="{{index<4}}">
+					<view style="display:flex;flex-direction:column;align-items:left;margin-right:12rpx;">
+						<image style="width:160rpx;height:160rpx;" src="{{item.imageUrl}}" mode></image>
+            <text	style="width:160rpx;height: 60rpx;font-size: 20rpx;font-weight: 550;" class="u-line-2">{{item.commodityName}}</text>
+            <text	style="color:red;font-size:20rpx;margin-top:10rpx;font-weight: 550;">￥{{item.showPrice}}</text>
+            <text	style="color:#999999;text-decoration:line-through;font-size:20rpx;margin-top:10rpx;">￥{{item.price}}</text>
+					</view>
+				</block>
+			</view>
+		</view>
+	</view>
+
+       
+
+	<!-- 中间部分开始 -->
+  <to-city isToCity="{{isToCity}}" isWuliu='{{isWuliu}}' isToStore="{{isToStore}}" address="{{markerInfo.address}}" msg="本店可预定商品，用户需到店取货或消费" tempId='{{tempId}}' marchantId='{{marchantId}}' logisticsList='{{logisticsList}}' shopList2="{{toShoplist2}}" shop-list="{{toShoplist}}" shopType="book" activityInfo="{{userInfo}}" main-order-type='{{mainBusinessModel}}' headImage="{{businessInfo.headImage}}" nickName="{{markerInfo.nickName}}">
+      </to-city>
+  <!-- 中间部分结束 -->
+  <!-- 通知部分开始 -->
+<!-- 老版通知 -->
+<activity-list  wx:if="{{commentList2s.length > 0}}" shopList='{{shopList}}' commentList="{{commentList2s}}" marchantId="{{marchantId}}" activityInfo="{{userInfo}}" hotelList='{{hotelList}}' temp-id='{{tempId}}'>
+      </activity-list>
+  <!-- 通知部分结束 -->
+	<!-- <view class="f-header" style="padding-left:30rpx;">猜你喜欢</view> -->
+  <!-- <image src="https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/Saas/jinrituijian.png" style="width: 200rpx;height:50rpx;margin-top: 60rpx;padding-left:30rpx;" mode="aspectFill"></image> -->
+  <view style="display: flex;align-items: center;width: 300rpx;margin: 0 auto;margin-top: 60rpx;">
+    <text style="color: #999;">——</text>
+  <image src="https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/Saas/jinrituijian.png" style="width: 200rpx;height:50rpx;" mode="aspectFill"></image>
+  <text style="color: #999;">——</text>
+  </view>
+ 
+  <!-- <product wx:if='{{marchantId}}' orderSwitch='{{orderSwitch}}' marchantId='{{marchantId}}' product-list='{{mainGoodsList}}' temp-id='{{tempId}}' isWuliu='{{isWuliu}}' isToCity="{{isToCity}}" isToStore="{{isToStore}}" main-order-type='{{mainBusinessModel}}'>
+  </product> -->
+  <goods-recommend wx:if="{{mainGoodsList.length !== 0}}" orderSwitch='{{orderSwitch}}' bind:relogin="reLogin" bind:myManager="changeTab" marchantId='{{marchantId}}' mainGoodsList='{{mainGoodsList}}' temp-id='{{6}}' main-order-type='{{mainBusinessModel}}'>
+  </goods-recommend>
+	<!-- <view class="guess-section" style="padding-left:50rpx;position:relative;">
+		<block wx:for="{{4}}" wx:for-item="item" wx:for-index="index" wx:key="index">
+			<view data-event-opts="{{[['tap',[['toDetail',['$0'],[[[4,'',index,'_id']]]]]]]}}" class="guess-item"
+				bindtap="__e">
+				<view class="image-wrapper">
+					<image src="https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/tuijianguan/morenimage.jpg" mode="aspectFill"></image>
+					<view
+						style="padding:3rpx 10rpx;color:white;background:red;font-size:20rpx;position:absolute;top:0;left:50rpx;border-radius:10rpx;">
+						门店团购</view>
+				</view><text class="title clamp">科罗娜啤酒330ml 6瓶装</text><text class="price">￥55.8</text>
+			</view>
+		</block>
+	</view> -->
+  
+</view>
+
+      <!-- 新版首页结束 -->
+
+      <!-- 搜索 -->
+      <!-- <view class="search-container">
+            <view class="relative">
+                <image mode="widthFix" src="../../static/images/Frame@2x.png"></image>
+                <input class="search-input" 	placeholder="请输入搜索关键字" type="text" v-model="search" />
+                <text>搜索</text>
+            </view>
+      </view> -->
+      <view class="coupon-window-bgc" style='display:{{isDiscount?"flex":"none"}}' catchtouchmove="true">
+        <view class="coupon-window">
+          <scroll-view bindtap="a" scroll-y="true" class="coupon-content-container">
+            <view class="coupon-content-single" wx:for="{{saleCanList}}" wx:key="index">
+              <view class="price">
+                <text>￥</text>
+                <text>{{item.deduct}}</text>
+              </view>
+              <view class="text">
+                <text>满 {{item.confine}} 可用</text>
+                <text>{{item.startTime}}-{{item.endTime}}</text>
+              </view>
+              <image src="https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/basics-New%2F%E4%BC%98%E6%83%A0%E5%88%B8%E5%BC%B9%E7%AA%97_slices%2FGroup%202999%402x.png" mode="aspectFill"></image>
+            </view>
+          </scroll-view>
+          <image class="accept" bindtap="receiveSale" src="https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/basics-New%2F%E4%BC%98%E6%83%A0%E5%88%B8%E5%BC%B9%E7%AA%97_slices%2F%E5%BC%80%E5%BF%83%E6%94%B6%E4%B8%8B.png"></image>
+          <!-- <image class="accept" bindtap="jumpVolume" src="https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/basics-New%2F%E4%BC%98%E6%83%A0%E5%88%B8%E5%BC%B9%E7%AA%97_slices%2F%E5%BC%80%E5%BF%83%E6%94%B6%E4%B8%8B.png"></image> -->
+          <image class="close" src="https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/basics-New%2F%E4%BC%98%E6%83%A0%E5%88%B8%E5%BC%B9%E7%AA%97_slices%2FFrame%402x(1).png" bindtap="closeSale"></image>
+        </view>
+      </view>
+      <!-- 抖音 -->
+      <view>
+          <view class="tiktok-window-bgc" style='display:{{isTiktok ? "flex":"none"}}'>
+            <view class="tiktok-cont">
+              <image class="tiktok-bgc" src="https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/basics-New%2F%E6%8A%96%E9%9F%B3%E5%A4%8D%E5%88%B6%E5%BC%B9%E7%AA%97_slices%2FGroup%201624%402x.png"></image>
+              <text> 复制口令
+                访问抖音小店</text>
+              <image class="copy" bindtap="copyTiktok" src="https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/basics-New%2F%E6%8A%96%E9%9F%B3%E5%A4%8D%E5%88%B6%E5%BC%B9%E7%AA%97_slices%2FGroup%203001%402x.png"></image>
+              <image class="close-tiktok" bindtap="closeTiktok" src="https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/basics-New%2F%E6%8A%96%E9%9F%B3%E5%A4%8D%E5%88%B6%E5%BC%B9%E7%AA%97_slices%2FFrame%402x(1).png"></image>
+            </view>
+         </view>
+         
+      </view>
+      
+      
+      <!--  banner -->
+      <top-banner settingImg='{{settingImg}}' bind:myManager="changeTab" userInfo="{{userInfo}}" banners='{{mainGoodsList}}' appName='{{appName}}' temp-id='{{tempId}}' main-order-type='{{mainBusinessModel}}' mainBanner="{{mainBanner}}" addcoupon-list='{{addcouponList}}' jifen-num='{{jifenNum}}'>
+      </top-banner>
+
+      <!-- 当前商户是哪种模式，就只显示另外两种模式  LOGISTICS  RESERVE  DELIVERY-->
+      <!-- 物流发送 同城配送  预订自提-->
+      <!-- <to-city isToCity="{{isToCity}}" isWuliu='{{isWuliu}}' isToStore="{{isToStore}}" address="{{markerInfo.address}}" msg="本店可预定商品，用户需到店取货或消费" tempId='{{tempId}}' marchantId='{{marchantId}}' logisticsList='{{logisticsList}}' shopList2="{{toShoplist2}}" shop-list="{{toShoplist}}" shopType="book" activityInfo="{{userInfo}}" main-order-type='{{mainBusinessModel}}'>
+      </to-city> -->
+      <!-- 老版通知 -->
+      <!-- <activity-list  wx:if="{{commentList2s.length > 0}}" shopList='{{shopList}}' commentList="{{commentList2s}}" marchantId="{{marchantId}}" activityInfo="{{userInfo}}" hotelList='{{hotelList}}' temp-id='{{tempId}}'>
+      </activity-list> -->
+      <!-- 通知新版 -->
+    
+      <!-- 幸运大转盘 -->
+      <!-- <view class="turntable-lucky">
+          <image src="../../static/images/Frame 2570@3x.png" mode="widthFix"></image>
+      </view> -->
+      <!-- 签到有惊喜 -->
+      <view class="signIn" bindtap="toSignActivity" wx:if="{{isOpenSignIn == 1}}">
+        <image src="https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/basics-New%2F%E9%A6%96%E9%A1%B5_slices%2F%E7%AD%BE%E5%88%B0%E5%85%A5%E5%8F%A3.gif" mode="widthFix"></image>
+      </view>
+      <!-- 下面是首次进入提示的签到弹窗 -->
+      <view class="signIn-window-bgc" wx:if="{{isOpenSignIn == 1}}" style='display:{{isShowSignInPopup ? "flex":"none"}}'>
+        <view class="signIn-cont">
+          <image class="signIn-bgc" bindtap="toSignActivity" src="https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/basics-New%2F%E9%A6%96%E9%A1%B5_slices%2F%E9%A6%96%E9%A1%B5%E7%AD%BE%E5%88%B0%E5%BC%B9%E7%AA%97.png" mode="widthFix"></image>
+          
+          <view class="jumpToSignIn" bindtap="toSignActivity">
+             <text>马上领商品</text>
+            <image src="https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/basics-New%2F%E7%AD%BE%E5%88%B0h5%2F%E7%AD%BE%E5%88%B0_%E5%88%86%E4%BA%AB%E6%8C%89%E9%92%AE%E5%BA%95%E5%9B%BE.png" mode="widthFix"></image>
+          </view>
+          <image class="close-signIn" bindtap="closeSignInPopup" src="https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/basics-New%2F%E6%8A%96%E9%9F%B3%E5%A4%8D%E5%88%B6%E5%BC%B9%E7%AA%97_slices%2FFrame%402x(1).png"></image>
+        </view>
+      </view>
+      <!-- 视频已经移动到品牌故事中  -->
+      <!-- <view class="video" wx:if="{{settingImg.top.fileurl.length > 1}}">
+        <video src="{{settingImg.top.fileurl[1]}}" mode="aspectFit" class="index1_img2" autoplay="true" muted="true" controls="true" show-mute-btn="true" show-play-btn="true">视频</video>
+        <image class="video-img" src="https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/basics-New%2F%E9%A6%96%E9%A1%B5_slices%2F%E8%A7%86%E9%A2%91%E4%B8%93%E5%8C%BA%E8%83%8C%E6%99%AF%E5%9B%BE.png"></image>
+      </view> -->
+      <!-- wx:if="{{userInfo.promotionStatus}}" 请求有问题 -->
+
+      <!-- 火热直播 -->
+      <!-- <hot-live wx:if="{{hotLiveList.length !== 0}}"></hot-live> -->
+
+      <!-- 秒杀、邀一返三、拼团活动列表 -->
+      <!-- 可以根据wx:for:"{{pushType}}" 字段渲染 -->
+      <!-- <tj-tg-ms-activity wx:if='{{marchantId!=-1}}' marchantId="{{marchantId}}" bind:myManager="changeTab" temp-id='{{tempId}}' activityType='{{pushType}}' homeActivity="{{homeActivity}}">
+      </tj-tg-ms-activity> -->
+      <!-- 会员中心和积分乐园  // 此处优惠券换成了会员中心，名字没改-->
+      <!-- <view class="integral-coupon">
+        <coupon marchantId="{{marchantId}}" mainBusinessModel="{{mainBusinessModel}}"></coupon>
+        <integral></integral>
+       </view> -->
+      <!-- 抖音弹窗和订阅消息还有会员中心，class没改，样式没改 -->
+      <!-- <view class="tiktok-coupon  {{pageScrolling ? 'animation' : 'animation-reverse'}}"> -->
+        <!-- 三个活动 -->
+        <!-- <image class="coupon" mode="aspectFill" wx:if="{{TTPTactivity.length > 0}}" bindtap='jumpMore' data-activityTag="{{TTPTactivity[0].templateTag}}" src="https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/basics-New%2F%E9%A6%96%E9%A1%B5_slices%2F%E5%A4%A9%E5%A4%A9%E6%8B%BC%E5%9B%A2%E6%B5%AE%E7%AA%97.gif"></image>
+        <image class="coupon" mode="aspectFill" wx:if="{{JSMSactivity.length > 0}}" bindtap='jumpMore' data-activityTag="{{JSMSactivity[0].templateTag}}" src="https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/basics-New%2F%E9%A6%96%E9%A1%B5_slices%2F%E6%80%A5%E9%80%9F%E7%A7%92%E6%9D%80%E6%B5%AE%E7%AA%97.gif"></image>
+        <image class="coupon" mode="aspectFill" wx:if="{{TJFLactivity.length > 0}}" bindtap='jumpMore' data-activityTag="{{TJFLactivity[0].templateTag}}" src="https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/basics-New%2F%E9%A6%96%E9%A1%B5_slices%2F%E9%82%80%E4%B8%80%E5%8F%8D%E4%B8%89%E6%B5%AE%E7%AA%97.gif"></image> -->
+        <!-- 订阅 -->
+        <!-- <image class="coupon" mode="aspectFill" bindtap="showDingYue" wx:if="{{isShowSub}}" src="https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/basics-New%2F%E9%A6%96%E9%A1%B5_slices%2F%E8%AE%A2%E9%98%85.gif"></image> -->
+        <!-- 抖音 -->
+        <!-- <image class="tiktok" mode="aspectFill" bindtap="isShowTiktok" wx:if="{{noticeContent[0] !== undefined}}" src="https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/basics-New%2F%E9%A6%96%E9%A1%B5_slices%2FEllipse-%E6%8A%96%E9%9F%B3.gif" mode="aspectFill"></image> -->
+        <!-- 加入会员 -->
+        <!-- <image class="coupon" mode="aspectFill" bindtap="membersEnt" wx:if="{{userInfo.status==1&&userInfo.memberLeve == undefined}}" src="https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/basics-New%2F%E9%A6%96%E9%A1%B5_slices%2FEllipse-%E4%BC%9A%E5%91%98.gif"></image> -->
+        <!-- <image class="coupon" mode="aspectFill" bindtap="jumpVolume" src="https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/Saas/mianfeilipin.gif"></image> -->
+      <!-- </view> -->
+
+
+      <!-- 首页签到组件 -->
+      <!-- <signInHome userInfo="{{userInfo}}" firstSignInData="{{signData}}"></signInHome> -->
+
+
+      <!-- 今日推荐 -->
+      <!-- <goods-recommend wx:if="{{mainGoodsList.length !== 0}}" orderSwitch='{{orderSwitch}}' bind:relogin="reLogin" bind:myManager="changeTab" marchantId='{{marchantId}}' mainGoodsList='{{mainGoodsList}}' temp-id='{{tempId}}' main-order-type='{{mainBusinessModel}}'>
+      </goods-recommend> -->
+
+      <!-- 首页推荐瀑布流形式 -->
+      <!-- <product wx:if='{{marchantId}}' orderSwitch='{{orderSwitch}}' marchantId='{{marchantId}}' product-list='{{mainGoodsList}}' temp-id='{{tempId}}' isWuliu='{{isWuliu}}' isToCity="{{isToCity}}" isToStore="{{isToStore}}" main-order-type='{{mainBusinessModel}}'>
+      </product> -->
+      <!-- <view class="support bgF8  {{'page-foot'+tempId}}  support2">-<text>信书技术支持</text>-</view> -->
+      <view class="support bgF8 support2 {{'page-foot'+tempId}}">
+      <image style="width: 182rpx;height:30rpx;" mode="aspectFit" src="https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/Saas/dibutab.png"></image>
+      </view>
+      <view class="foot"></view>
+      <view class="page_right_img me-fx-col">
+
+      </view>
+    </view>
+
+    <!-- 我的 -->
+    <view hidden="{{!(nowTabbarText==='我的')}}">
+      <my orderSwitch="{{orderSwitch}}" userInfo="{{userInfo}}" orderNum="{{orderNum}}" cityOrderNum="{{cityOrderNum}}" activityInfo="{{userInfo}}" toStoreOrderNum="{{toStoreOrderNum}}" noticeNum="{{noticeNum}}" toolsListNums='{{toolsListNums}}' marchantId="{{marchantId}}" bindpagesTo="pagesTo" CouponsNum='{{CouponsNum}}' bindtoDetail="toDetail" jifenNum='{{jifenNum}}' isDistribution="{{markerInfo.isDistribution}}" isWuliu="{{isWuliu}}" bind:reload="reload" mainBusinessModel="{{mainBusinessModel}}" isToCity="{{isToCity}}" isToStore="{{isToStore}}" wx:if="{{loadedList['我的']}}" list='{{noticeContent}}' signData="{{signData}}" codeInfo="{{codeInfo}}" id="myInfos"></my>
+      <!-- <view class="support bgF8 support2">-<text>信书技术支持</text>-</view> -->
+      <view class="support bgF8 support2">
+      <image style="width: 182rpx;height:30rpx;" mode="aspectFit" src="https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/Saas/dibutab.png"></image>
+      </view>
+      <view class="foot bgF8"></view>
+    </view>
+
+
+    <!-- 商品推荐 -->
+    <!-- <view wx:if='{{tempId>4}}' hidden='{{!(nowTabbarText=="商品推荐")}}'>
+      <view style='height:{{statusBarHeight+menuButtonHeight}}px'></view>
+      <view class="home-top-container bgFFF">
+        <view style="height:{{statusBarHeight}}px"></view>
+        <view class='me-fx-row me-fx-start-c font-cc' style="height:{{menuButtonHeight}}px">
+          <view class="appName">商品推荐</view>
+        </view>
+      </view>
+      <top-search subscribe='{{markerInfo.subscribe}}' bindevent='onGetSearchClick' marchantId='{{marchantId}}' temp-id='{{tempId}}' heights='{{statusBarHeight+menuButtonHeight}}'></top-search>
+      <union wx:if="{{shopListOther.length>0}}" shopList='{{shopListOther}}' marchantId="{{marchantId}}" temp-id='{{tempId}}'></union>
+
+      <recommend orderSwitch="{{orderSwitch}}" wx:if="{{loadedList['商品推荐']}}" recommends='{{recommends}}' bindrecommendEvent='parseRecommendEvent'></recommend>
+      <view class="foot"></view>
+    </view> -->
+
+    <!-- 分类 -->
+    <view wx:if='{{nowTabbarText=="商品"}}'>
+      <view style='height:{{statusBarHeight+menuButtonHeight}}px'></view>
+      <view class="home-top-container bgFFF">
+        <view style="height:{{statusBarHeight}}px"></view>
+        <view class='me-fx-row me-fx-start-c font-cc' style="height:{{menuButtonHeight}}px">
+          <view class="appName">商品</view>
+        </view>
+      </view>
+      <view>
+        <category-pages id="classify" wx:if='{{marchantId!=-1}}' marchantId="{{marchantId}}" temp-id='{{tempId}}' main-order-type='{{mainBusinessModel}}'>
+          addcouponList="{{addcouponList}}"
+        </category-pages>
+      </view>
+    </view>
+    <!-- 商家文化 -->
+    <view hidden='{{!(nowTabbarText=="商家文化")}}' style='background-color:#F7F7F7;' >
+      <view style='height:{{statusBarHeight+menuButtonHeight}}px'></view>
+      <view class="home-top-container bgFFF">
+        <view style="height:{{statusBarHeight}}px"></view>
+        <view class='me-fx-row me-fx-start-c font-cc' style="height:{{menuButtonHeight}}px">
+          <view class="appName">故事</view>
+        </view>
+      </view>
+      <!-- 商家文化 -->
+      <shops-slogan marchantId="{{marchantId}}" ArticleList="{{ArticleList}}" settingImg="{{settingImg}}" mainBusinessModel="{{mainBusinessModel}}">
+      </shops-slogan>
+    </view>
+    <!-- 购物车 -->
+    <view hidden='{{!(nowTabbarText=="购物车")}}' style='background-color:#F7F7F7;'>
+      <view style='height:{{statusBarHeight+menuButtonHeight}}px'></view>
+      <view class="home-top-container bgFFF">
+        <view style="height:{{statusBarHeight}}px"></view>
+        <view class='me-fx-row me-fx-start-c font-cc' style="height:{{menuButtonHeight}}px">
+          <view class="appName">购物车</view>
+        </view>
+      </view>
+      <shop-cart wx:if="{{loadedList['购物车']}}" main-order-type='{{mainBusinessModel}}' marchantId="{{marchantId}}" shopCartlist="{{shopCartlist}}"></shop-cart>
+    </view>
+    <view hidden='{{!(nowTabbarText=="购物车")}}' style='background-color:#F7F7F7;'>
+    </view>
+    <!-- 优惠券 style="{{isDiscount?'':'display:none'}}"-->
+    <!-- <view style='display:{{isDiscount?"flex":"none"}}' class="promotion">
+      <image class="sale_name" src="https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/static/sale_name.png"> </image>
+      <view class="sale_list">
+        <view class="sale-item-list me-fx-row" wx:if="{{index<3}}" wx:for="{{saleCanList}}" wx:key="index" style="background-image:url('https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/static/sale_bg.png')">
+          <view class="sale_left me-fx-col">
+            <text class="sale_left_name">{{item.couponName}}</text>
+            <text class="sale_left_desc">满{{item.confine}}可用</text>
+            <text class="sale_left_time">{{item.startTime}}-{{item.endTime}}</text>
+          </view>
+          <view class="sale_right me-fx-1 me-fx-row me-fx-c-c">
+            <text class="sale_money">{{item.deduct}}</text>元
+          </view>
+        </view>
+      </view>
+      <view class="sale_bgfoot me-fx-row me-fx-c-c" style="background-image:url('https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/static/sale_bg_foot.png')">
+        <view class="sale_btns" bindtap="receiveSale" style="background-image:url('https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/static/br_foot.png')">{{saleState}}</view>
+      </view>
+      <image class="sale-close" bindtap="closeSale" src="/pages/img/goods/close.png"></image>
+    </view> -->
+    <!-- 底部tabbar栏 -->
+    <tabbar tab-list='{{tabList}}' bind:myManager="changeTab" now-tabbar-text='{{nowTabbarText}}' marker-info='{{markerInfo}}'>
+    </tabbar>
+  </view>
+</view>
+
+<!-- 获取用户头像、昵称信息弹窗 -->
+<view wx:if="{{NickFlag}}" bindtap="bindGetUserInfo" class="mask_login"></view>
+
+<!-- 浏览用户 -->
+<!-- <view wx:if="{{nowTabbarText=='首页'}}" class='me-fx-row me-fx-start-c browse-user {{showHideStyle}}'>
+  <image src='{{browseUser[subscriptIndex].headUrl || "../../static/def-user.png"}}' class='user-avatar-img'></image>
+  <text>{{browseUser[subscriptIndex].nickName || '游客'}}在{{browseUser[subscriptIndex].humanize}}浏览店铺</text>
+</view> -->
+  </block>
+ 
+<!-- </block> -->

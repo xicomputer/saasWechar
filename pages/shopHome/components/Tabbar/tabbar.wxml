@@ -1,0 +1,18 @@
+<!--pages/Index/shopHome/components/Tabbar/tabbar.wxml-->
+<!-- Tabbar栏 -->
+<view class="custom-tab-bar" >
+  <view class="custom-tab-bar-item" 
+      wx:for="{{tabList}}" 
+      wx:key="index" 
+      wx:if="{{item.isHave}}" 
+      bindtap="changeTab" 
+      data-text="{{item.text}}"
+      data-url="/pages/shopHome/dynamic/dynamic"
+      >
+    <image  
+      class="{{item.text == '商家文化' ? 'shopsSty' : 'custom-Img'}}" 
+      src="{{nowTabbarText==item.text?item.imgActive:item.img}}" mode="aspectFill"></image>
+    <!-- /image/index/index1_active.png -->
+    <text wx:if="{{item.text !== '商家文化'}}" class="{{nowTabbarText==item.text?'custom-tab-bar-text custom-tab-bar-text-active':'custom-tab-bar-text'}}">{{item.text}}</text>
+  </view>
+</view>

@@ -1,0 +1,286 @@
+/* pages/Order/Order.wxss */
+.order {
+  min-height: 100vh;
+  background: #f9f9f9;
+}
+.order .tabs .order-list-container {
+  /* padding: 0 20rpx;
+  box-sizing: border-box; */
+}
+.order .tabs .order-list-container .order-content {
+  width: 100%;
+  background: rgba(229, 228, 229, 0.1);
+  box-shadow: 0rpx 6rpx 10rpx rgba(66, 41, 41, 0.1);
+  /* border-radius: 20rpx; */
+  margin-top: 20rpx;
+  padding: 0 30rpx;
+  box-sizing: border-box;
+  background-color: #fff;
+}
+.order .tabs .order-list-container .order-content .order-title {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1rpx solid #ECECEC;
+}
+.order-id {
+  padding: 20rpx 0;
+  box-sizing: border-box;
+  font-size: 22rpx;
+  font-family: PingFang SC;
+  font-weight: 500;
+  color: #999999;
+}
+.order .tabs .order-list-container .order-content .order-title .order-status {
+  height: 40rpx;
+  font-size: 24rpx;
+  font-family: PingFang SC;
+  font-weight: 400;
+  line-height: 40rpx;
+  color: #EB5E32;
+  opacity: 1;
+}
+.order .tabs .order-list-container .order-content .store-content {
+  display: flex;
+  height: 80rpx;
+  align-items: center;
+}
+.order .tabs .order-list-container .order-content .store-content .store_icon {
+  width: 34.16rpx;
+  height: 32.44rpx;
+}
+.order .tabs .order-list-container .order-content .store-content .store-name-content {
+  display: flex;
+  align-items: center;
+}
+.order .tabs .order-list-container .order-content .store-content .store-name-content .store-name {
+  height: 40rpx;
+  font-size: 30rpx;
+  font-family: PingFang SC;
+  font-weight: 500;
+  line-height: 42rpx;
+  color: #333;
+  opacity: 1;
+  margin-left: 10rpx;
+  max-width: 400rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  word-break: break-all;
+  word-wrap: break-word;
+}
+.order .tabs .order-list-container .order-content .store-content .store-name-content .jinru {
+  width: 10rpx;
+  height: 20rpx;
+  margin-left: 14rpx;
+}
+.order .tabs .order-list-container .order-content .goods-content {
+  width: 100%;
+  display: flex;
+}
+.order .tabs .order-list-container .order-content .goods-content /deep/ .van-image .van-image__img {
+  border-radius: 10rpx;
+}
+.order .tabs .order-list-container .order-content .goods-content .goods-item {
+  width: 0;
+  flex: 1;
+  height: 154rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-left: 20rpx;
+}
+.order .tabs .order-list-container .order-content .goods-content .goods-item .goods-name {
+  width: 100%;
+  font-size: 32rpx;
+  font-family: PingFang SC;
+  font-weight: 500;
+  color: #333;
+  line-height: 38rpx;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  word-break: break-all;
+  word-wrap: break-word;
+}
+.order .tabs .order-list-container .order-content .goods-content .goods-item .spec-content {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: space-between;
+}
+.order .tabs .order-list-container .order-content .goods-content .goods-item .spec-content .spec-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 22rpx;
+  font-family: PingFang SC;
+  font-weight: 400;
+  color: #999;
+  opacity: 1;
+}
+.order .tabs .order-list-container .order-content .goods-content .goods-item .spec-content .refund {
+  font-size: 22rpx;
+  font-family: PingFang SC;
+  font-weight: 500;
+  color: #F74C54;
+}
+.order .tabs .order-list-container .order-content .goods-content .goods-item .goods_price_content {
+  width: 100%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+.order .tabs .order-list-container .order-content .goods-content .goods-item .goods_price_content .goods_price {
+  font-size: 26rpx;
+  font-family: PingFang SC;
+  font-weight: 500;
+  color: #EC1919;
+}
+.comment-btn{
+  width: 120rpx;
+  height: 40rpx;
+  border: 1rpx solid #CCCCCC;
+  border-radius: 10rpx;
+  font-size: 24rpx;
+  font-family: PingFang SC;
+  font-weight: 400;
+  color: #999999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.order .tabs .order-list-container .order-content .goods-content .goods-item .goods_price_content .goods_num {
+  font-size: 28rpx;
+  font-family: PingFang SC;
+  font-weight: 500;
+  color: #999;
+}
+.order .tabs .order-list-container .order-content .goods-total {
+  width: 100%;
+  text-align: right;
+  /* padding: 0 42rpx; */
+  /* box-sizing: border-box; */
+  border-bottom: 1rpx solid #cecece;
+  padding-bottom: 20rpx;
+}
+.order .tabs .order-list-container .order-content .goods-total .total-span {
+  height: 24rpx;
+  font-size: 26rpx;
+  font-family: PingFang SC;
+  font-weight: 500;
+  color: #333333;
+  display: flex;
+  justify-content: flex-end;
+}
+.order .tabs .order-list-container .order-content .goods-time-box {
+  width: 100%;
+  /* display: flex; */
+  /* align-items: center; */
+  /* justify-content: space-between; */
+}
+.order .tabs .order-list-container .order-content .goods-time-box .item-box {
+  display: flex;
+  align-items: center;
+  font-size: 22rpx;
+  font-family: PingFang SC;
+  font-weight: 500;
+  color: #333;
+  line-height: 24rpx;
+  padding: 15rpx 0;
+  justify-content:space-between;
+}
+.flex-style{
+  justify-content: space-between;
+}
+.is-auto{
+  width: 116rpx;
+  height: 34rpx;
+  background: #EFEFEF;
+  border-radius: 17rpx;
+  font-size: 22rpx;
+  font-family: PingFang SC;
+  font-weight: 500;
+  color: #999999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.order .tabs .order-list-container .order-content .order-footer {
+  margin-top: 20rpx;
+}
+.order .tabs .order-list-container .order-content .order-footer .btn-content-box {
+  width: 100%;
+  text-align: right;
+  padding-right: 20rpx;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding-bottom: 20rpx;
+}
+.order .tabs .order-list-container .order-content .order-footer .do-btn {
+  width: 170rpx;
+  height: 60rpx;
+  text-align: center;
+  line-height: 60rpx;
+  border-radius: 30rpx;
+  font-size: 28rpx;
+  font-family: PingFang SC;
+  font-weight: 500;
+}
+.order .tabs .order-list-container .order-content .order-footer .cancel-btn {
+  color: #999;
+  border: 1rpx solid #cccccc;
+  opacity: 1;
+}
+.order .tabs .order-list-container .order-content .order-footer .other_btn {
+  margin-right: 18rpx;
+}
+.order .tabs .order-list-container .order-content .order-footer .submit-btn {
+  border: 1rpx solid #ed5757;
+  color: #ed5757;
+}
+.QR-top{
+	width: 100%;
+  padding: 30rpx;
+  box-sizing: border-box;
+	background: #F9F9F9;
+	border-radius: 8px 8px 0px 0px;
+	font-size: 30rpx;
+	font-family: PingFang SC;
+	font-weight: 400;
+	line-height: 40rpx;
+	color: #333333;
+}
+.click-number{
+  text-align: center;
+  height: 34rpx;
+  font-size: 24rpx;
+  font-family: PingFang SC;
+  font-weight: 400;
+  line-height: 34rpx;
+  color: #BBBBBB;
+}
+.clicked-number{
+  height: 34rpx;
+  font-size: 24rpx;
+  font-family: PingFang SC;
+  font-weight: 400;
+  line-height: 34rpx;
+  color: #333333;
+  letter-spacing: 20rpx;
+  text-align: center;
+}
+.van-count-down{
+  color: #EB5E32!important;
+}
+.copy_img{
+  width: 40rpx;
+  height: 40rpx;
+}
+.sale_money{
+  padding-right: 10rpx;
+  color: #999999;
+}

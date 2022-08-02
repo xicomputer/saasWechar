@@ -1,0 +1,62 @@
+<!--pages/Index/shopHome/components/componentsPage/member/member.wxml-->
+<view style="position: relative;"> 
+    <!-- 会员 -->
+    <view style="background:#fff;min-height:100vh">
+    <!-- 浮窗 -->
+    <view class="right-bottom-btn-container" >
+        <image class="right-bottom-btn-img" bindtap="toMember" src="/pages/img/index/right_bottom_icon1.png"></image>
+    </view>
+    <view wx:if="{{!memberGoodsList.length}}" class="no-data-container">
+        <image class="no-data-container-img" src="https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/Saas/%E7%BB%84%205558%403x.png"></image>
+        <view class="no-data-container-text"><text>暂无会员商品</text></view>
+    </view>
+
+
+    <view class='member-goods-list' wx:else>
+        <view class='me-fx-row goods-item-box' bindtap="goshop" data-id="{{item.id}}" data-name="{{item.commodityName}}" wx:for="{{memberGoodsList}}" wx:key="index">
+        <image class='goods-img' style="width: 283rpx;height:283rpx;" src='{{item.thumbnail}}' mode="aspectFill"></image>
+        <view class='me-fx-col me-fx-sb goods-info'>
+            <view class='goods-item-top'>
+            <view class='me-fx-row me-fx-start-c'>
+                <!-- <image src='' class='logo-img'></image> -->
+                <view class='goods-name'>{{item.commodityName}}</view>
+            </view>
+            <view class='introduce'>{{item.description}}</view>
+            </view>
+            <view class='me-fx-row me-fx-sb-c goods-item-price'>
+            <view class='price-str'>￥<text class='price-num'>{{ item.lowPrice }}</text></view>
+            <image src='../../static/cart.png' class='item-cart' wx:if="{{orderSwitch}}"></image>
+            <text class="orderSwitch" wx:else>参考价</text>
+            </view>
+        </view>
+        </view>
+    </view>
+    <view class="daodile">——信书技术支持——</view>
+
+    <!-- <view wx:else class="goods-list">
+        <block wx:for="{{memberGoodsList}}" wx:key="index">
+        <navigator style="{{index % 4 == 0?'':index % 4 == 3?'width: 220rpx;':'width: 220rpx;margin-right: 14rpx'}}" class="good-item" url="/pages/Index/GoodsDetails/GoodsDetails?id={{item.id}}&sid={{item.tempSpecId}}">
+            <van-notice-bar wx:if="{{index % 4 != 0 &&item.isMember}}" scrollable text="{{userInfo.memberLeve.discount==10?'普通会员无优惠':userInfo.memberLeve.name+'已优惠￥'+(item.originalPrice*1000-item.lowPrice*1000)/1000}}"  class="member-lever-box"/>
+            <image class="good-img" src="{{item.thumbnail}}" mode="aspectFill" style="{{index % 4 != 0?'width: 100%;height:166rpx':'width:100%;height:650rpx'}}"></image>
+            <view class="good-info-list">
+            <view class="good-top">
+                <view class="good-name-box">
+                <view class="cuxiao">会员专区</view>
+                <view class="good-name" style="{{index % 4 != 0?'font-size: 26rpx;':''}}">{{item.commodityName}}</view>
+                </view>
+                <view wx:if="{{index % 4 == 0}}" class="good-describe">{{item.description}}</view>
+            </view>
+            <view class="good-bottom">
+                <view class="good-price-box">
+                <view class="good-activity-price" style="{{index % 4 != 0?'font-size: 26rpx;':''}}"><text style="{{index % 4 != 0?'font-size: 20rpx;':'font-size:32rpx'}}">￥</text>{{ item.lowPrice }}</view>
+                <view class="member-sale-container" wx:if="{{index % 4 == 0 &&item.isMember}}">{{userInfo.memberLeve.discount==10?'普通会员无优惠':userInfo.memberLeve.name+'已优惠￥'+(item.originalPrice*1000-item.lowPrice*1000)/1000}}</view>
+                </view>
+                <view class="buy-btn-statu" catchtap="goBuy" data-item="{{item}}" style="{{index % 4 != 0?'font-size: 20rpx;':''}}">购买</view>
+            </view>
+            </view>
+        </navigator>
+        </block> 
+        <view class="daodile">——信书技术支持——</view>
+    </view>-->
+    </view>
+</view>

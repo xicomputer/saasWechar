@@ -1,0 +1,112 @@
+<!--pages/Order/Order.wxml-->
+<!-- <web-view src="https://xssj.letterbook.cn/?active={{active}}#/orderList"></web-view> -->
+<view class="order" >
+    <view class="tabs">
+        <van-tabs active="{{ tabsitem }}" bind:change="onChange" sticky color="#EB5E32" line-width="22">
+            <view wx:for="{{tabsList}}" wx:for-item="item" wx:for-index="index" wx:key="index" src="{{item}}">
+                <van-tab title="{{item.name}}">
+                    <view class="order-list-container">
+                        <!--商品列表-->
+                        <view class="order-content" data-uniqueid="{{item.uniqueId}}" wx:for="{{orderList}}" wx:key="index"  wx:if="{{item.orderCommodity.length!=0}}">
+                            <!--店铺名称、商品状态-->
+                            <view class="order-title">
+                                <view class="store-content">
+                                    <image src="{{item.logoPic}}" class="store_icon" style="border-radius:50%" />
+                                    <view class="store-name-content">
+                                        <view class="store-name">{{item.nickName}}</view>
+                                        <image src="../../img/jinru.png" class="jinru" />
+                                    </view>
+                                </view>
+                                <view class="order-status">
+                                    <view wx:if="{{tabsitem==2}}" style="color:#2BC372">已完成</view>
+                                    <view wx:if="{{tabsitem==1}}">待自取</view>
+                                    <van-count-down wx:if="{{tabsitem==0}}" time="{{ item.endTime }}" format="待支付 mm:ss" bind:finish="countDownOver" data-uniqueid="{{item.uniqueId}}" data-marchantId="{{item.marchantId}}"/>
+                                </view>
+                            </view>
+                            <!--商品主体 商品图片 名称 价格 数量-->
+                            <view class="order-id">订单号:{{item.orderNumber}} <image bindtap="copyOrder" class="copy_img" src="../../static/copy.png" data-order="{{item.orderNumber}}"></image></view>
+                            <view class="goods-content" wx:for="{{item.orderCommodity}}" wx:for-item="items" wx:for-index="key" wx:key="key">
+                                <van-image src="{{items.thumbnail}}" width="77px" height="77px" fit="cover" radius="10rpx;"></van-image>
+                                <view class="goods-item">
+                                    <view class="goods-name">{{items.commodityName}}</view>
+                                    <view class="spec-content">
+                                        <view class="spec-container">规格：{{items.tempSpecName}}</view>
+                                    </view>
+                                    <view class="spec-content">
+                                        <view class="spec-container">数量:{{items.amount}}</view>
+                                    </view>
+                                    <view class="goods_price_content">
+                                        <view class="goods_price">￥{{items.paymentMoney}}</view>
+                                    </view>
+                                </view>
+                            </view>
+                            <!--商品总价格、总数量-->
+                            <view class="goods-total">
+                                <view class="total-span">
+                                    <view class="sale_money" wx:if="{{item.paymentMoney!=item.actualMoney}}">
+                                        <text>总价：￥{{item.paymentMoney}}，</text>
+                                        <text>优惠价：￥{{item.paymentMoney-item.actualMoney}}</text>
+                                    </view>
+                                    <text> 实付款：￥{{item.actualMoney}}</text>
+                                </view>
+                            </view>
+                            <!-- 下单时间 人数 餐桌号 -->
+                            <view class="goods-time-box">
+                                <view class="item-box flex-style">
+                                    <view style="flex:1;display:flex;justify-content:space-between;">
+                                        <view>预计到店时间：</view>
+                                        <view>{{item.arriveTime}}</view>
+                                    </view>
+                                    <view wx:if="{{item.autoVerification}}" class="is-auto">自动结算</view>
+                                </view>
+                                <view class="item-box">
+                                    <view>门店名称: </view>
+                                    <view>{{item.shippingAddress.shopName}}</view>
+                                </view>
+                                <view class="item-box">
+                                    <view>联系人: </view>
+                                    <view>
+                                         {{item.shippingAddress.contact}}
+                                        <text style="margin-left:40rpx">{{item.shippingAddress.contactWay}}</text>
+                                    </view>
+                                </view>
+                                <view class="item-box">
+                                    <view>商家地址：</view>
+                                    <view>{{item.shippingAddress.address}}</view>
+                                </view>
+                                <view class="item-box">
+                                    <view style="white-space:nowrap">留言：</view>
+                                    <view>{{item.message?item.message:'你没有任何留言~'}}</view>
+                                </view>
+                            </view>
+                            <!--底部订单操作按钮-->
+                            <view class="order-footer" wx:if="{{tabsitem!=2}}">
+                                <view class="btn-content-box">
+                                    <view class="do-btn cancel-btn other_btn" catchtap="updateCityOrder" data-uniqueId="{{item.uniqueId}}" data-id="4"  data-marchantId="{{item.marchantId}}" wx:if="{{tabsList[tabsitem].name==='待使用'}}">确认核销</view>
+                                    <view class="do-btn cancel-btn other_btn" bindtap="showQR" data-uniqueId="{{item.uniqueId}}"
+                                    wx:if="{{tabsList[tabsitem].name=='待使用'}}">查看券码</view>
+                                    <view class="do-btn cancel-btn other_btn" wx:if="{{tabsList[tabsitem].name==='待付款'}}"
+                                    catchtap="updateCityOrder" data-uniqueId="{{item.uniqueId}}" data-id="3" data-marchantId="{{item.marchantId}}">取消订单</view>
+                                    <view class="do-btn submit-btn" wx:if="{{tabsList[tabsitem].name==='待付款'}}"
+                                    catchtap="payOrder" data-item="{{item}}">支付订单</view>
+                                </view>
+                            </view>
+                        </view>
+                    </view>
+                    <to-bottom wx:if="{{toBottom}}" />
+                </van-tab>
+            </view>
+        </van-tabs>
+    </view>
+</view>
+<!-- 二维码核销 -->
+<van-popup show="{{showQRCode}}" bind:close="onClose" round closeable>
+    <view class="QR-box" style="width: 280px;height: 270px;">
+        <view class="QR-top">商家输入数字核销或扫码核销</view>
+        <view class="numer-deal-box" style="padding:40rpx 50rpx;">
+            <view class="clicked-number">{{verification}}</view>
+        </view>
+        <canvas wx:if="{{showQRCode}}" style="width:110px;height:110px;margin:0 auto;" canvas-id="myQrcode"></canvas>
+    </view>
+</van-popup>
+

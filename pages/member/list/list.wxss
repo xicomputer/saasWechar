@@ -1,0 +1,52 @@
+.member{
+  width: 100%;
+  min-height: 100vh;
+  background-color: #f8f8f8;
+}
+.member_item{
+  width: 746rpx;
+  height: 216rpx;
+  background-size: 746rpx 216rpx;
+  background-repeat: no-repeat;
+  background-position: center;
+  padding: 52rpx 0 64rpx 46rpx;
+  box-sizing: border-box;
+  margin: 0 auto;
+  display: flex;
+}
+.member_item image{
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 50%;
+}
+.member_item_info{
+  margin-left: 22rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.member_item_name{
+  font-size: 32rpx;
+  font-weight: bold;
+  line-height: 44prx;
+  color: #FFFFFF;
+}
+.member_item_desc{
+  font-size: 24rpx;
+  font-weight: bold;
+  line-height: 34rpx;
+  color: #FFFFFF;
+}
+.member_item_level{
+  display: inline;
+}
+.member_item_score{
+  display: inline;
+  margin-left: 40rpx;
+}
+
+
+/* 空列表样式 */
+.empty-list-box{
+  height:300rpx;font-size:30rpx;color:#ccc;
+}

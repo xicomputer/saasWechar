@@ -1,0 +1,152 @@
+/* 我的关注 */
+.follow-list{
+  width: 100%;
+  padding: 0 30rpx;
+  box-sizing: border-box;
+}
+.looked-box{
+  display: flex;
+  align-items: center;
+  margin-bottom: 10rpx;
+}
+.follow-item-box{
+  padding-top: 15rpx;
+  box-sizing: border-box;
+}
+.big-dot{
+  width: 32rpx;
+  height: 32rpx;
+  background: #EBEBEB;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.small-dot{
+  width: 16rpx;
+  height: 16rpx;
+  background: red;
+  border-radius: 50%;
+}
+.looked-time{
+  height: 40rpx;
+  font-size: 28rpx;
+  font-family: PingFang SC;
+  font-weight: 500;
+  line-height: 40rpx;
+  color: #333333;
+  margin-left: 20rpx;
+}
+.follow-item{
+  width: 100%;
+  padding: 30rpx 0;
+  box-sizing: border-box;
+  border-bottom: 1rpx solid #ddd;
+  box-sizing: border-box;
+}
+.looked-item{
+  width: 98%;
+  padding: 0;
+  border: none;
+  border-left: 1rpx solid #ECECEC;
+  padding-left: 15rpx;
+  margin-left: 17rpx;
+  padding-bottom: 24rpx;
+  box-sizing: border-box;
+}
+.follow-list .follow-list-cell:last-child .looked-item{
+  border: none;
+}
+.follow-item .touxiang{
+  width: 271rpx;
+  height: 193rpx;
+  border-radius: 14rpx;
+}
+.follow-content{
+  width: 0;
+  flex: 1;
+  margin-left: 20rpx;
+}
+.follow-name{
+  max-width: 215rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  height: 45rpx;
+  font-size: 32rpx;
+  font-family: PingFang SC;
+  font-weight: bold;
+  line-height: 45rpx;
+  color: #333333;
+  margin-right: 20rpx;
+}
+.follow-content-info{
+  display: flex;
+  align-items: center;
+}
+.follow-star-list{
+  display: flex;
+}
+.looked-man{
+  height: 30rpx;
+  font-size: 22rpx;
+  font-family: PingFang SC;
+  font-weight: 400;
+  line-height: 30rpx;
+  color: #333333;
+}
+/* 标签 */
+.label-list{
+  display: flex;
+  flex-wrap: wrap;
+}
+.label-item{
+  height: 32rpx;
+  background: #f8ecd2;
+  border-radius: 4rpx;
+  font-size: 22rpx;
+  font-family: PingFang SC;
+  font-weight: 400;
+  color: #005050;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 10rpx;
+  padding: 0 10rpx;
+  margin-top: 10rpx;
+}
+.follow-content-botton{
+  font-size: 29rpx;
+  margin-top: 20rpx;
+  font-family: PingFang SC;
+  font-weight: 400;
+  line-height: 36rpx;
+  color: #999999;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display:-webkit-box;
+  -webkit-box-orient:vertical;
+  -webkit-line-clamp:2;
+}
+.del{
+  width: 130rpx;
+  height: 100%;
+  color: #FFFFFF;
+  background-color: #EC1919;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.delDiv{
+  width: 100%;
+  height: 50%;
+  text-align: center;
+  line-height: 50rpx;
+  box-sizing: border-box;
+  padding: 60rpx 0;
+}
+.delDivTextOne{
+  border-bottom: 1px solid #fff;
+ 
+}

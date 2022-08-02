@@ -1,0 +1,56 @@
+<view class="list">
+  <image bindtap="toPmEnter" class="list_myPm" src="https://xssj.letterbook.cn/applet/images/icon_myPm.png"></image>
+  <!-- <image bindtap="toShop" class="list_myPm" style="top: 680rpx;" src="https://xssj.letterbook.cn/applet/images/icon_toShop.png"></image> -->
+  <image mode="widthFix" class="list_image" src="{{auctionList[0].merchantAuctionLogo ? auctionList[0].merchantAuctionLogo : 'https://xssj.letterbook.cn/applet/images/bg_auctionList.png'}}"></image>
+  <block wx:for="{{auctionList}}" wx:key="index">
+    <view bindtap="toDetails" data-auctionid="{{item.auctionId}}" class="list_item">
+      <image wx:if="{{item.status == 3}}" class="list_item_icon" src="https://xssj.letterbook.cn/applet/images/icon_over.png"></image>
+      <view class="list_item_image">
+        <image src="{{item.logoImg}}" mode="aspectFill"></image>
+        <view wx:if="{{item.status == 3}}">已结束</view>
+      </view>
+      <view class="list_item_info">
+        <view class="list_item_up">
+          <view class="list_item_up_left">
+            <view class="list_item_name">{{item.xsAuctionItem.auctionItemName}}</view>
+            <view class="list_item_desc">{{item.xsAuctionItem.description}}</view>
+          </view>
+          <view class="list_item_up_right">
+            <view class="list_item_label">{{item.timeUnit == 1 ? '即时喊' : item.timeUnit == 2 ? '短时喊' : '长时喊'}}</view>
+            <view class="list_item_startPrice">保底价：￥{{item.xsAuctionItem.startingPrice}}</view>
+            <block wx:if="{{item.auctionPrice != 0}}">
+              <view class="list_item_nowPrice" style="{{item.status == '3'? 'color: #999999;' : ''}}">
+                {{item.status == '3' ? '成交价：￥' : '当前价：￥'}}
+                <text style="font-size: 24rpx;">{{item.auctionPrice}}</text>
+              </view>
+            </block>
+          </view>
+        </view>
+        <view class="list_item_down">
+          <block wx:if="{{item.status != '3'}}">
+            <van-count-down use-slot bind:change="changeTime" data-index="{{index}}" time="{{ item.timeMinutes }}">
+              <view class="list_item_onLookers">
+                <text wx:if="{{item.status == '1'}}">开始时间</text>
+                <text wx:if="{{item.status == '2'}}" style="color: #FF0000;">距离结束</text>
+                <text wx:if="{{item.timeData.days!=0}}">{{item.timeData.days}}</text>
+                <text wx:if="{{item.timeData.days!=0}}">天</text>
+                <text>{{item.timeData.hours<10?'0'+item.timeData.hours:item.timeData.hours}}</text>
+                <text>:</text>
+                <text>{{item.timeData.minutes<10?'0'+item.timeData.minutes:item.timeData.minutes}}</text>
+                <text>:</text>
+                <text>{{item.timeData.seconds<10?'0'+item.timeData.seconds:item.timeData.seconds}}</text>
+              </view>
+            </van-count-down>
+            <view wx:if="{{item.status == '1'}}" class="list_item_onLookers" style="color: #07C160;">预约人数：{{item.reserveNumber}}</view>
+          </block>
+          <view wx:if="{{item.status == '3'}}" style="color: #333333;">结束时间 {{item.endTime}}</view>
+          <view wx:if="{{item.status != '1'}}" class="list_item_onLookers">{{item.personNumber}}人参与喊价</view>
+        </view>
+      </view>
+    </view>
+  </block>
+
+  <view wx:if='{{auctionList.length==0 && reqComplete}}' class='me-fx-col me-fx-c-c empty-list'>
+    <text>抱歉！暂无数据</text>
+  </view>
+</view>

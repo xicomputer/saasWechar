@@ -1,0 +1,13 @@
+{
+  "usingComponents": {
+    "van-overlay": "@vant/weapp/overlay/index",
+    "van-popup": "@vant/weapp/popup/index",
+    "van-tab": "@vant/weapp/tab/index",
+    "van-tabs": "@vant/weapp/tabs/index",
+    "van-picker": "@vant/weapp/picker/index",
+    "van-sticky": "@vant/weapp/sticky/index",
+    "van-action-sheet": "@vant/weapp/action-sheet/index"
+  
+  },
+  "navigationBarTitleText": "确认订单"
+}

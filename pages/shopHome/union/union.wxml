@@ -1,0 +1,23 @@
+<!--pages/shopHome/union/union.wxml-->
+<view class="union">
+    <view class="union_info me-fx-row" wx:for="{{8}}">
+        <view class="union_left">
+            <image class="union_img"></image>
+            <view class="union_pro_title"><text class="me-full-text">商品名称商品名称商品名称</text></view>
+            <view class="union_btn">店铺联盟</view>
+        </view>
+        <view class="union_right me-fx-1 me-fx-col">
+            <view class="union_shop_title me-fx-row me-fx-start-c">
+                <image class="shop_icon"></image>
+                <text class="shop_title">邵阳人和</text>
+            </view>
+            <text class="union_desc me-full-text">初次线上开店，多多关照初次线上开店，多多关照初次线上开店，多多关照初次线上开店，多多关照初次线上开店，多多关照初次线上开店，多多关照初次线上开店，多多关照</text>
+            <view class="union_right_pro me-fx-row me-fx-sb">
+                <view class="right_pro" wx:for="{{3}}">
+                    <view class="pro_bg"></view>
+                    <text class="pro_price me-full-text">￥509.00</text>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>

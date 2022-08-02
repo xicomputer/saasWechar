@@ -1,0 +1,9 @@
+/* pages/Index/preview-protect-img/preview-protect-img.wxss */
+
+.preview-img-page{
+    width:100%;height:100vh;background-color:#000;
+    position:realtive;
+}
+
+.preview-img-page .img{width:540rpx;height:940rpx;background-color:#ccc;}
+.preview-img-page .watermark-img{position:fixed;top:0;left:0;width:100%;height:100%;}

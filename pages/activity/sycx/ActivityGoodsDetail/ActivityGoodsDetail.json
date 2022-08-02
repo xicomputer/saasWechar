@@ -1,0 +1,13 @@
+{
+  "usingComponents": {
+    "van-stepper": "@vant/weapp/stepper/index",
+    "van-overlay": "@vant/weapp/overlay/index",
+    "van-popup": "@vant/weapp/popup/index",
+    "van-count-down": "@vant/weapp/count-down/index",
+    "van-goods-action": "@vant/weapp/goods-action/index",
+    "van-goods-action-icon": "@vant/weapp/goods-action-icon/index",
+    "van-goods-action-button": "@vant/weapp/goods-action-button/index",
+    "van-sticky": "@vant/weapp/sticky/index"
+  },
+  "navigationBarTitleText": "商品详情"
+}

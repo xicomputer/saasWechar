@@ -1,0 +1,11 @@
+{
+  "usingComponents": {
+    "van-popup": "@vant/weapp/popup/index",
+    "van-overlay": "@vant/weapp/overlay/index",
+    "taskPop": "/pages/Index/integral/components/integralTask/integralTask",
+    "van-datetime-picker": "@vant/weapp/datetime-picker/index",
+    "van-count-down": "@vant/weapp/count-down/index",
+    "store-close": "/pages/Component/storeClose/index"
+  },
+  "navigationBarTitleText": "积分乐园"
+}

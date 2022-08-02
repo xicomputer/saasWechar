@@ -1,0 +1,6 @@
+<!--pages/group_booking/strategy/strategy.wxml-->
+<view>
+
+   <image src='https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/static/gl_img.png' mode='widthFix'></image>
+
+</view>

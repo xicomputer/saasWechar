@@ -1,0 +1,12 @@
+@font-face {
+    font-family: "HWKS_font";
+    src: url("https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/static/STLITI.TTF") format("truetype");
+}
+
+@font-face{
+    font-family:"DIN_font";
+    src: url("https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/static/DIN-Black.otf") format('openType'),
+    url("https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/static/DIN-Bold.otf") format('openType'),
+    url("https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/static/DIN-Light.otf") format('openType'),
+    url("https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/static/DIN-Regular.otf") format('openType');
+}

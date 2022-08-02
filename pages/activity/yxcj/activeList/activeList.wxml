@@ -1,0 +1,23 @@
+<view class="activity">
+		<view class="no-activity" wx:if="{{!activityList.length}}">
+			<image src="/pages/img/no_notice.png" class="no-activity-img" />
+			<view class="no-activity-text">暂无活动</view>
+		</view>
+    <view class="activity-list" wx:else>
+      <view class="activity-list-item" wx:for="{{activityList}}" wx:key="index" bindtap="toActiveIndex" data-id="{{item.activityId}}" data-tag="{{item.templateTag}}" data-tips="{{item.tips}}">
+        <image class="activity-list-item-img" style="{{item.tips == '活动已结束'?'filter:grayscale(80%);':''}}" src="{{item.icon}}" />
+        <view class="activity-list-item-content">
+          <view class="activity-list-item-content-box">
+            <view class="activity-list-item-content-itembox">
+                <view class="activity-list-item-content-name">{{item.title}}</view>
+                <view class="activity-list-item-content-people">参与人数：{{item.peopleNumber}}</view>
+            </view>
+            <view class="activity-list-item-content-itembox">
+              <view class="activity-list-item-content-datetime">{{item.startTime}}至{{item.endTime}}</view>
+              <view class="activity-list-item-content-tips">{{item.tips}}</view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>

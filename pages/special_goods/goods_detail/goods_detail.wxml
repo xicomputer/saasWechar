@@ -1,0 +1,184 @@
+<!--pages/special_goods/goods_detail/goods_detail.wxml-->
+
+<view>
+    <!-- banner -->
+    <swiper class='swiper-box' bindchange='swiperChange'>
+        <swiper-item wx:if='{{goodsInfo.videoUrl}}'>
+            <video id='swiperVideo' src="{{goodsInfo.videoUrl}}"  class='banner-img'
+                poster='{{goodsInfo.videoCover}}'></video>
+        </swiper-item>
+        <swiper-item wx:for='{{goodsInfo.imagList}}' wx:key='index'>
+            <image src='{{item}}' class='banner-img'></image>
+        </swiper-item>
+    </swiper>
+
+    <!-- 商品基本信息 -->
+    <view class='base-info'>
+        <view class='price-str'>
+            <text>￥</text>
+            <text class='price-num'>{{goodsInfo.originalPrice}}</text>
+        </view>
+        <view class='me-fx-row me-fx-sb-c'>
+            <view class='goods-name'>{{goodsInfo.commodityName}}</view>
+            <button open-type="share" class='me-fx-col me-fx-c-c share-btn'>
+                <image src='../imgs/wx-logic.png' class='wx-logo-img'></image>
+                <text>分享</text>
+            </button>
+        </view>
+    </view>
+
+    <!-- 属性 -->
+    <view class='attr-info'>
+        <view class='me-fx-row me-fx-sb-c attr-item' bindtap='openSale'>
+            <view class='me-fx-row me-fx-start-c'>
+                <text class='attr-name'>优惠</text>
+                <text class='red-full-box'>{{saleState}}</text>
+            </view>
+            <scroll-view scroll-x="true" class='sale-can-List'>
+                <view class="yhq-scroll">
+                    <view class="yhq-box" wx:for="{{saleCanList}}" wx:key="index">
+                        满{{item.confine}}减{{item.deduct}}
+                    </view>
+                </view>
+            </scroll-view>
+            <image class='more-img' src='../../img/goods/point-adorn.png'></image>
+        </view>
+        <view class='me-fx-row me-fx-sb-c attr-item' wx:if='{{nowSku.itemText}}'>
+            <view class='me-fx-row me-fx-start-c'>
+                <text class='attr-name'>规格</text>
+                <text class='sku-item-box'>{{nowSku.itemText}}</text>
+            </view>
+            <image class='more-img' src='../../img/goods/point-adorn.png'></image>
+        </view>
+        <view class='me-fx-row me-fx-sb attr-item'>
+            <text class='attr-name'>购买须知</text>
+            <view class='me-fx-1 instructions' wx:if='{{orderTemplate == 3}}'>购买此商品仅适用于门店团购</view>
+            <view class='me-fx-1 instructions' wx:if='{{orderTemplate == 2}}'>购买此商品仅适用于同城配送</view>
+        </view>
+        <view class='me-fx-row me-fx-start-c attr-item'>
+            <text class='attr-name'>{{orderTemplate==2?'同城配送':'预定自取'}}</text>
+            <view class='me-fx-1 me-fx-row me-fx-start-c'>
+                <view class='label-item'>购买</view>
+                <text class='line-x'></text>
+                <view class='label-item'>{{orderTemplate == 2?'配送':'店内消费'}}</view>
+                <text class='line-x'></text>
+                <view class='label-item'>完成</view>
+            </view>
+        </view>
+        <view class='me-fx-row me-fx-sb-c attr-item'>
+            <view class='me-fx-row me-fx-start-c'>
+                <text class='attr-name'>保障</text>
+                <view class='security'>放心购·材质保障·假一罚十</view>
+            </view>
+            <image class='more-img' src='../../img/goods/point-adorn.png'></image>
+        </view>
+    </view>
+
+    <!-- 商家信息 -->
+    <view class='me-fx-row merchants-info' wx:if='{{marchantInfo.merchantId}}'
+        bindtap='jumpMarchantInfo'
+    >
+        <image src='{{marchantInfo.headImg}}' class='merchants-img'></image>
+        <view class='me-fx-col me-fx-sb'>
+            <view class='me-fx-row me-fx-start-c'>
+                <text class='name-str'>{{marchantInfo.nickName}}</text>
+                <image class='right-jt-img' src='../../img/back-icon.png'></image>
+            </view>
+            <view class='introduction-content'>{{marchantInfo.signature}}</view>
+            <view class='certification-label'>企业认证</view>
+        </view>
+    </view>
+
+
+    <view class='me-fx-row me-fx-sb-c footer-box'>
+        <view class='me-fx-row me-fx-start-c'>
+            <view class='me-fx-col me-fx-c-c nav-item' bindtap='jumpPage' data-type='1'>
+                <image src='../../../image/pmhd/icon_cs.png' class='icon-img'></image>
+                <text>客服</text>
+            </view>
+            <view class='me-fx-col me-fx-c-c nav-item' bindtap='jumpPage' data-type='2'>
+                <image src='../../../image/pmhd/icon_shop.png' class='icon-img'></image>
+                <text>店铺</text>
+            </view>
+        </view>
+        <view class='buy-btn' bindtap='openBuyPopup' wx:if='{{orderTemplate == 3}}'>预订门店团购</view>
+        <view class='buy-btn' bindtap='openBuyPopup' wx:if='{{orderTemplate == 2}}'>同城商家配送</view>
+    </view>
+</view>
+
+
+<!-- 购买弹窗 -->
+<view class='buy-popup-box' wx:if='{{showBuyPopup}}'>
+    <view class='popup-content'>
+        <image src='../../img/goods/share_close.png' 
+            class='close-btn' bindtap='closeBuyPopup'
+        ></image>
+        <view class='me-fx-row product-info'>
+            <image class='product-img' src='{{nowSku.thumbnail}}'></image>
+            <view class='me-fx-col me-fx-sb'>
+                <view class='price-str'>
+                    <text>￥</text>
+                    <text class='price-num'>{{nowSku.originalPrice}}</text>
+                </view>
+                <view class='inventory-str'>库存：{{nowSku.stock}}</view>
+            </view>
+        </view>
+        <view class='block-box'>
+            <view class='title-text'>购买须知</view>
+            <view class='instructions'>购买此商品仅适用于{{orderTemplate == 3?'门店团购':'同城配送'}}</view>
+        </view>
+        <view class='block-box'>
+            <view class='title-text'>规格</view>
+            <view class='me-fx-row specification-list'>
+                <view class='me-fx-row me-fx-c-c sku-item {{item.id==nowSku.id?"sel-sku":""}}' 
+                    wx:for='{{skuList}}' wx:key='index' bindtap='replaceSku' data-item='{{item}}'
+                >
+                    <image class='sku-img' src='{{item.thumbnail}}'></image>
+                    <text>{{item.itemText}}</text>
+                </view>
+            </view>
+        </view>
+        <view class='me-fx-row me-fx-sb-c block-box'>
+            <view class='title-text'>数量</view>
+            <add-subtract-num bind:change='countChange' bind:minusCount='minusCount' desabled='{{isCountDesabled}}'></add-subtract-num>
+        </view>
+        <view class='me-fx-row me-fx-c-c btns-box'>
+            <view class='btn buy-btn' bindtap='buyNow' >立即购买</view>
+        </view>
+    </view>
+</view>
+
+
+<!-- 优惠券 -->
+<van-popup show="{{ showSale }}" bind:close="closeSale" round closeable position="bottom">
+    <view class="sale-box-pop">
+        <view class="sale-title">优惠券</view>
+        <scroll-view scroll-y="true" class="scroll-box">
+            <view class="sale-list">
+                <view class="sale-item" wx:for="{{saleCanList}}" wx:key="index" 
+                    bindtap="selectSale" data-index="{{index}}" 
+                    style="background-image:url(https://xssj.letterbook.cn/applet/images/sale_bg_sub.png);background-size:100% 173rpx;background-repeat:no-repeat;"
+                >
+                    <view class="coupon-left">
+                      <view>￥{{item.deduct}}</view>
+                      <view style="font-size:24rpx;margin-left:18rpx">
+                        满{{item.confine}}元使用
+                      </view>
+                    </view>
+                    <view class="coupon-right">
+                      <view class="coupon-title">{{item.couponName}}</view>
+                      <view class="coupon-time">截止日期：{{item.endTime}}</view>
+                      <view class="coupon-state">{{item.isDraw==1?'已领取':'未领取'}}</view>
+                    </view>
+                </view>
+            </view>
+        </scroll-view>
+        
+        <view bindtap="receiveSale" wx:if="{{!receivedSale}}"  class="sale-receive-btn">立即领取 </view>
+        <view bindtap="receivedSaleFun" wx:if="{{receivedSale}}" class="sale-receive-btn received">已领取</view>
+    </view>
+</van-popup>
+
+
+<!-- 授权组件 -->
+<auth-get-info></auth-get-info>

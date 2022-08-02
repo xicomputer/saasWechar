@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "van-area": "@vant/weapp/area/index",
+    "van-popup": "@vant/weapp/popup/index"
+  },
+  "navigationBarTitleText": "新建地址"
+}

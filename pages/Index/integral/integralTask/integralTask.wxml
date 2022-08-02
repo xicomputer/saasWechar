@@ -1,0 +1,188 @@
+<view class="integralTask">
+  <image src="https://xssj.letterbook.cn/applet/images/integral_task_bg.png" class="integralTask_image"></image>
+  <view class="integralTask_title" wx:if="{{userintegral}}">
+    <view class="integralTask_title_left">
+      <view>可兑换礼品</view>
+      <image src="/pages/img/icon_gift.png"></image>
+    </view>
+    <view class="integralTask_title_right">当前可用积分：{{userintegral}}</view>
+  </view>
+  <view class="integralTask_list" wx:if="{{exchangeGoodsList.length}}">
+    <view class="integralTask_list_item" wx:for="{{exchangeGoodsList}}" wx:key="index" bindtap="showDetail" data-idx="{{index}}">
+      <view class="integralTask_list_title">{{item.presentName}}</view>
+      <view class="integralTask_list_content">
+        <image src="{{item.imageUuid}}" mode="aspectFill"></image>
+        <view class="integralTask_list_content_right">
+          <view class="integralTask_list_content_integral">{{item.score}}积分</view>
+          <view class="integralTask_list_content_tips">
+            <view class="integralTask_list_content_tips_item" wx:if="{{item.disbursement==1||item.disbursement==3}}">到店领取</view>
+            <view class="integralTask_list_content_tips_item" wx:if="{{item.disbursement==2||item.disbursement==3}}">商家配送</view>
+          </view>
+          <view class="integralTask_list_content_tips_item">剩余{{item.rest}}</view>
+          <view class="integralTask_list_content_btn" catchtap="showSelectType" data-idx="{{index}}" >立即兑换</view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="integralTask_title">
+    <view class="integralTask_title_left">
+      <view>做任务</view>
+      <image src="/pages/img/icon_task.png"></image>
+    </view>
+  </view>
+  <view class="integralTask_content">
+    <!-- 发布动态 -->
+    <view class="integralTask_content_item" wx:for="{{taskList}}" wx:key="index">
+      <view class="integralTask_content_item_left">
+        <view class="integralTask_content_item_left_up">
+          <image src="{{item.icon}}" class="integralTask_content_item_left_up_left"></image>
+          <view class="integralTask_content_item_left_up_right">
+            <view class="integralTask_content_item_left_up_right_title">
+              <view>{{item.name}}</view>
+              <view class="integralTask_content_item_left_up_right_title_desc" wx:if="{{item.limit!=0}}">（{{item.announce}}/{{item.limit}}）</view>
+            </view>
+            <view class="integralTask_content_item_left_up_right_desc">{{item.module}}</view>
+          </view>
+        </view>
+        <view class="integralTask_content_item_left_down">{{item.description}}</view>
+      </view>
+      <view class="integralTask_content_item_right">
+        <navigator class="integralTask_content_item_right_btn" wx:if="{{item.announce<item.limit||item.limit==0}}" url="{{item.jump+'?marchantId=' + marchantId}}">去完成</navigator>
+        <view class="integralTask_content_item_right_btn" style="background:#999" wx:else>已完成</view>
+      </view>
+    </view>
+    <!-- 浏览商品 -->
+    <!-- <view class="integralTask_content_item">
+      <view class="integralTask_content_item_left">
+        <view class="integralTask_content_item_left_up">
+          <image src="/pages/img/index/task2.png" class="integralTask_content_item_left_up_left"></image>
+          <view class="integralTask_content_item_left_up_right">
+            <view class="integralTask_content_item_left_up_right_title">
+              <view>分享店铺</view>
+              <view class="integralTask_content_item_left_up_right_title_desc">（{{taskNum.transitermarchant}}/5）</view>
+            </view>
+            <view class="integralTask_content_item_left_up_right_desc">分享转发</view>
+          </view>
+        </view>
+        <view class="integralTask_content_item_left_down">分享店铺5次可获取5积分</view>
+      </view>
+      <view class="integralTask_content_item_right">
+        <navigator class="integralTask_content_item_right_btn" wx:if="{{taskNum.transitermarchant<5}}" url="/pages/shopHome/home/home?marchantId={{marchantId}}">去完成</navigator>
+        <view class="integralTask_content_item_right_btn" style="background:#999" wx:else>已完成</view>
+      </view>
+    </view> -->
+    <!-- 分享商品 -->
+    <!-- <view class="integralTask_content_item">
+      <view class="integralTask_content_item_left">
+        <view class="integralTask_content_item_left_up">
+          <image src="/pages/img/index/task3.png" class="integralTask_content_item_left_up_left"></image>
+          <view class="integralTask_content_item_left_up_right">
+            <view class="integralTask_content_item_left_up_right_title">
+              <view>分享商品</view>
+              <view class="integralTask_content_item_left_up_right_title_desc">（{{taskNum.transitercommodity}}/5）</view>
+            </view>
+            <view class="integralTask_content_item_left_up_right_desc">分享转发</view>
+          </view>
+        </view>
+        <view class="integralTask_content_item_left_down">分享商品详情页5次可获取5积分</view>
+      </view>
+      <view class="integralTask_content_item_right">
+        <navigator class="integralTask_content_item_right_btn" wx:if="{{taskNum.transitercommodity<5}}" url="/pages/shopHome/home/home?marchantId={{marchantId}}">去完成</navigator>
+        <view class="integralTask_content_item_right_btn" style="background:#999" wx:else>已完成</view>
+      </view>
+    </view> -->
+    <!-- 购买商品 -->
+    <!-- <view class="integralTask_content_item">
+      <view class="integralTask_content_item_left">
+        <view class="integralTask_content_item_left_up">
+          <image src="/pages/img/index/task4.png" class="integralTask_content_item_left_up_left"></image>
+          <view class="integralTask_content_item_left_up_right">
+            <view class="integralTask_content_item_left_up_right_title">
+              <view>购买商品</view>
+            </view>
+            <view class="integralTask_content_item_left_up_right_desc">购买商品</view>
+          </view>
+        </view>
+        <view class="integralTask_content_item_left_down">店铺每消费金额1元可获取1积分</view>
+      </view>
+      <view class="integralTask_content_item_right">
+        <navigator class="integralTask_content_item_right_btn" url="/pages/Index/Index?marchantId={{marchantId}}">去消费</navigator>
+      </view>
+    </view> -->
+  </view>
+</view>
+<!-- 完成任务后弹框 -->
+<taskPop showTaskPop="{{showTaskPop}}" text="你已完成发布动态任务获取3积分" marchantId="{{marchantId}}" style="position:fixed;top:0;left:0;right:0;z-index:9999"></taskPop>
+<!-- 显示商品详情弹框 -->
+<van-popup show="{{ showGoodsDetail }}" closeable position="bottom" bind:close="closeDetail" close-icon="close" round
+>
+  <view class="goods-detail-container">
+    <image src="{{nowGoodsDetail.imageUuid}}" class="goods-detail-img"  mode="widthFix"></image>
+    <view class="goods-detail-content">
+      <view class="goods-detail-top">
+        <view class="goods-detail-price">
+          <image class="goods-detail-icon" src="/pages/img/index/goods_price_icon.png" />
+          {{nowGoodsDetail.score}}积分
+        </view>
+        <view class="goods-detail-label">剩余{{nowGoodsDetail.rest}}</view>
+        <view class="goods-detail-label" wx:if="{{nowGoodsDetail.disbursement==1||nowGoodsDetail.disbursement==3}}">到店领取</view>
+        <view class="goods-detail-label" wx:if="{{nowGoodsDetail.disbursement==2||nowGoodsDetail.disbursement==3}}">商家配送</view>
+      </view>
+      <view class="goods-detail-name">{{nowGoodsDetail.presentName}}</view>
+      <view class="goods-detail-text">{{nowGoodsDetail.descriptions}}</view>
+      <view class="goods-detail-btn" catchtap="showSelectType" style="background:{{nowGoodsDetail.rest>0&&userintegral>=nowGoodsDetail.score?'':'#999'}}">
+        {{userintegral<nowGoodsDetail.score?'积分不足':nowGoodsDetail.rest==0?'库存不足':'立即兑换'}}</view>
+    </view>
+  </view>
+</van-popup>
+<!-- 显示配送方式弹框 -->
+<van-popup show="{{ showSelectType }}" closeable position="bottom" bind:close="closeType" close-icon="close" round
+>
+  <view class="selectType">
+    <view class="selectType_title"  hidden="{{hideTabs}}">
+      <block wx:for="{{typeList}}" wx:key="index">
+        <view bindtap="changeType" data-index="{{index}}" class="selectType_title_item {{selectType == index? item.class: ''}}">{{item.name}}</view>
+      </block>
+    </view>
+    <view class="no-select-type" hidden="{{!hideTabs}}">{{selectType?'商家配送':'门店团购'}}</view>
+    <view class="selectType_content">
+      <view class="selectType_content_item" hidden="{{selectType!=0}}">
+        <view class="selectType_content_item_label">到店时间</view>：
+        <view class="selectType_content_item_box" bindtap="showTimeSelect">
+          <view class="selectType_content_item_box_input">
+            <view>{{selectedTime?selectedTime:'请选择到店领取时间'}}</view>
+            <image src="/pages/img/index/arrow_right.png" style="width:24rpx;height:48rpx"></image>
+          </view>
+        </view>
+      </view>
+      <view class="selectType_content_item">
+        <view class="selectType_content_item_label">联系方式</view>：
+        <view class="selectType_content_item_box" bindtap="toSelectAddress">
+          <view class="selectType_contemt_item_box_item" style="border-bottom: 2rpx solid #F7F7F7;">联系人：{{selectType==0?toStoreContactMan:logisticsContactMan}} {{selectType==0?toStoreTel:logisticsTel}}</view>
+          <view class="selectType_contemt_item_box_item">地址：{{selectType==0?toStoreAddress:logisticsAddress}}</view>
+        </view>
+      </view>
+      <view class="selectType_content_item">
+        <view class="selectType_content_item_label">留言</view>：
+        <view class="selectType_content_item_box_textarea">
+          <textarea value="{{messageValue}}" bindinput="getMessageValue" maxlength="50"></textarea>
+          <view>{{messageValue.length<50?messageValue.length:50}}/50</view>
+        </view>
+      </view>
+      <view bindtap="exchangeIn" class="selectType_btn">提交</view>
+    </view>
+  </view>
+</van-popup>
+<!-- 选择到店时间弹框 -->
+<!-- 时间选择 -->
+<van-popup show="{{ showTimeSelect }}" bind:close="closeTimeSelect" position="bottom">
+    <van-datetime-picker
+    type="date"
+    title="请选择年月日"
+    bind:confirm="onInput"
+    bind:cancel="closeTimeSelect"
+    min-date="{{ minDate }}"
+    max-date="{{ maxDate }}"
+    formatter="{{ formatter }}"
+  />
+</van-popup>

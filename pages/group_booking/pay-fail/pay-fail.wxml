@@ -1,0 +1,5 @@
+<view class='me-fx-col me-fx-c-c pay-fail-page'>
+    <image src='../imgs/pay-fail-bg.png' class='pay-fail-bg-img'></image>
+    <text>支付失败</text>
+    <button class='back-hone' bindtap='btnHandle'>返回首页</button>
+</view>

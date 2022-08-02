@@ -1,0 +1,7 @@
+{
+  "navigationStyle":"custom",
+  "usingComponents": {
+    "no-data": "/pages/Component/noData/index",
+    "van-icon": "@vant/weapp/icon/index"
+  }
+}

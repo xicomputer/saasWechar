@@ -1,0 +1,23 @@
+
+<view class='join-user-list' wx:if='{{userList.length}}'>
+    <view style='margin-bottom:40rpx;' wx:for='{{userList}}' wx:key='index'>
+        <view class='earnings-msg' wx:if='{{item.financeUnitResponses.length}}'>
+            已推{{item.alreadyOrder || 0}}单，收益{{item.income || 0}}元，还可以获得{{item.residueIncome || 0}}元收益
+        </view>
+        <view class='me-fx-row me-fx-sb-c pushed-item' wx:for='{{item.financeUnitResponses}}' wx:key='ti' wx:for-index='ti' wx:for-item='temp'>
+            <view class='me-fx-row me-fx-c-c'>
+                <image src='{{temp.headimgurl}}' class='user-avatar-img'></image>
+                <text class=''>{{temp.nickname}}</text>
+            </view>
+            <view class='me-fx-row me-fx-c-c'>
+                <text class='amount-str'>+{{temp.earnings}}元</text>
+                <text class='service-fee' wx:if='{{temp.isLast==true}}'>(服务费¥{{temp.serviceCharge}})</text>
+            </view>
+        </view>
+    </view>
+    
+</view>
+
+<view wx:else class='me-fx-col me-fx-c-c list-empty-box'>
+    <text>暂无数据</text>
+</view>

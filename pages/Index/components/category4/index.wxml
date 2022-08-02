@@ -1,0 +1,27 @@
+<view class='classify-list'>
+    <view class='classify-item'>
+        <view class='me-fx-row me-fx-sb-c'>
+            <view class='me-fx-row me-fx-start-c'>
+                <image src='../../static/goods.png' class='goods-icon'></image>
+                <text class='class-title'>百合系列系列</text>
+            </view>
+            <text class='even-more'>更多 ></text>
+        </view>
+        <view class='goods-list'>
+            <view wx:for='{{3}}' wx:key='index' style='z-index:{{(3-index)*10}}'
+                class='me-fx-row goods-item {{index==0?"pos1":(index==2?"pos2":"")}}'
+                bindtouchstart="touchstartFun" bindtouchend='tounchendFun'
+            >
+                <image class='goods-img' src=''></image>
+                <view class='goods-info'>
+                    <view class='name'>商品名称商品名称{{index}}</view>
+                    <view class='introduce'>产品介绍产品介绍产品介绍产品介绍产品介绍产品介绍产品介绍</view>
+                    <view class='price'>
+                        <text>￥</text>
+                        <text class='price-num'>38</text>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>

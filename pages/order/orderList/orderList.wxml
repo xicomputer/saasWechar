@@ -1,0 +1,145 @@
+<!--pages/Order/Order.wxml-->
+<!-- <web-view src="https://xssj.letterbook.cn/?active={{active}}#/orderList"></web-view> -->
+<view class="order">
+    <view class="tabs">
+        <van-tabs active="{{ tabsitem }}" bind:change="onChange" sticky color="#EC1919" line-width="22">
+            <view wx:for="{{tabsList}}" wx:for-item="item" wx:for-index="index" wx:key="index" src="{{item}}">
+                <van-tab title="{{item.name}}">
+                    <view class="order-list-container">
+                        <!--商品列表-->
+                        <view class="order-content" wx:for="{{orderList}}" wx:key="index"  wx:if="{{item.orderCommodity.length!=0}}">
+                            <!--店铺名称、商品状态-->
+                            <view class="order-title">
+                                <view class="order-id">订单号:{{item.orderNumber}} <image bindtap="copyOrder" class="copy_img" src="../../static/copy.png" data-order="{{item.orderNumber}}"></image></view>
+                                <view class="order-status" wx:if="{{tabsList[tabsitem].name==='退款/退货'}}">
+                                    <view wx:if="{{item.refundStateCode==1}}">退款</view>
+                                    <view wx:if="{{item.refundStateCode==2}}">退货</view>
+                                </view>
+                                <view class="order-status" wx:else>{{tabsList[tabsitem].name}}</view>
+                            </view>
+                            <!--商品主体 商品图片 名称 价格 数量-->
+                            <view class="store-content">
+                                <image src="{{item.logoPic}}" class="store_icon" style="border-radius:50%" />
+                                <view class="store-name-content">
+                                    <view class="store-name">{{cartShop.appName}}</view>
+                                    <image src="../../img/jinru.png" class="jinru" />
+                                </view>
+                            </view>
+                            <navigator class="goods-content" wx:for="{{item.orderCommodity}}" wx:for-item="items" wx:for-index="key" wx:key="key" hover-class="none"
+                            url="../orderDetail/orderDetail?uniqueId={{item.uniqueId}}&deliveryUniqueId={{items.uniqueId}}&deliveryRefund={{deliveryOrderStatus}}">
+                                <van-image src="{{items.thumbnail}}" width="77px" height="77px" fit="cover" radius="10rpx;"></van-image>
+                                <view class="goods-item">
+                                    <view class="goods-name">{{items.commodityName}}</view>
+                                    <view class="spec-content">
+                                        <view class="spec-container">规格：{{items.tempSpecName}}</view>
+                                        <view class="refund" wx:if="{{activeTab==='2' && tabsList[tabsitem].name==='退款/退货'}}">
+                                            <text wx:if="{{items.refundState==1}}">审核中</text>
+                                            <text wx:if="{{items.refundState==2}}">已同意</text>
+                                            <text wx:if="{{items.refundState==3}}">已拒绝</text>
+                                            <text wx:if="{{items.refundState==4}}">退货中</text>
+                                            <text wx:if="{{items.refundState==5}}">已退款</text>
+                                        </view>
+                                    </view>
+                                    <view class="spec-content">
+                                        <view class="spec-container">数量:{{items.amount}}</view>
+                                    </view>
+                                    <view class="goods_price_content">
+                                        <view class="goods_price" style="width:40%">￥{{items.paymentMoney}}</view>
+                                        <!-- <view class="comment-btn" catchtap="comment" wx:if="{{tabsList[tabsitem].name==='已完成'&&items.singleEvaluate===0}}" data-orderIdx="{{index}}" data-goodsIdx="{{key}}">评价几句</view> -->
+                                        <view class="comment-btn" wx:if="{{tabsList[tabsitem].name==='退款/退货'&&items.refundState<4&&item.refundState!=14&&item.refundStateCode!=1&&items.chargebackCount==0}}" catchtap="cancelRefund" data-orderCommodityId="{{items.orderCommodityId}}" data-orderId="{{item.orderId}}">撤销申请</view>
+                                        <view class="comment-btn" catchtap="toApplyReturn" wx:if="{{(tabsList[tabsitem].name==='待收货' || tabsList[tabsitem].name==='已完成')&&items.refundState==0&&!items.isSettle&&item.isSupportRefund==1}}" data-uniqueId="{{item.uniqueId}}" data-selfUniqueId="{{items.uniqueId}}">申请退货</view>
+                                    </view>
+                                    
+                                </view>
+                            </navigator>
+                            <!--商品总价格、总数量-->
+                            <view class="goods-total">
+                                <view class="total-span">
+                                    <view class="sale_money" wx:if="{{item.sumDeduct>0}}">
+                                        <text>总价:</text>
+                                        <text class="price_symbol">￥</text>
+                                        <text>{{item.sumDeduct+item.actualMoney}},</text>    
+                                        <text>已优惠:</text>
+                                        <text class="price_symbol">￥</text>
+                                        <text>{{item.sumDeduct}}</text>
+                                    </view>
+                                    <text class="isOk_price">实付款: <text  class="price_symbol">￥</text><text>{{item.actualMoney}}</text></text>
+                                </view>
+                            </view>
+                            <!-- 下单时间 人数 餐桌号 -->
+                            <view class="goods-time-box">
+                                <view class="item-box">
+                                    <view>下单时间：</view>
+                                    <view>{{item.orderTime}}</view>
+                                </view>
+                            </view>
+                            <!--底部订单操作按钮-->
+                            <view class="order-footer">
+                                <view class="btn-content-box">
+                                    <!-- <view class="do-btn submit-btn other_btn" wx:if="{{tabsList[tabsitem].name==='待发货'||tabsList[tabsitem].name==='待收货'||tabsList[tabsitem].name==='已完成'}}"
+                                    catchtap="goActivity" data-uniqueId="{{item.uniqueId}}" data-id="2" data-marchantId="{{item.marchantId}}">参与活动</view> -->
+                                    <navigator class="do-btn cancel-btn shouhou other_btn"
+                                    url="../contact/contact?logoPic={{item.logoPic}}&marchantId={{item.marchantId}}&marchantName={{item.nickName}}">联系卖家</navigator>
+                                    <view class="do-btn cancel-btn shouhou other_btn" wx:if="{{tabsList[tabsitem].name==='已完成'||tabsList[tabsitem].name==='退款/退货'}}" bindtap="callStore" data-tel="{{item.contactsMobile}}">电话联系</view>
+                                    <view class="do-btn cancel-btn other_btn" bindtap="showQR" data-uniqueId="{{item.uniqueId}}"
+                                    wx:if="{{tabsList[tabsitem].name==='待消费'}}">查看券码</view>
+                                    <view class="do-btn cancel-btn other_btn" wx:if="{{tabsList[tabsitem].name==='待付款'}}"
+                                    catchtap="updateCityOrder" data-uniqueId="{{item.uniqueId}}" data-id="3" data-marchantId="{{item.marchantId}}">取消订单</view>
+                                    <view class="do-btn submit-btn" wx:if="{{tabsList[tabsitem].name==='待付款'}}"
+                                    catchtap="payOrder" data-item="{{item}}">支付订单</view>
+                                    <!-- <view class="do-btn cancel-btn other_btn" wx:if="{{tabsList[tabsitem].name==='待发货'}}">申请退款</view> -->
+                                    <view class="do-btn submit-btn" wx:if="{{tabsList[tabsitem].name==='待发货'}}"
+                                    catchtap="updateCityOrder" data-uniqueId="{{item.uniqueId}}" data-id="2" data-marchantId="{{item.marchantId}}">提醒发货</view>
+                                    
+                                    <navigator class="do-btn cancel-btn other_btn" wx:if="{{tabsList[tabsitem].name==='待收货'}}"
+                                    url="../logistics/logistics?wlNumber={{item.expressNo}}&wlCompany={{item.expressCompany}}&orderNumber={{item.orderNumber}}">查看物流</navigator>
+                                    <view class="do-btn submit-btn" wx:if="{{tabsList[tabsitem].name==='待收货'}}"
+                                     catchtap="getOrderGoods" data-uniqueId="{{item.uniqueId}}" data-id="4" data-marchantId="{{item.marchantId}}">确认收货</view>
+                                    <view style="display:flex"  wx:if="{{tabsList[tabsitem].name==='已完成'||tabsList[tabsitem].name==='退款/退货'}}">
+                                        <view class="do-btn cancel-btn" style="margin-right:20rpx" wx:if="{{tabsList[tabsitem].name==='已完成'||((tabsList[tabsitem].name==='退款/退货')&&item.orderState==3)}}"
+                                        catchtap="updateCityOrder" data-uniqueId="{{item.uniqueId}}" data-id="5" data-marchantId="{{item.marchantId}}">删除订单</view>
+                                        <!-- <navigator wx:if="{{tabsList[tabsitem].name==='已完成'&&item.chargebackIsAll == 0}}"
+                                        url="../applyReturn/applyReturn?uniqueId={{item.uniqueId}}" class="do-btn submit-btn">一键退货</navigator> -->
+                                    </view>
+                                    <navigator wx:if="{{item.refundState==14}}" url="../orderDetail/orderDetail?uniqueId={{item.uniqueId}}&state={{true}}" class="do-btn submit-btn">退款申请中</navigator>
+                                </view>
+                            </view>
+                        </view>
+                    </view>
+                    <to-bottom wx:if="{{toBottom}}" />
+                </van-tab>
+            </view>
+        </van-tabs>
+    </view>
+</view>
+<!-- 二维码核销 -->
+<van-popup show="{{showQRCode}}" bind:close="onClose" round closeable>
+    <view class="QR-box" style="width: 280px;height: 270px;">
+        <view class="QR-top">出示二维码扫码核销</view>
+        <view class="numer-deal-box" style="padding:40rpx 50rpx;" bindtap="showNumer">
+            <view class="click-number" wx:if="{{!showHexiao}}">点击可查看付款码数字</view>
+            <view class="clicked-number" wx:if="{{showHexiao}}">{{verification}}</view>
+        </view>
+        <canvas style="width:110px;height:110px;margin:0 auto;" canvas-id="myQrcode"></canvas>
+    </view>
+</van-popup>
+<!-- 收货 -->
+<van-overlay show="{{isTake}}">
+    <view class="istake-container">
+        <image src="https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/basics-New%2F%E9%A6%96%E9%A1%B5_slices%2FMy%2F%E6%88%91%E7%9A%84_%E6%94%B6%E8%B4%A7%E5%9B%BE%E7%89%87.png" class="istake-img"></image>
+        <view class="istake-content">
+            <view>请选择收货方式：</view>
+            <view>1、确认无误收货：如果需要退货,需要自行和商家协商处理。</view>
+            <view>2、仅收货：支持7天内退货。</view>
+            <view class="is-read-content" bindtap="read">
+                <image src="{{isCheck?'/pages/img/order/is_comfirm_taked.png':'/pages/img/order/is_comfirm_take.png'}}" class="is-read-img"></image>
+                <text>我已知悉（默认不选中，需要勾选后才能收货）</text>
+            </view>
+        </view>
+        <view class="istake-bottom">
+            <view class="istake-btn" bindtap="confirmTake" data-type="1">确认无误收货</view>
+            <view class="istake-btn" bindtap="confirmTake" data-type="0">仅收货</view>
+        </view>
+    </view>
+    <image src="/pages/img/order/order_close.png" class="close-take" bindtap="cancelTake"></image>
+</van-overlay>

@@ -1,0 +1,20 @@
+{
+  "usingComponents": {
+    "menu": "/pages/smallShop/myShop/components/navs-bong/navs-bong",   
+    "van-sidebar-item": "@vant/weapp/sidebar-item/index",
+    "van-sidebar": "@vant/weapp/sidebar/index",
+    "van-dialog": "@vant/weapp/dialog/index",
+    "van-toast": "@vant/weapp/toast/index",
+    "van-icon": "@vant/weapp/icon/index",
+    "van-field": "@vant/weapp/field/index",
+    "van-overlay": "@vant/weapp/overlay/index",
+    "van-sticky": "@vant/weapp/sticky/index",
+    "van-tabbar": "@vant/weapp/tabbar/index",
+    "van-tabbar-item": "@vant/weapp/tabbar-item/index",
+    "van-count-down": "@vant/weapp/count-down/index",
+    "no-data": "/pages/Component/noData/index"
+  },
+  "navigationBarTitleText": "小店",
+  "backgroundTextStyle": "dark",
+  "onReachBottomDistance": 50
+}

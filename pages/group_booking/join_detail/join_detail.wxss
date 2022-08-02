@@ -1,0 +1,131 @@
+page{background-color:#F2F4F4;}
+
+
+/* 头部地址 */
+.top-address{
+    margin:10rpx 0;background-color:#fff;
+    padding:10rpx 30rpx;box-sizing:border-box;
+    min-height:128rpx;
+}
+.top-address .sel-address-msg{font-size:28rpx;color:#ACACAC;}
+.top-address .right-jantou-img{width:18rpx;height:32rpx;}
+.top-address .pen-icon{width:36rpx;height:36rpx;}
+.top-address .location-img{width:56rpx;height:56rpx;}
+.top-address .center-content{margin:0 20rpx;}
+.top-address .user-name{font-size:28rpx;color:#000;font-weight:bold;}
+.top-address .user-phone{font-size:24rpx;color:#ACACAC;margin-left:16rpx;}
+.top-address .address-text{font-size:24rpx;color:#0F0F0F;}
+
+
+/* 主要内容 */
+.section-content{background-color:#fff;padding-bottom:20rpx;margin-bottom:40rpx;}
+
+/* 商品信息 */
+.section-content .goods-info{
+    width:710rpx;margin:0 auto;padding:30rpx 0;
+    border-bottom:1rpx solid #E5E5E5;
+}
+.section-content .goods-info .goods-img{
+    width:156rpx;height:156rpx;background-color:#ccc;
+    border-radius:8rpx;margin-right:16rpx;
+}
+.section-content .goods-info .goods-name{
+    font-size:28rpx;color:#0F0F0F;
+}
+.section-content .goods-info .now-price{
+    font-size:40rpx;color:#EB1918;font-weight:bold;
+}
+.section-content .goods-info .old-price{
+    font-size:22rpx;color:#ACACAC;
+    text-decoration:line-through;margin-left:16rpx;
+}
+.section-content .goods-info .people-num{font-size:26rpx;color:#ACACAC;}
+
+/* 参团信息 */
+.section-content .join-info{margin:50rpx 0 60rpx;padding:0 20rpx;box-sizing:border-box;}
+.section-content .join-info .icon-img{
+    width:56rpx;height:56rpx;margin-right:34rpx;
+}
+.section-content .join-info .title-msg{
+    font-size:36rpx;color:#0F0F0F;font-weight:bold;
+}
+
+.section-content .join-info .user-list{margin:58rpx 0 34rpx;flex-wrap:wrap;}
+.section-content .join-info .user-list .avatar-item{
+    position:relative;margin:0 20rpx 15rpx 0;
+}
+.section-content .join-info .user-list .avatar-item .user-avatar{
+    width:100rpx;height:100rpx;border-radius:50%;
+    background-color:#ccc;
+}
+.section-content .join-info .user-list .avatar-item .initiator-user-label{
+    background-color:#1577FF;border-radius: 14px 14px 14px 0px;
+    font-size:18rpx;color:#fff;position:absolute;bottom:0;right:0;
+    padding:2rpx 10rpx;
+}
+.section-content .join-info .user-list .empty-avatar-img{
+    width:100rpx;height:100rpx;margin-right:20rpx;margin-bottom:15rpx;
+}
+
+.section-content .join-info .down-count-box{
+    font-size:26rpx;color:#0F0F0F;font-weight:bold;
+    margin-bottom:40rpx;
+}
+.section-content .join-info .down-count-box .down-num{
+    width:48rpx;height:56rpx;border-radius:8rpx;
+    background-color:#FFBB38;color:#fff;
+    font-size:35rpx;font-weight:bold;text-align:center;
+    margin:0 10rpx;line-height:56rpx;
+}
+
+.section-content .join-info .immediately-join-btn{
+    width:382rpx;height:74rpx;color:#fff;font-size:24rpx;
+    padding:0;margin:0;border-radius:38rpx;
+    background-color:#EB1918;line-height:74rpx;
+}
+
+.section-content .join-info .prompt-msg{font-size:18rpx;color:#EB1918;margin-top:15rpx;}
+
+/* 攻略 */
+.section-content .strategy-box{
+    width:710rpx;border:4rpx solid #1577FF;
+    margin:0 auto;border-radius:16rpx;
+}
+.section-content .strategy-box .title-box{
+    font-size:28rpx;color:#1577FF;
+    font-weight:bold;height:80rpx;
+}
+.section-content .strategy-box .text-content{
+    font-size:24rpx;color:#0F0F0F;padding:0 20rpx 20rpx;
+    box-sizing:border-box;
+}
+
+.groupbox {
+    display: flex;
+    border-radius: 16rpx;
+    border: 2rpx solid #1577FF;
+    margin: 0 20rpx;
+    height: 98rpx;
+    align-items: center;
+    justify-content: center;
+}
+.groupbox text {
+    font-size: 28rpx;
+    font-weight: bold;
+    color: #1577FF;
+    padding: 0 6rpx;
+}
+.groupbox .icon {
+    width: 30rpx;
+    height: 34rpx;
+}
+
+
+/* 绑定手机号按钮 */
+.get-phone-btn{
+    position:fixed;top:0;left:0;
+    width:100%;height:100%;
+    background-color:transparent;
+    border-radius:0;
+}
+.get-phone-btn:after{border:0;}

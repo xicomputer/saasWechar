@@ -1,0 +1,94 @@
+.favorites{
+  min-height: 100vh;
+  background: #F9F9F9;
+}
+.favorites-list{
+  padding: 20rpx 30rpx 0;
+}
+.favorites-list-item{
+  margin-top: 20rpx;
+  padding: 30rpx;
+  background: #FFFFFF;
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+.favorites-list-item:first-child{
+  margin-top: 0rpx;
+}
+.favorites-list-item-left{
+  display: flex;
+  align-items: center;
+}
+.favorites-list-item-left-logo{
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 50%;
+}
+.favorites-list-item-left-info{
+  margin-left: 30rpx;
+}
+.favorites-list-item-left-info-name{
+  font-size: 32rpx;
+  font-family: Source Han Sans CN;
+  font-weight: 500;
+  color: #333333;
+  margin-bottom: 10rpx;
+}
+.favorites-list-item-left-info-desc{
+  display: flex;
+  align-items: center;
+}
+.favorites-list-item-left-info-desc-text{
+  font-size: 20rpx;
+  font-family: Source Han Sans CN;
+  font-weight: 400;
+  color: #999999;
+  margin-right: 7rpx;
+}
+.favorites-list-item-left-info-desc-starList{
+  display: flex;
+  align-items: center;
+}
+.favorites-list-item-left-info-desc-starItem{
+  margin-right: 5rpx;
+  width: 17rpx;
+  height: 17rpx;
+}
+
+.favorites-list-item-right{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.favorites-list-item-right-uptext{
+  font-size: 13rpx;
+  font-family: Source Han Sans CN;
+  font-weight: 500;
+  color: #666666;
+}
+.favorites-list-item-right-image{
+  width: 28rpx;
+  height: 28rpx;
+  margin: 5rpx 0;
+}
+.favorites-list-item-right-downtext{
+  font-size: 13rpx;
+  font-family: Source Han Sans CN;
+  font-weight: 500;
+  color: #999999;
+}
+.index-content-content-noData{
+  padding-top: 100rpx;
+  text-align: center;
+}
+.index-content-content-noData-image{
+  width: 326rpx;
+  height: 278rpx;
+}
+.index-content-content-noData-text{
+  font-size: 24rpx;
+  color: #999999;
+  text-align: center;
+  margin-top: 40rpx;
+}

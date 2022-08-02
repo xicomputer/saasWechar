@@ -1,0 +1,54 @@
+<view class="postGoodsComment">
+		<view class="postGoodsComment-goods">
+			<view class="goods-title">商品评价</view>
+			<view class="goods-content">
+				<view class="goods-left">
+					<image class="goods-logo" src="{{commodityLogo}}"></image>
+				</view>
+				<view class="goods-right">
+					<view class="goods-name">{{commodityName}}</view>
+					<view class="goods-star">
+            <block wx:for="{{5}}">
+              <image src="../../img/order/start_b{{startLevel>index?6-startLevel+index:0}}.png" class="start-img" bindtap="changeStartLevel" data-index="{{index+1}}"></image>
+            </block>
+						<view class="start-text">{{startList[startLevel].name}}</view>
+					</view>
+				</view>
+			</view>
+		</view>
+		<view class="postGoodsComment-content">
+			<view class="content-textarea">
+				<textarea bindinput="getInputValue" value="{{content}}" placeholder="请谈谈您对该商品的看法吧" maxlength="100" class="textarea-input"></textarea>
+				<view class="textarea-num">{{contentLen}}/100</view>
+			</view>
+			<view class="content-image">
+				<view wx:for="{{fileList}}" class="image-box">
+					<!-- <image src="{{item.httpAddress}}" class="image-img" bindtap="zoomImg" data-list="{{fileList}}" data-src="{{item.httpAddress}}"></image> -->
+					<image src="{{item}}" class="image-img" bindtap="zoomImg" data-list="{{fileList}}" data-src="{{item}}"></image>
+					<image src="../../img/shanchu.png" class="image-del" bindtap="delImg" data-index="{{index}}"></image>
+				</view>
+				<view wx:if="{{fileList.length<6}}" class="uploadImg" bindtap="uploadImage">
+					<image class="uploadImg-btn" src="/pages/img/order/upload.png"></image>
+				</view>
+			</view>
+		</view>
+		<view class="postGoodsComment-tips">
+			<view class="tips-box">
+				<view class="tips-left">
+					<image src="../../img/order/tips.png" class="tips-img"></image>
+				</view>
+				<view class="tips-right">尊敬的用户，您发布的内容须遵守相关法律法规和订阅通知规则，请严格遵守相关规定，以免违规。</view>
+			</view>
+		</view>
+		<view class="postGoodsComment-footer">
+			<view class="footer-anonymous" bindtap="changeAnonymous">
+        <view class="anonymous-noChoose {{isAnonymous?'isShow':''}}"></view>
+				<image src="../../img/check2.png" class="anonymous-isChoose {{isAnonymous?'':'isShow'}}"></image>
+				<view class="anonymous-text">匿名评价</view>
+			</view>
+			<view class="footer-btn" bindtap="submit">
+				<view class="btn-text">发布</view>
+			</view>
+		</view>
+		<view class="postGoodsComment-fill"></view>
+	</view>

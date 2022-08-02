@@ -1,0 +1,287 @@
+<view>
+    <!-- 自定义tabs -->
+    <van-sticky wx:if="{{storeId==0}}" style="display:none">
+        <view class="tabs-custom" wx:if="{{businessModelTake}}">
+            <view class="tabs-item" style="color:{{orderType==1?'#EB5E32':'#333'}}" bindtap="onChange" data-type="1" wx:if="{{haveLogistics}}">
+                物流配送
+                <view class="active-state" hidden="{{orderType!=1}}"></view>
+            </view>
+            <view class="tabs-item" style="color:{{orderType==2?'#EB5E32':'#333'}}" bindtap="onChange" data-type="2" wx:if="{{haveToCity}}">
+                同城配送
+                <view class="active-state" hidden="{{orderType!=2}}"></view>
+            </view>
+            <view class="tabs-item"  style="color:{{orderType==3?'#EB5E32':'#333'}}"  bindtap="onChange" data-type="3" wx:if="{{haveToStore}}">
+                在线预订
+                <view class="active-state" hidden="{{orderType!=3}}"></view>
+            </view>
+        </view>
+    </van-sticky>
+    <!-- 商家配送头部信息 -->
+    <view class="ps_head" hidden="{{orderType!=1&&orderType!=2}}">
+        <view class="ps_head_box" bindtap="selectAddreee">
+            <view class="ps_head_left" wx:if="{{!submitObj.shipping}}">暂未获取到收货地址</view>
+            <view class="ps_head_left" wx:else>
+                <view class="ps_head_left_item">
+                    {{submitObj.shipping.provincesName}}{{submitObj.shipping.cityName}}{{submitObj.shipping.areaName}}
+                </view>
+                <view class="ps_head_left_item_addressDetail">
+                    {{submitObj.shipping.provincesName}}{{submitObj.shipping.cityName}}{{submitObj.shipping.areaName}}{{submitObj.shipping.address}}
+                </view>
+                <view class="ps_head_left_item">
+                    <text>{{submitObj.shipping.contacts}}</text><text
+                        style="padding-left:10rpx">     </text>
+                </view>
+            </view>
+            <image class="ps_head_right" src="/pages/img/my/enter.png" />
+        </view>
+        <image class="ps_head_image" src="/pages/img/order/address-border.png" />
+    </view>
+    <!-- 门店团购头部信息 -->
+    <view class="zq_head" hidden="{{orderType!=3}}">
+        <view class="zq_head_box">
+            <view class="zq_head_title">
+                <text style="font-weight: bold;">{{submitObj.marchantName}}</text>
+                <view bindtap="addCopy">
+                    <image src="/pages/img/order/copy.png" />复制地址</view>
+            </view>
+            <view bindtap="selectAddress" class="zq_head_content">
+                <view class="zq_head_content_title" style="white-space: nowrap;">商家地址</view>
+                <view class="zq_head_content_desc">
+                    <view class="zq_head_content_desc_address">{{selectedAress.address}} </view>
+                    <image class="imgEnter" src="/pages/img/my/enter.png" />
+                </view>
+            </view>
+            <picker mode="multiSelector" bindchange="bindMultiPickerChange"
+                bindcolumnchange="bindMultiPickerColumnChange" value="{{multiIndex}}" range="{{multiArray}}">
+                <view class="zq_head_content">
+                    <view class="zq_head_content_title">
+                        <text>团购时间</text>
+                        <text style="color:red"> (只支持门店团购/自取)</text>
+                    </view>
+                    <view class="zq_head_content_desc">
+                        <text
+                            style="display:{{showTimeText}}">{{multiArray[0][multiIndex[0]]}}{{multiArray[1][multiIndex[1]]&&multiArray[1][multiIndex[1]]+':00'}}</text>
+                        <text style="color: #666666;" style="display:{{showTime}};white-space:nowrap">请选择消费时间 </text>
+                        <image style="display:{{showTime}};" src="/pages/img/my/enter.png" />
+                    </view>
+                </view>
+            </picker>
+            <view class="zq_head_content">
+                <view class="zq_head_content_title">预留手机</view>
+                <input bindblur="bindconfirmIphone" class="zq_head_content_desc" maxlength="11"
+                    value="{{iphoneValue}}" />
+            </view>
+        </view>
+        <image class="ps_head_image" src="/pages/img/order/address-border.png" />
+    </view>
+    <!-- 商品信息 -->
+    <view class="goods_box">
+        <navigator url="/pages/shopHome/home/home?marchantId={{submitObj.marchantId}}" class="goods_shop">
+            <image class="goods_shop_image" src="{{cartShop.headImage}}" />
+            <view class="goods_shop_text">{{cartShop.appName}}</view>
+        </navigator>
+        <view class="goods">
+            <view class="goods_item" wx:for="{{submitObj.commList}}" wx:key="commodityId">
+                <image class="goods_left" src="{{item.thumbnail}}" />
+                <view class="goods_right">
+                    <view class="goods_title">{{item.commodityName}}</view>
+                    <view class="goods_spec">规格：{{item.itemText}}</view>
+                    <view class="goods_price">
+                        <view class="goods_money">￥{{item.lowPrice}}</view>
+                        <view class="goods_number">
+                            <view class="goods_number_item" bindtap="editNumber" data-num="{{-1}}"
+                                data-index="{{index}}">-
+                            </view>
+                            <view class="goods_number_item">{{item.amount}}</view>
+                            <view class="goods_number_item" bindtap="editNumber" data-num="{{1}}"
+                                data-index="{{index}}">+
+                            </view>
+                        </view>
+                    </view>
+                    <view class="goods_tips">
+                        <view wx:for="{{item.labelsList}}" wx:for-item="tipItem" wx:key="tipItem"
+                            class="goods_tips_item">
+                            {{tipItem}}
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <!-- 商品金额、退款、配送方式、优惠 -->
+    <view class="desc-list">
+        <!-- <view class="item">
+            <view class="title">商品金额</view>
+            <view class="desc desc-active-price">￥{{submitObj.subtotals}}</view>
+        </view> -->
+        <!-- 退款、配送方式只有商家配送才有 -->
+        <block wx:if="{{orderType==1||orderType==2}}">
+            <!-- <view class="item" wx:if="{{orderType==1}}">
+                <view class="title">退款</view>
+                <view class="desc desc-active">{{submitObj.isSupportRefund?'七天无理由退货':'不支持退款'}}</view>
+            </view> -->
+            <view class="item">
+                <view class="title">运费</view>
+                <view class="desc desc-active">{{submitObj.totalFreightmoney}}</view>
+            </view>
+        </block>
+        <view class="item" bindtap="showSale">
+            <view class="title">优惠 <text class="sale_money" wx:if="{{deduct}}">省{{deduct}}元：优惠券</text></view>
+            <!-- {{selectedSaleText}} -->
+            <view class="desc">
+                <view class="text2"  wx:if="{{deduct}}">-￥{{deduct}}元</view>
+                <view class="text" wx:else>{{selectedSaleText}}</view>
+                <image class="img" src="/pages/img/my/enter.png" />
+            </view>
+        </view>
+    </view>
+    <!-- 支付方式、发票、留言 -->
+    <view class="desc-list">
+        <view class="item">
+            <view class="title">支付方式</view>
+            <view class="desc">
+                <view class="text">微信支付</view>
+                <image class="img" src="/pages/img/my/enter.png" />
+            </view>
+        </view>
+        <view class="item">
+            <view class="title">发票</view>
+            <view class="desc" bindtap="selectInvoice">
+                <view class="text" wx:if="{{!submitObj.invoice}}">不开发票</view>
+                <view class="text" wx:else>{{submitObj.invoice.companyName}}</view>
+                <image class="img" src="/pages/img/my/enter.png" />
+            </view>
+        </view>
+        <view class="item">
+            <view class="title">留言</view>
+            <input class="input" value="{{message}}" maxlength="50" bindinput="bindMessage" placeholder="50字内" />
+        </view>
+    </view>
+    <!-- 消息订阅 -->
+    <view class="subscription-box">
+        <view class="subscription">
+            <view class="subscription-title">微信消息订阅（如果取消订阅，将通过系统消息通知）</view>
+            <view class="subscription-descBox">
+                <view class="subscription-desc">
+                    订阅商品及物流动态（含消息推送，下单通知，发货通知等）便于您及时跟踪商品动态
+                </view>
+            </view>
+        </view>
+    </view>
+    <view style="height:160rpx;background: #F2F2F2;"></view>
+    <!-- 底部 -->
+    <view class="footer">
+        <view class="footer_total">
+            <view class="footer-top-box">
+                <view class="footer_total_text"><text style="font-size: 32rpx;">￥</text> {{submitObj.totalSum}}</view>
+            </view>
+            <view class="footer-top-bottom" wx:if="{{submitObj.discountscx>0||submitObj.discountshy||submitObj.totalCouponsmoney>0}}">
+                <view class="footer-top-bottom-item" wx:if="{{submitObj.discountscx>0}}">促销优惠￥{{submitObj.discountscx}}</view>
+                <view class="footer-top-bottom-item" wx:if="{{submitObj.discountshy>0}}">会员优惠￥{{submitObj.discountshy}}</view>
+                <view class="footer-top-bottom-item" wx:if="{{submitObj.totalCouponsmoney>0}}">优惠券优惠￥{{submitObj.totalCouponsmoney}}</view>
+            </view>
+        </view>
+        <!-- <picker mode="multiSelector" bindchange="bindMultiPickerChange"
+                bindcolumnchange="bindMultiPickerColumnChange" value="{{multiIndex}}" range="{{multiArray}}">
+                <view class="zq_head_content">
+                    
+                    <view class="zq_head_content_desc" style="font-size: 22rpx;">
+                        <text
+                            style="display:{{showTimeText}}">{{multiArray[0][multiIndex[0]]}}{{multiArray[1][multiIndex[1]]&&multiArray[1][multiIndex[1]]+':00'}}</text>
+                        <text style="color: #666666;font-size: 22rpx;width: 120rpx;" style="display:{{showTime}};white-space:nowrap">请选择消费时间 </text>
+                        <image style="display:{{showTime}};" src="/pages/img/my/enter.png" />
+                    </view>
+                </view>
+            </picker> -->
+        <image class="footer_btn_image" bindtap="tjdd" src="/pages/img/my/tjddbtn.png" />
+    </view>
+</view>
+<!-- 绑定手机号 -->
+<!-- <van-popup show="{{ showTel }}" bind:close="closeTel" round closeable>
+    <view class="bind-tel-container">
+        <image style="width:225rpx;height:237rpx;margin-top:110rpx" src="https://xssj.letterbook.cn/applet/images/ipone.png"></image>
+        <view class="bind-tel-text">请先绑定手机号，方便及时获取订单消息!</view>
+        <view class="bind-btn-box">
+            <button class="bind-btn" open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">立即绑定</button>
+        </view>
+    </view>
+</van-popup> -->
+<!-- 优惠券 -->
+<van-popup show="{{ showSale }}" bind:close="closeSale" round closeable position="bottom">
+    <view class="sale-box">
+        <view class="sale-title">优惠券</view>
+        <view class="sale-type-box">
+            <view bindtap="canUse" class="{{active==0?'sale-type-title-active sale-type-title':'sale-type-title'}}">
+                可用优惠券({{submitObj.usableCouponsList.length}})</view>
+            <view bindtap="nocanUse" class="{{active==1?'sale-type-title-active sale-type-title':'sale-type-title'}}">
+                不可用优惠券({{submitObj.unusableCouponsList.length}})</view>
+        </view>
+        <scroll-view wx:if="{{ active==0 }}" scroll-y="true" class="scroll-box">
+            <view class="sale-list">
+                <view class="sale-item" wx:for="{{submitObj.usableCouponsList}}" wx:key="index" bindtap="selectSale"
+                    data-index="{{index}}"
+                    style="background-image:url(https://xssj.letterbook.cn/applet/images/sale_bg_sub.png);background-size:100% 173rpx;background-repeat:no-repeat;">
+                    <view class="coupon-left">
+                        <view>￥{{item.deduct}}</view>
+                        <view style="font-size:24rpx;margin-left:18rpx">满{{item.confine}}元使用</view>
+                    </view>
+                    <view class="coupon-right">
+                        <view class="coupon-title">{{item.couponName}}</view>
+                        <view class="coupon-time">截止日期：{{item.endTime}}</view>
+                        <view class="coupon-state">可使用</view>
+                    </view>
+                </view>
+                <!-- 没数据 -->
+                <view class="no-coupon-use" wx:if="{{submitObj.usableCouponsList.length==0}}">
+                    <image style="width:100%;height:440rpx" src="/pages/img/no_notice.png"></image>
+                    暂无可用优惠券
+                </view>
+            </view>
+        </scroll-view>
+        <scroll-view wx:if="{{ active==1 }}" scroll-y="true" class="scroll-box">
+            <view class="sale-list">
+                <view class="sale-item" wx:for="{{submitObj.unusableCouponsList}}" wx:key="index" bindtap="selectSale"
+                    data-index="{{index}}"
+                    style="background-image:url(https://xssj.letterbook.cn/applet/images/sale_bg_sub.png);background-size:100% 173rpx;background-repeat:no-repeat;filter: grayscale(100%);">
+                    <view class="coupon-left">
+                        <view>￥{{item.deduct}}</view>
+                        <view style="font-size:24rpx;margin-left:18rpx">满{{item.confine}}元使用</view>
+                    </view>
+                    <view class="coupon-right">
+                        <view class="coupon-title">{{item.couponName}}</view>
+                        <view class="coupon-time">截止日期：{{item.endTime}}</view>
+                        <view class="coupon-state">{{item.isemploy==1?'未达到满减条件':'已过期'}}</view>
+                    </view>
+                    <image wx:if="{{item.isemploy==3}}" class="yhq-img" src="/pages/img/order/yhq_overtime.png"></image>
+                </view>
+                
+                <!-- 没数据 -->
+                <view class="no-coupon-use" wx:if="{{submitObj.unusableCouponsList.length==0}}">
+                    <image style="width:100%;height:440rpx" src="/pages/img/no_notice.png"></image>
+                    暂无不可用优惠券
+                </view>
+            </view>
+        </scroll-view>
+    </view>
+</van-popup>
+<!-- 自取地址 -->
+<van-popup show="{{ showAddressList }}" bind:close="closeAddressList" round closeable position="bottom">
+    <view class="address-list-pop">
+        <view class="address-item" wx:for="{{addressList}}" wx:key="index" bindtap="comfirmAddress"
+            data-idx="{{index}}">
+            <view class="store-name">{{item.shopName}}</view>
+            <view class="contact-container">
+                <view class="contact-name">联系人:{{item.contact}}</view>
+                <view class="contact-tel">{{item.contactWay}}</view>
+            </view>
+            <view class="address-box">
+                <image class="addressIcon" src="/pages/img/order/addressIcon.png"></image>
+                {{item.address}}
+            </view>
+        </view>
+    </view>
+</van-popup>
+<view class="bg_nocity" wx:if="{{nocityFlag}}" bindtap="closeBgNocity">
+    <image class="nocity_img" src="../imgs/noCity.png"></image>
+    <image class="nocity_close_img" src="../../static/close.png"></image>
+</view>

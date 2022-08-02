@@ -1,0 +1,12 @@
+<!-- 搜索框 -->
+
+<view class='me-fx-row me-fx-sb-c search-box {{searchBoxBg}}' style="top:{{heights}}px;position:{{fixed?'fixed':'relative'}}">
+    <navigator class="search-container-content" hover-class='none' url="/pages/Index/searchGood/searchGood?marchantId={{marchantId}}">
+        <view class='me-fx-row me-fx-start-c search-ipt {{iptBgClass}}'>
+            <image class='search-icon' src='../../../static/search-icon.png'></image>
+            <text>请输入商品名称</text>
+        </view>
+    </navigator>
+    <button class='subscribe-btn {{btnBgClass}}' bindtap="{{subscribe==0?'showDingYue':''}}">{{subscribe === 0 ? '商品订阅' : '已订阅'}}</button>
+</view>
+<view wx:if='{{fixed}}' class='placeholder-empty'></view>

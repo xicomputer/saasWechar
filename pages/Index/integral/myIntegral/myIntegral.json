@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+    "van-datetime-picker": "@vant/weapp/datetime-picker/index",
+    "van-popup": "@vant/weapp/popup/index",
+    "no-data": "/pages/Component/noData/index"
+  },
+  "navigationBarTitleText": "我的积分"
+}

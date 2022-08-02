@@ -1,0 +1,150 @@
+/* pages/special_goods/activity-classify/activity-classify.wxss */
+
+page{background-color:#F3F4F8;}
+.activity-classify-page{height:100vh;}
+
+/*---------- 顶部导航返回按钮 -----------*/
+.top-navigation-box{
+    position:fixed;left:0; width:100%;z-index:100;
+    color:#333;padding-left:30rpx;box-sizing:border-box;
+}
+.top-navigation-box .icon-fanhui5{font-size:75rpx;}
+/* --------------- */
+
+
+@font-face {
+font-family: "icon"; /* Project id 2691355 */
+    src: url('//at.alicdn.com/t/font_2691355_3bgd8uqx5zl.woff2?t=1630027642395') format('woff2'),
+        url('//at.alicdn.com/t/font_2691355_3bgd8uqx5zl.woff?t=1630027642395') format('woff'),
+        url('//at.alicdn.com/t/font_2691355_3bgd8uqx5zl.ttf?t=1630027642395') format('truetype');
+}
+
+.icon {
+    font-family: "icon" !important;
+    font-size: 16px;
+    font-style: normal;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-fanhui5:before {
+    content: "\e600";
+}
+
+.swiper-box{height:366rpx;}
+.swiper-box .banner-img{width:100%;height:100%;background-color:#ccc;}
+
+
+/* 分类导航 */
+.classify-nav-list{height:92rpx;}
+.classify-nav-list .nav-item{
+    flex-shrink:0;padding:0 30rpx;
+    color:#333;font-size:28rpx;
+}
+.classify-nav-list .sel-nav{
+    font-size:32rpx;font-weight:bold;color:#FF0000;
+}
+.classify-nav-list .nav-item .under-line{
+    width:70rpx;height:6rpx;border-radius:6rpx;
+    background-color:transparent;margin-top:5rpx;
+}
+.classify-nav-list .sel-nav .under-line{
+    background-color:#FF0000;
+}
+
+
+/* 商品列表 */
+.product-list .goods-item{
+    background-color:#fff;padding:20rpx;
+    box-sizing:border-box;
+}
+.product-list .goods-item:not(:first-child){margin-top:20rpx;}
+.product-list .goods-item .goods-img{
+    width:220rpx;height:220rpx;border-radius:16rpx;
+    background-color:#ccc;margin-right:20rpx;
+}
+.product-list .goods-item .goods-name{font-size:30rpx;color:#333;font-weight:bold;}
+.product-list .goods-item .reduced-price{
+    background-color:#FFE0E0;color:#FF0000;font-size:18rpx;
+    padding:2rpx 5rpx;border-radius:4rpx;
+}
+.product-list .goods-item .progress-box{
+    font-size:18rpx;color:#999;
+}
+
+/* 秒杀 */
+.product-list .goods-item .price-box{
+    font-size:20rpx;color:#fff;padding:0 20rpx;
+    background-color:#FF0000;
+    border-radius:8rpx 0 0 8rpx; 
+}
+.product-list .goods-item .price-box .price-num{
+    font-size:40rpx;font-weight:bold;
+}
+.product-list .goods-item .price-box .old-price{
+    text-decoration:line-through;margin-left:5rpx;
+}
+
+.product-list .goods-item .right-box{
+    background-color:#1577FF;color:#fff;
+    font-size:26rpx;font-weight:bold;width:200rpx;
+    border-radius:0 8rpx 8rpx 0;
+    
+}
+.product-list .goods-item .ms-icon-img{width:40rpx;height:50rpx;}
+
+
+/* 拼团 */
+.product-list .goods-item .pt-btn-box .price-box{
+    font-size:30rpx;font-weight:bold;
+    background-color:#FEE476;color:#FF0000;
+    border-radius:8rpx 0 0 8rpx; 
+}
+.product-list .goods-item .pt-btn-box .price-symbol{
+    font-size:24rpx;
+}
+.product-list .goods-item .pt-btn-box .price-int{
+    font-size:40rpx;
+}
+.product-list .goods-item .pt-btn-box .old-price{
+    font-size:20rpx;color:#fff;font-weight:normal;
+    text-decoration:line-through;margin-left:5rpx;
+}
+.product-list .goods-item .pt-btn-box .adorn-img{
+    width:26rpx;height:64rpx;
+}
+.product-list .goods-item .pt-btn-box .pt-btn-str{
+    font-size:26rpx;color:#fff;width:125rpx;
+    background-color:#FD4A45;border-radius:0 8rpx 8rpx 0;
+}
+
+
+/* 推荐返利 */
+.product-list .goods-item .tjfl-btn-box .fl-price{
+    border-radius:8rpx 0 0 30rpx;background-color:#FF0000;
+    color:#fff;font-size:24rpx;position:relative;flex:1;
+}
+.product-list .goods-item .tjfl-btn-box .fl-price .ljfx-str{
+    font-size:22rpx;color:#fff;position:absolute;
+    top:5rpx;left:5rpx;
+}
+.product-list .goods-item .tjfl-btn-box .fl-price .price-str{
+    position:relative;top:10rpx;left:10rpx;
+}
+.product-list .goods-item .tjfl-btn-box .fl-price .price-num{
+    font-size:40rpx;font-weight:bold;
+}
+.product-list .goods-item .tjfl-btn-box .fl-adom-img{
+    width:60rpx;height:84rpx;
+}
+.product-list .goods-item .tjfl-btn-box .fl-btn-str{
+    font-size:30rpx;color:#fff;width:168rpx;
+    background-color:#FEE476;
+    border-radius:0 30rpx 8rpx 0;
+}
+
+
+
+.list-scroll-box .list-empty-box{
+    height:500rpx;font-size:30rpx;color:#999;
+}

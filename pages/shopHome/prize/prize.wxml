@@ -1,0 +1,47 @@
+<!--pages/shopHome/prize/prize.wxml-->
+<view class="prize">
+    <view class="me-fx-col me-fx-c-c">
+        <view class="prizeInfo" style="background-image:url('/pages/static/Price_bg.png')">
+            <image class="prize_img" src="./imgs/goldTama.png"></image>
+            <view class="me-fx-row me-fx-sb prize_txt me-fx-start-c">
+                <view class="me-fx-col">
+                    <text class="prize_Number">砸金蛋一等奖</text>
+                    <text class="prize_date">2021年6月5日</text>
+                </view>
+                <text class="prize_ok">去兑奖</text>
+            </view>
+        </view>
+        <view class="prizeInfo" style="background-image:url('/pages/static/Price_bg.png')">
+            <image class="prize_img" src="/pages/static/ge.png"></image>
+            <view class="me-fx-row me-fx-sb prize_txt me-fx-start-c">
+                <view class="me-fx-col">
+                    <text class="prize_Number">九宫格抽奖一等奖</text>
+                    <text class="prize_date">2021年6月5日</text>
+                </view>
+                <text class="prize_ok">去兑奖</text>
+            </view>
+        </view> 
+        <view class="prizeInfo " style="background-image:url('/pages/static/Price_bg.png')">
+            <image class="prize_img" src="./imgs/goldTama.png"></image>
+            <view class="me-fx-row me-fx-sb prize_txt me-fx-start-c">
+                <view class="me-fx-col">
+                    <text class="prize_Number">砸金蛋一等奖</text>
+                    <text class="prize_date">2021年6月5日</text>
+                </view>
+                <text class="prize_ok">去兑奖</text>
+            </view>
+            <view class="isfalse"></view>
+        </view>
+        <view class="prizeInfo" style="background-image:url('/pages/static/Price_bg.png')">
+            <image class="prize_img" src="/pages/static/ge.png"></image>
+            <view class="me-fx-row me-fx-sb prize_txt me-fx-start-c">
+                <view class="me-fx-col">
+                    <text class="prize_Number">九宫格抽奖一等奖</text>
+                    <text class="prize_date">2021年6月5日</text>
+                </view>
+                <text class="prize_ok">去兑奖</text>
+            </view>
+            <view class="isfalse"></view>
+        </view> 
+    </view>
+</view>

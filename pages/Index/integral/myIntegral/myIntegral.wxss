@@ -1,0 +1,127 @@
+/* pages/Index/integral/myIntegral/myIntegral.wxss */
+.my-integral-container{
+  width: 100%;
+  height: 100vh;
+  background-color: #f7f7f7;
+  padding: 20rpx;
+  box-sizing: border-box;
+}
+/* 时间选择头部 */
+.integral-time-select-container{
+  width: 100%;
+  height: 80rpx;
+  border-bottom: 2rpx solid #e4e4e4;
+  box-sizing: border-box;
+  padding: 14rpx 20rpx;
+  display: flex;
+  align-items: center;
+  background-color: #fff;
+  border-radius:  20rpx 20rpx 0 0;
+}
+.integral-time-bg{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  background: #FDDCCD;
+  border-radius: 10rpx;
+  overflow: hidden;
+}
+.integral-content-box{
+  width: 0;
+  flex: 1;
+  height: 48rpx;
+  display: flex;
+  align-items: center;
+  font-size: 28rpx;
+  font-weight: bold;
+  font-family: PingFang SC;
+  color: #666666;
+}
+.start-time-box{
+  width: 220rpx;
+  display: flex;
+  align-items: center;
+  margin-left: 28rpx;
+}
+.time-select-img{
+  width: 48rpx;
+  height: 24rpx;
+}
+/* 积分列表 */
+.integral-list-box{
+  width: 100%;
+  max-height: calc(100vh - 120rpx);
+  background-color: #fff;
+  border-radius: 0 0 20rpx 20rpx;
+}
+.integral-list{
+  width: 100%;
+}
+.integral-item{
+  width: 100%;
+  height: 116rpx;
+  padding: 20rpx 28rpx;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-bottom: 2rpx solid #E4E4E4;
+}
+.integral-list .integral-item:last-child{
+  border: none;
+}
+.integral-top{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.integral-title{
+  height: 40rpx;
+  font-size: 28rpx;
+  font-family: PingFang SC;
+  font-weight: bold;
+  line-height: 40rpx;
+  color: #333333;
+}
+.integral-change{
+  height: 44rpx;
+  font-size: 32rpx;
+  font-family: PingFang SC;
+  font-weight: bold;
+  line-height: 44rpx;
+  color: #FF0000;
+}
+.integral-bottom{
+  height: 28rpx;
+  font-size: 20rpx;
+  font-family: PingFang SC;
+  font-weight: bold;
+  line-height: 28rpx;
+  color: #999999;
+}
+/* 没数据 */
+.no-dynamic {
+  width: 100%;
+  padding: 20rpx 60rpx;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+  .no-dynamic-img {
+    width: 632rpx;
+    height: 368rpx;
+  }
+
+  .no-dynamic-text {
+    font-size: 28rpx;
+    font-family: PingFang SC;
+    font-weight: 400;
+    margin-top: 40rpx;
+    font-size: 26rpx;
+    font-family: PingFang SC;
+    font-weight: 400;
+    line-height: 29rpx;
+    color: #999999;
+  }

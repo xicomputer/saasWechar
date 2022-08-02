@@ -1,0 +1,41 @@
+<view>
+    <view class='top-info'>
+        <view class='title-info'>
+            <view class='title-text'>商家已同意售后申请，等待寄回商品</view>
+            <van-count-down time='{{times}}' use-slot='{{true}}' auto-start='{{true}}'
+                bind:finish='finishFun' bind:change='changeFun' 
+            >
+                <view class='down-time-text'>还剩下{{downTime.days}}天{{downTime.hours}}时{{downTime.minutes}}分</view>
+            </van-count-down>
+            
+        </view>
+        <view class='address-info'>
+            <view class='title-text'>商家收货地址</view>
+            <view class='user-name'>{{merchantAddress.contacts}}：{{merchantAddress.contactWay}}</view>
+            <view class='me-fx-row'>
+                <view class='me-fx-1 address-text'>{{merchantAddress.contactAddress}}</view>
+                <view class='copy-btn' bindtap='copyAddress'>复制</view>
+            </view>
+        </view>
+    </view>
+
+    <view class='logistics-ipt'>
+        <view class='me-fx-row me-fx-sb-c ipt-item'>
+            <text class='title-text'>物流公司：</text>
+            <input class='me-fx-1 ipt' type="text" placeholder="请输入物流公司" value='{{expressName}}'
+                bindinput='iptChange' data-keyname='expressName'
+            />
+        </view>
+        <view class='me-fx-row me-fx-sb-c ipt-item'>
+            <text class='title-text'>物流公司：</text>
+            <input class='me-fx-1 ipt' type="text" placeholder="请输入快递单号" value='{{expressNum}}'
+                bindinput='iptChange' data-keyname='expressNum'
+            />
+            <image src='../imgs/sao-ma.png' bindtap='scanCode' class='sao-ma-img'></image>
+        </view>
+    </view>
+
+    <view class='me-fx-row me-fx-c-c footer-btn-box'>
+        <button class='confirm-btn' bindtap='confrimSalesReturn'>确认退货</button>
+    </view>
+</view>

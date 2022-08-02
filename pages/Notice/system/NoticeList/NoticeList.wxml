@@ -1,0 +1,17 @@
+<view wx:if="{{!noticeList.length}}" class="no-notice">
+  <image class="no-notice-img" src="/pages/img/no_notice.png"></image>
+	<view class="no-notice-text">暂无消息通知</view>
+</view>
+<view class="notice-item" bindtap="toDetail" data-item="{{item}}" wx:for="{{noticeList}}" wx:for-item="item" wx:for-index="index" wx:key="index">
+  <image src="/pages/img/notice/system_notice_img.png" style="width:120rpx;height:120rpx;border-radius:50%;"></image>
+  <view class="notice-right">
+    <view class="notice-top">
+      <view class="notice-title">{{item.title}}</view>
+      <view class="notice-time">{{item.addTime}}</view>
+    </view>
+    <view class="notice-bottom">
+      <view class="notice-content">{{item.content}}</view>
+      <!-- <view class="notice-read" wx:if="{{item.isRead!=1}}"></view> -->
+    </view>
+  </view>
+</view>

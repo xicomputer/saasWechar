@@ -1,0 +1,7 @@
+{
+  "component": true,
+  "usingComponents": {
+    "no-data": "/pages/Component/noData/index",
+    "hotel": "/pages/Index/components/hotel/index"
+  }
+}

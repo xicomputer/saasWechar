@@ -1,0 +1,30 @@
+<view class="favorites">
+  <view class="favorites-list" wx:if="{{favoriteList.length}}">
+    <navigator url="../myShop/myShop?storeId={{item.id}}" class="favorites-list-item" wx:for="{{favoriteList}}" wx:key="index">
+      <view class="favorites-list-item-left">
+        <image src="{{item.headImgUrl}}" class="favorites-list-item-left-logo"></image>
+        <view class="favorites-list-item-left-info">
+          <view class="favorites-list-item-left-info-name">{{item.nickName}}</view>
+          <view class="favorites-list-item-left-info-desc">
+            <view class="favorites-list-item-left-info-desc-text">人缘口碑</view>
+            <view class="favorites-list-item-left-info-desc-starList">
+              <image wx:for="{{item.excellent}}" src="/pages/img/smallShop/star_b.png" class="favorites-list-item-left-info-desc-starItem"></image>
+            </view>
+          </view>
+          <view class="favorites-list-item-left-info-desc">
+            <view class="favorites-list-item-left-info-desc-text">颜值指数</view>
+            <view class="favorites-list-item-left-info-desc-starList">
+              <image wx:for="{{item.score}}" src="/pages/img/smallShop/star_b.png" class="favorites-list-item-left-info-desc-starItem"></image>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class="favorites-list-item-right" data-storeId="{{item.salesUserId}}" data-idx="{{index}}">
+        <view class="favorites-list-item-right-uptext">支持他</view>
+        <image src="/pages/img/smallShop/liked.png" class="favorites-list-item-right-image"></image>
+        <view class="favorites-list-item-right-downtext">{{item.praise}}</view>
+      </view>
+    </navigator>
+  </view>
+  <no-data text="您还没有收藏小店哦！" url="https://xssj.letterbook.cn/applet/images/sj_no_data_img4.png" wx:else></no-data>
+</view>

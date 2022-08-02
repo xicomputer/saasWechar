@@ -1,0 +1,28 @@
+
+<view class="invoice-container">
+  <view wx:if="{{!Invoice.length}}" class="no-invoice">
+    <image class="no-invoice-img" src="/pages/img/no_notice.png"></image>
+    <view class="no-invoice-text">您还没有添加发票……</view>
+  </view>
+  <no-data text="您还没有发票哦！" url="https://xssj.letterbook.cn/applet/images/sj_no_data_img2.png" wx:if="{{!Invoice.length}}"></no-data>
+  <view wx:else class="InvoiceList">
+    <van-radio-group value="{{radio}}" bind:change="change">
+      <view wx:for="{{Invoice}}" wx:key="index" bindtap="backOrder">
+        <van-swipe-cell right-width=" {{65}} ">
+          <view class="InvoiceList-item" bindtap="backOrder" data-item="{{item}}">
+            <van-radio name="{{item.id}}"  checked-color="#ec1919" icon-size="20px"></van-radio>
+            <view class="right">
+              <view class="cpy-name">{{item.companyName}}</view>
+              <view class="cpy-number">税号{{item.companyDp}}</view>
+              <view class="cpy-email">邮箱{{item.email}}</view>
+            </view>
+          </view>
+          <view slot="right" bindtap="clickDel" data-id="{{item.id}}" class="del">删除</view>
+        </van-swipe-cell>
+      </view>
+    </van-radio-group>
+  </view>
+  <view class="addlist-footer-btn">
+    <navigator url="../NewInvoice/NewInvoice" class="saveBtn">添加发票</navigator>
+  </view>
+</view>

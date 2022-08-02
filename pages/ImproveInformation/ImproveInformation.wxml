@@ -1,0 +1,60 @@
+<view class="ifo_bigBox">
+	<view class="fareninfo">法人信息</view>
+	<view class="info">
+		<van-field value="{{useName}}" label="姓名：" placeholder="请填写姓名" bind:blur="onDescribe1" required />
+        <van-field value="{{tel}}" type="tel" label="电话-商家账号:" bind:blur="onDescribe2" placeholder="请填写电话号码" required/>
+        <van-field value="{{card}}" label="身份证号码：" placeholder="请填写身份证号码" bind:blur="onDescribe3" required />
+	</view>
+
+	<view class="fareninfo">商家信息</view>
+		<!--商家信息-->
+    <view class="sj_info" style="padding-bottom:10px;">
+        <view class="sj_category" bindtap="clickCategory">
+             <van-field placeholder-style="font-size: 28rpx;color: #333333;" size='large' value="{{businessName}}" bind:blur="onDescribe4"   label="经营品类" placeholder="请选择经营品类" readonly required />
+        </view>   
+      <van-field placeholder-style="font-size: 28rpx;color: #333333;" size='large'  value="{{shop_pname}}" label="商家名称：" bind:blur="onDescribe5" placeholder="请填写商家名称" required/>
+      <view bindtap="openshopshow">
+      <van-field placeholder-style="font-size: 28rpx;color: #333333;" size='large'  value="{{shop_address}}"  bind:blur="onDescribe6" label="商家地址：" placeholder="请选择商家地址" readonly  required />
+      </view>
+      <van-field placeholder-style="font-size: 28rpx;color: #333333;" size='large'  value="{{shop_detail_address}}" label="详细地址：" bind:blur="onDescribe7" placeholder="请填写详细地址" required/>
+    </view>
+		
+		 <!--营业执照-->
+    <view class="fareninfo"><span style="color:#ee0a24;font-size:11px">*</span>营业执照</view>
+    <view class="business"> 
+      <van-uploader bind:after-read="afterRead4"  bind:oversize="oversize">
+        <image src="{{license}}" class="license" lazy-load="true" mode="aspectFill" ></image>
+      </van-uploader>
+      <view class="business-text">须与上面填写法人信息一致</view>
+    </view>
+    <view class="submit" bindtap="clickSubimt">立即提交</view>
+		<van-popup show="{{ show }}" bind:close="onClose" position="bottom" custom-style="height: 50%;">
+		<van-area
+			area-list="{{ areaList }}"
+			columns-placeholder="{{ ['请选择', '请选择', '请选择'] }}"
+			title="标题"
+			bind:cancel ="cancel"
+			bind:confirm ="confirm"
+			wx:if="{{showarea}}"
+		/>
+		</van-popup>
+		<!--经营品类弹框-->
+    <van-popup show="{{showCategory}}" bind:close="onClose1" position="bottom" style="height:70vh;border-radius: 8px 8px 0 0;">
+        <view style="display:flex">
+            <view class="categories-body-left">
+							<van-sidebar active-key="{{ activeKey }}">
+								<van-sidebar-item wx:for ="{{navList}}" wx:key="item" title="{{item.businessName}}"  data-index="{{item.marchantTypeId}}" bindtap="onChange"></van-sidebar-item>
+							</van-sidebar>
+                <!-- <view class="categories-nav-item {active: navActive === idx}" wx:for="(nav, idx) in{{navList}}" wx:key="idx" bindtap="changeNav(nav, idx)">{{item.businessName }}</view> -->
+        	</view>
+        <view class="categories-body-right">
+            <view class="categories-nav-right-item" wx:for="{{showGoodsList}}" wx:key="item" data-index="{{item}}" bindtap="suerCategories">
+                <image src="{{item.industryImage}}" style="width: 130rpx;height: 130rpx;" ></image>
+                <view style="line-height: 48rpx;" >{{item.businessName }}</view>
+            </view>
+        </view>
+    </view>
+    </van-popup>
+		<van-dialog id="van-dialog" />
+
+</view>

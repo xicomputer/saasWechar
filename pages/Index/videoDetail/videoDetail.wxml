@@ -1,0 +1,28 @@
+<view class="video-container">
+  <video 
+  loop="{{true}}" 
+  autoplay="{{true}}"
+  enable-play-gesture="{{false}}"
+  enable-progress-gesture 
+  show-center-play-btn="{{false}}"
+  controls="{{false}}"
+  src="{{videoInfo.videoUrl}}" class="video-detail"></video>
+  <view class="news-goods-container">
+    <!-- <image src="/pages/img/index/arrow_bottom.png"
+      style="width:48rpx;height:24rpx;position:absolute;top:0;right:0;padding:0 0 20rpx 20rpx"></image> -->
+    <view class="news-goods-top">
+      <view class="news-goods-name">{{videoInfo.commodityName}}</view>
+      <view class="news-goods-price">
+        <view class="news-goods-sale-price">￥{{videoInfo.activityType==1||(videoInfo.activityType==2&&videoInfo.isMember==1)?videoInfo.lowPrice:videoInfo.originalPrice}}</view>
+        <view class="news-goods-origin-price" wx:if="{{videoInfo.activityType==1||(videoInfo.activityType==2&&videoInfo.isMember==1)}}" hidden="{{videoInfo.originalPrice == videoInfo.lowPrice}}">￥{{videoInfo.originalPrice}}</view>
+      </view>
+    </view>
+    <view class="news-goods-bottom">
+      <view class="news-goods-introduction">产品介绍：{{videoInfo.description}}</view>
+      <view bindtap="toBuy" data-id="{{videoInfo.id}}" class="news-goods-btn">立即购买</view>
+    </view>
+  </view>
+  <image wx:if="{{isShare}}" src="/pages/img/index/video_to_store_icon.png" bindtap="toStore" class="to-store-icon"></image>
+</view>
+
+

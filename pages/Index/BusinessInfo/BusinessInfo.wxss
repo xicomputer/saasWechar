@@ -1,0 +1,22 @@
+/* pages/Index/BusinessInfo/BusinessInfo.wxss */
+@import '/styles/me_common.wxss';
+.business{
+    margin: 10rpx 32rpx;
+}
+.business_title{
+    color: #000;
+    font-weight: bold;
+    font-size: 32rpx;
+    margin-bottom: 20rpx;
+}
+.bus_return{
+    width: 29rpx;
+    height: 29rpx;
+}
+.business_info{
+    color: #666666;
+    font-size: 26rpx;
+}
+.business_info>view{
+    margin-bottom: 20rpx;
+}

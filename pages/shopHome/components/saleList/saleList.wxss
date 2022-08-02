@@ -1,0 +1,435 @@
+/* 促销 */
+.no-dynamic {
+  width: 100%;
+  padding: 20rpx 60rpx 0;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+  .no-dynamic-img {
+    width: 632rpx;
+    height: 368rpx;
+  }
+
+  .no-dynamic-text {
+    font-size: 28rpx;
+    font-family: PingFang SC;
+    font-weight: 400;
+    line-height: 42rpx;
+    color: #000;
+    opacity: 1;
+    margin-top: 40rpx;
+    
+    font-size: 26rpx;
+    font-family: PingFang SC;
+    font-weight: 400;
+    line-height: 29rpx;
+    color: #999999;
+  }
+  /* 秒杀商品列表 */
+.goods-list{
+  position: relative;
+  padding: 30rpx;
+  box-sizing: border-box;
+}
+.good-item{
+  width: 100%;
+  display: inline-flex;
+  flex-direction: column;
+  background-color: white;
+  margin-bottom: 20rpx;
+  border-radius: 20rpx;
+  overflow: hidden;
+  box-shadow: 0rpx 6rpx 12rpx rgba(0, 0, 0, 0.16);
+  position: relative;
+}
+.count-down-box{
+  position: absolute;
+  left: 0;
+  top: 0;
+  background: rgba(51, 51, 51, 0.7);
+  width: 100%;
+  height: 48rpx;
+  font-size: 24rpx;
+  font-family: PingFang SC;
+  font-weight: bold;
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  padding-left: 20rpx;
+  box-sizing: border-box;
+}
+.small-count-down-box{
+  height: 40rpx;
+  padding-left: 8rpx;
+  font-size: 20rpx;
+}
+.van-count-down{
+  color:#fff!important;
+  font-size: 24rpx!important;
+}
+.member-lever-box{
+  width: 100%;
+  height: 40rpx;
+  position: absolute;
+  top: 126rpx;
+  left: 0;
+}
+.member-lever-box .van-notice-bar{
+  height: 40rpx!important;
+  background: rgba(51, 51, 51, 0.7)!important;
+  color:#FF5340!important;
+}
+.good-info-list{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 8rpx 8rpx 20rpx;
+  box-sizing: border-box;
+}
+.good-name-box{
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+.cuxiao{
+  width: 50rpx;
+  height: 38rpx;
+  text-align: center;
+  background: linear-gradient(0deg, #FE5C00 0%, #FE1A00 100%);
+  border-radius: 4rpx;
+  font-size: 16rpx;
+  font-weight: bold;
+  line-height: 16rpx;
+  color: #FFFFFF;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 10rpx;
+}
+.good-name{
+  width: 0;
+  flex: 1;
+  height: 50rpx;
+  font-size: 36rpx;
+  font-family: PingFang SC;
+  font-weight: bold;
+  line-height: 50rpx;
+  color: #101010;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  word-break: break-all;
+  word-wrap: break-word;
+}
+.good-describe{
+  font-size: 24rpx;
+  font-family: PingFang SC;
+  font-weight: 400;
+  line-height: 36rpx;
+  color: #999999;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  word-break: break-all;
+  word-wrap: break-word;
+}
+.good-bottom{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10rpx;
+}
+.good-price-box{
+  display: flex;
+  align-items: flex-end;
+}
+.good-activity-price{
+  height: 60rpx;
+  font-size: 44rpx;
+  font-family: PingFang SC;
+  font-weight: bold;
+  line-height: 60rpx;
+  color: #FF5340;
+}
+.good-original-price{
+  font-size: 24rpx;
+  font-family: PingFang SC;
+  font-weight: bold;
+  line-height: 22rpx;
+  color: #999;
+  margin-left: 20rpx;
+  text-decoration: line-through;
+  padding-bottom: 10rpx;
+}
+.member-sale-container{
+  height: 28rpx;
+  font-size: 20rpx;
+  font-family: PingFang SC;
+  font-weight: 600;
+  line-height: 28rpx;
+  color: #FF5340;
+  margin-bottom: 10rpx;
+  margin-left: 20rpx;
+}
+.buy-btn-statu{
+  /* width: 160rpx;
+  height: 52rpx; */
+  padding: 8rpx;
+  background: #000000;
+  border-radius: 8rpx;
+  font-size: 28rpx;
+  font-family: PingFang SC;
+  font-weight: bold;
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.sold-all{
+  background-color: #999;
+}
+/* 底部 */
+.daodile{
+  font-size: 20rpx;
+  text-align: center;
+  color: #999999;
+  font-weight: bold;
+}
+/* 下单弹框 */
+.good-info {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+.good-info .good-des{
+  width: 100%;
+  height: 283rpx;
+  border-bottom: 1rpx solid #ECECEC;
+  padding: 50rpx 40rpx 0rpx 40rpx;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  background: #fff;
+}
+.good-info .good-des .good-img{
+  width: 214rpx;
+  height: 214rpx;
+  
+}
+.good-info .good-des .good-img .img{
+  width: 214rpx;
+  height: 214rpx;
+}
+.good-info .good-des .good-des-inner{
+  flex: 1;
+  height: 90%;
+  padding-left: 30rpx;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  /* justify-content: space-between; */
+}
+.good-price-area, .good-inventory, .good-select-specifications {
+  flex: 1;
+  color: #999999;
+}
+.good-price-area {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #FF3950;
+}
+.good-price-area .good-tag {
+  font-size: 24rpx;
+}
+.good-inventory {
+  font-size: 28rpx;
+}
+.good-inventory .inventory {
+  color: #FF3950;
+}
+.good-select-specifications {
+  font-size: 24rpx;
+}
+.good-info .good-edit{
+  flex: 1;
+  padding: 30rpx 40rpx;
+  background: #fff;
+  overflow: hidden;
+  overflow-y: scroll;
+}
+.good-info .good-edit .good-specifications{
+  overflow: hidden;
+}
+.good-info .good-edit .list-black {
+  padding: 20rpx 0;
+  box-sizing: border-box;
+}
+.good-info .good-edit .list-black .list-item {
+  float: left;
+  overflow: hidden;
+  padding: 4rpx 20rpx;
+  box-sizing: border-box;
+  background: #fff;
+  border: 1rpx solid #ECECEC;
+  margin-bottom: 20rpx;
+  margin-right: 20rpx;
+  border-radius: 6rpx;
+}
+.good-info .good-edit .list-black .active {
+  background: rgba(250, 51, 78, 0.05);
+  border: 1rpx solid #FA334E;
+}
+.good-info .good-edit{
+  flex: 1;
+  padding: 30rpx 40rpx;
+  background: #fff;
+  overflow: hidden;
+  overflow-y: scroll;
+}
+.good-info .good-edit .good-specifications{
+  overflow: hidden;
+}
+.good-info .good-edit .list-black {
+  padding: 20rpx 0;
+  box-sizing: border-box;
+}
+.good-info .good-edit .list-black .list-item {
+  float: left;
+  overflow: hidden;
+  padding: 4rpx 20rpx;
+  box-sizing: border-box;
+  background: #fff;
+  border: 1rpx solid #ECECEC;
+  margin-bottom: 20rpx;
+  margin-right: 20rpx;
+  border-radius: 6rpx;
+}
+.good-info .good-edit .list-black .active {
+  background: rgba(250, 51, 78, 0.05);
+  border: 1rpx solid #FA334E;
+}
+.list-item-img {
+  width: 58rpx;
+  height: 58rpx;
+  vertical-align: middle;
+  margin-right: 15rpx;
+}
+.good-info .good-edit .by-num{
+  margin: 20rpx 0 50rpx 0;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+  .good-info .good-edit .by-num .edit-num-btn{
+    display: inline-block;
+    width: 68rpx;
+    height: 44rpx;
+    margin-left: 15rpx;
+    text-align: center;
+    background: #F6F6F6;
+    border-radius: 6rpx;
+  }
+  .good-info .good-edit .by-num .edit-num{
+    display: inline-block;
+    width: 80rpx;
+    height: 44rpx;
+    margin-left: 15rpx;
+    text-align: center;
+    background: #F6F6F6;
+    border-radius: 6rpx;
+}
+.good-info .btn-area {
+  width: 100%;
+  height: 169rpx;
+  padding-top: 40rpx;
+  box-sizing: border-box;
+  border-top: 1rpx solid #ECECEC;
+  background: #fff;
+  display: flex;
+  flex-direction: row;
+}
+.good-info .btn-area .btn-area-inner {
+  flex: 1;
+  height: 100%;
+}
+.good-info .btn-area .btn {
+  width: 86%;
+  height: 88rpx;
+  line-height: 88rpx;
+  border-radius: 44rpx;
+  color: #fff;
+  font-size: 32rpx;
+}
+.good-info .btn-area .add-cart-btn {
+  background: #E7A124;
+}
+.good-info .btn-area .buy-btn {
+  background: #101010;
+}
+.cartNum{
+  width: 26rpx;
+  height: 26rpx;
+  line-height: 26rpx;
+  background: #FF1D2E;
+  border: 1px solid #FF1C30;
+  border-radius: 50%;
+  font-size: 22rpx;
+  font-family: PingFang SC;
+  font-weight: 400;
+  color: #FFFFFF;
+  opacity: 1;
+  position: absolute;
+  top: -7rpx;
+  right: 34rpx;
+  text-align: center;
+}
+.sale-header{
+  height: 76rpx;
+  background-color: #EB1918;
+  width: 100%;
+  padding: 0rpx 20rpx;
+}
+.sale-header-img{
+  width: 188rpx;
+  height: 36rpx;
+  flex-shrink: 0;
+}
+.list_item_onLookers{
+  color: #ffff !important;
+  padding-left: 10rpx;
+  font-size: 28rpx;
+  padding-right: 20rpx;
+}
+.rematr-sale{
+  display: flex;
+  align-items: center;
+  background: #000;
+  color: #ffffff;
+  font-size: 28rpx;
+  border-radius: 14rpx;
+  padding: 15rpx 0rpx 15rpx 10rpx;
+}
+.sale-img-clock{
+  width: 36rpx;
+  height: 36rpx;
+}
+.time-box{
+  background-color: #fff;
+  color: #000;
+  padding: 8rpx 6rpx;
+  border-radius: 8rpx;
+}
+.time-sybmol{
+  padding: 0rpx 10rpx;
+}

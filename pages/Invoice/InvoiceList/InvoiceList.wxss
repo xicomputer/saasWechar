@@ -1,0 +1,113 @@
+.invoice-container{
+  min-height: 100vh;
+}
+.InvoiceList {
+width: 100%;
+box-sizing: border-box;
+padding-bottom: 210rpx;
+}
+.InvoiceList-item {
+  width: 100%;
+  height: 240rpx;
+  display: flex;
+  padding: 0 40rpx;
+  padding-top: 34rpx;
+  padding-right: 0;
+  padding-bottom: 40rpx;
+  box-sizing: border-box;
+  align-items: flex-start;
+  border-bottom: 1rpx solid #ececec;
+}
+.van-radio {
+  height: 163rpx;
+  align-items: flex-start;
+}
+.right {
+  height: 163rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-left: 20rpx;
+}
+  .cpy-name {
+    font-size: 32rpx;
+    font-family: PingFang SC;
+    font-weight: 400;
+    color:#333;
+    opacity: 1;
+  }
+  .cpy-number {
+    font-size: 28rpx;
+    font-family: PingFang SC;
+    font-weight: 400;
+    color: #999;
+    opacity: 1;
+  }
+  .cpy-email {
+    font-size: 28rpx;
+    font-family: PingFang SC;
+    font-weight: 400;
+    color: #999;
+    opacity: 1;
+  }
+
+.addlist-footer-btn{
+position: fixed;
+bottom: 0;
+width:100%;
+height:210rpx;
+}
+.saveBtn {
+  width: 90%;
+  height: 100rpx;
+  background: linear-gradient(274deg, #FC5800 0%, #F64756 100%);
+  box-shadow: 0px 10px 20px rgba(251, 37, 12, 0.16);
+  border-radius:50rpx;
+  font-size: 32rpx;
+  font-family: PingFang SC;
+  font-weight: bold;
+  text-align: center;
+  line-height: 100rpx;
+  color: rgba(255, 255, 255, 1);
+  margin: 40rpx 5% 0;
+}
+.del {
+width: 130rpx;
+height: 100%;
+background: #ff5340;
+display: flex;
+flex-direction: column;
+justify-content: center;
+text-align: center;
+color: #fff;
+}
+.no-invoice {
+  width: 100%;
+  height: 80vh;
+  padding: 20rpx 60rpx 0;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+  .no-invoice-img {
+    width: 632rpx;
+    height: 368rpx;
+  }
+
+  .no-invoice-text {
+    font-size: 28rpx;
+    font-family: PingFang SC;
+    font-weight: 400;
+    line-height: 42rpx;
+    color: #000;
+    opacity: 1;
+    margin-top: 40rpx;
+    
+    font-size: 26rpx;
+    font-family: PingFang SC;
+    font-weight: 400;
+    line-height: 29rpx;
+    color: #999999;
+  }

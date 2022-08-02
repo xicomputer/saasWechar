@@ -1,0 +1,29 @@
+<!--pages/Index/BusinessInfo/BusinessInfo.wxml-->
+<view class="business">
+    <view class="business_title">资质认证</view>
+    <view class="me-fx-col business_info">
+        <view class="me-fx-row me-fx-sb">
+            <text>店铺名称</text>
+            <text>{{shopInfo.appletInfo.nickName}}</text>
+        </view>
+        <view class="me-fx-row me-fx-sb">
+            <text>主体认证</text>
+            <view bindtap="showImg">
+                <text>{{shopInfo.appletInfo.principalName}}</text>
+                <image class="bus_return" src="../../static/bus_return.png"></image>
+            </view>
+        </view>
+        <view class="me-fx-row me-fx-sb">
+            <text>营业时间</text>
+            <text>{{shopInfo.merchant.openingTime}}-{{shopInfo.merchant.closingTime}}</text>
+        </view>
+        <view class="me-fx-row me-fx-sb">
+            <text>店铺类型</text>
+            <text>{{shopInfo.type?"个体工商户":"企业"}}</text>
+        </view>
+        <view class="me-fx-row me-fx-sb">
+            <text>开店时间</text>
+            <text>{{shopInfo.appletInfo.createDate}}</text>
+        </view>
+    </view>
+</view>

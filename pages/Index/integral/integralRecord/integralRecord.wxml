@@ -1,0 +1,76 @@
+<view class="exchange-record-container">
+  <view class="exchange-record-list" wx:if="{{exchangeRecordList.length}}">
+    <view class="exchange-record-item" wx:for="{{exchangeRecordList}}" wx:key="index">
+      <!-- 订单头部 -->
+      <view class="exchange-top-box">
+        <view class="exchange-order-num">订单号：{{item.integralNumber}}<image bindtap="copyOrder" class="copy_img" src="../../../static/copy.png" data-order="{{item.integralNumber}}"></image></view>
+        <view class="exchange-order-state-box">
+          订单状态:
+          <text class="exchange-order-state-text" wx:if="{{item.state==1}}">{{item.getWay==2?'待发货':'待使用'}}</text>
+          <text class="exchange-order-state-text" wx:if="{{item.state==2}}">已发货</text>
+          <text class="exchange-order-state-text" wx:if="{{item.state==3}}">已完成</text>
+        </view>
+      </view>
+      <!-- 商品信息 -->
+      <view class="goods-info-box">
+        <image class="goods-img" src="{{item.integralPresent.imageUuid}}" mode="aspectFill"></image>
+        <view class="goods-info-content">
+          <view class="goods-name">{{item.integralPresent.presentName}}</view>
+          <view class="goods-price">-{{item.integralPresent.score}}积分</view>
+          <view class="goods-time">兑换时间：{{item.addTime}}</view>
+        </view>
+      </view>
+      <!-- 联系人信息 -->
+      <view class="person-info-container">
+        <view class="person-info-item">
+          <view class="person-info-title">联系人</view>：
+          <view class="person-info-right-text">{{item.contacts}} {{item.contactsWay}}</view>
+        </view>
+        <view class="person-info-item">
+          <view class="person-info-title">联系地址</view>：
+          <view class="person-info-right-text">{{item.address}}</view>
+        </view>
+        <view class="person-info-item">
+          <view class="person-info-title">取货方式</view>：
+          <view class="person-info-right-text">{{item.getWay==2?'商家配送':'门店团购'}}</view>
+        </view>
+        <view class="person-info-item" wx:if="{{item.getWay==2&&item.state==2}}">
+          <view class="person-info-title">快递公司</view>：
+          <view class="person-info-right-text">{{item.expressCompany}}</view>
+        </view>
+        <view class="person-info-item" wx:if="{{item.getWay==2&&item.state==2}}">
+          <view class="person-info-title">快递单号</view>：
+          <view class="person-info-right-text">{{item.expressNo}}</view>
+        </view>
+        <view class="person-info-item" wx:if="{{item.getWay!=2}}">
+          <view class="person-info-title">到店时间</view>：
+          <view class="person-info-right-text">{{item.arriveTimes}}</view>
+        </view>
+        <view class="person-info-item">
+          <view class="person-info-title">留言</view>：
+          <view class="person-info-right-text">{{item.message?item.message:'暂无留言'}}</view>
+        </view>
+      </view>
+      <!-- 按钮 -->
+      <view class="integral-btn-container">
+        <view class="integral-btn" wx:if="{{item.state==1&&item.getWay!=2}}" bindtap="showQR" data-num="{{item.integralNumber}}">核销</view>
+        <view class="integral-btn" wx:if="{{item.state==2&&item.getWay==2}}" bindtap="comfirmGet" data-num="{{item.integralNumber}}">确认收货</view>
+        <view class="integral-btn integral-btn-no" wx:if="{{item.state==3}}">已完成</view>
+      </view>
+    </view>
+  </view>
+  <no-data text="暂无订单~" url="https://xssj.letterbook.cn/applet/images/sj_no_data_img1.png" wx:else></no-data>
+</view>
+<!-- 二维码核销 -->
+<van-overlay show="{{showQRCode}}" bind:click="onCloseQR">
+    <view class="QR-box" catchtap="catch">
+        <view class="QR-top">
+          出示二维码扫码核销
+          <image class="close-icon" src="/pages/img/goods/share_close.png" catchtap="onCloseQR"></image>
+        </view>
+        <view class="numer-deal-box" style="padding:40rpx 50rpx;">
+            <view class="clicked-number">{{verification}}</view>
+        </view>
+        <canvas wx:if="{{showQRCode}}" style="width:110px;height:110px;margin:0 auto;" canvas-id="myQrcode"></canvas>
+    </view>
+</van-overlay>

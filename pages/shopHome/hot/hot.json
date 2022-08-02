@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "热销视频",
+  "usingComponents": {
+    "video-list":"../../Component/videoList/index",
+    "no-data": "/pages/Component/noData/index"
+  }
+}

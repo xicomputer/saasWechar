@@ -1,0 +1,4 @@
+<view>
+    <text wx:if='{{!useSlot}}'>{{showText}}</text>
+    <slot wx:else></slot>
+</view>

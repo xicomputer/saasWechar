@@ -1,0 +1,2 @@
+<!--pages/MyFollows/MyFollows.wxml-->
+<web-view src="https://xssj.letterbook.cn/#/MyFollows"></web-view>

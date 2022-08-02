@@ -1,0 +1,15 @@
+
+<view class="btn-container">
+  <view class='menu-list' hidden='{{isShow}}'>
+    <view class="menu-item {{isFold?item.inAnimation:item.outAnimation}}" wx:for='{{navs}}' wx:key="index" data-url="{{item.url}}" bindtap="toJump"
+    style="bottom:{{item.bottom}};right:{{item.right}};">
+      <image mode='widthFix' src='{{item.src}}' class="menu-icon"></image>
+      <!-- <text class='menu-name'>{{item.name}}</text> -->
+      <view class="btn-num" wx:if="{{item.name=='购物车' && cartnum!=0}}">{{cartnum}}</view>
+    </view>
+  </view>
+  <view catchtap="onClickAdd" class="btn-main">
+    <image class="btn-img {{isShow?'':(isFold?'menuOpen':'menuClose')}}" src="{{isFold?'../../../img/my/menu-close.png':'../../../img/my/menu-open.png'}}" />
+    <view class="btn-num" wx:if="{{!isFold && cartnum!=0}}">{{cartnum}}</view>
+  </view>
+</view>

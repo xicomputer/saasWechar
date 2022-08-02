@@ -1,0 +1,892 @@
+.details{
+  width: 750rpx;
+  min-height: 100vh;
+  background: #F8F8F8;
+  padding-bottom: 180rpx;
+  box-sizing: border-box;
+}
+.details_topTime_time{
+  margin-top: 20rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #000000;
+}
+.details_topTime_time_box{
+  background: #000000;
+  border-radius: 50%;
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #FFFFFF;
+  min-width: 56rpx;
+  height: 56rpx;
+  line-height: 56rpx;
+  text-align: center;
+}
+.details_topTime_time_box_big{
+  width: 74rpx;
+  height: 74rpx;
+  line-height: 74rpx;
+  font-size: 48rpx;
+}
+.details_topTime_time_box_icon{
+  margin: 0 8rpx;
+}
+/* 轮播图 */
+.details_swiper{
+  width: 100%;
+  height: 500rpx;
+}
+.details_swiper_item{}
+.details_swiper_item image{
+  width: 100%;
+  height: 100%;
+}
+.details_swiper_count{
+  position: absolute;
+  bottom: 14rpx;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  width: 88rpx;
+  height: 34rpx;
+  background: rgba(0, 0, 0, 0.51);
+  border-radius: 20rpx 0rpx 0rpx 20rpx;
+  font-weight: bold;
+  color: #FFFFFF;
+  font-size: 24rpx;
+}
+.details_swiper_sumcount{
+  font-size: 16rpx;
+}
+/* 拍卖信息 */
+.details_auction{
+  width: 100%;
+  background-size: 100% 164rpx;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+}
+.details_auction_bottom{
+  margin-top: 20rpx;
+  width: 100%;
+  height: 80rpx;
+  padding: 0 20rpx;
+  box-sizing: border-box;
+  background: #FFFFFF;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.details_auction_bottom_left{
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+.details_auction_bottom_left_text{
+  font-weight: bold;
+  color: #333333;
+}
+.details_auction_bottom_left_price{
+  margin-left: 20rpx;
+  font-size: 56rpx;
+  font-weight: bold;
+  color: #0B7EFF;
+}
+.details_auction_bottom_right{
+  font-size: 32rpx;
+  font-weight: 500;
+  color: #FFFFFF;
+  background: #000000;
+  border-radius: 28rpx;
+  padding: 6rpx 14rpx;
+  margin-right: 8rpx;
+}
+.details_auction_left_info{
+  display: flex;
+  align-items: center;
+}
+.details_auction_left_logo{
+  position: relative;
+}
+.details_auction_left_win{
+  width: 48rpx;
+  height: 48rpx;
+  position: absolute;
+  top: -24rpx;
+  left: -22rpx;
+}
+.details_auction_left_image{
+  width: 44rpx;
+  height: 44rpx;
+  border-radius: 50%;
+}
+.details_auction_left_name{
+  margin-left: 16rpx;
+  font-size: 24rpx;
+  font-weight: bold;
+  color: #333333;
+}
+.details_auction_left_text{
+  margin-left: 16rpx;
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333333;
+}
+.details_auction_right{
+  width: 450rpx;
+  margin-top: 94rpx;
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #FFFFFF;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.details_auction_right_endtime{
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #999999;
+}
+/* 商品名称、分享 */
+.details_goods{
+  width: 100%;
+  background: #FFFFFF;
+  border-radius: 0rpx 0rpx 20rpx 20rpx;
+  padding: 22rpx 0 12rpx;
+  box-sizing: border-box;
+  display: flex;
+}
+.details_goods_name{
+  width: 100%;
+  background: #C48D44;
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #FFFFFF;
+  padding: 20rpx 28rpx;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+}
+.details_goods_left{
+  width: 590rpx;
+  font-size: 30rpx;
+  font-weight: bold;
+  line-height: 42rpx;
+  color: #000000;
+  padding: 0 24rpx 0 20rpx;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+}
+.details_goods_right{
+  width: calc(100% - 590rpx);
+  height: 100%;
+  padding: 24rpx 0 16rpx;
+  border-left: 2rpx solid #F4F4F4;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 22rpx;
+  font-weight: 400;
+  color: #333333;
+  position: relative;
+}
+.details_goods_right image{
+  width: 39rpx;
+  height: 39rpx;
+}
+.details_goods_right button{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+}
+/* 标题 */
+.details_title{
+  display: flex;
+  align-items: center;
+}
+.details_title_left{
+  display: flex;
+  align-items: center;
+}
+.details_title_icon{
+  width: 12rpx;
+  height: 32rpx;
+  background: linear-gradient(149deg, #FFB8A9 0%, #E8320C 100%);
+}
+.details_title_text{
+  margin-left: 8rpx;
+  font-size: 24rpx;
+  font-weight: bold;
+  color: #333333;
+}
+/* 竞价榜 */
+.details_bidlist{
+  width: 100%;
+  background: #FFFFFF;
+  border-radius: 20rpx;
+}
+.details_bidlist_title{
+  padding: 18rpx 20rpx 0;
+  justify-content: space-between;
+}
+.details_bidlist_title_right{
+  font-size: 24rpx;
+  font-weight: bold;
+  color: #333333;
+  display: flex;
+  align-items: center;
+}
+.details_bidlist_title_line{
+  width: 2rpx;
+  height: 30rpx;
+  background-color: #CCCCCC;
+  margin: 0 20rpx;
+}
+.details_bidlist_item{
+  width: 100%;
+  height: 100rpx;
+  border-bottom: 2rpx solid #F4F4F4;
+  padding: 0 20rpx 0 44rpx;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.details_bidlist_left{
+  display: flex;
+  align-items: center;
+}
+.details_bidlist_index{
+  font-size: 36rpx;
+  font-weight: bold;
+}
+.details_bidlist_image{
+  width: 60rpx;
+  height: 60rpx;
+  border-radius: 50%;
+  margin-left: 28rpx;
+}
+.details_bidlist_name{
+  margin-left: 22rpx;
+  font-size: 24rpx;
+  font-weight: bold;
+}
+.details_bidlist_text{
+  margin-left: 48rpx;
+  font-size: 24rpx;
+  font-weight: bold;
+}
+.details_bidlist_right{
+  font-size: 24rpx;
+  font-weight: bold;
+}
+.color0{
+  color: #FF0000;
+}
+.color1{
+  color: #666666;
+}
+.color2{
+  color: #999999;
+}
+.details_bidlist_foot{
+  width: 100%;
+  height: 54rpx;
+  font-size: 22rpx;
+  font-weight: bold;
+  line-height: 54rpx;
+  color: #333333;
+  text-align: center;
+}
+/* 正在围观、发货方式、拍卖说明、用户须知 */
+.details_info{
+  margin-top: 20rpx;
+  width: 100%;
+  background: #FFFFFF;
+  border-radius: 20rpx;
+  overflow: hidden;
+}
+/* 正在围观 */
+.details_onlooker{
+  width: 100%;
+  height: 96rpx;
+  padding: 0 20rpx;
+  box-sizing: border-box;
+  border-bottom: 2rpx solid #F4F4F4;
+}
+.details_onlooker_image{
+  margin-left: 20rpx;
+  display: flex;
+  position: relative;
+  top: -20rpx;
+}
+.details_onlooker_image image{
+  width: 56rpx;
+  height: 56rpx;
+  border-radius: 50%;
+  position: absolute;
+  top: 0;
+}
+.details_onlooker_image view{
+  width: 56rpx;
+  height: 56rpx;
+  font-size: 24rpx;
+  font-weight: 400;
+  color: #FFFFFF;
+  background: rgba(0, 0, 0, 0.59);
+  border-radius: 50%;
+  line-height: 56rpx;
+  text-align: center;
+  position: absolute;
+  top: 0;
+}
+/* 发货方式 */
+.details_ship{
+  width: 100%;
+  height: 76rpx;
+  padding: 0 20rpx;
+  box-sizing: border-box;
+  border-bottom: 2rpx solid #F4F4F4;
+}
+.details_ship_list{
+  margin-left: 20rpx;
+  display: flex;
+  align-items: center;
+}
+.details_ship_list view{
+  margin-right: 16rpx;
+  color: #999999;
+  border: 2rpx solid #999999;
+  border-radius: 4rpx;
+  font-size: 22rpx;
+  font-weight: 500;
+  padding: 2rpx 4rpx;
+}
+/* 拍卖说明 */
+.details_desc{
+  width: 100%;
+  padding: 0 20rpx 20rpx;
+  box-sizing: border-box;
+  border-bottom: 2rpx solid #F4F4F4;
+}
+.details_desc_title{
+  margin: 20rpx 0 16rpx;
+}
+.details_desc_content{}
+.details_desc_item{
+  margin-top: 22rpx;
+  display: flex;
+  align-items: center;
+}
+.details_desc_label{
+  width: 120rpx;
+}
+.details_desc_label view{
+  font-size: 20rpx;
+  font-weight: 500;
+  color: #333333;
+}
+.details_desc_desc{
+  margin-left: 26rpx;
+  padding: 0 10rpx;
+  border: 2rpx solid #FA5151;
+  border-radius: 8rpx;
+  font-size: 20rpx;
+  font-weight: bold;
+  color: #FA5151;
+}
+/* 用户须知 */
+.details_notice{
+  width: fit-content;
+  padding: 8rpx 12rpx;
+  border: 2rpx solid #FF0000;
+  border-radius: 8rpx;
+  font-size: 24rpx;
+  font-weight: 500;
+  color: #FF0000;
+  margin: 20rpx auto;
+}
+/* 拍卖详情 */
+.details_details{
+  margin-top: 20rpx;
+  width: 100%;
+  background: #FFFFFF;
+  border-radius: 20rpx;
+  padding: 20rpx;
+  box-sizing: border-box;
+}
+.details_details image{
+  width: 100%;
+  margin-top: 20rpx;
+  vertical-align: bottom;
+}
+/* 底部栏 */
+.details_bottom{
+  width: 100%;
+  height: 120rpx;
+  background: #FFFFFF;
+  box-shadow: 0rpx 0rpx 54rpx rgba(0, 0, 0, 0.11);
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+}
+.details_bottom_item{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+.details_bottom_item image{
+  width: 40rpx;
+  height: 40rpx;
+}
+.details_bottom_item_text{
+  font-size: 18rpx;
+  color: #333333;
+}
+.details_bottom_btn{
+  width: 484rpx;
+  height: 100%;
+  background: #FA2D2D;
+  box-shadow: 0rpx 2rpx 6rpx rgba(0, 0, 0, 0.16);
+  border-radius: 44rpx 0rpx 0rpx 44rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 36rpx;
+  font-weight: 600;
+  color: #FFFFFF;
+}
+.details_bottom_btn_tips{
+  font-size: 20rpx;
+  font-weight: 500rpx;
+}
+.details_bottom_more{
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, #F95244 0%, #FF1400 100%);
+  font-size: 28rpx;
+  font-weight: 500;
+  color: #FFFFFF;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+/* 竞拍详情 */
+.bid{
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 584rpx;
+  background: #FFFFFF;
+  border-radius: 20rpx 20rpx 0rpx 0rpx;
+}
+.bid_title{
+  width: 100%;
+  height: 84rpx;
+  text-align: center;
+  line-height: 84rpx;
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333333;
+}
+.bid_close{
+  width: 60rpx;
+  height: 60rpx;
+  text-align: right;
+  position: absolute;
+  top: 20rpx;
+  right: 20rpx;
+}
+.bid_close image{
+  width: 28rpx;
+  height: 28rpx;
+}
+.bid_item{
+  border-top: 2rpx solid #F4F4F4;
+  border-bottom: none;
+}
+/* 加价详情 */
+.addprice{
+  width: 100%;
+  padding: 20rpx;
+  box-sizing: border-box;
+  background: #FFFFFF;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  border-bottom: 2rpx solid #F4F4F4;
+}
+.addprice_item{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.addprice_item_left{
+  display: flex;
+}
+.addprice_item_name{
+  margin-right: 8rpx;
+  width: 96rpx;
+  font-size: 24rpx;
+  font-weight: bold;
+  color: #333333;
+}
+.addprice_item_btn{
+  margin-right:20rpx;
+  padding: 6rpx 46rpx;
+  border-radius: 34rpx;
+  height: 44rpx;
+  font-size: 32rpx;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #000000;
+  background: #E4E4E4;
+  margin-bottom:20rpx;
+}
+
+.addprice_item_btnActive{
+  color: #FF0016;
+  background: #FDDCCD;
+}
+.addprice_item_right{
+  width: 40rpx;
+  height: 32rpx;
+}
+.addprice_item_nowPrice{
+  margin-right: 0;
+  color: #FF0000;
+}
+.addprice_item_myPrice{
+  margin-right: 0;
+  color: #FFFFFF;
+  background: #FF0000;
+}
+/* 支付 */
+.payment{
+  padding: 20rpx;
+  width: 100%;
+  height: 470rpx;
+  background: #FFFFFF;
+  border-radius: 20rpx 20rpx 0rpx 0rpx;
+  box-sizing: border-box;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+}
+.payment_close{
+  width: 28rpx;
+  height: 28rpx;
+  float: right;
+}
+.payment_info{
+  margin-top: 40rpx;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+.payment_info_left{
+  font-size: 36rpx;
+  font-weight: 600;
+  color: #000000;
+}
+.payment_info_right{
+  font-size: 60rpx;
+  font-weight: bold;
+  color: #FF0000;
+}
+.deposit-text{
+  font-size:28rpx;font-weight:bold;
+  margin-top:40rpx;
+}
+.payment_desc{
+  margin-top: 70rpx;
+  width: 100%;
+  background: #F4F8FF;
+  border-radius: 16rpx;
+  font-size: 24rpx;
+  font-weight: bold;
+  color: #333333;
+  display: flex;
+  justify-content: center;
+  align-items:center;
+  position: relative;
+  padding: 12rpx 0;
+  box-sizing: border-box;
+}
+.payment_desc image{
+  width: 26rpx;
+  height: 26rpx;
+  margin-right: 18rpx;
+}
+.payment_way{
+  margin-top: 20rpx;
+}
+.payment_btn{
+  width: 100%;
+  height: 92rpx;
+  background: #E23E3E;
+  border-radius: 46rpx;
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #FFFFFF;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 58rpx;
+}
+.payment_doc{
+  margin: 30rpx 0 6rpx;
+  font-size: 24rpx;
+  font-weight: bold;
+  color: #FF0000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.payment_doc_text{
+  font-size: 24rpx;
+  font-weight: bold;
+  color: #666666;
+  margin: 0 20rpx 0 14rpx;
+}
+/* 拍卖 */
+.won{
+  width: 484rpx;
+  height: 576rpx;
+  background: #FFFFFF;
+  border-radius: 20rpx;
+  background-size: 484rpx 410rpx;
+  background-repeat: no-repeat;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.won image{
+  width: 128rpx;
+  height: 128rpx;
+  border-radius: 50%;
+  margin-top: 110rpx;
+}
+.won_title{
+  margin-top: 8rpx;
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #FFFFFF;
+}
+.won_price{
+  margin: 16rpx 0 110rpx;
+  font-size: 20rpx;
+  font-weight: bold;
+  color: #FFFFFF;
+}
+.won_desc{
+  font-size: 24rpx;
+  font-weight: 400;
+  color: #999999;
+}
+.won_btn{
+  margin-top: 26rpx;
+  width: 484rpx;
+  height: 60rpx;
+  text-align: center;
+  line-height: 60rpx;
+  background: #6467F0;
+  border-radius: 8rpx;
+  display: flex;
+}
+.won_btn view{
+  flex: 1;
+  font-size: 24rpx;
+  font-weight: bold;
+  color: #FFFFFF;
+}
+/* 蒙版 */
+.mask{
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.7);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 12;
+}
+.mask_center{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.btn_centern{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.first{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 40rpx 0 20rpx;
+}
+.first_money{
+  margin-top: 6rpx;
+  font-size: 24rpx;
+  font-weight: bold;
+  color: #333333;
+}
+.pass{
+  width: 484rpx;
+  height: 560rpx;
+  background: #FFFFFF;
+  border-radius: 20rpx;
+}
+.pass_image{
+  width: 100%;
+  height: 328rpx;
+  vertical-align: bottoms;
+}
+.pass_box{
+  height: 232rpx;
+  padding: 14rpx 0 38rpx 0;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+.pass_text{
+  text-align: center;
+  font-size: 24rpx;
+  font-weight: 400;
+  color: #999999;
+}
+.pass_btn{
+  width: 364rpx;
+  height: 70rpx;
+  line-height: 70rpx;
+  text-align: center;
+  background: #333333;
+  border-radius: 44rpx;
+  font-size: 36rpx;
+  font-weight: 400;
+  color: #FFFFFF;
+}
+.guanzhu{
+  width: 96rpx;
+  height: 96rpx;
+  position: fixed;
+  top: 850rpx;
+  right: 20rpx;
+  z-index: 10;
+}
+.han_price{
+  width: 484rpx;
+  height: 502rpx;
+  background: #FFFFFF;
+  border-radius: 20rpx;
+}
+.han_price image{
+  width: 484rpx;
+  height: 288rpx;
+}
+.han_price_text{
+  font-size: 44rpx;
+  font-weight: bold;
+  color: #000000;
+  text-align: center;
+  margin-top: 10rpx;
+}
+.ban_price_btn{
+  margin-top: 32rpx;
+  padding: 0 60rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.ban_price_cancelbtn{
+  width: 172rpx;
+  height: 62rpx;
+  border: 2rpx solid #666666;
+  border-radius: 44rpx;
+  font-size: 24rpx;
+  font-weight: bold;
+  line-height: 62rpx;
+  color: #666666;
+  text-align: center;
+}
+.ban_price_surelbtn{
+  width: 172rpx;
+  height: 62rpx;
+  background: linear-gradient(180deg, #FA5151 0%, #FF0000 100%);
+  border-radius: 44rpx;
+  font-size: 24rpx;
+  font-weight: bold;
+  line-height: 62rpx;
+  color: #FFFFFF;
+  text-align: center;
+}
+.yanchibox{
+  height: 300rpx;
+  display: flex;
+  position: relative;
+}
+.yanchiTime{
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 52rpx;
+  padding: 8rpx 0;
+  background: linear-gradient(180deg, #F95244 0%, #FF1400 100%);
+  border-radius: 26rpx;
+  font-size: 24rpx;
+  font-weight: bold;
+  color: #FFFFFF;
+  text-align: center;
+}
+.yanchiTime image{
+  width: 24rpx;
+  height: 24rpx;
+}
+.yanchi_right{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+.yanchi_textbox{
+  width: 620rpx;
+  box-sizing: border-box;
+  padding: 16rpx 22rpx;
+  background: #000000;
+  border-radius: 20rpx;
+  color: #FFFFFF;
+  font-weight: bold;
+  font-size: 22rpx;
+  position: absolute;
+  top: 260rpx;
+  left: 42rpx;
+  z-index: 999;
+}

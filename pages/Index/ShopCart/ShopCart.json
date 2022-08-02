@@ -1,0 +1,17 @@
+{
+  "usingComponents": {
+    "van-sidebar-item": "@vant/weapp/sidebar-item/index",
+    "van-sidebar": "@vant/weapp/sidebar/index",
+    "no-data": "/pages/Component/noData/index",
+    "van-dialog": "@vant/weapp/dialog/index",
+    "van-toast": "@vant/weapp/toast/index",
+    "van-field": "@vant/weapp/field/index",
+    "van-overlay": "@vant/weapp/overlay/index",
+    "store-close": "/pages/Component/storeClose/index",
+    "van-count-down": "@vant/weapp/count-down/index"
+  },
+  "navigationBarTitleText": "购物车",
+  "enablePullDownRefresh": true,
+  "backgroundTextStyle": "dark",
+  "onReachBottomDistance": 50
+}

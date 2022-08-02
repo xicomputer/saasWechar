@@ -1,0 +1,75 @@
+<!--pages/tabPage/me/me.wxml-->
+<view class='me-page-container'>
+
+    <!-- 头部 -->
+    <view class='top-content-box'>
+        <image class='top-box-bg' src=''></image>
+
+        <view class='content-box'>
+            <view class='user-base-info'>
+                <open-data class='avatar-img' type='userAvatarUrl'></open-data>
+                <view class='user-name-info'>
+                    <view class='name-box'>
+                        <open-data class='user-name' type='userNickName'></open-data>
+                        <view>
+                            <image class='me-top-nav-icon' src='../../../image/tabpage/seting.png' bindtap="toSetUp"></image>
+                            <image class='me-top-nav-icon'  bindtap="toNotice" style='margin-left:30rpx;width:44rpx' src='../../../image/tabpage/msg.png'></image>
+                        </view>
+                        <view class="noticeNum" wx:if="{{noticeNum>0}}">{{noticeNum}}</view>
+                    </view>
+                    <navigator hover-class='none' url="/pages/Modify/Modify">{{userInfo.signature||'点击设置个性签名'}}</navigator>
+                </view>
+            </view>
+
+            <view class='plate-box logistics-order-plate'>
+                <view class='plate-title'>物流订单</view>
+                <view class='nav-list-container'>
+                    <navigator hover-class='none' class='nav-item-box' wx:for='{{logisticsOrderList}}' wx:key='index' url="/pages/order/orderList/orderList?activeTab=2&tabsItem={{index}}">
+                        <image class='nav-icon-img' src='{{"../../../image/tabpage/"+item.icon+".png"}}'></image>
+                        <text>{{item.name}}</text>
+                        <view class="number" wx:if="{{orderNum[index]}}">{{orderNum[index]}}</view>
+                    </navigator>
+                </view>
+            </view>
+        </view>
+    </view>
+
+    <view class='residue-plate-container'>
+        <view class='plate-box' style='margin-bottom:10px;'>
+            <view class='plate-title'>同城配送</view>
+            <view class='nav-list-container'>
+                <navigator hover-class='none' class='nav-item-box' wx:for='{{distributionList}}' wx:key='index' url="/pages/order/orderListCity/orderListCity?tabsitem={{index}}">
+                    <image class='nav-icon-img' src='{{"../../../image/tabpage/"+item.icon+".png"}}'></image>
+                    <text>{{item.name}}</text>
+                    <view class="number" wx:if="{{cityOrderNum[index]}}">{{cityOrderNum[index]}}</view>
+                </navigator>
+            </view>
+        </view>
+
+        <view class='plate-box' style='margin-bottom:10px;'>
+            <view class='plate-title'>预定/自取</view>
+            <view class='nav-list-container'>
+                <navigator hover-class='none' class='nav-item-box' wx:for='{{reservationList}}' wx:key='index' url="/pages/order/orderListTake/orderListTake?tabsitem={{index}}">
+                    <image class='nav-icon-img' src='{{"../../../image/tabpage/"+item.icon+".png"}}'></image>
+                    <text>{{item.name}}</text>
+                    <view class="number" wx:if="{{toStoreOrderNum[index]}}">{{toStoreOrderNum[index]}}</view>
+                </navigator>
+            </view>
+        </view>
+
+        <view class='plate-box' style='margin-bottom:10px;'>
+            <view class='plate-title'>我的工具</view>
+            <view class='nav-list-container'>
+                <navigator hover-class='none' class='nav-item-box' wx:for='{{toolList}}' 
+                    wx:key='index' url="{{item.url}}"
+                >
+                    <image class='nav-icon-img2' src='{{item.icon+".png"}}'></image>
+                    <text>{{item.name}}</text>
+                    <view class="number" wx:if="{{toStoreOrderNum[index]}}">{{toStoreOrderNum[index]}}</view>
+                </navigator>
+            </view>
+        </view>
+    </view>
+</view>
+
+<navigator hover-class='none' wx:if="{{buton}}" url="/pages/shopHome/home/home" class="butt">授权登录</navigator>

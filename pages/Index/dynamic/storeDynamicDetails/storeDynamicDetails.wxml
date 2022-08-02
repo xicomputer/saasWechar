@@ -1,0 +1,89 @@
+  <!-- 推荐酒店 -->
+  <!-- <hotel wx:if="{{hotelList.length}}" hotelList="{{hotelList}}"></hotel> -->
+  
+<view class="store-danamic-item">
+    <view class="store-danamic-content">
+      <view class="store-info-box">
+        <image class="store-dynamic-logo" src="{{dynamicData.userInfo.logoPic}}"></image>
+        <view class="store-dynamic-box-info">
+          <view class="store-dynamic-name">{{dynamicData.userInfo.nickname}}</view>
+          <view class="store-dynamic-time">{{dynamicData.addTime}}</view>
+        </view>
+        <view class="dingyue-btn" catchtap="{{subscribe?'':'showDingYue'}}" style="{{subscribe?'background-color:#e4e4e4;color:#FFF':''}}">{{subscribe?'已订阅':'+订阅'}}</view>
+      </view>
+      <view class="store-dynamic-text">{{dynamicData.content}}</view>
+      <view class="store-dynamic-img-list">
+        <image class="{{dynamicData.commodity?'store-dynamic-img':'store-dynamic-img store-dynamic-big-img'}}" catchtap="imgClick" data-list="{{dynamicData.imagList}}" data-src="{{pitem}}" mode="aspectFill" src="{{pitem}}" wx:for="{{dynamicData.imagList}}" wx:for-item="pitem" wx:key="index" hidden="{{(!dynamicData.commodity&&index>=1)||(dynamicData.commodity&&index>=2)}}">
+          <view class="store-dynamic-img-more" wx:if="{{(dynamicData.commodity&&dynamicData.imagList.length-2>0)||(!dynamicData.commodity&&dynamicData.imagList.length-1)}}" hidden="{{(dynamicData.commodity&&index!=1)||(!dynamicData.commodity&&index!=0)}}">+{{dynamicData.commodity?dynamicData.imagList.length-2:dynamicData.imagList.length-1}}</view>
+        </image>
+      </view>
+      <!-- 商品信息 -->
+      <view class="dynamic-goods-container" wx:if="{{dynamicData.commodity}}" catchtap="toBuy" data-id="{{dynamicData.commodity.id}}">
+        <image src="{{dynamicData.commodity.thumbnail}}" class="dynamic-goods-container-img" mode="aspecFill"></image>
+        <view class="dynamic-goods-container-content">
+          <view class="dynamic-goods-container-name">{{dynamicData.commodity.commodityName}}</view>
+          <view class="dynamic-goods-container-text">{{dynamicData.commodity.description}}</view>
+          <view class="dynamic-goods-bottom">
+            <view class="dynamic-goods-container-price">
+              <text style="font-size:22rpx">￥</text>{{dynamicData.commodity.activityType==1||(dynamicData.commodity.activityType==2&&dynamicData.commodity.isMember)?dynamicData.commodity.lowPrice:dynamicData.commodity.originalPrice}}
+            </view>
+            <view class="dynamic-goods-container-btn">购买商品</view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <!-- 评论 commentDataList.length-->
+  <view class="comment-container" wx:if="{{false}}">
+    <view class="comment-title">全部评论</view>
+    <view class="comment-item" wx:for="{{commentDataList}}" wx:key="index">
+      <image class="comment-user-img" src="{{item.userInfo.headimgurl}}"></image>
+      <view class="comment-content">
+        <view class="comment-top-info">
+          <view class="comment-top-left">
+            <view class="comment-name">{{item.userName}}</view>
+            <!-- <image class="member-img" src="/pages/img/index/member_icon.png"></image> -->
+          </view>
+          <view class="comment-top-left">
+            <view>{{item.addTime}}</view>
+            <!-- <view class="user-info-solid"></view>
+            <image class="user-info-icon" src="{{item.isPraise?'/pages/img/index/dynamic/praised.png':'/pages/img/index/dynamic/praise.png'}}"  bindtap="operationPraise" data-id="{{item.id}}" data-idx="{{index}}"></image> -->
+          </view>
+        </view>
+        <view class="user-signature">{{item.userInfo.signature||' 暂无个性签名'}}</view>
+        <view class="user-commnet-text">{{item.content}}</view>
+        <!-- <view class="store-reply">{{}}</view> -->
+      </view>
+    </view>
+  </view>
+
+  <!-- 底部 -->
+  <!-- <view class="store-dynamic-bottom">
+    <view class="store-dynamic-bottom-item" catchtap="{{subscribe?'':'showDingYue'}}">
+      <image class="store-dynamic-bottom-item-icon" src="{{subscribe?'/pages/img/index/dynamic/dingyued.png':'/pages/img/index/dynamic/dingyue.png'}}"></image>
+    </view>
+    <view class="store-dynamic-bottom-item" bindtap="commentFocus">
+      <image class="store-dynamic-bottom-item-icon" src="/pages/img/index/dynamic/comment.png"></image>
+      <view class="comment-number" wx:if="{{dynamicData.reply>0}}">{{dynamicData.reply>99?99:dynamicData.reply}}</view>
+    </view>
+    <view class="store-dynamic-bottom-item" catchtap="operationPraise" data-id="{{dynamicData.id}}">
+      <view class="parise-box">
+        <image class="store-dynamic-bottom-item-icon" src="{{dynamicData.isPraise?'/pages/img/index/dynamic/praised1.png':'/pages/img/index/dynamic/praise1.png'}}"></image>
+        <text>{{dynamicData.praise||'点赞'}}</text>
+      </view>
+    </view>
+  </view> -->
+
+  <!-- 输入框 -->
+  <view class="input-container" style="bottom:{{inputHeight}}px" wx:if="{{isFocus}}">
+    <textarea class="input-text" show-confirm-bar="{{false}}" value="{{content}}" bindinput="inputContent" maxlength="80" placeholder="我来聊几句" auto-height="{{false}}" auto-focus="{{isFocus}}" adjust-position="{{false}}" bindconfirm="releaseComment" confirm-type="send" bindfocus="inputFocus" bindblur="inputBlur"></textarea>
+    <view class="confirm-btn" bindtap="{{content.length?'releaseComment':''}}" style="{{content.length?'':'background-color:#FFD1C1'}}">发表</view>
+  </view>
+<!-- <view class="bottom" style="bottom:{{inputHeight}}px">
+  <input bindinput="inputContent" value="{{content}}" adjust-position="{{false}}" maxlength="50" bindconfirm="releaseComment" confirm-type="send" bindfocus="inputFocus" bindblur="inputBlur"
+/>
+  <view class="bottom_right" bindtap="releaseComment">
+    <image src="/pages/img/index/dynamic_icon_3.png" mode="aspectFill" ></image>
+    <view>发布</view>
+  </view>
+</view> -->

@@ -1,0 +1,65 @@
+<view class='page-content'>
+    <van-tabs active="{{ currentIndex }}" bind:change="onChange" sticky color="#EC1919" line-width="22">
+        <view wx:for="{{tabList}}" wx:for-item="item" wx:for-index="index" wx:key="index" src="{{item}}">
+            <van-tab title="{{item.name}}">
+                <block wx:for="{{currentList}}" wx:key="index">
+                    <view class='order-item order-{{item.orderNumber}}'>
+                        <!-- <view class='me-fx-row me-fx-sb-c top-base-info'>
+                            <view class='me-full-text activity-name'>{{item.title}}</view>
+                        </view> -->
+                        <view class='me-fx-row product-info'>
+                            <image src='{{item.detailImgUrls[0]}}' class='product-img'></image>
+                            <view class='me-fx-1 me-fx-col me-fx-sb'>
+                                <view>{{item.commodityName}}</view>
+                                <view class='me-fx-row me-fx-sb-c'>
+                                    <text>¥{{item.livePrice}}</text>
+                                    <text>x{{item.amount}}</text>
+                                </view>
+                                <view class='price-text'>合计:¥{{item.actualMoney}}</view>
+                            </view>
+                        </view>
+                        <view class='receive-goods'>
+                            <view>订单号:{{item.orderNumber}}</view>
+                            <view>订单生成时间:{{item.orderTime}}</view>
+                            <view wx:if='{{item.shippingAddress.contacts}}'>收货人: {{item.shippingAddress.contacts+' '+item.shippingAddress.contactWay}}</view>
+                            <view wx:if='{{item.shippingAddress.provincesName}}'>收货地址: {{item.shippingAddress.provincesName+item.shippingAddress.cityName+item.shippingAddress.areaName+item.shippingAddress.address}}</view>
+                            <view wx:if='{{currentState==2}}'>{{item.expressCompany}}：{{item.expressNo}}</view>
+                            <view wx:if='{{currentState==2}}'>商家发货时间：{{item.deliveryTime}}</view>
+                        </view>
+                    </view>
+                    <view class='order-item-foolt'>
+                        <view wx:if='{{item.activityFinanceResponse.status==2 || item.activityFinanceResponse.status==3}}' class='msg-text'>
+                            已完成：{{item.activityFinanceResponse.alreadyOrder}}单任务，您购买商品已退还金额({{item.activityFinanceResponse.income}}元) 
+                            <text wx:if='{{item.activityFinanceResponse.status==2}}'>服务费：{{item.activityFinanceResponse.serviceCharge}}</text>
+                        </view>
+                        <view wx:else class='msg-text not-complete'>进行中：已推{{item.activityFinanceResponse.alreadyOrder}}单，商品金额退还{{item.activityFinanceResponse.income}} 只差{{item.activityFinanceResponse.residueOrder}}单赚取商品</view>
+
+                        <view wx:if='item.activityFinanceResponse' class='join-user-list'>
+                            <view class='' wx:for='{{item.activityFinanceResponse.financeUnitResponses}}'
+                                wx:for-item='temp' wx:for-index='ti' wx:key='ti' class='me-fx-row me-fx-sb-c join-user-item'
+                            >   
+                                <view class='me-fx-row me-fx-start-c user-info'>
+                                    <image src='{{temp.headimgurl}}' class='user-avatar'></image>
+                                    <view class='me-full-text nick-name'>{{temp.nickname}}</view>
+                                    <view class='create-time'>下单时间{{temp.createTime}}</view>
+                                </view>
+                                <view class='me-fx-1 earnings-text'>+{{temp.earnings}}元</view>
+                                <view class='me-fx-1 service-charge'>{{temp.isLast ? ('服务费'+(temp.serviceCharge+temp.payPlatformFeeMoney)) : ''}}</view>
+                            </view>
+                        </view>
+                        
+                        <view class='me-fx-row me-fx-end-c foot-btns'>
+                            <text class='confirm-btn contact-btn' bind:tap='toChat' data-item='{{item}}'>联系商家</text>
+                            <text wx:if='{{currentState==2}}' class='confirm-btn' bind:tap='confirmGoods' data-item='{{item}}'>确认收货</text>
+                        </view>
+                    </view>
+                    
+                </block>
+
+                <view class='me-fx-row me-fx-c-c place-empty' wx:if='{{!currentList.length}}'>
+                    <text>暂无数据</text>
+                </view>
+            </van-tab>
+        </view>
+    </van-tabs>
+</view>

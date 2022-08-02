@@ -1,0 +1,45 @@
+<view class="pointRules">
+  <view class="pointRules_tilte">积分活动简介</view>
+  <view class="pointRules_content">
+    积分乐园是商家反馈用户的一项活动功能；活动的对象为商家自主传播；该活动由商家发起，任务及礼品均由商家自行设置，参与用户需看商家活动规则。
+  </view>
+  <view class="pointRules_tilte">积分有效期</view>
+  <view class="pointRules_content">
+    本期积分乐园结束时间为<text class="pointRules_color">{{signData.countDownTime}}</text>，活动结束后所有用户的积分将清空，请各位用户及时兑换礼品。
+  </view>
+  <view class="pointRules_tilte">积分获取规则</view>
+  <view class="pointRules_table">
+    <view class="pointRules_table_title">
+      <view>积分任务</view>
+      <view>积分分值</view>
+      <view>累计上限</view>
+    </view>
+    <view class="pointRules_table_content">
+      <view class="pointRules_table_content_item" wx:for="{{taskList}}" wx:key="index">
+        <view>{{item.name}}</view>
+        <view>
+          积分+{{item.score}}
+          <text wx:if="{{item.type==2}}">/元</text>
+        </view>
+        <view wx:if="{{item.limit!=0}}">{{item.limit}}次/日</view>
+        <view wx:if="{{item.limit==0}}">活动内可累计</view>
+      </view>
+    </view>
+  </view>
+  <view class="pointRules_tips">注：同一个邀请任务，每个受邀人每天只计1次
+    <view style="margin-left:40rpx">购买商品的积分需要确认收货后七天才能生效</view>
+  </view>
+  <view class="pointRules_tilte">积分兑换注意事项</view>
+  <view class="pointRules_content">
+    <view>1、使用积分兑换的产品一旦兑换完成，不支持取消兑换，积分不予退还，请在兑换前谨慎选择兑换礼品，若因不可抗力，导致订单无法交易成功，订单将被取消，积分将返还回原支付账户。</view>
+    <view>2、请如实正确填写收货地址，兑换礼品发出前如有问题及时找商家沟通修改，如因用户提供的地址有误造成礼品无法递送而退回的，视为用户自动放弃该产品，积分不予退还。</view>
+    <view>3、用户收到礼品后，需严格遵守相关法律和产品使用说明，产品使用中造成的人身、财产损失与信书平台无关.</view>
+    <view>4、商家有权益根据运营情况调整产品所需积分值.</view>
+    <view>5、如遇恶意刷积分情况，商家有权取消该用户兑换资格并进行积分清零处罚.</view>
+  </view>
+  <view class="pointRules_tilte">声明</view>
+  <view class="pointRules_content">
+    <view>本活动最终解释权归商家所有，如有疑问，请联系商家。</view>
+  </view>
+  <view style="height: 42rpx"></view>
+</view>

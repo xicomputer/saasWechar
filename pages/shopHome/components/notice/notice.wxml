@@ -1,0 +1,8 @@
+<!-- 商家通知公告 -->
+
+<swiper class='notice-box {{noticeBox}}' wx:if="list.length>0" vertical autoplay circular easing-function='easeInOutCubic'>
+    <swiper-item class='me-fx-row me-fx-start-c notice-content {{contentBox}}' wx:for='{{list}}' wx:key='index'>
+        <text class='icon icon-notice {{textColor}}'></text>
+        <text class='me-fx-1 me-full-text {{textColor}}'>{{item.content}}</text>
+    </swiper-item>
+</swiper>

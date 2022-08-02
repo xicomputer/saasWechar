@@ -1,0 +1,35 @@
+<!--components/video-button-bar.wxml-->
+
+
+
+<cover-image class='shop-entry' src='../images/shop_entry.png'
+  bindtap='entryShop' data-mid='{{itemdata.marchantId}}'
+></cover-image>
+
+  <cover-view  class="icon-container">
+    <cover-view class='me-fx-row me-fx-sb'>
+      <cover-view class='me-fx-row me-fx-start-c'>
+        <cover-image class='daizhi-img' src='../../../image/tabpage/daizhi.png'></cover-image>
+        <cover-view class='me-full-text title-text'>{{itemdata.commodityName}}</cover-view>
+        <cover-view class='member-label'>会员价</cover-view>
+      </cover-view>
+      <cover-view class='me-fx-row me-fx-start-c'>
+        <cover-view class='me-fx-row me-fx-start-c'>
+          <cover-view class='symbol'>￥</cover-view>
+          <cover-view class='amount-num'>{{itemdata.lowPrice}} </cover-view>
+        </cover-view>
+        <cover-view class='me-fx-row me-fx-start-c'>
+          <cover-view class='symbol'> — ￥</cover-view>
+          <cover-view class='amount-num'>{{itemdata.originalPrice}}</cover-view>
+        </cover-view>
+      </cover-view>
+    </cover-view>
+    <cover-view class='me-fx-row me-fx-sb-c introduce-box'>
+      <cover-view class='me-full-text introduce'>产品介绍：{{itemdata.description}}</cover-view>
+      <cover-view class='buy-btn' bindtap='buyClick' data-pid='{{itemdata.id}}'>立即购买</cover-view>
+    </cover-view>
+  </cover-view>
+
+
+
+

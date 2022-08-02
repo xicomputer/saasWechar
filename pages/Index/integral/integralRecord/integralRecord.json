@@ -1,0 +1,11 @@
+{
+  "usingComponents": {
+    "van-popup": "@vant/weapp/popup/index",
+    "van-overlay": "@vant/weapp/overlay/index",
+    "no-data": "/pages/Component/noData/index"
+  },
+  "navigationBarTitleText": "兑奖记录",
+  "enablePullDownRefresh": true,
+  "backgroundTextStyle": "dark",
+  "onReachBottomDistance": 50
+}

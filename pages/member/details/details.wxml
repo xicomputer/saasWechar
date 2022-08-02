@@ -1,0 +1,37 @@
+<view class="member">
+  <view class="member_title">会员卡详情</view>
+  <view class="member_item">
+    <view class="member_item_label">会员等级</view>
+    <view class="member_item_desc">{{memberInfo.memberLeve.name}}</view>
+  </view>
+  <view class="member_item">
+    <view class="member_item_label">有效期</view>
+    <view class="member_item_desc">长期有效</view>
+  </view>
+  <view class="member_item">
+    <view class="member_item_label">使用时段</view>
+    <view class="member_item_desc">周一至周日  全天可用</view>
+  </view>
+  <view class="member_item">
+    <view class="member_item_label">折扣率</view>
+    <view class="member_item_desc">{{memberInfo.memberLeve.discount}}折</view>
+  </view>
+  <view class="member_item">
+    <view class="member_item_label">当前积分</view>
+    <view class="member_item_desc">{{memberInfo.member.integral}}</view>
+  </view>
+  <view class="member_item">
+    <view class="member_item_label">是否可升级</view>
+    <view class="member_item_desc">{{memberInfo.memberLevel1?'是':'否'}}</view>
+  </view>
+  <view class="member_item" wx:if="{{memberInfo.memberLevel1.name}}">
+    <view class="member_item_label">下一等级</view>
+    <view class="member_item_desc">{{memberInfo.memberLevel1.name}}</view>
+  </view>
+  <view class="member_QA">
+    <view class="member_QA_q">Q：如何成为会员？</view>
+    <view class="member_QA_a">A：申请激活会员，商家审核通过即可成为会员；或者直接联系商家成为会员。</view>
+    <view class="member_QA_q">Q：怎么提升会员等级？</view>
+    <view class="member_QA_a">A：通过消费获得会员积分，当积分累计到一定数量时自动升级。</view>
+  </view>
+</view>

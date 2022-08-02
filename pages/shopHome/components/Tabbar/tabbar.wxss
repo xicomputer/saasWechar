@@ -1,0 +1,51 @@
+/* pages/Index/shopHome/components/Tabbar/tabbar.wxss */
+/* tabbar */
+.custom-tab-bar {
+  width: 100%;
+  height: 140rpx;
+  background: #FFF;
+  border-top: 1rpx solid #e4e4e4;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  z-index: 99;
+}
+
+.custom-tab-bar-item {
+  width: 0;
+  flex: 1;
+  height: 120%;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 10rpx;
+  position: relative;
+}
+
+.custom-tab-bar-text {
+  height: 28rpx;
+  font-size: 20rpx;
+  font-family: PingFang SC;
+  font-weight: 400;
+  line-height: 28rpx;
+  color: #999999;
+  white-space: nowrap;
+  margin-top: 5rpx;
+}
+
+.custom-tab-bar-text-active {
+  color: #FB5050;
+}
+
+.custom-tab-bar-item .custom-Img {
+  width: 40rpx;
+  height: 40rpx;
+  box-shadow: 0rpx 6rpx 12rpx rgba(247, 247, 247, 0.16);
+}
+
+.custom-tab-bar-item .shopsSty {
+  width: 90rpx !important;
+  height: 90rpx !important;
+}

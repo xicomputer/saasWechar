@@ -1,0 +1,614 @@
+
+<view style='min-height:80vh;margin-top:20rpx;'> 
+    <!-- 模板1 -->
+    <view class="product3" wx:if="{{tempId == 1}}">
+        <scroll-view scroll-x='true' class="product1_list">
+            <view class="me-fx-row me-fx-start-c">
+                <block wx:for="{{productList}}" wx:key="index">
+                    <view class="List3_title me-fx-sb-c {{currentIndex == index ?'cur3':''}}" bindtap="titleClick"
+                        data-idx='{{index}}'> {{item.classifyName}}
+                    </view>
+                </block>
+            </view>
+        </scroll-view>
+        <view class="list1_shop2  me-fx-row">
+            <view class="shop3_Info me-fx-col " bindtap="toGoodsDetails" data-id="{{item.id}}"
+                wx:for="{{productList[currentIndex].commodityList}}" wx:key="index">
+                <image src="{{item.thumbnail}}"></image>
+                <text class=" me-full-text">{{item.commodityName}}</text>
+                <view class="me-fx-row addShop3 me-fx-sb me-fx-start-c">
+                    <view class="shop2_money">
+                        <text class="price2">￥</text><text class="red">{{item.lowPrice}}</text>
+                    </view>
+                    <image src="../../../static/add.png" wx:if="{{orderSwitch}}"></image>
+                    <view class="orderSwitch1" wx:else>参考价</view>
+                </view>
+            </view>
+        </view>
+        <view class="me-fx-row me-fx-c-c more-5 " bindtap="goColumn" data-id="{{productList[currentIndex].id}}">
+            <text>查看更多</text>
+        </view>
+    </view>
+    <!-- 模板2 -->
+    <view class="product3" wx:elif="{{tempId == 2}}">
+        <scroll-view scroll-x='true' class="product1_list">
+            <view class="me-fx-row me-fx-start-c">
+                <block wx:for="{{productList}}" wx:key="index">
+                    <view class="List3_title me-fx-sb-c {{currentIndex == index ?'curl3':''}}" bindtap="titleClick"
+                        data-idx='{{index}}'> {{item.classifyName}}
+                    </view>
+                </block>
+            </view>
+        </scroll-view>
+        <view class="list1_shop2  me-fx-row">
+            <view class="shop3_Info me-fx-col " bindtap="toGoodsDetails" data-id="{{item.id}}"
+                wx:for="{{productList[currentIndex].commodityList}}" wx:key="index">
+                <image mode="aspectFit" src="{{item.thumbnail}}"></image>
+                <text class=" me-full-text">{{item.commodityName}}</text>
+                <view class="me-fx-row addShop3 me-fx-sb me-fx-start-c">
+                    <view class="shop2_money">
+                        <text class="price2s">￥</text><text class="red2">{{item.lowPrice}}</text>
+                    </view>
+                    <image src="../../../static/temp2_car.png" wx:if="{{orderSwitch}}"></image>
+                    <view class="orderSwitch2" wx:else>参考价</view>
+                </view>
+            </view>
+        </view>
+        <view class="me-fx-row me-fx-c-c more-5 " bindtap="goColumn" data-id="{{productList[currentIndex].id}}">
+            <text>查看更多</text>
+        </view>
+    </view>
+    <!-- 模板3 -->
+    <view class="product4" wx:elif="{{tempId == 3}}">
+        <view class="product11_Info" wx:for="{{productList}}" wx:key="index">
+            <view class="Info2_title me-fx-row me-fx-c-c Info3_item2 lll_item2" bindtap="goColumn"
+                data-name='{{item.classifyName}}' data-id='{{item.id}}'>
+                <image src="../../../static/img_l2.png"></image>
+                <text class="add3">{{item.classifyName}} </text>
+                <image src="../../../static/img_r2.png"></image>
+                <text class="more-xxx">查看更多</text>
+            </view>
+            <view class="product4_content">
+                <view class="product4_shop me-fx-row">
+                    <view class="me-fx-col me-fx-c-c shop4_pro" bindtap="toGoodsDetails" data-id="{{item.id}}"
+                        wx:if="{{index<6}}" wx:for="{{item.commodityList}}">
+                        <view class="shop3_item">
+                            <image src="{{item.thumbnail}}"></image>
+                            <text class="me-full-text shop3_item_name">{{item.commodityName}}</text>
+                            <view class="shop3_item_price">
+                                <text>￥</text>
+                                <text>{{item.lowPrice}}</text>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <!-- 模板4 -->
+    <view class="product5" wx:elif="{{tempId == 4}}">
+        <view class="product11_Info" wx:for="{{productList}}" wx:key="index">
+            <view class="Info2_title me-fx-row me-fx-c-c Info11_item2" bindtap="navito"
+                data-name='{{item.classifyName}}' data-id='{{item.id}}'>
+                <image class="leaves_d2" src="../../../static/leaves_d2.png"></image>
+                <text>{{item.classifyName}} </text>
+                <image class="leaves_x2" src="../../../static/leaves_x2.png"></image>
+                <text class="more-xxx">查看更多</text>
+            </view>
+            <view class="Info11_item2info me-fx-row me-fx-sb">
+                <view class="me-fx-row  me-fx-sb item_11Info" wx:key='index' wx:if="{{index<4}}"
+                    wx:for="{{item.commodityList}}">
+                    <view class="me-fx-row Info11_shortPro" bindtap="toGoodsDetails" data-id="{{item.id}}">
+                        <image mode='aspectFit' src="{{item.thumbnail}}"></image>
+                        <view class="me-fx-col shortPro11_Info me-fx-1 me-fx-sb">
+                            <text class="clamp2 Name11_Info me-full-text">{{item.commodityName}}</text>
+                            <view class="info11_price">
+                                <text class="price11_text">￥</text>
+                                <text class="Info11_money ">{{item.lowPrice}}</text>
+                            </view>
+                            <view class="btn_cart11 me-fx-row me-fx-start-c" wx:if="{{orderSwitch}}">
+                                <image src="../../../static/cart11.png"></image>
+                                <text>立即购买</text>
+                            </view>
+                            <view class="btn_cart11 me-fx-row me-fx-c-c" wx:else>
+                                <text>参考价</text>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <!-- 模板5 -->
+    <view class="product_last" wx:if="{{tempId == 5}}">
+        <block wx:for="{{productList}}" wx:key="index">
+            <view wx:if='{{item.activityList.list.length}}'>
+                <view class="me-fx-row me-fx-c-c" bindtap="goColumn" data-item="{{item}}"
+                    style="transform:translateX({{15*(item.classifyName.length-1)}}rpx)">
+                    <text
+                        style="background-image:url('https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/static/border.png');transform:translateX({{-30*index}}rpx)"
+                        class="item_name" wx:for="{{item.classifyName}}" wx:key="index">{{item}}</text>
+                </view>
+                <view class="me-fx-row me-fx-c-c more" bindtap="goColumn" data-item="{{item}}">查看更多</view>
+                <view wx:if="{{index==0}}">
+                    <view bindtap="toGoodsDetails" data-item="{{temp}}" class="shop1_Info me-fx-col me-fx-sb"
+                        wx:for="{{item.activityList.list}}" wx:key="ti" wx:for-item='temp' wx:for-index='ti'
+                    >
+                        <view class="product1_title">{{temp.commodityName}}</view>
+                        <image class="product1_img" mode='aspectFit' src="{{temp.imageUrl}}"></image>
+                        <view class="countdown countdown5" wx:if="{{countdown}}">
+                            <text>距结束还剩：</text>
+                            <van-count-down use-slot bind:change="changeJfTime" data-subs="{{index}}-{{ti}}" 
+                                time="{{temp.downDiffTimes}}"
+                            >
+                                <view class='c5-main'>
+                                    <text wx:if="{{temp.downTime.days!=0}}">{{temp.downTime.days}}</text>
+                                    <text wx:if="{{temp.downTime.days!=0}}">天</text>
+                                    <text class='c5-pd'>{{temp.downTime.hours}}</text>
+                                    <text>:</text>
+                                    <text class='c5-pd'>{{temp.downTime.minutes}}</text>
+                                    <text>:</text>
+                                    <text class='c5-pd'>{{temp.downTime.seconds}}</text>
+                                </view>
+                            </van-count-down>
+                        </view>
+                        <view class="product1_desc me-full-text" wx:else>{{temp.commodityName}}</view>
+                        <view class="product1_money me-fx-row me-fx-start-end">
+                            <text>价格:</text>
+                            <text class="price">￥{{temp.lowPrice}}</text>
+                            <text class="oldprice" wx:if="{{countdown}}">￥{{temp.price}}</text>
+                            <image src="../../../../image/tabpage/ms-btn5.png" class='price5_img' wx:if='{{templateTag=="JSMS"}}' />
+                            <image src="../../../../image/tabpage/to-pt5.png" class='price5_img' wx:if='{{templateTag=="TTPT"}}' />
+                        </view>
+                    </view>
+                </view>
+                <view class="product2_infos me-fx-row me-fx-sb" wx:else>
+                    <view bindtap="toGoodsDetails" data-item="{{temp}}" class="shop2_Info"
+                        wx:for="{{item.activityList.list}}" wx:key="ti" wx:for-item='temp' wx:for-index='ti'
+                    >
+                        <text class="me-full-text product2_desc" wx:if='{{countdown}}'>{{temp.commodityName}}</text>
+                        <image class="product2_img" mode='aspectFit' src="{{temp.imageUrl}}"></image>
+                        <view class="countdown countdown5 fz20" wx:if="{{countdown}}">
+                            <text>距结束还剩：</text>
+                            <van-count-down use-slot bind:change="changeJfTime" data-subs="{{index}}-{{ti}}" time="{{temp.downDiffTimes}}">
+                                <view class='c5-main fz20'>
+                                    <text wx:if="{{temp.downTime.days!=0}}">{{temp.downTime.days}}</text>
+                                    <text wx:if="{{temp.downTime.days!=0}}">天</text>
+                                    <text class='c5-pd'>{{temp.downTime.hours}}</text>
+                                    <text>:</text>
+                                    <text class='c5-pd'>{{temp.downTime.minutes}}</text>
+                                    <text>:</text>
+                                    <text class='c5-pd'>{{temp.downTime.seconds}}</text>
+                                </view>
+                            </van-count-down>
+                        </view>
+                        <text class="product2_desc me-full-text me-full-line2" wx:if='{{!countdown}}'>{{temp.commodityName}}</text>
+                        <view class="product2_money me-fx-row me-fx-start-c">
+                            <text>价格:</text>
+                            <text class="price2">￥{{temp.lowPrice}}</text>
+                        </view>
+                        <image src="../../../../image/tabpage/ms-btn5.png" class='price5_img' wx:if='{{templateTag=="JSMS"}}' />
+                        <image src="../../../../image/tabpage/to-pt5.png" class='price5_img' wx:if='{{templateTag=="TTPT"}}' />
+                    </view>
+                </view>
+            </view>
+        </block>
+    </view>
+    <!-- 模板6 -->
+    <view wx:if="{{tempId == 6}}">
+        <block wx:for="{{productList}}" wx:key="index">
+            <view class="product2_temp2" wx:if='{{item.activityList.list.length}}'>
+                <view class="temp2_product me-fx-row me-fx-c-c" bindtap="goColumn" data-item="{{item}}"
+                    style="background-image:url('https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/static/class2_bg.png')">
+                    <image class="right_img" src="../../../static/leaves_d.png"></image>
+                    <view class="temp2_item_name"
+                        style="background-image:url('https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/static/class2_item_name.png')">
+                        <text class="item-text me-full-text"> {{item.classifyName}}</text>
+                    </view>
+                    <text class="temp2_more">查看更多</text>
+                </view>
+                <view wx:if="{{index==0}}">
+                    <view class="temp2_product_info" bindtap="toGoodsDetails" data-item="{{temp}}"
+                        wx:for="{{item.activityList.list}}" wx:key="ti" wx:for-item='temp' wx:for-index='ti'
+                    >
+                        <view class="temp2_product_info2">
+                            <view class="temp2_prodct_bg"
+                                style="background-image:url('https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/static/class2_long_product.png')">
+                                <view class="temp2_pro_msg me-fx-row me-fx-start-c me-fx-sb">
+                                    <image mode='aspectFit' src="{{temp.imageUrl}}" class="temp2_product1_img"></image>
+                                    <view class="me-fx-col me-fx-sb temp2_product1_msg me-fx-start-c ">
+                                        <text class="temp2_product1_name me-full-text">{{temp.commodityName}}</text>
+                                        <view style="background:url('https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/static/class2_desc.png');background-size: 100% 100%;padding: 0 20rpx;width:100%;">
+                                            <view class="me-fx-row me-fx-c-c countdown countdown6 fz20" wx:if="{{countdown}}">
+                                                <van-count-down use-slot bind:change="changeJfTime" 
+                                                    data-subs="{{index}}-{{ti}}" time="{{temp.downDiffTimes}}"
+                                                >
+                                                    <view class='c6-main'>
+                                                        <text>距结束 </text>
+                                                        <text wx:if="{{temp.downTime.days!=0}}">{{temp.downTime.days}}</text>
+                                                        <text wx:if="{{temp.downTime.days!=0}}">天</text>
+                                                        <text class='c5-pd'>{{temp.downTime.hours}}</text>
+                                                        <text>:</text>
+                                                        <text class='c5-pd'>{{temp.downTime.minutes}}</text>
+                                                        <text>:</text>
+                                                        <text class='c5-pd'>{{temp.downTime.seconds}}</text>
+                                                    </view>
+                                                </van-count-down>
+                                            </view>
+                                            <text class="temp2_product1_btn me-full-text" wx:else>{{temp.commodityName}}</text>
+                                        </view>
+                                        <view class="c6-price">
+                                            <text class="c6-oldprice" wx:if='{{countdown}}'>￥{{temp.price}}</text>
+                                            <text class="temp2_product1_price">￥{{temp.lowPrice}}</text>
+                                        </view>
+                                        
+                                        <view style="background-image:url('https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/static/class2_long_btn.png');background-size: 100% 100%;padding: 12rpx 20rpx;display: flex;align-items: center;">
+                                            <image src="../../../../image/tabpage/ms-btn6.png" class='c6-btn' wx:if='{{templateTag=="JSMS"}}' />
+                                            <image src="../../../../image/tabpage/to-pt6.png" class='c6-btn' wx:if='{{templateTag=="TTPT"}}' />
+                                        </view>
+                                    </view>
+                                </view>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+                <view wx:else>
+                    <view class="temp2_product_info">
+                        <view class="temp2_product_info2" bindtap="toGoodsDetails" data-item="{{item.activityList.list[0]}}">
+                            <view class="temp2_prodct_bg"
+                                style="background-image:url('https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/static/class2_long_product.png')">
+                                <view class="temp2_pro_msg me-fx-row me-fx-start-c me-fx-sb">
+                                    <image mode='aspectFit' src="{{item.activityList.list[0].imageUrl}}"
+                                        class="temp2_product1_img"></image>
+                                    <view class="me-fx-col me-fx-sb temp2_product1_msg me-fx-start-c ">
+                                        <text
+                                            class="me-full-text temp2_product1_name">{{item.activityList.list[0].commodityName}}</text>
+                                            <view style="background:url('https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/static/class2_desc.png');background-size: 100% 100%;padding: 0 20rpx;">
+                                            <view class="countdown countdown6 fz20" wx:if="{{countdown}}">
+                                                <text>距结束</text>
+                                                <van-count-down use-slot bind:change="changeJfTime" data-subs="{{index}}-0" time="{{item.activityList.list[0].downDiffTimes}}">
+                                                    <view class='c6-main'>
+                                                        <text wx:if="{{item.activityList.list[0].downTime.days!=0}}">{{item.activityList.list[0].downTime.days}}</text>
+                                                        <text wx:if="{{item.activityList.list[0].downTime.days!=0}}">天</text>
+                                                        <text class='c5-pd'>{{item.activityList.list[0].downTime.hours}}</text>
+                                                        <text>:</text>
+                                                        <text class='c5-pd'>{{item.activityList.list[0].downTime.minutes}}</text>
+                                                        <text>:</text>
+                                                        <text class='c5-pd'>{{item.activityList.list[0].downTime.seconds}}</text>
+                                                    </view>
+                                                </van-count-down>
+                                            </view>
+                                            <text class="temp2_product1_btn me-full-text" wx:else>{{item.activityList.list[0].commodityName}}</text>
+                                        </view>
+                                        
+                                        <view class="c6-price">
+                                            <text class="temp2_product1_price">￥{{item.activityList.list[0].lowPrice}}</text>
+                                            <text class="c6-oldprice" wx:if='{{countdown}}'>￥{{item.activityList.list[0].price}}</text>
+                                        </view>
+                                        <view style="background-image:url('https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/static/class2_long_btn.png');background-size: 100% 100%;padding: 12rpx 20rpx;display: flex;align-items: center;">
+                                            <image src="../../../../image/tabpage/ms-btn6.png" class='c6-btn' wx:if='{{templateTag=="JSMS"}}' />
+                                            <image src="../../../../image/tabpage/to-pt6.png" class='c6-btn' wx:if='{{templateTag=="TTPT"}}' />
+                                        </view>
+                                    </view>
+                                </view>
+                            </view>
+                        </view>
+                    </view>
+                    <view class="temp2_product2_info">
+                        <block wx:for="{{item.activityList.list}}" wx:key="ti" wx:for-item='temp' wx:for-index='ti'>
+                            <view class="me-fx-col temp2_prodct2_info2 me-fx-sb" bindtap="toGoodsDetails"
+                                data-item="{{temp}}" wx:if="{{ti!=0}}">
+                                <view class="temp2_product2_top me-fx-row me-fx-c-c"
+                                    style="background-image:url('https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/static/class2_short_product.png')">
+                                    <image mode='aspectFit' src="{{temp.imageUrl}}" class="temp2_product1_img"></image>
+                                    <view class='temp2_product2_btn' style="background-image:url('https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/static/class2_desc.png')">
+                                        <view class="countdown countdown6 fz20" wx:if="{{countdown}}">
+                                            <text>距结束</text>
+                                            <van-count-down use-slot bind:change="changeJfTime" data-subs="{{index}}-{{ti}}" time="{{temp.downDiffTimes}}">
+                                                <view class='c6-main'>
+                                                    <text wx:if="{{temp.downTime.days!=0}}">{{temp.downTime.days}}</text>
+                                                    <text wx:if="{{temp.downTime.days!=0}}">天</text>
+                                                    <text class='c5-pd'>{{temp.downTime.hours}}</text>
+                                                    <text>:</text>
+                                                    <text class='c5-pd'>{{temp.downTime.minutes}}</text>
+                                                    <text>:</text>
+                                                    <text class='c5-pd'>{{temp.downTime.seconds}}</text>
+                                                </view>
+                                            </van-count-down>
+                                        </view>
+                                        <text class="me-full-text" wx:else>{{temp.commodityName}}</text>
+                                    </view>
+                                </view>
+                                <view class="temp2_product2_foot me-fx-col me-fx-start-c me-fx-sb">
+                                    <view class="me-full-text temp2_product2_desc">{{temp.commodityName}}</view>
+                                    <view class="me-fx-row me-fx-sb temp2_product2_money" style="margin-bottom:10rpx">
+                                        <view class="me-fx-row me-fx-start-c">
+                                            <text class="temp2_product2_price me-full-text">￥{{temp.lowPrice}}</text>
+                                            <text class='oldprice'>￥{{temp.price}}</text>
+                                        </view>
+                                        <view class="temp2_product2_btn2"
+                                            style="background-image:url('https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/static/class2_short_btn.png')"
+                                        >
+                                            <image src="../../../../image/tabpage/ms-btn6.png" class='c6-btn-min' wx:if='{{templateTag=="JSMS"}}' />
+                                            <image src="../../../../image/tabpage/to-pt6min.png" class='c6-btn-min' wx:if='{{templateTag=="TTPT"}}' />
+                                        </view>
+                                    </view>
+                                </view>
+                            </view>
+                        </block>
+                    </view>
+                </view>
+            </view>
+        </block>
+    </view>
+    <!-- 模板7 -->
+    <view wx:if="{{tempId == 7}}">
+        <block wx:for="{{productList}}" wx:key="index">
+            <view  class="product3_temp3" wx:if='{{item.activityList.list.length}}'>
+                <view class="product3-item me-fx-row me-fx-sb me-fx-start-c" 
+                    bindtap="goColumn" data-item="{{item}}"
+                >
+                    <image class="temp3_item_img"
+                        src="https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/static/temp3_left_img.png"></image>
+                    <text class="product3-item-name me-full-text">{{item.classifyName}}</text>
+                    <image class="temp3_item_img"
+                        src="https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/static/temp3_right_img.png"></image>
+                </view>
+                <view class="product3-item1" wx:if="{{index == 0}}" bindtap="toGoodsDetails"
+                    data-item="{{item.activityList.list[0]}}">
+                    <image class="product3-item1-img" mode='aspectFit' src="{{item.activityList.list[0].imageUrl}}"></image>
+                    <view class="product3-item1-info">
+                        <text class="product3-item1-name me-full-text">{{item.activityList.list[0].commodityName}}</text>
+                        <block wx:if='{{countdown}}'>
+                            <view class="c7-prices">
+                                <text class='c7p-price'>秒杀价:¥{{item.activityList.list[0].lowPrice}}</text>
+                                <text class='c7p-oldprice'>原价:¥{{item.activityList.list[0].price}}</text>
+                            </view>
+                            <view class='me-fx-row me-fx-sb'>
+                            <view class="countdown countdown7">
+                                <text>距结束:</text>
+                                <van-count-down use-slot bind:change="changeJfTime" data-subs="{{index}}-0" time="{{item.activityList.list[0].downDiffTimes}}">
+                                    <view class='me-fx-row c6-main' style='color:#333;font-size:25rpx;'>
+                                        <text wx:if="{{item.activityList.list[0].downTime.days!=0}}">{{item.activityList.list[0].downTime.days}}</text>
+                                        <text wx:if="{{item.activityList.list[0].downTime.days!=0}}">天</text>
+                                        <text class='c7-txt'>{{item.activityList.list[0].downTime.hours}}</text>
+                                        <text>:</text>
+                                        <text class='c7-txt'>{{item.activityList.list[0].downTime.minutes}}</text>
+                                        <text>:</text>
+                                        <text class='c7-txt'>{{item.activityList.list[0].downTime.seconds}}</text>
+                                    </view>
+                                </van-count-down>
+                            </view>
+                            <image wx:if='{{templateTag=="JSMS"}}' class='c7-btn' src='../../../../image/tabpage/ms-btn7.png'></image>
+                            <image wx:if='{{templateTag=="TTPT"}}' class='c7-btn' src='../../../../image/tabpage/to-pt7.png'></image>
+                            </view>
+                        </block>
+                        <block wx:else>
+                            <text class="product3-item1-desc me-full-text">{{item.activityList.list[0].commodityName}}</text>
+                            <view class="me-fx-row me-fx-start-c me-fx-sb">
+                                <text class="product3-item1-price">￥{{item.activityList.list[0].lowPrice}}</text>
+                                <text class="product3-item1-btn">全国发货</text>
+                            </view>
+                        </block>
+                    </view>
+                </view>
+                <view class="product3-item2" wx:if="{{index == 1}}">
+                    <view class="me-fx-row me-fx-sb">
+                        <view class="me-fx-col" bindtap="toGoodsDetails" data-item="{{item.activityList.list[0]}}">
+                            <image class="product3-item2-img1" src="{{item.activityList.list[0].imageUrl}}"></image>
+                            <view class="product3-item2-info1 me-fx-row me-fx-sb">
+                                <text
+                                    class="product3-item2-text me-full-text">{{item.activityList.list[0].commodityName}}</text>
+                                <text class="product3-item2-text">￥{{item.activityList.list[0].lowPrice}}</text>
+                            </view>
+                        </view>
+                        <view class="me-fx-col me-fx-sb">
+                            <view bindtap="toGoodsDetails" data-item="{{item.activityList.list[1]}}"
+                                wx:if="{{item.activityList.list[1]}}">
+                                <image class="product3-item2-img2" src="{{item.activityList.list[1].imageUrl}}"></image>
+                                <view class="product3-item2-info2 me-fx-row me-fx-c-c">
+                                    <text class="product3-item2-text1" wx:if='{{countdown}}'>秒杀价</text>
+                                    <text class="product3-item2-text me-fx-row">￥{{item.activityList.list[1].lowPrice}}</text>
+                                </view>
+                            </view>
+                            <view bindtap="toGoodsDetails" data-item="{{item.activityList.list[2]}}"
+                                wx:if="{{item.activityList.list[2]}}">
+                                <image class="product3-item2-img2" src="{{item.activityList.list[2].imageUrl}}"></image>
+                                <view class="product3-item2-info2 me-fx-row me-fx-c-c">
+                                    <text class="product3-item2-text1" wx:if='{{countdown}}'>秒杀价</text>
+                                    <text class="product3-item2-text ">￥{{item.activityList.list[2].lowPrice}}</text>
+                                </view>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+                <view class="product3-item3" wx:if="{{index != 1 && index !=0}}">
+                    <block wx:for="{{item.activityList.list}}" wx:key="ti" wx:for-item='temp' wx:for-index='ti'>
+                        <view bindtap="toGoodsDetails" data-item="{{temp}}"
+                            class="me-fx-row product3-item3-list me-fx-start-c me-fx-sb" wx:if="{{ti%2==0}}">
+                            <image class="product3-item3-img" src="{{temp.imageUrl}}"></image>
+                            <view class="product3-item3-info me-fx-col me-fx-sb">
+                                <text class="product3-item3-name me-full-text">{{temp.commodityName}}</text>
+                                <block wx:if='{{countdown}}'>
+                                    <view class="countdown countdown7">
+                                        <text>距结束:</text>
+                                        <van-count-down use-slot bind:change="changeJfTime" data-subs="{{index}}-{{ti}}" time="{{temp.downDiffTimes}}">
+                                            <view class='me-fx-row c6-main' style='color:#333;font-size:25rpx;'>
+                                                <text wx:if="{{temp.downTime.days!=0}}">{{temp.downTime.days}}</text>
+                                                <text wx:if="{{temp.downTime.days!=0}}">天</text>
+                                                <text class='c7-txt'>{{temp.downTime.hours}}</text>
+                                                <text>:</text>
+                                                <text class='c7-txt'>{{temp.downTime.minutes}}</text>
+                                                <text>:</text>
+                                                <text class='c7-txt'>{{temp.downTime.seconds}}</text>
+                                            </view>
+                                        </van-count-down>
+                                    </view>
+                                    <view class='me-fx-row me-fx-sb'>
+                                        <text>¥{{temp.lowPrice}}</text>
+                                        <image wx:if='{{templateTag=="JSMS"}}' class='c7-btn' src='../../../../image/tabpage/ms-btn7.png'></image>
+                                        <image wx:if='{{templateTag=="TTPT"}}' class='c7-btn' src='../../../../image/tabpage/to-pt7.png'></image>
+                                    </view>
+                                </block>
+                                <block wx:else>
+                                    <text class="product3-item3-desc me-full-text">{{temp.commodityName}}</text>
+                                    <view class="me-fx-row me-fx-start-c me-fx-sb">
+                                        <text class="product3-item3-price">￥{{temp.lowPrice}}</text>
+                                        <text class="product3-item3-btn">全国发货</text>
+                                    </view>
+                                </block>
+                            </view>
+                        </view>
+                        <view class="me-fx-row product3-item3-list me-fx-start-c me-fx-sb" bindtap="toGoodsDetails"
+                            data-item="{{temp}}" wx:else>
+                            <view class="product3-item3-info me-fx-col me-fx-sb">
+                                <text class="product3-item3-name me-full-text">{{temp.commodityName}}</text>
+                                <block wx:if='{{countdown}}'>
+                                    <view class="countdown countdown7">
+                                        <text>距结束:</text>
+                                        <van-count-down use-slot bind:change="changeJfTime" data-subs="{{index}}-{{ti}}" time="{{temp.downDiffTimes}}">
+                                            <view class='me-fx-row c6-main' style='color:#333;font-size:25rpx;'>
+                                                <text wx:if="{{temp.downTime.days!=0}}">{{temp.downTime.days}}</text>
+                                                <text wx:if="{{temp.downTime.days!=0}}">天</text>
+                                                <text class='c7-txt'>{{temp.downTime.hours}}</text>
+                                                <text>:</text>
+                                                <text class='c7-txt'>{{temp.downTime.minutes}}</text>
+                                                <text>:</text>
+                                                <text class='c7-txt'>{{temp.downTime.seconds}}</text>
+                                            </view>
+                                        </van-count-down>
+                                    </view>
+                                    <view class='me-fx-row me-fx-sb'>
+                                        <text>¥{{temp.lowPrice}}</text>
+                                        <image wx:if='{{templateTag=="JSMS"}}' class='c7-btn' src='../../../../image/tabpage/ms-btn7.png'></image>
+                                        <image wx:if='{{templateTag=="TTPT"}}' class='c7-btn' src='../../../../image/tabpage/to-pt7.png'></image>
+                                    </view>
+                                </block>
+                                <block wx:else>
+                                    <text class="product3-item3-desc me-full-text">{{temp.commodityName}}</text>
+                                    <view class="me-fx-row me-fx-start-c me-fx-sb">
+                                        <text class="product3-item3-price">￥{{temp.lowPrice}}</text>
+                                        <text class="product3-item3-btn">全国发货</text>
+                                    </view>
+                                </block>
+                            </view>
+                            <image class="product3-item3-img" src="{{temp.imageUrl}}"></image>
+                        </view>
+                    </block>
+                </view>
+                <view class="me-fx-row me-fx-c-c">
+                    <text class="product3-more" bindtap="goColumn" data-item="{{item}}">查看更多</text>
+                </view>
+            </view>
+        </block>
+    </view>
+    <!-- 模板8 -->
+    <view wx:if="{{tempId == 8}}">
+        <block wx:for="{{productList}}" wx:key="index">
+            <view class="product4_temp1" wx:if='{{item.activityList.list.length}}'>
+                <image class="temp4-header-img"
+                    src="https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/static/temp4_bg_header.png">
+                </image>
+                <view class="product4-item me-fx-row me-fx-sb me-fx-start-c" 
+                    bindtap="goColumn" data-item="{{item}}"
+                >
+                    <view class="product4-item-title me-fx-row me-fx-c-c">
+                        <text class="product4-item-name me-full-text">{{item.classifyName}}</text>
+                        <text class="more4">查看更多 >>></text>
+                    </view>
+                </view>
+                <block wx:if="{{index == 0}}">
+                    <view class="me-fx-col me-fx-c-c product4-item1-prolist">
+                        <block wx:for="{{item.activityList.list}}" wx:key="ti" wx:for-item='temp' wx:for-index='ti'>
+                            <view class="product4-shop-info" bindtap="toGoodsDetails" data-item="{{temp}}">
+                                <image class="product4-item-pro1" src="{{temp.imageUrl}}"></image>
+                                <view wx:if='{{countdown}}' class='c8-desc me-fx-col'>
+                                    <view class="countdown countdown8">
+                                        <van-count-down use-slot bind:change="changeJfTime" data-subs="{{index}}-{{ti}}" time="{{temp.downDiffTimes}}">
+                                            <view class='c8-main'>
+                                                <text>距结束: </text>
+                                                <text wx:if="{{temp.downTime.days!=0}}">{{temp.downTime.days}}</text>
+                                                <text wx:if="{{temp.downTime.days!=0}}">天</text>
+                                                <text class='c8-txt'>{{temp.downTime.hours}}</text>
+                                                <text>:</text>
+                                                <text class='c8-txt'>{{temp.downTime.minutes}}</text>
+                                                <text>:</text>
+                                                <text class='c8-txt'>{{temp.downTime.seconds}}</text>
+                                            </view>
+                                        </van-count-down>
+                                    </view>
+                                    <view class="c8-price me-fx-row">
+                                        <text class="temp4_price">￥{{temp.lowPrice}}</text>
+                                        <text class="c8p-oldprice">￥{{temp.price}}</text>
+                                        <image class='c8_btn' wx:if='{{templateTag=="JSMS"}}' src='../../../../image/tabpage/ms-btn8.png'></image>
+                                        <image class='c8_btn' wx:if='{{templateTag=="TTPT"}}' src='../../../../image/tabpage/to-pt8.png'></image>
+                                    </view>
+                                </view>
+                                <block wx:else>
+                                    <view class="product4-item-msg me-fx-col"
+                                    style="background-image:url('https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/static/temp4_info_bg.png')">
+                                        <text class="product4-msg-desc me-full-text">{{temp.commodityName}}</text>
+                                        <text class="temp4_price">￥{{temp.lowPrice}}</text>
+                                    </view>
+                                    <view class="product4-item-btn1"
+                                        style="background-image:url('https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/static/temp4_btn2.png')">
+                                        <text>全国发货</text>
+                                    </view>
+                                </block>
+                                <view class="product4-item-btn2"
+                                    style="background-image:url('https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/static/temp4_btn1.png')">
+                                    <text class="me-full-text">{{temp.commodityName}}</text>
+                                </view>
+                            </view>
+                        </block>
+                    </view>
+                </block>
+                <block wx:else>
+                    <view class="me-fx-row me-fx-sb product4-item2-prolist">
+                        <block wx:for="{{item.activityList.list}}" wx:key="ti" wx:for-item='temp' wx:for-index='ti'>
+                            <view class="product4-pro-info2" bindtap="toGoodsDetails" data-item="{{temp}}">
+                                <image class="product4-item-pro2" src="{{temp.imageUrl}}"></image>
+                                <view class="product4-item2-msg me-fx-col"
+                                    style="background-image:url('https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/static/temp4_info_bg.png')">
+                                    <view class="c8-lf" wx:if='{{countdown}}'>
+                                        <view class="countdown countdown81">
+                                            <text>距结束:</text>
+                                            <van-count-down use-slot bind:change="changeJfTime" data-subs="{{index}}-{{ti}}" time="{{temp.downDiffTimes}}">
+                                                <view class='c8-main1'>
+                                                    <text wx:if="{{temp.downTime.days!=0}}">{{temp.downTime.days}}</text>
+                                                    <text wx:if="{{temp.downTime.days!=0}}">天</text>
+                                                    <text class='c8-txt'>{{temp.downTime.hours}}</text>
+                                                    <text>:</text>
+                                                    <text class='c8-txt'>{{temp.downTime.minutes}}</text>
+                                                    <text>:</text>
+                                                    <text class='c8-txt'>{{temp.downTime.seconds}}</text>
+                                                </view>
+                                            </van-count-down>
+                                        </view>
+                                    </view>
+                                    <view class='me-fx-row me-fx-sb-c'>
+                                        <view class="c8-price1">
+                                            <text class="c8-price12">￥{{temp.lowPrice}}</text>
+                                            <text class="c8-price13">￥{{temp.price}}</text>
+                                        </view>
+                                        <image class='c8_btn1' wx:if='{{templateTag=="JSMS"}}' src='../../../../image/tabpage/ms-btn8.png'></image>
+                                        <image class='c8_btn1' wx:if='{{templateTag=="TTPT"}}' src='../../../../image/tabpage/to-pt8.png'></image>
+                                    </view>
+                                </view>
+                                <view class="product4-item2-btn1"
+                                    wx:if='{{!countdown}}'
+                                    style="background-image:url('https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/static/temp4_btn2.png')">
+                                    <text>全国发货</text>
+                                </view>
+                                <view class="product4-item2-btn2"
+                                    style="background-image:url('https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/static/temp4_btn1.png')">
+                                    <text class="me-full-text">{{temp.commodityName}}</text>
+                                </view>
+                            </view>
+                        </block>
+                    </view>
+                </block>
+            </view>
+        </block>
+    </view>
+</view>

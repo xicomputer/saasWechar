@@ -1,0 +1,30 @@
+<view class="shops-slogan" wx:if="{{ArticleList.length !== 0}}">
+    <view class="video" wx:if="{{settingImg.top.fileurl.length > 1}}">
+        <video src="{{settingImg.top.fileurl[1]}}" mode="aspectFit" class="index1_img2" autoplay="true" muted="true" controls="true" show-mute-btn="true" show-play-btn="true">视频</video>
+    </view>
+    <view class="text">
+        <text style="color: rgb(255, 0, 0);font-weight: 800;">品质 · 文化</text>
+        <text style="color: #bbbbbb;font-weight: 700;">文化是一家企业的灵魂</text>
+    </view>
+    <!-- <view>
+                <text>更多</text>
+                <image class="more-icon" src="https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/basics-New%2F%E9%A6%96%E9%A1%B5_slices%2FVector%402x.png" mode="widthFix"></image>
+            </view>  -->
+    <view class="slogan-container">
+        <!-- 上半部分 -->
+        <!-- 下半部分 --> 
+        <view class="single" bindtap="toWebViewPage" data-link='{{item.linkurl}}' wx:for="{{ArticleList}}" wx:key="index">
+            <image src="{{item.articlecover}}" mode="aspectFill"></image>
+            <text class="line-clamp2" style="font-weight: 700;">{{item.articletitle}}</text>
+        </view>
+    </view>
+    <!-- <view class="support  page-foot3   support2">- 信书技术支持 -</view> -->
+    <view class="support  support2 page-foot3">
+      <image style="width: 182rpx;height:30rpx;" mode="aspectFit" src="https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/Saas/dibutab.png"></image>
+      </view>
+</view>
+<!-- 缺省页 -->
+<!-- <view class="default" wx:else>
+    <image src="https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/basics-New%2F%E9%A6%96%E9%A1%B5_slices%2F%E7%BB%84%205537%402x.png"></image>
+    <text>商户还没有添加动态哦!</text>
+</view> -->

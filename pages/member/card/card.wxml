@@ -1,0 +1,87 @@
+<view class="member">
+  <!-- 头部 -->
+  <view class="member_head" style="background-image: url('https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/basics-New%2F%E9%A6%96%E9%A1%B5_slices%2FMy%2F%E6%BF%80%E6%B4%BB%E4%BC%9A%E5%91%98bgc.png');">
+    <navigator wx:if="{{type!=0}}" class="member-explain" url="/pages/member/level/level?marchantId={{marchantId}}">
+      <text>会员等级说明</text>
+      <image style="width:32rpx;height:32rpx" src="/pages/img/member/menber_explain.png"></image>
+    </navigator>
+    <view class="member_head_left">
+    <!-- {{memberInfo.userRegister.headimgurl||memberInfo.merchantInfo.logoPic}} -->
+      <image src="{{cartShop.headImage}}" mode="aspectFill"></image>
+      <view class="member_head_left_info">
+      <!-- {{memberInfo.userRegister.nickname||memberInfo.merchantInfo.nickName}} -->
+        <view class="member_head_left_name">{{cartShop.appName}}</view>
+        <view class="member_head_left_desc">{{memberInfo.merchantInfo.nickName}}会员卡</view>
+      </view>
+    </view>
+    <block wx:if="{{type!=0}}">
+      <!-- <view wx:if="{{vipLevel==0}}" class="member_head_right">
+        <image src="/pages/img/member/memberCard_vip2.png" mode="aspectFill"></image>
+        <view style="color: #999999;">普通会员</view>
+      </view> -->
+      <view class="member_head_right">
+        <image src="/pages/img/member/memberCard_vip1.png" mode="aspectFill"></image>
+        <view>{{memberInfo.memberLeve.name}}</view>
+      </view>
+    </block>
+  </view>
+  <block wx:if="{{type!=0}}">
+    <!-- 工具 -->
+    <view class="member_tool">
+      <navigator class="member_tool_item" url="/pages/member/integral/integral?marchantId={{marchantId}}&integral={{memberInfo.member.integral}}">
+        <view class="member_tool_item_name">会员积分</view>
+        <view class="member_tool_item_desc">{{memberInfo.member.integral}}</view>
+      </navigator>
+      <view class="member_tool_item_line"></view>
+      <navigator class="member_tool_item" url="/pages/member/level/level?marchantId={{marchantId}}">
+        <view class="member_tool_item_name">等级</view>
+        <view class="member_tool_item_desc">{{memberInfo.memberLeve.name}}</view>
+      </navigator>
+      <view class="member_tool_item_line"></view>
+      <navigator class="member_tool_item" url="/pages/Index/couponList/couponList?marchantId={{marchantId}}">
+        <view class="member_tool_item_name">会员优惠券</view>
+        <view class="member_tool_item_desc">查看</view>
+      </navigator>
+    </view>
+  </block>
+  <block wx:else>
+    <!-- 激活按钮 -->
+    <view class="member_btn">
+      <navigator wx:if="{{memberInfo.memberApply.audit!=0}}" class="member_btn-state" url="/pages/member/active/active?marchantId={{marchantId}}&id={{memberInfo.memberApply.id}}">激活会员卡</navigator>
+      <view  wx:if="{{memberInfo.memberApply.audit==0}}" class="member_btn-state" style="background:#ccc;border:none">商家审核中</view>
+    </view>
+  </block>
+  <!-- 拒绝状态 -->
+  <view class="refund-state-box" wx:if="{{memberInfo.memberApply.audit==2}}">
+    <view class="refund-title">商家已拒绝您的会员申请</view>
+    <view class="refund-reason">拒绝理由：{{memberInfo.memberApply.refuse}}</view>
+    <view class="refund-text">你可以
+      <view class="refund-text-btn" bindtap="contactStore">1.联系商家</view>
+      <navigator url="/pages/member/active/active?marchantId={{marchantId}}&id={{memberInfo.memberApply.id}}" class="refund-text-btn">2.点击重新激活会员卡</navigator>
+    </view>
+  </view>
+  <!-- 列表 -->
+  <view class="membere_list">
+    <block wx:if="{{type!=0}}">
+      <view class="membere_list_item" bindtap="returnShop" >
+        <view class="membere_list_item_left">进入店铺</view>
+        <image src="/pages/img/member/icon_enter.png" class="membere_list_item_right"></image>
+      </view>
+    </block>
+    <navigator  wx:if="{{type!=0}}" class="membere_list_item" url="/pages/member/details/details?marchantId={{marchantId}}">
+      <view class="membere_list_item_left">会员卡详情</view>
+      <image src="/pages/img/member/icon_enter.png" class="membere_list_item_right"></image>
+    </navigator>
+    <!-- <navigator class="membere_list_item" url="/pages/member/illustrate/illustrate">
+      <view class="membere_list_item_left">会员卡说明:</view>
+      <image src="/pages/img/member/icon_enter.png" class="membere_list_item_right"></image>
+    </navigator> -->
+    <view class="explain-container">
+  <view class="explain-title">会员说明：</view>
+  <view class="explaine-text">1、会员卡是商家为您提供尊贵服务的凭证，持有会员卡在购买会员商品时能享受会员折扣;</view>
+  <view class="explaine-text">2、点击“激活会员卡”向商家申请会员卡，需要商家进行审核，若审核通过后即可成为普通会员；若审核不通过，会在本页面显示商家拒绝理由，您可以联系商家进行沟通后重新激活会员卡;</view>
+  <view class="explaine-text">3、首次成为会员，成为基础会员等级 “普通会员”，普通会员不享受会员折扣权益，但能通过购买商品获得积分，升级会员等级，级别越高，折扣力度越大；</view>
+  <view class="explaine-text">4、不同商家的会员规则稍有不同，具体会员规则详情请成为会员后，在会员卡区查看。</view>
+</view>
+  </view>
+</view>

@@ -1,0 +1,14 @@
+<!--pages/videoPlay/videoPlay.wxml-->
+<view class="video_container">
+    <scroll-video 
+        player-type="{{playerType}}"
+        video-list="{{videoList}}"
+        fit-type="{{fitType}}"
+        bind:swipeDown="swipeDown"
+        bind:swipeUpper="swipeUpper"
+        bind:swipeToStart="swipeToStart"
+        bind:swipeToEnd="swipeToEnd"
+    ></scroll-video>
+
+    
+</view>

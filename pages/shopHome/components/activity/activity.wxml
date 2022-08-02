@@ -1,0 +1,28 @@
+
+
+
+<!-- <view class="activity"  wx:if="{{tempId<12}}">
+    <view class="me-fx-row me-fx-sb activity_list">
+        <view class="me-fx-row activitys_Info {{tempBg}}"  bindtap="goSaleShop" data-url="/pages/shopHome/dynamic/dynamic">
+            <view class="Info_msg me-fx-row me-fx-start-c">
+                <text class="good-express">精彩快讯</text>
+                <image class="Info_msg_img" src="https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/basics-New%2F%E9%A6%96%E9%A1%B5_slices%2FRectangle%201415%402x.png"></image>
+                <view class="me-fx-col shop_msg_info">
+                    <text class="new_msg {{'text_color'+tempId}}">最新消息</text>
+                </view>
+                <image class="right-arrow" src="https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/basics-New%2F%E9%A6%96%E9%A1%B5_slices%2FVector%402x.png" mode="widthFix" ></image>
+            </view>
+            <view class="me-fx-1 me-fx-row me-fx-c-c">
+            </view>
+        </view>
+    </view>
+</view> -->
+
+<view class="activity"  style="margin: 0 auto;margin-top: 20rpx;" wx:if="{{tempId<12}}">
+   <image class="alerts-Img" bindtap="goSaleShop"  data-url="/pages/shopHome/dynamic/dynamic" src="https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/basics-New%2F%E9%A6%96%E9%A1%B5_slices%2F%E5%95%86%E5%AE%B6%E6%B6%88%E6%81%AF%E9%80%9A%E7%9F%A5.png" mode="aspectFill"></image>
+</view>
+<view  wx:else  style="position: absolute;z-index: 9999;width: 90rpx;height: 90rpx;margin-left: -45rpx;" bindtap="goSaleShop"  data-url="/pages/shopHome/dynamic/dynamic">
+</view>
+
+
+

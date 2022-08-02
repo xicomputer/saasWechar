@@ -1,0 +1,34 @@
+<!--pages/tabPage/hot/hot.wxml-->
+<view class='hot-page-container'>
+    <no-data wx:if="{{!leftList.length}}" text="暂无热卖视频哦！" url="https://xssj.letterbook.cn/applet/images/sj_no_data_img8.png"></no-data>
+    <view class='me-fx-row me-fx-sb' wx:if="{{leftList.length}}">
+        <view class='me-fx-col'>
+            <view class='video-item' wx:for='{{leftList}}' wx:key='index'
+                bindtap='toVideoPlay' data-videoid='{{item.id}}'
+            >
+                <image class='video-img' src='{{item.coverUrl}}'></image>
+                <view class='item-bottom-box'>
+                    <view class='me-fx-row me-fx-start-c'>
+                        <image class='item-daizhi-img' src='../../../image/tabpage/daizhi.png'></image>
+                        <text class='title-text'>{{item.commodityName}}</text>
+                    </view>
+                    <view class='me-full-text introduce-text'>产品介绍：{{item.description}}</view>
+                </view>
+            </view>
+        </view>
+        <view class='me-fx-col'>
+            <view class='video-item' wx:for='{{rightList}}' wx:key='index'
+                bindtap='toVideoPlay' data-videoid='{{item.id}}'
+            >
+                <image class='video-img' src='{{item.coverUrl}}'></image>
+                <view class='item-bottom-box'>
+                    <view class='me-fx-row me-fx-start-c'>
+                        <image class='item-daizhi-img' src='../../../image/tabpage/daizhi.png'></image>
+                        <text class='title-text'>{{item.commodityName}}</text>
+                    </view>
+                    <view class='me-full-text introduce-text'>产品介绍：{{item.description}}</view>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>

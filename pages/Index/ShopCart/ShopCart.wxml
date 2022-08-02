@@ -1,0 +1,144 @@
+<!--pages/Index/shopHome/components/componentsPage/shopCart/shopCart.wxml-->
+<view class="cart-main">
+  <!-- <view class="address_Info">
+    <view class="address me-fx-row me-fx-start-c">
+        <image src="../static/path.png"></image>
+        <text>湖南省长沙市开福区</text>
+    </view>
+  </view> -->
+  <view class="item_foot me-fx-row me-fx-start-c ">
+    <view class="me-fx-row me-fx-sb foot_info" wx:for="{{shopCartlist.length?shopCartlist:1}}" wx:key="marchantId" >
+      <view class="me-fx-row me-fx-start-c"  bindtap="selectAll" >
+        <text class="icon-text iconfont iconBig {{isAll ? 'icon-select1 red-style' : 'icon-selectnor'}}"></text>
+        <text>全选</text>
+      </view>
+      <view class="me-fx-row me-fx-sb me-fx-1 me-fx-start-c">
+        <view class='me-fx-row me-fx-end-c me-fx-1'>合计：<text class="red">￥{{item.subtotal?item.subtotal:0}}</text></view>
+        <view class="redbtn"  data-pi="{{index}}" bindtap="handleGoSettlement">结算</view>
+      </view>
+    </view>
+  </view>
+ <!-- 编辑 -->
+    <!-- 
+ <view class="edit-area">
+    <view class="edit-inner">
+      <view class="select-all-area">
+        <text class="click-area" bindtap="selectAll">
+          <text class="icon-text iconfont {{isAll ? 'icon-select1 red-style' : 'icon-selectnor'}}"></text>
+          <text>全选</text>
+        </text>
+      </view>
+      <view class="delet-area">
+        <text class="click-area" bindtap="delete">
+          <text class="icon-text iconfont icon-delete"></text>
+          <text>删除</text>
+        </text>
+      </view>
+    </view> 
+  </view>-->
+  <!-- 没有添加商品 -->
+  <no-data text="您还没有添加商品哦！" url="https://xssj.letterbook.cn/applet/images/sj_no_data_img3.png" wx:if="{{!shopCartlist.length}}"></no-data>
+  <view wx:else class="scroll-area">
+    <view class="list-area">
+      <view class="item-area" wx:for="{{shopCartlist}}" wx:key="marchantId">
+        <view class="item-header" data-marchantId="{{item.marchantId}}">
+          <view class="me-fx-row me-fx-sb">
+            <view>
+              <text class="item-header-select-area" data-pid="{{index}}" catchtap="handleGoodsSelect">
+              <text
+                class="item-header-select iconfont iconBig {{item.isSelect ? 'icon-select1 red-style' : 'icon-selectnor'}}"></text>
+              </text>
+              <image class="item-header-img" src="{{cartShop.headImage}}"></image>
+              <text>{{cartShop.appName}}</text>
+            </view>
+            <view class="delet-area">
+              <text class="click-area" bindtap="delete">
+                <text class="icon-text iconfont icon-delete"></text>
+                <text>删除</text>
+              </text>
+            </view>
+          </view>
+        </view>
+        <view class="item-goods">
+          <view class="item-good" wx:for="{{item.commoditys}}" wx:key="commodityId" wx:for-item="goodItem"
+            wx:for-index="goodIndex" bindtap="toGoodsdetail"  data-activity="{{goodItem.activityId}}"  data-commodityId="{{goodItem.commodityId}}">
+            <view class="item-good-l">
+              <text class="select-area" data-pid="{{index}}" data-cid="{{goodIndex}}" catchtap="handleGoodItemSelect">
+                <text
+                  class="icon-text iconfont iconBig {{goodItem.isPitch ? 'icon-select1 red-style' : 'icon-selectnor'}}"></text>
+              </text>
+            </view>
+            <view class="item-good-c">
+              <image class="good-img" src="{{goodItem.imageUrl?goodItem.imageUrl:goodItem.thumbnail}}"></image>
+            </view>
+            <view class="item-good-r">
+              <view class="good-title">
+                <text>{{goodItem.commodityName}}</text>
+              </view>
+              <view class="good-model">
+                <text>规格：{{goodItem.itemText}}</text>
+              </view>
+              <view class="me-fx-row me-fx-start-c shop-cart-miaosha" wx:if="{{goodItem.remainingTime}}">
+                <view class="br-miaosha">
+                  <text class="shopcart-miaosha-text">秒杀</text>
+                  <van-count-down use-slot bind:change="changeTime" data-index="{{index}}" time="{{goodItem.remainingTime*1000}}">
+                    <view class="list_item_onLookers">
+                        <text>距结束</text>
+                        <text wx:if="{{goodItem.timeData.days!=0}}">{{goodItem.timeData.days}}</text>
+                        <text wx:if="{{goodItem.timeData.days!=0}}">天</text>
+                        <text>{{goodItem.timeData.hours<10?'0'+goodItem.timeData.hours:goodItem.timeData.hours}}</text>
+                        <text>:</text>
+                        <text>{{goodItem.timeData.minutes<10?'0'+goodItem.timeData.minutes:goodItem.timeData.minutes}}</text>
+                        <text>:</text>
+                        <text>{{goodItem.timeData.seconds<10?'0'+goodItem.timeData.seconds:goodItem.timeData.seconds}}</text>
+                    </view>
+                  </van-count-down>
+                </view>
+              </view>
+              <view  class="number-price {{goodItem.remainingTime?'':'mt-cart'}}">
+                <view class="price">
+                  ￥{{(goodItem.activityType==1||(goodItem.activityType==2&&goodItem.isMember))?goodItem.lowPrice:goodItem.originalPrice}}
+                </view>
+                <view class="edit-num">
+                  <!-- 减一 -->
+                  <text class="edit-subtract" data-pi="{{index}}" data-ci="{{goodIndex}}"  
+                    data-type="minus"  catchtap="handleEditNum">
+                    <text class="iconfont icon-minuscircle"></text>
+                  </text>
+                  <text class="num" data-pi="{{index}}" data-ci="{{goodIndex}}" data-type="edit"
+                    catchtap="handleEditNum">{{goodItem.amount}}</text>
+                  <!-- 加一 -->
+                  <text class="edit-add" data-pi="{{index}}" data-ci="{{goodIndex}}" data-type="add"
+                    catchtap="handleEditNum">
+                    <text class="iconfont icon-add"></text>
+                  </text>
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+        <!-- <view class="item-footer">
+          <view class="item-footer-l">
+            <text>合计：</text>
+            <text>￥{{item.subtotal}}</text>
+          </view>
+          <view class="item-footer-r">
+            <van-button round class="settlement-btn" data-pi="{{index}}" bindtap="handleGoSettlement">
+              去结算
+            </van-button>
+          </view>
+        </view> -->
+      </view>
+    </view>
+  </view>
+
+  <van-toast id="van-toast" />
+  <van-dialog id="van-dialog" />
+  <van-dialog use-slot title="请输入您的内容" show="{{ show1 }}" show-cancel-button bind:close="onClose"
+    bind:confirm="confirm">
+    <view class="num-input">
+      <input type="number" value="{{value}}" maxlength="3" title="" bindinput="handleInput" bindblur="validate" />
+    </view>
+  </van-dialog>
+  <view class="cart_foot"></view>
+</view>

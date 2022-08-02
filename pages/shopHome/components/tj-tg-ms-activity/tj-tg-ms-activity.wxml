@@ -1,0 +1,76 @@
+<!--pages/shopHome/components/tj-tg-ms-activity/tj-tg-ms-activity.wxml-->
+
+<!-- 我的组件 -->
+<!-- <view class='container-box {{tempBg}}' wx:if='{{homeActivity.length}}'>
+    <view wx:for="{{homeActivity}}" wx:key="index" bindtap='jumpMore' data-activityTag="{{item.code}}">
+        <image src="{{item.url}}" mode="aspectFill"></image>  
+    </view> -->
+    <!-- <view wx:for="{{activityList}}" wx:key="index">
+        <view class="name-event" bindtap="changeActivity">
+            <image src="{{img}}"></image>
+            <view class="activity-container"> -->
+    <!-- 上半部分 -->
+    <!-- <view class="text">
+                    <text>{{activityTitle}}</text>
+                    <view>
+                        <text>更多</text>
+                        <u-icon name="arrow-right" color="#333" size="22"></u-icon>
+                        <image class="more-icon" src="../../../static/images/Vector@2x.png"></image>
+                    </view>
+                </view> -->
+    <!-- 下半部分 -->
+    <!-- <view class="img">
+                    <view class="single" wx:for='{{dataList}}' wx:key='index' bindtap='jumpDetail' data-item='{{item}}'>
+                        <image src="{{item.imageUrl}}"></image>
+                        <text class="line-clamp2">{{item.commodityName}}</text>
+                        <view class="price">
+                            <view class="price-new">
+                                <text class="yang1">￥</text>
+                                <text>{{item.priceArr[1]}}</text>
+                            </view>
+                            <view class="price-old">
+                                <text class="yang2">￥</text>
+                                <text>{{item.priceArr[0]}}</text>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view> -->
+<!-- </view> -->
+
+<view class='container-box {{tempBg}}' wx:if='{{homeActivity.length}}'>
+    <view wx:for="{{activityListNew}}" class="single-active" wx:key="index" bindtap='jumpMore' data-activityTag="{{item.code}}">
+        <view class="textContent">
+            <image src="{{item.icon}}"></image>
+            <text>{{item.name}}</text>
+        </view>
+        <image src="{{item.url}}" mode="aspectFill"></image>  <!--目前图片固定，根据后端接口返回-->
+    </view>
+</view>
+
+<!-- <view class='container-box {{tempBg}}' wx:if='{{dataList.length}}'>
+    <view class='me-fx-row me-fx-sb-c top-title-box'>
+        <text>{{activityTitle}}</text>
+        <view class='me-fx-row me-fx-c-c more-str' bindtap='jumpMore'>
+            <text>更多</text>
+            <image class='right-icon' src='../../../img/back-icon.png'></image>
+        </view>
+    </view>
+    <view-more-title title='{{activityTitle}}' title-color='#fff' title-size='28' img-name='t{{tempId}}-{{tempId==3?1:3}}.png' bind:click='jumpMore'></view-more-title>
+    <view class='me-fx-row product-list'>
+        <view class='product-item' wx:for='{{dataList}}' wx:key='index' style='margin-left:{{index%3==0?0:18}}rpx' bindtap='jumpDetail' data-item='{{item}}'>
+            <image src='{{item.imageUrl}}' class='goods-img'></image>
+            <view class='me-full-text goods-name'>{{item.commodityName}}</view>
+            <view class='me-fx-row me-fx-sb-c'>
+                <view class='price-str'>
+                    <text wx:if='{{item.templateTag=="TJFL"}}'>返现</text>￥
+                    <text class='price-int'>{{item.priceArr[0]}}.</text>
+                    <text>{{item.priceArr[1] || '00'}}</text>
+                </view>
+                <text wx:if='{{item.templateTag=="TTPT"}}' class='pin-label'>拼</text>
+            </view>
+        </view>
+    </view>
+</view> -->

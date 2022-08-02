@@ -1,0 +1,173 @@
+<view>
+    <view class='me-fx-row me-fx-sb-c top-box' wx:if='{{orderInfo.isDelete==1 || orderInfo.orderState==3}}'>
+        <image src='../imgs/yqx.png' class='adorn-img'></image>
+        <!-- <view class='me-fx-1 cancel-title'>交易已取消</view> -->
+        <view class='me-fx-1 cancel-title'>已退款订单</view>
+    </view>
+    <view wx:else class='me-fx-row top-box'>
+        <view class='me-fx-1'>
+            <view class='me-fx-row me-fx-start-c'>
+                <text class='col-line'></text>
+                <text class='title-text'>{{topTitle}}</text>
+            </view>
+
+            <view wx:if='{{orderState==4}}' class='sub-title'>您可以对该商品进行评价</view>
+            <block wx:if='{{orderState==2}}'>
+                <van-count-down time='{{downTimes}}' use-slot='{{true}}' auto-start='{{true}}'
+                    bind:finish='finishFun' bind:change='changeFun' data-timename='downTimeObj'
+                >
+                    <view class='sub-title'>
+                        <text>剩余</text>
+                        <text wx:if='{{downTimeObj.days!=="0"}}'>{{downTimeObj.days}}天</text>
+                        <text>{{downTimeObj.hours}}小时{{downTimeObj.minutes}}分钟{{downTimeObj.seconds}}秒自动确认收货</text>
+                    </view>
+                </van-count-down>
+            </block>
+            <view wx:if='{{orderState==1}}' class='sub-title'>预计支付成功后48小时内发货</view>
+            <block wx:if='{{orderState==0}}'>
+                <view class='sub-title' wx:if='{{isOverdue}}' >待支付订单已过期</view>
+                <van-count-down time='{{downTimes}}' use-slot='{{true}}' auto-start='{{true}}'
+                    bind:finish='finishFun' bind:change='changeFun' data-timename='downTimeObj' wx:else
+                >
+                    <view class='sub-title'>剩余{{downTimeObj.minutes}}分钟{{downTimeObj.seconds}}秒自动取消</view>
+                </van-count-down>
+            </block>
+        </view>
+        <image src='{{adornUrl}}' class='adorn-img'></image>
+    </view>
+
+    <block wx:if='{{orderInfo.isDelete!=1}}'>
+        <!-- 物流 -->
+        <view class='me-fx-row me-fx-sb-c logistics-info' bindtap='jumpLogisticsShow'
+            wx:if='{{orderInfo.expressNo}}'
+        >
+            <image src='../imgs/wl.png' class='wl-icon-img'></image>
+            <view class='me-fx-1 info-content'>
+                <view class='describe-msg'>{{nowLogisticsItem.status}}</view>
+                <view class='time-str'>{{nowLogisticsItem.time}}</view>
+            </view>
+            <image src='../imgs/right-jiantou.png' class='jiantou-img'></image>
+        </view>
+
+        <!-- 地址 -->
+        <view class='me-fx-row me-fx-sb-c address-info'>
+            <block wx:if='{{fullAddress}}'>
+                <image src='../imgs/location-icon.png' class='location-img'></image>
+                <view class='me-fx-1'>
+                    <view>
+                        <text class='user-name'>{{shippingAddress.contacts}}</text>
+                        <text class='user-phone'>{{shippingAddress.contactWay}}</text>
+                    </view>
+                    <view>{{fullAddress}}</view>
+                </view>
+            </block>
+            <block wx:else>
+                <text class='address-empty-title'>请选择收货地址</text>
+                <image src='../imgs/right-jiantou.png' class='jiantou-img'></image>
+            </block>
+        </view>
+    </block>
+    
+
+    <!-- 商品信息 -->
+    <view class='goods-info'>
+        <view class='me-fx-row info-content'>
+            <image src='{{orderInfo.bannerImgUrls[0]}}' class='goods-img'></image>
+            <view class='me-fx-1 me-fx-col me-fx-sb right-info'>
+                <view class='me-full-text goods-name'>{{orderInfo.commodityName}}</view>
+                <view class='goods-specification'>规格:{{orderInfo.skuName}}</view>
+                <view class='me-fx-row me-fx-start-c' wx:if='{{orderInfo.isDelete==1}}'>
+                    <text class='price-str'>¥{{orderInfo.livePrice}}</text>
+                    <text class='old-price'>¥{{orderInfo.price}}</text>
+                </view>
+                <view class='me-fx-row me-fx-sb-end' wx:else>
+                    <text class='price-str'>¥{{orderInfo.livePrice}}</text>
+                    <text class='count-num'>x{{orderInfo.amount}}</text>
+                </view>
+            </view>
+        </view>
+        <view class='me-fx-row me-fx-sb-c summary' wx:if='{{orderInfo.isDelete!=1}}'>
+            <view></view>
+            <view>
+                <text>共{{orderInfo.amount}}件商品，合计:</text>
+                <text class='summary-amount'>¥{{orderInfo.actualMoney}}</text>
+            </view>
+        </view>
+    </view>
+
+    <!-- 拼团信息 -->
+    <view class='group-info' wx:if='{{orderInfo.activityGroupResponse}}'>
+        <view class='me-fx-row me-fx-sb'>
+            <view>
+                <view>{{groupInfo.nickname}}的拼团</view>
+                <view class='poor-num'>差<text>{{groupInfo.groupOfNumber-joinGroupUser.length}}</text>人成团</view>
+            </view>
+            <van-count-down time='{{groupEndTimes}}' use-slot='{{true}}' auto-start='{{true}}'
+                bind:finish='finishFun' bind:change='changeFun' data-timename='groupTimeObj'
+            >
+                <view class='group-down-str'>
+                    <text wx:if='{{groupTimeObj.days!=="00"}}'>{{groupTimeObj.days}}天</text>
+                    <text>{{groupTimeObj.hours}}:{{groupTimeObj.minutes}}:{{groupTimeObj.seconds}} 后结束</text>
+                </view>
+            </van-count-down>
+        </view>
+        <view class='me-fx-row me-fx-start-c user-list'>
+            <view class='avatar-item' wx:for='{{joinGroupUser}}' wx:key='index'>
+                <image src='{{item}}' class='user-avatar'></image>
+                <text wx:if='{{index==0}}' class='initiator-user-label'>团长</text>
+            </view>
+            <image wx:for='{{groupInfo.groupOfNumber-joinGroupUser.length}}' 
+                wx:for-index='ti' wx:key='ti' src='../imgs/empty-avatar.png' class='empty-avatar-img'
+            ></image>
+        </view>
+    </view>
+
+    <!-- 订单信息 -->
+    <view class='order-info'>
+        <view>下单时间: {{orderInfo.orderTime}}</view>
+        <view>支付方式: 微信支付</view>
+        <view>留言: <text class='leave-msg'>{{orderInfo.message || '您没有任何留言哦'}}</text></view>
+    </view>
+    
+
+    <!-- 底部按钮 -->
+    <view class='me-fx-row me-fx-end-c footer-btns'>
+        <!-- <button class='btn blue-btn' wx:if='{{orderState==0 && orderInfo.isDelete!=1}}' bindtap='openWhyList' data-type='1'>取消订单</button> -->
+        <button class='btn blue-btn' wx:if='{{orderState==1 || orderState==2 || orderState==4}}' bindtap='contactMerchant'>联系商家</button>
+        <button class='btn red-btn' data-item='{{item}}' catchtap='openWhyList' wx:if='{{(orderState==4 || orderState==1) && orderInfo.isEnd!=1 }}' data-type='2'>{{orderInfo.activityOrderRefundResponse?'查看售后':'申请退款'}}</button>
+        <!-- <button class='btn red-btn' wx:if='{{orderState==1 || orderState==4}}' bindtap='openWhyList' data-type='2'>申请退款</button> -->
+        <button class='btn blue-btn' wx:if='{{orderInfo.isDelete==1 || orderInfo.orderState==3 || orderInfo.orderState==0}}' bindtap='delOrder'>删除订单</button>
+
+        <button class='btn red-btn' wx:if='{{orderState==0 && orderInfo.isDelete!=1}}' bindtap='goPay'>去支付</button>
+        <button class='btn yellow-btn' wx:if='{{orderState==2}}' bindtap='confirmDelivery'>确认收货</button>
+        <!-- <button class='btn solid-btn' wx:if='{{orderState==4}}' bindtap='jumpEvaluate'>去评价</button> -->
+        <button class='btn yellow-btn' wx:if='{{orderInfo.isDelete==1 || orderInfo.orderState==3}}' bindtap='jumpGoodsDetail'>再次拼单</button>
+        <button class='btn yellow-btn' wx:if='{{orderState==1}}' bindtap='remindDelivery'>提醒发货</button>
+    </view>
+</view>
+
+
+
+
+<!-- 取消订单原因弹窗 -->
+<van-popup show='{{showCancelWhy}}' round='{{true}}' bind:click-overlay='closePopup'
+    close-on-click-overlay="{{true}}" position='bottom' 
+    custom-style='border-radius:24rpx 24rpx 0 0;'
+>
+    <view class='cancel-why-content'>
+        <view class='me-fx-row me-fx-sb-c top-box'>
+            <text class='cancel-btn' bindtap='closePopup'>取消</text>
+            <text class='title-text'>{{whyPopupTitle}}</text>
+            <text class='confirm-btn' bindtap='popupConfrimHandle'>确认</text>
+        </view>
+        <view class='radio-list'>
+            <view class='me-fx-row me-fx-start-c why-item' wx:for='{{whyList}}' wx:key='index'
+                bindtap='selectWhy' data-whynum='{{item.whyNum}}'
+            >
+                <view class='radio-box {{item.whyNum==whyNum?"checked-radio":""}}'></view>
+                <text>{{item.content}}</text>
+            </view>
+            <textarea class='why-textarea' value='{{reasonText}}' bindinput='textareaChange' ></textarea>
+        </view>
+    </view>
+</van-popup>

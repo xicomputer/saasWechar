@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "hotel": "/pages/Index/components/hotel/index"
+  },
+  "navigationBarTitleText": "详情"
+}

@@ -1,0 +1,11 @@
+<!--pages/shopHome/hot/hot.wxml-->
+  <!-- 新品 热卖视频 -->
+  <view hidden="{{!(nowTabbarText!='热卖')}}"
+        class="{{isAdapter?'news-container news-container-sp':'news-container'}}" 
+    >
+        <video-list wx:if='{{hotSaleGoodsList.length}}' videoList="{{hotSaleGoodsList}}"></video-list>
+        <no-data  wx:else text="您还没有热卖视频哦！"
+            url="https://xssj.letterbook.cn/applet/images/sj_no_data_img8.png" 
+        ></no-data>
+    </view>
+    

@@ -1,0 +1,197 @@
+<!--
+此文件为开发者工具生成，生成时间: 2022/6/1 下午3:52:27
+使用方法：
+在 F:\projects\xssj_New_basic\pages\shopHome\home\home.wxml 引入模板
+
+```
+<import src="home.skeleton.wxml"/>
+<template is="skeleton" wx:if="{{loading}}" />
+```
+
+在 F:\projects\xssj_New_basic\pages\shopHome\home\home.wxss 中引入样式
+```
+@import "./home.skeleton.wxss";
+```
+
+更多详细信息可以参考文档：https://developers.weixin.qq.com/miniprogram/dev/devtools/skeleton.html
+-->
+<template name="skeleton">
+  <view class="sk-container">
+    <view class="headpo">
+      <view class="head-shop-info-boxtop-box-bg3 1">
+        <view class="me-fx-row me-fx-sb-c title-bar" style="height:70px;">
+          <view class="me-fx-row header">
+            <view class="header_Info me-fx-col">
+              <view>
+                <text class="appName_info app-name sk-transparent sk-text-18-7500-230 sk-text" style="color: #000;">完美美妆达人</text>
+              </view>
+              <view class="tscl">
+                <text class="btn_sales sk-transparent sk-text-18-7500-32 sk-text" style="font-size: 9px;">访问：3132</text>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="home-page bg_AllPage3 1" style="overflow-x: hidden;">
+      <view style="overflow-x: hidden;background-color: whitesmoke; " class="bg_AllPage3 1">
+        <view style=" overflow-x: hidden;background: #fff;">
+          <view class="hoem-title"></view>
+          <view class="home">
+            <view class="video" style="width: 350px;height:150px;margin: 0 auto;margin-bottom: 20px;">
+              <view autoplay="true"  style="width: 350px;height:150px;margin: 0 auto;" class="index1_img2 sk-transparent sk-text--Infinity-159 sk-text sk-image" controls="true" muted="true" show-mute-btn="true" show-play-btn="true" src="https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/xsrm/video/d12019744b6749d695f568d70576dcde.mp4"
+                unit-id="true">00:0900:26视频</view>
+            </view>
+            <view>
+              <view class="column" id="navbar">
+                <view style="width:350px;margin:0px auto;display:flex;align-items:center;">
+                  <view style="width:20%;display:flex;align-items:center;flex-direction:column;">
+                    <image mode="true" style="width:30px;height:30px;" class="sk-image"></image>
+                    <text style="font-size:11px;margin-top:5px;font-weight: 550;" class="sk-transparent sk-text-18-7500-223 sk-text">粉丝群</text>
+                  </view>
+                  <view style="width:20%;display:flex;align-items:center;flex-direction:column;">
+                    <image mode="true" style="width:30px;height:30px;" class="sk-image"></image>
+                    <text style="font-size:11px;margin-top:5px;font-weight: 550;" class="sk-transparent sk-text-18-7500-905 sk-text">优惠劵</text>
+                  </view>
+                  <view style="width:20%;display:flex;align-items:center;flex-direction:column;">
+                    <view is="pages/shopHome/components/coupon/coupon">
+                      <view data-url="/pages/shopHome/member/member" style="width: 45px;height:45px;position: absolute;z-index: 9999;margin-left: -22px;"></view>
+                    </view>
+                    <image mode="true" style="width:30px;height:30px;" class="sk-image"></image>
+                    <text style="font-size:11px;margin-top:5px;font-weight: 550;" class="sk-transparent sk-text-18-7500-353 sk-text">会员专区</text>
+                  </view>
+                  <view style="width:20%;display:flex;align-items:center;flex-direction:column;">
+                    <view is="pages/shopHome/components/activity/activity">
+                      <view data-url="/pages/shopHome/dynamic/dynamic" style="position: absolute;z-index: 9999;width: 45px;height: 45px;margin-left: -22px;"></view>
+                    </view>
+                    <image mode="true" style="width:30px;height:30px;" class="sk-image"></image>
+                    <text style="font-size:11px;margin-top:5px;font-weight: 550;" class="sk-transparent sk-text-18-7500-573 sk-text">商家推荐</text>
+                  </view>
+                  <view data-index="5" style="width:20%;display:flex;align-items:center;flex-direction:column;">
+                    <image mode="true" style="width:30px;height:30px;" class="sk-image"></image>
+                    <text style="font-size:11px;margin-top:5px;font-weight: 550;" class="sk-transparent sk-text-18-7500-777 sk-text">抖音小店</text>
+                  </view>
+                </view>
+              </view>
+            </view>
+            <view></view>
+            <view is="pages/shopHome/components/ToCity/ToCity">
+              <view style="margin-top: 30px">
+                <view class="ToCity--toCity ToCity--temp-box-31" style="margin-top: 30px;width: 350px;margin:0 auto ;background: #fff;">
+                  <view class="ToCity--book" style="background-color: #fff;width: 100%;">
+                    <view data-type="1" style="width:100%;background:rgba(0, 0, 0, 0.25);height:42px;border-radius:5px 5px 0 0;position:relative;">
+                      <image mode="true" style="width:36px;height:36px;border-radius:20%;margin-top:15px;margin-left:10px;" class="sk-image"></image>
+                      <view style="position:absolute;top:10px;left:60px;color:white;font-size: 15px;">
+                        <text class="sk-transparent sk-text-18-7500-605 sk-text">完美美妆达人</text>
+                      </view>
+                      <text style="padding:0.5px 3px;color:white;background:red;font-size:9px;position:absolute;top:12px;right:0;font-weight: 550;border-radius: 4px;" class="sk-transparent sk-text-18-7500-379 sk-text">全国物流</text>
+                      <text style="padding:0.5px 3px;color:white;background:red;font-size:9px;position:absolute;bottom:-9px;left:60px;font-weight: 550;border-radius: 4px;" class="sk-transparent sk-text-18-7500-309 sk-text">7天无理由退货</text>
+                      <text style="padding:0.5px 3px;color:white;background:red;font-size:9px;position:absolute;bottom:-9px;left:140px;font-weight: 550;border-radius: 4px;" class="sk-transparent sk-text-18-7500-153 sk-text">质量保障</text>
+                    </view>
+                    <scroll-view class="ToCity--product1_list" scroll-x="true" style="width: 100%;margin-top: 10px;">
+                      <view class="ToCity--me-fx-row ToCity--me-fx-start-c">
+                        <view class="ToCity--me-fx-col ToCity--me-fx-sb-c ToCity--product_info" data-id="2195" data-type="1">
+                          <image class="ToCity--product_img sk-image"></image>
+                          <text class="ToCity--product_name ToCity--me-full-text ToCity--u-line-2 sk-transparent" style="font-weight: 550;font-size: 10px;height: 30px;"><text style="color:#fff;background:#ff0000;border-radius:2px;font-size:9px;padding: 0 2px;" class="sk-transparent sk-text-18-7500-768 sk-text">全国</text>judydoll橘朵液体眼影珠</text>
+                          <view class="ToCity--me-fx-row ToCity--price_info" style="justify-content: flex-start; color: #FF0021; font-weight: bold;">
+                            <text class="ToCity--product_price sk-transparent sk-opacity">￥</text>
+                            <text class="ToCity--price sk-transparent sk-text-18-7500-180 sk-text">0.01</text>
+                          </view>
+                        </view>
+                        <view class="ToCity--me-fx-col ToCity--me-fx-sb-c ToCity--product_info" data-id="2198" data-type="1">
+                          <image class="ToCity--product_img sk-image"></image>
+                          <text class="ToCity--product_name ToCity--me-full-text ToCity--u-line-2 sk-transparent" style="font-weight: 550;font-size: 10px;height: 30px;"><text style="color:#fff;background:#ff0000;border-radius:2px;font-size:9px;padding: 0 2px;" class="sk-transparent sk-text-18-7500-588 sk-text">全国</text>nycemakeup修容高光</text>
+                          <view class="ToCity--me-fx-row ToCity--price_info" style="justify-content: flex-start; color: #FF0021; font-weight: bold;">
+                            <text class="ToCity--product_price sk-transparent sk-opacity">￥</text>
+                            <text class="ToCity--price sk-transparent sk-text-18-7500-145 sk-text">2.2</text>
+                          </view>
+                        </view>
+                        <view class="ToCity--me-fx-col ToCity--me-fx-sb-c ToCity--product_info" data-id="2214" data-type="1">
+                          <image class="ToCity--product_img sk-image"></image>
+                          <text class="ToCity--product_name ToCity--me-full-text ToCity--u-line-2 sk-transparent" style="font-weight: 550;font-size: 10px;height: 30px;"><text style="color:#fff;background:#ff0000;border-radius:2px;font-size:9px;padding: 0 2px;" class="sk-transparent sk-text-18-7500-432 sk-text">全国</text>Dior迪奥烈艳蓝金唇膏口红</text>
+                          <view class="ToCity--me-fx-row ToCity--price_info" style="justify-content: flex-start; color: #FF0021; font-weight: bold;">
+                            <text class="ToCity--product_price sk-transparent sk-opacity">￥</text>
+                            <text class="ToCity--price sk-transparent sk-text-18-7500-536 sk-text">35</text>
+                          </view>
+                        </view>
+                        <view class="ToCity--me-fx-col ToCity--me-fx-sb-c ToCity--product_info" data-id="2886" data-type="1">
+                          <image class="ToCity--product_img sk-image"></image>
+                          <text class="ToCity--product_name ToCity--me-full-text ToCity--u-line-2 sk-transparent" style="font-weight: 550;font-size: 10px;height: 30px;"><text style="color:#fff;background:#ff0000;border-radius:2px;font-size:9px;padding: 0 2px;" class="sk-transparent sk-text-18-7500-170 sk-text">全国</text>测试口红001</text>
+                          <view class="ToCity--me-fx-row ToCity--price_info" style="justify-content: flex-start; color: #FF0021; font-weight: bold;">
+                            <text class="ToCity--product_price sk-transparent sk-opacity">￥</text>
+                            <text class="ToCity--price sk-transparent sk-opacity">1</text>
+                          </view>
+                        </view>
+                        <view class="ToCity--me-fx-col ToCity--me-fx-sb-c ToCity--product_info" data-id="2194" data-type="1">
+                          <image class="ToCity--product_img sk-image"></image>
+                          <text class="ToCity--product_name ToCity--me-full-text ToCity--u-line-2 sk-transparent" style="font-weight: 550;font-size: 10px;height: 30px;"><text style="color:#fff;background:#ff0000;border-radius:2px;font-size:9px;padding: 0 2px;" class="sk-transparent sk-text-18-7500-572 sk-text">全国</text>juduo橘朵单色腮红</text>
+                          <view class="ToCity--me-fx-row ToCity--price_info" style="justify-content: flex-start; color: #FF0021; font-weight: bold;">
+                            <text class="ToCity--product_price sk-transparent sk-opacity">￥</text>
+                            <text class="ToCity--price sk-transparent sk-text-18-7500-123 sk-text">2.18</text>
+                          </view>
+                        </view>
+                      </view>
+                    </scroll-view>
+                  </view>
+                  <view class="ToCity--book" style="background-color: #ffffff;width: 100%;margin-top: 10px;">
+                    <view data-type="3" style="width:100%;background:rgba(0, 0, 0, 0.25);height:42px;border-radius:5px 5px 0 0;position:relative;">
+                      <image mode="true" style="width:36px;height:36px;border-radius:20%;margin-top:15px;margin-left:10px;" class="sk-image"></image>
+                      <view style="position:absolute;top:10px;left:60px;color:white;">
+                        <text class="sk-transparent sk-text-18-7500-772 sk-text">北辰三角洲内,凤凰天阶苑西北88米</text>
+                      </view>
+                      <text style="padding:0.5px 3px;color:white;background:red;font-size:9px;position:absolute;top:12px;right:0;font-weight: 550;border-radius: 4px;" class="sk-transparent sk-text-18-7500-559 sk-text">门店团购</text>
+                      <text style="padding:0.5px 3px;color:white;background:red;font-size:9px;position:absolute;bottom:-8px;left:60px;font-weight: 550;border-radius: 4px;" class="sk-transparent sk-text-18-7500-423 sk-text">上门自取</text>
+                      <text style="padding:0.5px 3px;color:white;background:red;font-size:9px;position:absolute;bottom:-8px;left:115px;font-weight: 550;border-radius: 4px;" class="sk-transparent sk-text-18-7500-658 sk-text">进店消费</text>
+                    </view>
+                    <scroll-view class="ToCity--product1_list" scroll-x="true" style="width: 100%;margin-top: 10px;">
+                      <view class="ToCity--me-fx-row ToCity--me-fx-start-c">
+                        <view class="ToCity--me-fx-col ToCity--me-fx-sb-c ToCity--product_info" data-id="2196" data-type="3">
+                          <image class="ToCity--product_img sk-image"></image>
+                          <text class="ToCity--product_name ToCity--me-full-text ToCity--u-line-2 sk-transparent" style="font-weight: 550;font-size: 10px;height: 30px;"><text style="color:#fff;background:#ff0000;border-radius:2px;font-size:9px;padding: 0 2px;" class="sk-transparent sk-text-18-7500-740 sk-text">到店</text>哆可眼线胶笔</text>
+                          <view class="ToCity--me-fx-row ToCity--price_info" style="justify-content: flex-start; color: #FF0021; font-weight: bold;">
+                            <text class="ToCity--product_price sk-transparent sk-opacity">￥</text>
+                            <text class="ToCity--price sk-transparent sk-text-18-7500-364 sk-text">1.38</text>
+                          </view>
+                        </view>
+                        <view class="ToCity--me-fx-col ToCity--me-fx-sb-c ToCity--product_info" data-id="2211" data-type="3">
+                          <image class="ToCity--product_img sk-image"></image>
+                          <text class="ToCity--product_name ToCity--me-full-text ToCity--u-line-2 sk-transparent" style="font-weight: 550;font-size: 10px;height: 30px;"><text style="color:#fff;background:#ff0000;border-radius:2px;font-size:9px;padding: 0 2px;" class="sk-transparent sk-text-18-7500-652 sk-text">到店</text>麻辣八爪鱼</text>
+                          <view class="ToCity--me-fx-row ToCity--price_info" style="justify-content: flex-start; color: #FF0021; font-weight: bold;">
+                            <text class="ToCity--product_price sk-transparent sk-opacity">￥</text>
+                            <text class="ToCity--price sk-transparent sk-text-18-7500-212 sk-text">0.1</text>
+                          </view>
+                        </view>
+                        <view class="ToCity--me-fx-col ToCity--me-fx-sb-c ToCity--product_info" data-id="2193" data-type="3">
+                          <image class="ToCity--product_img sk-image"></image>
+                          <text class="ToCity--product_name ToCity--me-full-text ToCity--u-line-2 sk-transparent" style="font-weight: 550;font-size: 10px;height: 30px;"><text style="color:#fff;background:#ff0000;border-radius:2px;font-size:9px;padding: 0 2px;" class="sk-transparent sk-text-18-7500-440 sk-text">到店</text>JILL LEEN迷你九色眼影</text>
+                          <view class="ToCity--me-fx-row ToCity--price_info" style="justify-content: flex-start; color: #FF0021; font-weight: bold;">
+                            <text class="ToCity--product_price sk-transparent sk-opacity">￥</text>
+                            <text class="ToCity--price sk-transparent sk-text-18-7500-214 sk-text">2.5</text>
+                          </view>
+                        </view>
+                        <view class="ToCity--me-fx-col ToCity--me-fx-sb-c ToCity--product_info" data-id="2199" data-type="3">
+                          <image class="ToCity--product_img sk-image"></image>
+                          <text class="ToCity--product_name ToCity--me-full-text ToCity--u-line-2 sk-transparent" style="font-weight: 550;font-size: 10px;height: 30px;"><text style="color:#fff;background:#ff0000;border-radius:2px;font-size:9px;padding: 0 2px;" class="sk-transparent sk-text-18-7500-571 sk-text">到店</text>unny眼线胶笔</text>
+                          <view class="ToCity--me-fx-row ToCity--price_info" style="justify-content: flex-start; color: #FF0021; font-weight: bold;">
+                            <text class="ToCity--product_price sk-transparent sk-opacity">￥</text>
+                            <text class="ToCity--price sk-transparent sk-text-18-7500-715 sk-text">2.9</text>
+                          </view>
+                        </view>
+                      </view>
+                    </scroll-view>
+                  </view>
+                </view>
+              </view>
+            </view>
+            <view is="pages/shopHome/components/activity/activity">
+              <view class="activity-activity--activity" style="margin: 0 auto;margin-top: 10px;">
+                <image class="activity-activity--alerts-Img sk-image" data-url="/pages/shopHome/dynamic/dynamic" mode="aspectFill"></image>
+              </view>
+            </view>
+          </view>
+          <view class="page_right_img me-fx-col"></view>
+        </view>
+      </view>
+    </view>
+  </view>
+</template>

@@ -1,0 +1,29 @@
+@import '/styles/me_common.wxss';
+
+
+
+.add-wechat-container{
+    padding:0 32rpx;box-sizing:border-box;
+    font-size:24rpx;margin:20rpx 0 40rpx 0;
+}
+
+.content-text{
+    width:686rpx;height:58rpx;padding:0 16rpx;
+    box-sizing:border-box;border-radius:20rpx;
+    box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.16);
+}
+.content-text>text{
+    padding-right: 15rpx;
+}
+/* .btn-el{margin-left:15rpx;} */
+
+
+.content-text1{background-color:#FE4F4F;color:#fff;}
+.content-text2{background-color:#A66A42;color:#fff;}
+.content-text3{background-color:#FD4B6D;color:#fff;}
+.content-text4{background-color:#F9F9F9;color:#000;}
+.content-text5{background-color:#3185FF;color:#fff;}
+.content-text6{background-color:#FF6C7E;color:#fff;}
+.content-text7{background-color:#FF8B4E;color:#fff;}
+.content-text8{background-color:#2CA4F0;color:#fff;}
+.content-text9{background-color:#fff;color:#000;}

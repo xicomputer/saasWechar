@@ -1,0 +1,25 @@
+<view>
+    <view class='list-box'>
+        <view class='me-fx-row me-fx-sb-c row-item' bindtap='jumpOrderList' data-type='1'>
+            <text>邀三退一物流订单</text>
+            <view class='me-fx-row me-fx-sb-c'>
+                <view wx:if='{{wuliu>0}}' class='count-num'></view>
+                <image src='../imgs/right-jiantou.png' class='right-jiantou-img'></image>
+            </view>
+        </view>
+        <view class='me-fx-row me-fx-sb-c row-item' bindtap='jumpOrderList' data-type='2'>
+            <text>邀三退一预订订单</text>
+            <view class='me-fx-row me-fx-sb-c'>
+                <view wx:if='{{yuding>0}}' class='count-num'></view>
+                <image src='../imgs/right-jiantou.png' class='right-jiantou-img'></image>
+            </view>
+        </view>
+        <view class='me-fx-row me-fx-sb-c row-item' bindtap='jumpOrderList' data-type='3'>
+            <text>邀三退一同城订单</text>
+            <view class='me-fx-row me-fx-sb-c'>
+                <view wx:if='{{tongcheng>0}}' class='count-num'></view>
+                <image src='../imgs/right-jiantou.png' class='right-jiantou-img'></image>
+            </view>
+        </view>
+    </view>
+</view>

@@ -1,0 +1,5 @@
+<view class="no-data-container" style='height:{{height}}vh'>
+    <image wx:if='{{height}}' class="no-data-container-img" mode="heightFix" style='height:{{height-10}}vh' src="{{url}}"></image>
+    <image wx:else class="no-data-container-img" mode="heightFix" src="{{url}}"></image>
+    <view class="no-data-container-text">{{text}}</view>
+</view>

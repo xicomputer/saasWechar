@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "邀三退一同城订单",
+  "enablePullDownRefresh":true,
+  "usingComponents": {
+    "van-tab": "@vant/weapp/tab/index",
+    "van-tabs": "@vant/weapp/tabs/index"
+  }
+}

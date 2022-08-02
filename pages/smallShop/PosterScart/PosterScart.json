@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "canvas-synthetic":"../components/canvas_synthetic/canvas_synthetic"
+  },
+  "navigationBarTitleText": "我的小店"
+}

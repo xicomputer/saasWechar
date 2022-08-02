@@ -1,0 +1,56 @@
+/* pages/shopHome/components/union/union.wxss */
+@import '/styles/me_common.wxss';
+.union-shop{margin-top:40rpx;}
+.union-shop .title-box{margin-bottom:20rpx;}
+.union-shop .adorn-img{width:41rpx;height:29rpx;}
+.union-shop .title-text{font-size:30rpx;color:#333;font-weight:bold;margin:0 20rpx;}
+
+.union-info{height: 158rpx;border-radius: 12rpx;background-color: #F9F1E4;margin: 0px 20px 20rpx;}
+.Info_msg{padding:20rpx 0rpx 20rpx 48rpx;width: 400rpx;flex-shrink: 0;}
+.Info_msg_img{width: 116rpx;height: 116rpx; border-radius: 16rpx;   flex-shrink: 0;}
+.shop_msg_info{padding-left: 24rpx;height: 116rpx;}
+.shop_msg{color: #D1A463;font-size: 20rpx;}
+.new_msg{color: #000000;font-size: 34rpx;font-weight: bold;}
+.new_desc{font-size: 20rpx;color: #9C948B;-webkit-line-clamp: 2;}
+.activitys_Info_btn{color: #fff;background-color: #FFD098;font-size: 20rpx;padding: 14rpx 30rpx;margin-right:15rpx ;border-radius: 6rpx;}
+
+/* 模板颜色 */
+.text_color1{color: #FE4F4F;}
+.btn_bg1{background-color:#FE4F4F }
+
+.text_color2{color: #111833;}
+.btn_bg2{background-color:#111833 }
+
+.text_color3{color: #333333;}
+.btn_bg3{background-color:#333333 }
+
+.text_color4{color: #9EC06C;}
+.btn_bg4{background-color:#9EC06C }
+.union-shop .textColor3{color: #000;}
+
+
+
+
+
+.item-box{
+    width:690rpx;background-color:#fff;
+    border-radius:18rpx;margin:20rpx auto;
+    padding:16rpx;box-sizing:border-box;
+}
+.item-box .item-top{margin-bottom:34rpx;}
+.item-box .avatar-img{
+    width:50rpx;height:50rpx;
+    background-color:#ccc;
+    border-radius:50%;
+}
+.item-box .title-text{font-size:34rpx;color:#000;font-weight:bold;}
+.item-box .enter-btn{
+    width:134rpx;height:46rpx;border-radius:28rpx;font-size:24rpx;
+    background: linear-gradient(92deg, #EC0702 0%, #F83603 100%);
+    color:#fff;text-align:center;line-height:46rpx;
+}
+.item-box .product-img{
+    width:200rpx;height:200rpx;margin-bottom:15rpx;
+}
+.item-box .price-box{font-size:22rpx;color:#FF1C1C;font-weight:bold;}
+.item-box .price-num{font-size:36rpx;}

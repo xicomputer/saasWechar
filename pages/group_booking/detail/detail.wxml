@@ -1,0 +1,349 @@
+<view class='detail-page'>
+    <view class='top-banner'>
+        <swiper circular class='banner-swiper' bindchange='swiperChange'>
+            <swiper-item wx:if='{{activityInfo.videoUrl}}' class='swiper-item'>
+                <video id='swiperVideo' src="{{activityInfo.videoUrl}}"  class='banner-img'
+                 poster='{{activityInfo.videoCover}}'></video>
+            </swiper-item>
+            <swiper-item class='swiper-item' wx:for='{{activityInfo.bannerImgUrls}}' wx:key='index'>
+                <view class='swiper-content'>
+                    <image src='{{item}}' class='banner-img'></image>
+                </view>
+            </swiper-item>
+        </swiper>
+        <view class='count-text-box'>{{currentBanner}}/{{activityInfo.bannerImgUrls.length}}</view>
+    </view>
+
+    <view class='base-info'>
+        <view class='me-fx-row me-fx-sb-c price-down-count'>
+            <view class='me-fx-row me-fx-start-end price-box'>
+                <view class='me-fx-row me-fx-start-end'>
+                    <text class='symbol-text'>￥</text>
+                    <text class='price-num'>{{activityInfo.lowPrice}}</text>
+                </view>
+                <view class='me-fx-row me-fx-start-end old-price'>￥{{activityInfo.price}}</view>
+            </view>
+            <van-count-down time='{{downTimes}}' use-slot='{{true}}' auto-start='{{true}}'
+                bind:finish='activityEnd' bind:change='changeFun'
+            >
+                <view class='me-fx-col me-fx-c-c down-count'>
+                    <view>距拼团活动{{activityInfo.state==1?'开始':'结束'}}还剩:</view>
+                    <view class='me-fx-row me-fx-c-c'>
+                        <block wx:if='{{downTimeObj.days!=="00"}}'>
+                            <text class='num-text'>{{downTimeObj.days}}</text>天
+                        </block>
+                        <text class='num-text'>{{downTimeObj.hours}}</text>时
+                        <text class='num-text'>{{downTimeObj.minutes}}</text>分
+                        <text class='num-text'>{{downTimeObj.seconds}}</text>秒
+                    </view>
+                </view>
+            </van-count-down>
+        </view>
+        <view class='me-fx-row me-fx-start-c labels-container'>
+            <text class='label-text1'>拼团价</text>
+            <text class='label-text2'>{{activityInfo.groupOfNumber}}人团</text>
+            <text class='label-text2' wx:if='{{activityInfo.limitBuyCount!=-1}}'>每人限购{{activityInfo.limitBuyCount}}件</text>
+        </view>
+        <view class='me-full-text me-full-line2 goods-name'>{{activityInfo.commodityName}}</view>
+        <view class='me-fx-row me-fx-sb-c base-info-bottom'>
+            <view class='inventory-text'>已售{{activityInfo.soldCount}}件·库存{{activityInfo.commodityTotalCount}}件·快递包邮</view>
+            <!-- 下面是活动分享按钮，现在隐藏 -->
+            <!-- <view class='me-fx-row me-fx-c-c share-box' bindtap="handleShareBtnClick">
+                <image src='../imgs/wx.png' class='wx-img'></image>
+                <text>分享</text>
+            </view> -->
+        </view>
+    </view>
+
+    <view class='attr-info'>
+        <!-- <view class='me-fx-row me-fx-start-c info-item'>
+            <text class='attr-title'>运费</text>
+            <image src='../imgs/che.png' class='che-img'></image>
+            <text class='label1-text'>包邮</text>
+        </view> -->
+
+        <view class='me-fx-row me-fx-start-c info-item'
+            wx:for='{{activityInfo.orderTypeArr}}' wx:key='index'
+        >
+            <text class='attr-title'>{{item==1?'物流发货':item==2?'同城配送':'预订自取'}}</text>
+            <view class='me-fx-row me-fx-start-c'>
+                <text class='label-text2'>购买</text>
+                <view class='connect-line'></view>
+                <text class='label-text2'>{{item==1?'接单发货':item==2?'配送':'门店团购'}}</text>
+                <view class='connect-line'></view>
+                <text class='label-text2'>{{item==1?'收货完成':'完成'}}</text>
+            </view>
+        </view>
+
+        <view class='me-fx-row me-fx-start-c info-item'>
+            <text class='attr-title'>保障</text>
+            <view class='me-fx-1 content-str'>放心购·材质保障·假一罚十</view>
+            <image src='../imgs/point-adorn.png' class='point-adorn-img'></image>
+        </view>
+    </view>
+
+    <!-- 开团列表 -->
+    <view class='buy-user' wx:if='{{groupList.list.length}}'>
+        <view class='me-fx-row me-fx-sb-c row-item'>
+            <text class='title-msg'>这些人刚刚发起拼团，可直接参团</text>
+            <view class='me-fx-row me-fx-start-c view-all' bindtap='viewAll'>
+                <text>查看全部</text>
+                <image src='../imgs/right-point.png' class='left-point-img'></image>
+            </view>
+        </view>
+        <block wx:for='{{groupList.list}}' wx:key='index'>
+            <view class='me-fx-row me-fx-sb-c row-item' wx:if='{{index<3}}'>
+                <view class='me-fx-row me-fx-start-c'>
+                    <image src='{{item.headimgurl}}' class='avatar-img'></image>
+                    <text class='me-full-text user-name'>{{item.nickname}}</text>
+                </view>
+                <view class='me-fx-row me-fx-start-c' >
+                    <view class='me-fx-col me-fx-c-end join-info'>
+                        <view>还差<text class='people-num'>{{item.groupOfNumber-item.groupJoinNumber}}人</text>拼团</view>
+                        <van-count-down time='{{item.diffTimes}}' use-slot='{{true}}' auto-start='{{true}}'
+                            bind:finish='finishFun' bind:change='changeFun' data-index='{{index}}'
+                        >
+                            <view class='down-time-str'>
+                                <text>剩余: </text>
+                                <text wx:if='{{item.downTimeObj.days!=="00"}}'>{{item.downTimeObj.days}}天</text>
+                                <text>{{item.downTimeObj.hours}}:{{item.downTimeObj.minutes}}:{{item.downTimeObj.seconds}}</text>
+                            </view>
+                        </van-count-down>
+                    </view>
+                    <view class='join-btn' bindtap='goJoin' data-item='{{item}}'>去参团</view>
+                </view>
+            </view>
+        </block>
+    </view>
+
+    <view class='explain-info'>
+        <view class='me-fx-row me-fx-start-c block-title-box'>
+            <text class='col-line'></text>
+            <text>活动规则</text>
+        </view>
+        <view class='explain-text'>
+            <view>1.拼团有效期</view>
+            <view>拼团有效期是由开团时刻起开始计算,商家设置的时间。</view>
+            <view>2.拼团成功</view>
+            <view>拼团有效期内,支付的用户数达到参团人数,则拼团成功,商家进入发货流程。</view>
+            <view>3.拼团失败</view>
+            <view>拼团有效期内,未达到要求参团人数,则为拼团失败。</view>
+            <view>4.等待成团中如何退款？</view>
+            <view>拼团中状态暂不支持退款申请，有需要的可以等待拼团成功后申请或者失败后自动退回。</view>
+            <view>5.商品承诺的发货时间</view>
+            <view>参加拼团活动的商品承诺发货时间，将以拼团成功时间为准开始计算。</view>
+            <view>6.限量规则</view>
+            <view>商家如设置每人开团次数限制,达到限制后,将无法再次开团。</view>
+            <view>7.退货说明</view>
+            <view>活动商品如有保质期、品质、假冒伪劣问题请及时保留证据并联系商家线下退货。</view>
+        </view>
+    </view>
+
+    <view class='detail-imgs'>
+        <view class='me-fx-row me-fx-start-c block-title-box'>
+            <text class='col-line'></text>
+            <text>商品详情</text>
+        </view>
+        <view>
+            <image wx:for='{{activityInfo.detailImgUrls}}' wx:key='index' src='{{item}}' class='detail-img' mode='widthFix'></image>
+        </view>
+    </view>
+
+    <view class='me-fx-row me-fx-sb-c floot-container'>
+        <view class='me-fx-row me-fx-start-c service'>
+            <view class='me-fx-col me-fx-c-c link-item' bindtap='jumpChat'>
+                <image src='../imgs/msg-img.png' class='icon-img'></image>
+                <text>客服</text>
+            </view>
+            <view class='me-fx-col me-fx-c-c link-item' bindtap='jumpShop'>
+                <image src='../imgs/shop-img.png' class='icon-img'></image>
+                <text>店铺</text>
+            </view>
+        </view>
+        <view class='me-fx-row me-fx-start-c handel-btn'>
+            <!-- <view class='me-fx-col me-fx-c-c left-btn' bindtap='handleFlootBtn' data-type='1'>
+                <text>¥{{activityInfo.price}}</text>
+                <text>单独购买</text>
+            </view> -->
+            <view class='me-fx-col me-fx-c-c right-btn' bindtap='handleFlootBtn' data-type='2'>
+                <text>¥{{activityInfo.lowPrice}}</text>
+                <text>一键开团({{activityInfo.groupOfNumber}}人)</text>
+            </view>
+            <!-- <view class='me-fx-col me-fx-c-c right-btn' bindtap='handleFlootBtn' data-type='2'>
+                <text>¥1750</text>
+                <text>一键开团(3人)</text>
+            </view> -->
+            <!-- <view class='me-fx-col me-fx-c-c right-btn' bindtap='handleFlootBtn' data-type='3'>
+                <text>查看拼团进度</text>
+            </view> -->
+        </view>
+    </view>
+</view>
+
+
+<!-- 拼团弹窗 -->
+<van-popup show="{{ showJoinPopup }}" round='{{true}}' close-on-click-overlay='{{true}}'
+    bind:click-overlay='closePopup' data-attrname='showJoinPopup'
+>
+    <view class='me-fx-col me-fx-c-c join-spell-group-popup-content'>
+        <view class='me-fx-row me-fx-c-c top-title'>
+            <image class='shizhong-img' src='../imgs/shizhong-icon.png'></image>
+            <view>等待成团，仅剩<text class='people-count'>{{expectGroup.groupOfNumber-expectGroup.groupJoinNumber}}</text>个名额</view>
+        </view>
+        <view class='me-fx-row me-fx-start-c user-list'>
+            <view class='avatar-item' wx:for='{{expectGroup.groupJoinUserHeads}}' wx:key='index'>
+                <image src='{{item}}' class='user-avatar'></image>
+                <text wx:if='{{index===0}}' class='initiator-user-label'>团长</text>
+            </view>
+            <image wx:for='{{expectGroup.groupOfNumber-expectGroup.groupJoinNumber}}' wx:for-index='ti' wx:key='ti' src='../imgs/empty-avatar.png' class='empty-avatar-img'></image>
+        </view>
+        <van-count-down time='{{expectGroup.diffTimes}}' use-slot='{{true}}' auto-start='{{true}}'
+            bind:finish='finishFun' bind:change='changeFun' data-groupinfo='{{expectGroup}}'
+        >
+            <view class='me-fx-row me-fx-c-c down-count-box'>
+                距结束:
+                <block wx:if='{{expectGroup.downTimeObj.days!=="00"}}'>
+                    <text class='down-num'>{{expectGroup.downTimeObj.days}}</text>天
+                </block>
+                <text class='down-num'>{{expectGroup.downTimeObj.hours}}</text>时
+                <text class='down-num'>{{expectGroup.downTimeObj.minutes}}</text>分
+                <text class='down-num'>{{expectGroup.downTimeObj.seconds}}</text>秒
+            </view>
+        </van-count-down>
+        
+        <button class='immediately-join-btn' bindtap='jumpJoinDetail'>立即参团</button>
+    </view>
+</van-popup>
+
+
+<!-- 发起平团全部用户 -->
+<van-popup show="{{ showAllUser }}" round='{{true}}' close-on-click-overlay='{{true}}'
+    bind:click-overlay='closePopup' bind:close='closePopup' closeable='{{true}}'
+    data-attrname='showAllUser'
+>
+    <view class='all-user-list-popup'>
+        <view class='me-fx-row me-fx-c-c popup-title'>即将拼成，一键参团</view>
+        <scroll-view scroll-y='{{true}}' class='list-scroll' bindscrolltolower='scrolltolower'
+            refresher-enabled='{{true}}' refresher-triggered='{{refresherStatus}}'
+            bindrefresherpulling='refresherpulling' bindrefresherrefresh='refresherrefresh'
+        >
+            <view class='me-fx-row me-fx-sb-c row-item' wx:for='{{groupList.list}}' wx:key='index'>
+                <view class='me-fx-row me-fx-start-c'>
+                    <image src='{{item.headimgurl}}' class='avatar-img'></image>
+                    <text class='me-full-text user-name'>{{item.nickname}}</text>
+                </view>
+                <view class='me-fx-row me-fx-start-c' >
+                    <view class='me-fx-col me-fx-c-end join-info'>
+                        <view>还差<text class='people-num'>{{item.groupOfNumber-item.groupJoinNumber}}人</text>拼团</view>
+                        <van-count-down time='{{item.diffTimes}}' use-slot='{{true}}' auto-start='{{true}}'
+                            bind:finish='finishFun' bind:change='changeFun' data-index='{{index}}'
+                        >
+                            <view class='down-time-str'>
+                                <text>剩余: </text>
+                                <text wx:if='{{item.downTimeObj.days!=="00"}}'>{{item.downTimeObj.days}}天</text>
+                                <text>{{item.downTimeObj.hours}}:{{item.downTimeObj.minutes}}:{{item.downTimeObj.seconds}}</text>
+                            </view>
+                        </van-count-down>
+                    </view>
+                    <view class='join-btn' bindtap='goJoin' data-item='{{item}}'>去参团</view>
+                </view>
+            </view>
+        </scroll-view>
+    </view>
+</van-popup>
+
+
+<!-- 选择规格弹窗 -->
+<van-popup show="{{ showSelSpecification }}" position='bottom' close-on-click-overlay='{{true}}'
+    bind:click-overlay='closePopup' bind:close='closePopup' 
+    closeable='{{true}}' data-attrname='showSelSpecification'
+>
+    <view class='sel-specification-popup'>
+        <view class='me-fx-row me-fx-sb-c goods-base-info'>
+            <image src='{{currentSku.imageUrl}}' class='goods-img'></image>
+            <view class='me-fx-1 me-fx-col me-fx-sb right-info'>
+                <view class='price-text'>¥{{buyType==1?currentSku.price:currentSku.livePrice}}</view>
+                <view class='me-fx-row me-fx-sb-c'>
+                    <view class='me-full-text me-full-line2 goods-name'>{{activityInfo.commodityName}}</view>
+                    <view>库存:{{currentSku.residueCommoditySkuCount}}</view>
+                </view>
+            </view>
+        </view>
+        <view class='specification-list'>
+            <view class='title-text'>规格分类</view>
+            <view class='me-fx-row'>
+                <text class='specification-item {{item.skuId==goodsSkuId?"sel-item":""}}' wx:for='{{skuList}}' wx:key='index' bindtap='selSkuFun' data-skuitem='{{item}}'>{{item.skuName}}</text>
+            </view>
+        </view>
+        <view class='me-fx-row me-fx-sb-c buy-count'>
+            <view class='me-fx-row me-fx-start-end'>
+                <text class='title-text'>购买数量</text>
+                <text class='msg-text' wx:if='{{activityInfo.limitBuyCount!=-1}}'>此商品限购{{activityInfo.limitBuyCount}}件</text>
+            </view>
+            <add-subtract-num bind:change='countChange' bind:minusCount='minusCount' desabled='{{isCountDesabled}}'></add-subtract-num>
+        </view>
+        <view class='me-fx-row me-fx-sb-c address-text' bindtap='jumpAddressList'>
+            <view>{{userShipping.fullAddress || '请选择收货地址'}}</view>
+            <image src='../imgs/right-jiantou.png' class='right-jiantou-img'></image>
+        </view>
+        <view class='remark-content'>
+            <view class='title-text'>备注：</view>
+            <view>
+                <textarea value="请输入" value='{{reason}}' bindinput='textChange' class='remark-ipt'></textarea>
+            </view>
+        </view>
+        <button class='down-order-btn' bindtap='jumpComfirmOrder'>{{buyType==1?'立即支付':'立即支付并开团'}}</button>
+    </view>
+</van-popup>
+
+
+<!-- 分享弹窗 -->
+<van-popup show='{{showShare}}' position='bottom' close-on-click-overlay='{{true}}'
+    bind:click-overlay='closePopup' data-attrname='showShare'
+>
+    <view class='share-content-popup'>
+        <view class='me-fx-row me-fx-sa-c'>
+            <button class='me-fx-col me-fx-c-c share-btn' open-type='share'>
+                <image src='../imgs/wx-logo.png' class='share-img'></image>
+                <text>分享至微信</text>
+            </button>
+            <view class='me-fx-col me-fx-c-c' bindtap='createPosters'>
+                <image src='../imgs/save-img.png' class='share-img'></image>
+                <text>保存海报</text>
+            </view>
+        </view>
+        <button class='cancel-btn' bindtap='closePopup' data-attrname='showShare'>取消</button>
+    </view>
+</van-popup>
+
+<van-popup show="{{isEnd}}" close-on-click-overlay='{{true}}' custom-style='border-radius:28rpx;'
+    close-on-click-overlay='{{true}}' bind:click-overlay='hideEndPopup'
+>
+    <view class='me-fx-col me-fx-c-c activity-end-popup-content'>
+        <view class='title-text'>拼团活动已结束</view>
+        <view class='goods-name'>{{activityInfo.commodityName}}</view>
+        <image class='activity-end-img' src='../imgs/activity_end_img.png'></image>
+        <!-- <button class='popup-btn' bindtap='jumpJoinUserList'>查看推荐订单</button> -->
+    </view>
+</van-popup>
+
+<!-- 海报展示弹窗 -->
+<view wx:if='{{showPoster}}' class='poster-popup' bindtap='closePosterPopup'>
+    <image class='poster-img' src='{{testimgUrl}}'></image>
+    <view class='me-fx-row me-fx-c-c footer-save'>
+        <button class='save-btn' catchtap='savePoster'>保存海报</button>
+    </view>
+</view>
+
+
+
+<!-- 海报生成组件 -->
+<canvas-synthetic class='synthetic' canvas-id='canvas_goods'
+    canvas-width='{{548}}' canvas-height='{{856}}' canvas-bgcolor='#fff'
+    imgs='{{imgs}}' bind:generateComplete='getCompleteImg' texts='{{texts}}'
+    showline='{{false}}' rect-info='{{rectInfo}}'
+></canvas-synthetic>
+
+
+<!-- 授权组件 -->
+<auth-get-info></auth-get-info>

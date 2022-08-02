@@ -1,0 +1,180 @@
+page{
+  /* padding: 20rpx; */
+  box-sizing: border-box;
+  background: #f2f2f2;
+  position: relative;
+}
+.seckill-goods-list{
+  padding-bottom: 40rpx;
+}
+/* 秒杀头部 */
+.seckill-top{
+  margin: 20rpx;
+}
+.seckill-time-list{
+  display: flex;
+  margin-top: 9rpx;
+  height: 90rpx;
+}
+.seckill-time-box{
+  text-align: center;
+  margin-right: 38rpx;
+}
+.seckill-time{
+  height: 45rpx;
+  font-size: 32rpx;
+  font-family: PingFang SC;
+  font-weight: 800;
+  line-height: 48rpx;
+  color: #333;
+}
+.seckill-time-active{
+  color: #FF5340;
+}
+.seckill-statu{
+  width: 112rpx;
+  padding: 0 5px;
+  height: 40rpx;
+  font-size: 28rpx;
+  font-family: PingFang SC;
+  font-weight: 300;
+  line-height: 40rpx;
+  color: #999999;
+}
+.seckill-statu-active{
+  min-width: 110rpx;
+  background-color: #FF5340;
+  border-radius: 20rpx;
+  color: #FFFFFF;
+}
+/* 秒杀商品列表 */
+.secklii-good-item{
+  display: flex;
+  padding: 20rpx;
+  box-sizing: border-box;
+  background-color: white;
+  margin-top: 20rpx;
+  border-radius: 20rpx;
+}
+.seckill-good-info{
+  width: 0;
+  flex: 1;
+  margin-left: 20rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.seckill-good-top{
+  margin-top: 10rpx;
+}
+.seckill-good-name{
+  height: 40rpx;
+  font-size: 28rpx;
+  font-family: PingFang SC;
+  font-weight: bold;
+  line-height: 40rpx;
+  color: #333333;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.seckill-good-describe{
+  font-size: 24rpx;
+  font-family: PingFang SC;
+  font-weight: 400;
+  line-height: 36rpx;
+  color: #999999;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+.seckill-good-bottom{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+.seckill-good-price-box{
+  display: flex;
+  align-items: center;
+}
+.seckill-good-activity-price{
+  height: 40rpx;
+  font-size: 28rpx;
+  font-family: PingFang SC;
+  font-weight: bold;
+  line-height: 40rpx;
+  color: #FF5340;
+}
+.seckill-good-original-price{
+  height: 30rpx;
+  font-size: 22rpx;
+  font-family: PingFang SC;
+  font-weight: 300;
+  line-height: 30rpx;
+  color: #CCCCCC;
+  margin-left: 5rpx;
+  text-decoration: line-through;
+}
+.seckill-buy-btn{
+  width: 128rpx;
+  height: 60rpx;
+  background: #FF5340;
+  border-radius: 5rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.seckill-buy-btn-statu{
+  height: 30rpx;
+  font-size: 28rpx;
+  font-family: PingFang SC;
+  font-weight: 400;
+  line-height: 30rpx;
+  color: #FFFFFF;
+}
+.sold-all{
+  background-color: #999;
+}
+.seckill-buy-btn-bottom{
+  display: flex;
+  align-items: center;
+}
+.seckill-buy-btn-progress{
+  width: 80rpx;
+  height: 6rpx;
+  background: #FF877a;
+  border-radius: 4px;
+  margin-right: 4rpx;
+  position: relative;
+}
+.seckill-buy-btn-progress-statu{
+  width: 0;
+  height: 6rpx;
+  background: #FFFFFF;
+  border-radius: 4rpx;
+}
+.sold-num{
+  height: 20rpx;
+  font-size: 16rpx;
+  font-family: PingFang SC;
+  font-weight: 300;
+  line-height: 20rpx;
+  color: #FFFFFF;
+}
+/* 底部 */
+.daodile{
+  font-size: 20rpx;
+  text-align: center;
+  color: #999999;
+  font-weight: bold;
+  position: absolute;
+  bottom: 0rpx;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+.seckill_body{min-height: 92vh;}

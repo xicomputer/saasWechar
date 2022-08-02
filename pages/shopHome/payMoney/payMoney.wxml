@@ -1,0 +1,11 @@
+<!--pages/payMoney/money.wxml-->
+<view class='xp-box'>
+    <view class='box-item'>
+        <view class="item1">{{goodsName}}</view>
+        <view  class="item2">
+            <view class="z1">消费金额</view>
+            <view class="z2">  <text>￥</text><input type="number" bindinput="getvalue" /></view>
+        </view>
+        <view  class="item3" bindtap="enterMoney">确认付款</view>
+    </view>
+</view>

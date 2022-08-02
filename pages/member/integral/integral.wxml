@@ -1,0 +1,16 @@
+<view class="member">
+  <view class="member_title">
+    <view>当前积分</view>
+    <view style="color: #333333;">{{integral}}分</view>
+  </view>
+  <view class="member_item" wx:for="{{integralList}}" wx:key="index">
+    <view class="member_item_up">
+      <view class="member_item_no">订单号：{{item.orderNumber}}</view>
+      <view class="member_item_point">+{{item.integral}}分</view>
+    </view>
+    <view class="member_item_down">
+      <view class="member_item_price">消费金额￥{{item.actualMoney}}</view>
+      <view class="member_item_time">{{item.addTime}}</view>
+    </view>
+  </view>
+</view>

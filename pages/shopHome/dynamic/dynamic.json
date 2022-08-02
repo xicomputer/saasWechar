@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "商家通知",
+  "usingComponents": {
+    "dynamic-list":"../../Component/dynamic/index"
+  }
+}

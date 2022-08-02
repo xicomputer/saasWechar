@@ -1,0 +1,29 @@
+<view class="dynamic-top">
+  <image src="/pages/img/smallShop/warn.png" style="width:36rpx;height:30rpx"></image>{{appraiseCount>0?'你还可以发布'+appraiseCount+'消息':'您暂时无法发布消息'}}（每完成一笔订单/可发布一条消息）
+</view>
+<view class="release-dynamic-box">
+  <textarea class="txtarea" value="{{content}}" bindinput="bindTextAreaBlur" maxlength="200" auto-height placeholder="请输入发表的内容" placeholder-style="font-size:24rpx" />
+  <!-- 上传图片 -->
+    <view class="content-image">
+        <view wx:for="{{fileList}}" wx:key="index" class="image-box">
+            <image src="{{item}}" class="image-img" bindtap="zoomImg" mode="aspectFill" data-list="{{fileList}}" data-src="{{item}}"></image>
+            <image src="../../img/shanchu.png" class="image-del" bindtap="delImg" data-index="{{index}}"></image>
+        </view>
+        <view wx:if="{{fileList.length<6}}" class="image-box uploadImg" bindtap="uploadImage">
+            <image class="uploadImg-btn" src="/pages/img/order/upload.png"></image>
+            上传图片
+        </view>
+    </view>
+</view>
+<view class="notice-content">
+  <image src="/pages/img/smallShop/warn.png" style="width:36rpx;height:30rpx;margin-left:22rpx;margin-right:8rpx"></image>
+  购买过小店商品客户可以参与商品评价发布
+</view>
+<view class="dynamic-notice">
+  <image src="/pages/img/smallShop/gantang.png" style="width:24rpx;height:24rpx;margin-right:8rpx"></image>
+  <text class="notice-text">尊敬的用户，您发布的内容须遵守相关法律法规和订阅通知规 则，请严格遵守相关规定，以免违规。</text>
+</view>
+<view class="dynamic-bottom">
+  <view class="cancel-btn" bindtap="cancel">取消</view>
+  <view class="cancel-btn comfirm-btn" bindtap="submit">发布</view>
+</view>

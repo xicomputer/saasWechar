@@ -1,0 +1,105 @@
+<!--pages/special_goods/activity-classify/activity-classify.wxml-->
+
+<!-- 顶部导航栏 -->
+<view class='me-fx-row me-fx-start-c top-navigation-box' 
+    style='top:{{menuBtnInfo.top}}px;height:{{menuBtnInfo.height}}px'
+>
+    <text class='icon icon-fanhui5' bindtap='breakPage'></text>
+</view>
+
+<view class='me-fx-col activity-classify-page'>
+    <swiper class='swiper-box'>
+        <swiper-item>
+            <image src='{{topImgUrl}}' class='banner-img'></image>
+        </swiper-item>
+    </swiper>
+
+    <scroll-view scroll-x='true'>
+        <view class='me-fx-row classify-nav-list'>
+            <view class='me-fx-col me-fx-c-c nav-item {{nowClassId==item.id?"sel-nav":""}}' 
+                wx:for='{{classNavList}}' wx:key='index' bindtap='switchClass' 
+                data-classid='{{item.id}}'
+            >
+                <text class='me-fx-row me-fx-c-c'>{{item.classifyName}}</text>
+                <text class='under-line'></text>
+            </view>
+        </view>
+    </scroll-view>
+    <view class='me-fx-1 list-scroll-box'>
+        <view wx:if='{{dataList.length==0}}' class='me-fx-col me-fx-c-c list-empty-box'>
+            <text>暂无数据</text>
+        </view>
+        <scroll-view wx:else scroll-y='true' class='product-list' 
+            style='height:{{scrollHeight}}px;' refresher-enabled='true'
+            bindscrolltolower='scrolltolower' refresher-triggered='{{refresherStatus}}'
+            bindrefresherpulling='refresherpulling' bindrefresherrefresh='refresherrefresh'
+        >
+            <view class='me-fx-row goods-item' wx:for='{{dataList}}' wx:key='index'
+                bindtap='jumpDetail' data-item='{{item}}'
+            >
+                <image src='{{item.imageUrl}}' class='goods-img'></image>
+                <view class='me-fx-1 me-fx-col me-fx-sb'>
+                    <view>
+                        <view class='me-full-text goods-name'>{{item.commodityName}}</view>
+                        <view class='me-fx-row'>
+                            <view class='reduced-price'>限时直降{{item.saveAmount}}元</view>
+                        </view>
+                        <view wx:if='{{templateTag=="JSMS"}}' 
+                            class='me-fx-row me-fx-start-c progress-box'
+                        >
+                            <progress class='me-fx-1' percent="{{item.percentNum}}" color="#FFE0E0" active   stroke-width="13" border-radius='7' show-info activeColor='#FF0000' font-size='9'/>
+                            <text>已秒{{item.salesTotalCount}}件</text>
+                        </view>
+                    </view>
+
+                    <!-- 秒杀按钮样式 -->
+                    <view class='me-fx-row' wx:if='{{templateTag=="JSMS"}}'>
+                        <view class='me-fx-1 me-fx-row me-fx-c-c price-box'>
+                            <text>秒杀价：</text>
+                            <view>
+                                <text>￥</text>
+                                <text class='price-num'>{{item.lowPrice}}</text>
+                            </view>
+                        </view>
+                        <view class='me-fx-row me-fx-c-c right-box'>
+                            <image src='../imgs/ms-icon.png' class='ms-icon-img'></image>
+                            <text>急速秒杀</text>
+                        </view>
+                    </view>
+
+                    <!-- 拼团按钮样式 -->
+                    <view class='me-fx-row pt-btn-box' wx:if='{{templateTag=="TTPT"}}'>
+                        <view class='me-fx-1 me-fx-row me-fx-c-c price-box'>
+                            <text>拼团价:</text>
+                            <view>
+                                <text class='price-symbol'>￥</text>
+                                <text class='price-int'>{{item.lowPrice}}</text>
+                            </view>
+                        </view>
+                        <image class='adorn-img' src='../imgs/pt-adorn.png'></image>
+                        <view class='me-fx-row me-fx-c-c pt-btn-str'>天天拼团</view>
+                    </view>
+
+                    <!-- 推荐返利按钮样式 -->
+                    <view wx:if='{{templateTag=="TJFL"}}' class='me-fx-row tjfl-btn-box'>
+                        <view class='me-fx-row me-fx-c-c fl-price'>
+                            <text class='ljfx-str'>立即返现</text>
+                            <view class='price-str'>
+                                <text>￥</text>
+                                <text class='price-num'>{{item.lowPrice}}</text>
+                            </view>
+                        </view>
+                        <image class='fl-adom-img' src='../imgs/fl-adom.png'></image>
+                        <view class='me-fx-row me-fx-c-c fl-btn-str'>邀三退一</view>
+                    </view>
+                </view>
+            </view>
+        </scroll-view>
+    </view>
+    
+</view>
+
+
+
+<!-- 授权组件 -->
+<auth-get-info></auth-get-info>

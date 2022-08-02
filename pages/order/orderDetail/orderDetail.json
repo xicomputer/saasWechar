@@ -1,0 +1,10 @@
+{
+  "usingComponents": {
+    "van-popup": "@vant/weapp/popup/index",
+    "van-icon": "@vant/weapp/icon/index",
+    "van-count-down": "@vant/weapp/count-down/index",
+    "store-close": "/pages/Component/storeClose/index",
+    "van-overlay": "@vant/weapp/overlay/index"
+  },
+  "navigationBarTitleText": "订单详情"
+}

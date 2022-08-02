@@ -1,0 +1,28 @@
+@import '../../iconfont/iconfont.wxss';
+@import '/styles/me_common.wxss';
+
+.notice-box{
+    margin: 0 32rpx;
+    padding: 0rpx 20rpx;box-sizing:border-box;overflow: hidden;height: 40rpx;position: relative;margin-bottom: 20rpx;}
+.notice-box::after {content: '';position: absolute;top: 0;left:0;right: 0;bottom: 0;}
+.notice-content{font-size:24rpx;line-height: 40rpx;}
+.icon-notice{margin-right:10rpx;}
+
+
+.notice-box1{background-color:#fff;
+    border-radius: 20rpx;}
+
+.content-box1{
+    background-color:#fff;border-radius:26rpx;
+    padding:0 10rpx;box-sizing:border-box;
+}
+.me-full-text {
+    overflow: initial;
+    white-space: nowrap;
+    display:inline-block;
+}
+.text-color1{color:#FE4F4F;}
+.text-color2{color:#333;}
+.text-color3{color:#FF8B4E;}
+.text-color4{color:#2CA4F2}
+

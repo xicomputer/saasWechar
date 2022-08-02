@@ -1,0 +1,44 @@
+<!-- banner图 -->
+
+<!-- <view wx:if="{{tempId !=3.1}}">
+
+    <image wx:if="{{settingImg.top.fileurl.length < 2 && settingImg.hasTop}}" src="{{settingImg.top.fileurl[0]}}" mode="aspectFill" class="index1_img">
+    </image>
+    <video wx:if="{{settingImg.top.fileurl.length > 1}}" src="{{settingImg.top.fileurl[1]}}" mode="aspectFit" class="index1_img2" autoplay="true" muted="true" controls="true" show-mute-btn="true" show-play-btn="true" />
+
+    <view class="noimg" wx:if="{{settingImg.hasTop}}"></view>
+    <view class="abImg {{tempId == 12?'bgHeight':''}}">
+        <view class="banner_info">
+            <swiper class='swiper-box {{swiperHeight}}' autoplay circular>
+                <swiper-item wx:for='{{banners}}' wx:key='index' bindtap="goShopDeatial" data-id="{{item.commodityId}}">
+                    <view class='swiper-item-content {{itemContent}}'>
+                        <image src='{{item.thumbnail}}' class='item-img'></image>
+                        <view wx:if="{{tempId != 12}}" class="me-full-text banner_text">{{item.description}}</view>
+                    </view>
+                </swiper-item>
+            </swiper>
+        </view>
+    </view>
+</view> -->
+<view class="static-Img" bindtap="goShopDeatial" data-id="{{mainBanner.commodityId}}" wx:if="{{mainBanner.fileurl}}">
+    <image src="{{mainBanner.fileurl}}"></image>
+</view>
+
+<!-- 下面是数组形式 -->
+<!-- <view wx:else>
+    <view class="abImg {{tempId == 12?'bgHeight':''}}" style="position: relative;">
+        <view class="banner_info">
+            <swiper class='swiper-box {{swiperHeight}}' autoplay style="height:316rpx" indicator-dots="true">
+                <swiper-item wx:for='{{banners}}' wx:key='index' bindtap="goShopDeatial" data-id="{{item.commodityId}}">
+                    <view class='swiper-item-content {{itemContent}}'>
+                        <image src='{{item.thumbnail}}' class='item-img' mode="aspectFill"></image>
+                    </view>
+                </swiper-item>
+            </swiper>
+        </view>
+    </view>
+
+    <view class="noimg" style="margin-top: 100rpx;"></view>
+
+    <image style="height: 307rpx; width: 690rpx;  margin-left:30rpx; border-radius: 10rpx;  margin-bottom: 30rpx; " wx:if="{{settingImg.top.fileurl.length < 2 && settingImg.hasTop}}" src="{{settingImg.top.fileurl[0]}}" mode="aspectFill" class="index1_img"></image>
+</view> -->

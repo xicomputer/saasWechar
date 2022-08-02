@@ -1,0 +1,20 @@
+<!--pages/shopHome/components/hotVideo/hotVideo.wxml-->
+<view class="hotVideo">
+    <view class="Video_info">
+        <view class="video_tit me-fx-row me-fx-sb">
+            <view>
+                <text class="item_title {{tempId == '3'?'title_black':''}}">热卖商品</text>
+                <!-- <text class="item_title_fu">视频商品</text> -->
+            </view>
+            <view wx:if="{{videoList.length>4}}" bindtap="moreVideo" class="more {{tempId>2?'title_black':''}}">更多<text class="icon icon-right {{tempId == '3'?'title_black':''}}"></text></view>
+        </view>
+        <view class="me-fx-row">
+            <view class="video" wx:for="{{videoList}}" wx:if="{{index<4}}" wx:key="index">
+                <image mode='aspectFit' class="video_image" src="{{item.coverUrl}}" bindtap="toVideo" data-item="{{item}}"></image>
+                <view class="text_info" >
+                    <text class="info_name me-full-text">{{item.commodityName}}</text>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>

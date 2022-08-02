@@ -1,0 +1,8 @@
+/* pages/shopHome/cultureLIst/cultureList.wxss */
+@import '/styles/me_common.wxss';
+.Article{margin: 20rpx 30rpx;}
+.culture-img{width: 216rpx;height: 120rpx;border-radius:8rpx ;}
+.Article_info{margin-left: 20rpx;flex:1;}
+.culture_title{font-size:#333 ;font-size: 28rpx;line-height: 28rpx;-webkit-line-clamp:2}
+.culture_time{text-align: right;font-size: 24rpx;color: #ACACAC;display: flex;justify-content: flex-end;}
+.line{border-top: 1px solid #333333;margin: 30rpx; opacity: 0.1;}

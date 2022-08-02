@@ -1,0 +1,63 @@
+<view class="member">
+  <view class="member_head" style="background-image: url('https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/basics-New%2F%E9%A6%96%E9%A1%B5_slices%2FMy%2F%E6%BF%80%E6%B4%BB%E4%BC%9A%E5%91%98bgc.png');">
+    <view class="member_head_up">
+      <view class="member_head_left">
+        <image src="{{cartShop.headImage}}"  mode="aspectFill"></image>
+        <view>{{cartShop.appName}}</view>
+      </view>
+      <view class="member_head_right">
+        <image src="/pages/img/member/memberCard_vip1.png" ></image>
+        <view>{{memberInfo.memberLeve.name}}</view>
+      </view>
+      <!-- <view class="member_head_right">
+        <image src="/pages/img/member/memberCard_vip1.png" ></image>
+        <view style="color: #999999;">普通会员</view>
+      </view> -->
+    </view>
+    <view class="member_head_down">会员积分{{memberInfo.member.integral}}</view>
+  </view>
+  <view class="member_rule">
+    <view class="member_title">
+      <image src="/pages/img/member/memberLevel_waveLeft.png"></image>
+      <view>积分获取规则</view>
+      <image src="/pages/img/member/memberLevel_waveRight.png"></image>
+    </view>
+    <view class="member_rule_one">会员用户每消费{{memberInfo.memberSetting.moneyConvert}}元获得1积分</view>
+    <view class="member_title">
+      <image src="/pages/img/member/memberLevel_waveLeft.png"></image>
+      <view>会员权益</view>
+      <image src="/pages/img/member/memberLevel_waveRight.png"></image>
+    </view>
+    <view class="member_rule_two">
+      <view class="member_rule_two_title">
+        <view>会员等级</view>
+        <view>专属折扣</view>
+      </view>
+      <view class="member_rule_two_content">
+        <view class="member_rule_two_content_item" wx:for="{{memberInfo.memberLevelList}}" wx:key="index">
+          <view>{{item.name}}</view>
+          <view>{{item.discount}}折</view>
+        </view>
+      </view>
+    </view>
+    <view class="member_title">
+      <image src="/pages/img/member/memberLevel_waveLeft.png"></image>
+      <view>晋升规则</view>
+      <image src="/pages/img/member/memberLevel_waveRight.png"></image>
+    </view>
+    <view class="member_rule_three" wx:for="{{memberInfo.memberLevelList}}" wx:key="index">
+      <view class="member_rule_three_title">
+        <view class="member_rule_three_left"></view>
+        <image src="/pages/img/member/memberLevel_start.png"></image>
+        <view>{{item.name}}</view>
+        <image src="/pages/img/member/memberLevel_start.png"></image>
+        <view class="member_rule_three_right"></view>
+      </view>
+      <view class="member_rule_three_content">满{{item.threshold}}积分成为{{item.name}}</view>
+    </view>
+    <view class="member_rule_tips">
+      <icon color="#FF0000" type="warn" size="24rpx" style="padding-top:4rpx"></icon>
+      <view>注意：会员规则由商家制定，平台仅提供会员功能。如有疑问，请及时联系商家！</view>
+    </view>
+  </view>
+</view>

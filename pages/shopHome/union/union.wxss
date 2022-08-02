@@ -1,0 +1,95 @@
+/* pages/shopHome/union/union.wxss */
+@import '/styles/me_common.wxss';
+page{
+    background-color: #F9F9F9;
+}
+.union_info{
+    height: 328rpx;
+    margin:32rpx 32rpx 0rpx ;
+    background-color: #fff;
+    border-radius: 20rpx;
+    overflow: hidden;
+}
+.union_left{
+    position: relative;
+}
+.union_img{
+    width: 290rpx;
+    height: 328rpx;
+    background: #000;
+}
+.union_pro_title{
+    position:absolute;
+    bottom: 15rpx;
+    width: 290rpx;
+    text-align: center;
+}
+.union_pro_title>text{
+    color: #fff;
+    font-size: 22rpx;
+    font-weight: bold;
+    padding: 0rpx 20rpx;
+    letter-spacing: 1rpx;
+}
+.union_btn{
+    position: absolute;
+    top:15rpx;
+    left: 20rpx;
+    background-color: #FF6363;
+    color: #fff;
+    font-size: 20rpx;
+    letter-spacing: 1rpx;
+    padding: 5rpx 10rpx;
+    border-radius:6rpx ;
+}
+.union_right{
+    padding: 20rpx;
+}
+.shop_icon{
+    width: 40rpx;
+    height: 40rpx;
+    background-color: #000;
+    border-radius:50% ;
+    margin-right:20rpx ;
+}
+.shop_title{
+    font-size: 28rpx;
+}
+.union_desc{
+    text-indent: 60rpx;
+    font-size: 20rpx;
+    color: #999999;
+    -webkit-line-clamp:4;
+    height: 128rpx;
+    flex-shrink: 0;
+}
+.union_right_pro{
+    margin-top: 10rpx;
+}
+.right_pro{
+    width: 112rpx;
+    height: 112rpx;
+    background-color: #999999;
+    border-radius: 8rpx;
+    position: relative;
+    overflow: hidden;
+}
+.pro_bg{
+    position: absolute;
+    width: 100%;
+    height: 32rpx;
+    bottom: 0;
+    background-color: #000;
+    opacity: 0.6;
+}
+.pro_price{
+    position: absolute;
+    font-size: 20rpx;
+    color: #fff;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+}
+.union_info:last-child{
+    margin-bottom: 32rpx;
+}

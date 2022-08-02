@@ -1,0 +1,19 @@
+<!-- 推荐酒店 -->
+<swiper autoplay="{{true}}" class="retail-swiper" wx:if="{{shopList.length}}">
+    <block wx:for="{{shopList}}" wx:key="index">
+      <swiper-item class="retail-item" style="background-image:url('https://xssj.letterbook.cn/applet/images/index_retail_bg_img.png')" bindtap="toMarchant" data-idx="{{index}}">
+        <view class="index-retail-name">{{item.nickName}}</view>
+        <view class="index-retail-goods-box" catchtap="toGoodsDetail" data-id="{{item.commodity.commodityId}}">
+            <image class="index-retail-goods-img" mode="aspectFill" src="{{item.commodity.thumbnail}}"></image>
+            <view class="index-retail-goods-content">
+                <view class="index-retail-goods-name">{{item.commodity.commodityName}}</view>
+                <view class="index-retail-goods-description">{{item.commodity.description}}</view>
+                <view class="index-retail-goods-price">
+                   <text style="font-size:16rpx">￥</text>
+                   {{item.commodity.activityType==1||(item.commodity.activityType==2&&item.commodity.isMember)?item.commodity.lowPrice:item.commodity.originalPrice}}
+                </view>
+            </view>
+        </view>
+      </swiper-item>
+    </block>
+  </swiper> 

@@ -1,0 +1,16 @@
+<view class="notice-container">
+  <navigator hidden="{{item.hide}}" url="{{item.to}}" class="notice-item" wx:for="{{noticeTypeList}}" wx:key="index">
+    <image class="notice-item-img" src="{{item.img}}">
+      <view wx:if="{{item.sum!=0}}" class="notice-content-number">{{item.sum}}</view>
+    </image>
+    <view class="notice-content-box">
+      <view class="notice-content-item">
+        <view class="notice-type">{{item.title}}</view>
+        <view class="notice-time">{{item.time}}</view>
+      </view>
+      <view class="notice-content-item">
+        <view class="notice-content-text">{{item.content}}</view>
+      </view>
+    </view>
+  </navigator>
+</view>

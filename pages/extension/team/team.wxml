@@ -1,0 +1,14 @@
+<!--pages/extension/team/team.wxml-->
+<!-- <text>pages/extension/team/team.wxml</text> -->
+<view>
+  <view style="width:100%;background: #fff;margin-bottom: 20rpx;display: flex;padding: 32rpx;" wx:for="{{6}}">
+    <image style="width:116rpx;height:116rpx;" src="https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/Saas/%E7%BB%84%205558%403x.png"></image>
+    <view style="margin-left: 25rpx;display: flex;flex-direction: column;justify-content: space-between;">
+      <view style="font-size: 32rpx;font-weight:900" class="u-line-1">t商品名称商品名称商品名称商品itle</view>
+      <view style="font-size: 24rpx;color:#999999;"  class="u-line-1">
+        <text>浏览次数：999</text>
+        <text style="margin-left:40rpx">购买次数：999</text>
+      </view>
+    </view>
+  </view>
+</view>

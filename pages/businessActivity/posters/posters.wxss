@@ -1,0 +1,14 @@
+
+.poster-canvas{
+   position:fixed;bottom:100%;right:100%;
+}
+
+
+.section-content{min-height:100vh;padding-bottom:40rpx;}
+.section-content .posters-img{ width:584rpx;height:1008rpx;}
+
+.section-content .save-btn{
+    width:520rpx;font-size:30rpx;border-radius:44rpx;
+    background-color:#FF3535;color:#fff;margin-top:50rpx;
+
+}

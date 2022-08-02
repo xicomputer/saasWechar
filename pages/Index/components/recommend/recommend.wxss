@@ -1,0 +1,91 @@
+@import '/styles/me_common.wxss';
+
+
+.top-container{
+    padding:0 30rpx;box-sizing:border-box;
+}
+.top-container .top-search-container{height:80rpx;}
+.top-container .top-search{
+    padding:0 18rpx;box-sizing:border-box;
+    background-color:#F7F7F7;width:532rpx;height:52rpx;
+    font-size:22rpx;color:#A0A0A0;border-radius:26rpx;
+}
+.top-search .search-icon{width:32rpx;height:32rpx;margin-right:15rpx;}
+.top-container .notice-btn{
+    padding:0 15rpx;margin:0;background-color:#FE4F4F;
+    font-size:24rpx;border-radius:26rpx;color:#fff;
+    line-height:52rpx;height:52rpx;
+}
+
+.top-container .top-tab-list{
+    font-size:28rpx;color:#333;height:80rpx;
+}
+.top-container .top-tab-item{
+    flex:1;text-align:center;height:80rpx;line-height:80rpx;
+}
+.top-container .sel-tab-item{font-size:32rpx;color:#FE4F4F;}
+
+
+
+/* 商品列表 */
+.goods-list{
+    padding:0 30rpx;box-sizing:border-box;
+    background-color:#F7F7F7;
+}
+.goods-list .goods-scroll{height:calc(100vh - 100rpx);}
+.goods-list .list-container{flex-wrap:wrap;padding:30rpx 0;}
+.goods-item{
+    border-radius:20rpx;overflow:hidden;width:336rpx;
+    background-color:#fff;margin-bottom:20rpx;flex-shrink:0;
+}
+.goods-item .goods-img{
+    width:336rpx;height:336rpx;background-color:#ccc;
+}
+.goods-item .goods-info{padding:12rpx;box-sizing:border-box;font-size:28rpx;}
+.describe-text{
+    font-size: 32rpx;
+    display: -webkit-box;overflow: hidden;
+    -webkit-box-orient: vertical;-webkit-line-clamp: 1;
+}
+.describe-desc{
+    font-size: 28rpx;color:#999999;
+    display: -webkit-box;overflow: hidden;
+    -webkit-box-orient: vertical;-webkit-line-clamp: 4;
+}
+ .price-box{
+    font-size:28rpx;color:#FE4F4F;font-weight:bold;
+}
+.price-num{font-size:36rpx;}
+.cart-img{width:84rpx;height:84rpx;}
+.cart-img2{
+    width: 30rpx;
+    height: 30rpx;
+    margin-right: 5rpx;
+}
+.btn_cart11{
+    background-color: #FE4F4F;
+    width: 150rpx;
+    border-radius: 10rpx;
+    padding:5rpx 5rpx
+}
+.btn_cart11>text{
+    color: #fff;
+    font-size: 26rpx;
+}
+
+.goods2-info {
+    padding: 20rpx;
+}
+.list-container2{
+    margin-top: 20rpx;
+}
+.goods2{
+    margin-bottom: 20rpx;
+    background-color: #fff;
+    border-radius: 20rpx;
+}
+.goods2-img{
+    width: 240rpx;
+    height: 240rpx;
+    border-radius: 20rpx;
+}

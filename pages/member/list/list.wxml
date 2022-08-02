@@ -1,0 +1,13 @@
+<view class="member">
+  <navigator url="/pages/member/card/card?marchantId={{item.marchantId}}" class="member_item" style="background-image: url('https://xssj.letterbook.cn/applet/images/memberList_bg1.png');" wx:for="{{memberList}}" wx:key="index">
+    <image src="{{item.marchant.logoPic}}" mode="aspectFill"></image>
+    <view class="member_item_info">
+      <view class="member_item_name">{{item.marchant.nickName}}</view>
+      <view class="member_item_desc">
+        <view class="member_item_level">{{item.memberLevel.name}}</view>
+        <view class="member_item_score">会员积分{{item.integral||0}}</view>
+      </view>
+    </view>
+  </navigator>
+  <no-data text="您还没有会员卡哦！" url="https://xssj.letterbook.cn/applet/images/sj_no_data_img6.png" wx:if="{{!memberList.length&& reqComplete}}"></no-data>
+</view>

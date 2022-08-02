@@ -1,0 +1,93 @@
+<block wx:if="{{storeDynamicList.length}}">
+  <navigator class="store-dynamic-top" hover-class="none" url="/pages/Index/dynamic/storeDynamicList/storeDynamicList?marchantId={{marchantId}}&isSubscribe={{markerInfo.subscribe}}&status={{status}}">
+    <image class="store-dynamic-img-bg" src="/pages/img/index/dynamic/index_dynamic_store_bg.png"></image>
+  </navigator>
+  <swiper style="width:100%;height:754rpx;box-shadow:0rpx 0rpx 20rpx #FFD1C1;border-radius: 16rpx;" autoplay="{{true}}" bindchange="changeSwiper">
+    <block wx:for="{{storeDynamicList}}" wx:key="index">
+      <swiper-item class="store-danamic-item">
+        <navigator class="store-danamic-content" hover-class="none" url="/pages/Index/dynamic/storeDynamicDetails/storeDynamicDetails?id={{item.id}}">
+          <view class="store-info-box">
+            <image class="store-dynamic-logo" src="{{item.userInfo.logoPic}}"></image>
+            <view class="store-dynamic-box-info">
+              <view class="store-dynamic-name">{{item.userInfo.nickname}}</view>
+              <view class="store-dynamic-time">{{item.addTime}}</view>
+            </view>
+            <view class="dingyue-btn" catchtap="{{markerInfo.subscribe?'':'showDingYue'}}" style="{{markerInfo.subscribe?'background-color:#e4e4e4;color:#FFF':''}}">{{markerInfo.subscribe?'已订阅':'+订阅'}}</view>
+          </view>
+          <view class="store-dynamic-text">{{item.content}}</view>
+          <view class="store-dynamic-img-list">
+            <image class="{{item.commodity?'store-dynamic-img':'store-dynamic-img store-dynamic-big-img'}}" catchtap="imgClick" data-list="{{item.imagList}}" data-src="{{pitem}}" mode="aspectFill" src="{{pitem}}" wx:for="{{item.imagList}}" wx:for-item="pitem" wx:key="index" hidden="{{(!item.commodity&&index>=1)||(item.commodity&&index>=2)}}">
+              <view class="store-dynamic-img-more" wx:if="{{(item.commodity&&item.imagList.length-2>0)||(!item.commodity&&item.imagList.length-1)}}" hidden="{{(item.commodity&&index!=1)||(!item.commodity&&index!=0)}}">+{{item.commodity?item.imagList.length-2:item.imagList.length-1}}</view>
+            </image>
+          </view>
+          <!-- 商品信息 -->
+          <view class="dynamic-goods-container" wx:if="{{item.commodity}}" catchtap="toBuy" data-id="{{item.commodity.id}}">
+            <image src="{{item.commodity.thumbnail}}" class="dynamic-goods-container-img" mode="aspecFill"></image>
+            <view class="dynamic-goods-container-content">
+              <view class="dynamic-goods-container-name">{{item.commodity.commodityName}}</view>
+              <view class="dynamic-goods-container-text">{{item.commodity.description}}</view>
+              <view class="dynamic-goods-bottom">
+                <view class="dynamic-goods-container-price">
+                  <text style="font-size:22rpx">￥</text>{{item.commodity.activityType==1||(item.commodity.activityType==2&&item.commodity.isMember)?item.commodity.lowPrice:item.commodity.originalPrice}}
+                </view>
+                <view class="dynamic-goods-container-btn">购买商品</view>
+              </view>
+            </view>
+          </view>
+        </navigator>
+        <!-- <view class="store-dynamic-bottom">
+          <view class="store-dynamic-bottom-item" catchtap="{{markerInfo.subscribe?'':'showDingYue'}}">
+            <image class="store-dynamic-bottom-item-icon" src="{{markerInfo.subscribe?'/pages/img/index/dynamic/dingyued.png':'/pages/img/index/dynamic/dingyue.png'}}"></image>
+            <text>{{markerInfo.subscribe?'已订阅':'订阅'}}</text>
+          </view>
+          <navigator class="store-dynamic-bottom-item" hover-class="none" url="/pages/Index/dynamic/storeDynamicDetails/storeDynamicDetails?id={{item.id}}&isFocus=true">
+            <image class="store-dynamic-bottom-item-icon" src="/pages/img/index/dynamic/comment.png"></image>
+            <text>{{item.reply||'评论'}}</text>
+          </navigator>
+          <view class="store-dynamic-bottom-item" catchtap="operationPraise" data-id="{{item.id}}" data-idx="{{index}}">
+            <image class="store-dynamic-bottom-item-icon" src="{{item.isPraise?'/pages/img/index/dynamic/praised.png':'/pages/img/index/dynamic/praise.png'}}"></image>
+            <text style="white-space:nowrap">{{item.praise||'点赞'}}</text>
+          </view>
+        </view> -->
+      </swiper-item>
+    </block>
+  </swiper>
+  <view class="store-bottom-solid" style="width:{{100/storeDynamicList.length}}%;margin-left:{{100/storeDynamicList.length * swiperIndex}}%"></view>
+</block>
+<hotel wx:if="{{hotelList.length}}" hotelList="{{hotelList}}"></hotel>
+<!-- 优质评论 -->
+<block wx:if="{{commentList.length}}">
+  <navigator class="store-dynamic-top" style="margin-top:20rpx" hover-class="none" url="/pages/Index/dynamic/commentList/commentList?marchantId={{marchantId}}&stick=1">
+    <image class="store-dynamic-img-bg" src="/pages/img/index/dynamic/index_dynamic_user_bg.png"></image>
+  </navigator>
+  <block wx:for="{{commentList}}" wx:key="index">
+    <view class="user-dynamic-itme">
+      <view class="store-info-box">
+        <image class="store-dynamic-logo" src="{{item.userInfo.headimgurl}}"></image>
+        <view class="store-dynamic-box-info">
+          <view class="user-dynamic-name-box">
+            <view class="user-dynamic-name">{{item.userInfo.nickname}}</view>
+            <image class="user-dynamic-member" wx:if="{{item.isMember}}" src="/pages/img/index/member_icon.png"></image>
+            <view class="user-dynamic-tip">优质评论</view>
+          </view>
+          <view class="user-dynamic-signature">{{item.userInfo.signature||'暂无个性签名'}}</view>
+        </view>
+        <view class="user-info-right-top">
+          <view>{{item.addTime}}</view>
+          <view class="user-info-solid"></view>
+          <view class="user-info-icon" catchtap="operationPraiseUser" data-id="{{item.id}}" data-idx="{{index}}">
+            <image class="store-dynamic-bottom-item-icon" src="{{item.isPraise?'/pages/img/index/dynamic/praised.png':'/pages/img/index/dynamic/praise.png'}}"></image>
+            <text style="white-space:nowrap">{{item.praise||'点赞'}}</text>
+          </view>
+        </view>
+      </view>
+      <view class="user-dynamic-text">{{item.content}}</view>
+      <scroll-view style="width:100%;padding-top:20rpx" scroll-x wx:if="{{item.imagList.length}}">
+        <view class="user-img-list">
+          <image class="{{item.imagList.length>=3?'user-img-item user-small-img':'user-img-item'}}" catchtap="imgClick" wx:for="{{item.imagList}}" wx:key="index" wx:for-item="pitem" data-list="{{item.imagList}}" data-src="{{pitem}}" mode="aspectFill" src="{{pitem}}" />
+        </view>
+      </scroll-view>
+    </view>
+  </block>
+</block>
+<no-data wx:if="{{!storeDynamicList.length&&!commentList.length}}" text="暂无动态消息" url="https://xssj.letterbook.cn/applet/images/sj_no_data_img7.png"></no-data>

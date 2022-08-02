@@ -1,0 +1,16 @@
+/* pages/shopHome/components/hotVideo/hotVideo.wxss */
+@import '../../iconfont/iconfont.wxss';
+@import '/styles/me_common.wxss';
+.hotVideo{
+    margin: 20rpx 32rpx;
+}
+.video_tit{margin-bottom: 20rpx;color: #fff;}
+.item_title{font-size: 32rpx;font-weight: bold;}
+.item_title_fu{font-size: 22rpx; margin-left: 12rpx;background-color: #fe3976;border: 1px solid #fe3976;padding: 0rpx 5rpx;}
+.more{font-size: 24rpx;}
+.icon{font-size: 24rpx;}
+.video{margin-right: 15rpx;position: relative;}
+.video_image{width: 160rpx;height: 280rpx;border-radius:12rpx ;background: #000;}
+.text_info{    position: absolute;height: 70rpx; bottom: 0rpx;     border-bottom-left-radius: 12rpx;border-bottom-right-radius: 12rpx; width: 100%; display: flex;justify-content: center;  background-color: rgba(0,0,0,0.7);align-items: center;}
+.title_black{color: #000;}
+.info_name{color: #D6A965;font-size: 20rpx;text-align: center;padding: 0rpx 5rpx;position: absolute;-webkit-line-clamp:2;}

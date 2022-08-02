@@ -1,0 +1,10 @@
+{
+  "navigationBarTitleText": "活动详情",
+  "enablePullDownRefresh":true,
+  "usingComponents": {
+    "count-down":"../components/countdown/countdown",
+    "van-popup": "@vant/weapp/popup/index",
+    "van-count-down": "@vant/weapp/count-down/index",
+    "auth-get-info":"../../Component/auth-get-info/auth-get-info"
+  }
+}

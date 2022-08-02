@@ -1,0 +1,30 @@
+{
+  "usingComponents": {
+    "menu": "./components/navs-bong/navs-bong",
+    "van-sticky": "@vant/weapp/sticky/index",
+    "van-popup": "@vant/weapp/popup/index",
+    "van-tabbar": "@vant/weapp/tabbar/index",
+    "van-tabbar-item": "@vant/weapp/tabbar-item/index",
+    "van-overlay": "@vant/weapp/overlay/index",
+    "van-notice-bar": "@vant/weapp/notice-bar/index",
+    "taskPop": "/pages/Index/integral/components/integralTask/integralTask",
+    "mp-video-swiper": "../../miniprogram_npm/video-swiper/miniprogram_dist/index",
+    "category1":"./components/category1/index",
+    "category2":"./components/category2/index",
+    "category3":"./components/category3/index",
+    "category4":"./components/category4/index",
+    "category5":"./components/category5/index",
+    "category6":"./components/category6/index",
+    "category7":"./components/category7/index",
+    "my":"./components/my/index",
+    "video-list":"./components/videoList/index",
+    "dynamic-list":"./components/dynamic/index",
+    "van-count-down": "@vant/weapp/count-down/index",
+    "no-data": "/pages/Component/noData/index",
+    "store-close": "/pages/Component/storeClose/index",
+    "hotel": "/pages/Index/components/hotel/index",
+    "retail": "/pages/Index/components/retail/index",
+    "recommend":"./components/recommend/recommend"
+  },
+  "navigationBarTitleText": ""
+}

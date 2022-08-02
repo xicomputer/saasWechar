@@ -1,0 +1,117 @@
+<view class="orderList">
+  <view class="list_tab">
+    <block wx:for="{{statusList}}" wx:key="item">
+      <view bindtap="changeTab" data-index="{{index}}"
+        class="list_tab_item {{index == status ? 'list_tab_item_active' : ''}}">{{item}}</view>
+    </block>
+  </view>
+  <view style="height: 88rpx"></view>
+  <view wx:for="{{orderList}}" class="order_item">
+    <view bindtap="toShop" data-item="{{item}}" class="order_item_shop">
+      <view class="order_item_shop_left">
+        <image src="{{item.merchantLogo}}" mode="aspectFill"></image>
+        <view>{{item.merchantName}}</view>
+      </view>
+      <view class="order_item_shop_right">
+        {{statusList[status]}}{{statusList[status] == '退款/售后' ? typeList[item.refundStatus] : ''}}</view>
+    </view>
+    <view bindtap="toDetails" data-item="{{item}}" class="order_item_goods">
+      <view class="order_item_goods_left">
+        <image src="{{item.logoImg}}" mode="aspectFill"></image>
+        <view class="order_item_goodsInfo">
+          <view class="order_item_goodsInfo_name">{{item.auctionItemName}}</view>
+          <view class="order_item_goodsInfo_desc">{{item.description}}</view>
+        </view>
+      </view>
+      <view class="order_item_goods_right">
+        <view>成交价：￥{{item.xsAuctionOrderItem.totalMoney}}</view>
+        <view>已付金额：<text style="color: #FF0000;">￥{{item.xsAuctionOrderItem.money}}</text></view>
+      </view>
+    </view>
+    <view style="padding-bottom: 20rpx;" class="order_item_orderInfo">
+      <view class="order_item_orderInfo">订单编号：{{item.xsAuctionOrderItem.orderNo}}<image bindtap="copyOrder" class="copy_img" src="../../../static/copy.png" data-order="{{item.xsAuctionOrderItem.orderNo}}"></image></view>
+      <view class="order_item_orderInfo">喊价单号：{{item.auctionNo}}</view>
+      <view class="order_item_orderInfo">订单生成时间：{{item.xsAuctionOrderItem.payTime}}</view>
+      <view wx:if="{{statusList[status] != '退款/售后'}}" class="order_item_orderInfo">
+        联系人：
+        <text style="margin: 0 24rpx 0 12rpx;">{{item.receivingName}}</text>
+        {{item.receivingTelephone}}
+        <view class="order_item_orderInfo">收货地址：{{item.receivingAddress}}</view>
+      </view>
+      <block wx:if="{{statusList[status] == '退款/售后'}}">
+        <view class="order_item_orderInfo">退款金额：￥{{item.xsAuctionOrderItem.money}}</view>
+        <view class="order_item_orderInfo">申请退款时间：{{item.xsAuctionOrderItem.refundApplyTime}}</view>
+        <view class="order_item_orderInfo">退款理由：{{item.refundReason}}</view>
+      </block>
+    </view>
+    <block wx:if="{{statusList[status] == '待收货' && statusList[status] == '已完成'}}">
+      <view style="border-top: 2rpx solid #F4F4F4;" class="order_item_orderInfo">
+        <view class="order_item_orderInfo">{{item.mailName}}：{{item.mailOrderNo}}</view>
+        <view class="order_item_orderInfo">发货时间：{{item.xsAuctionOrderItem.deliverGoodsTime}}</view>
+        <view wx:if="{{statusList[status] == '已完成'}}" class="order_item_orderInfo">确认收货时间：{{item.xsAuctionOrderItem.receivingrGoodsTime}}</view>
+      </view>
+    </block>
+    <block wx:if="{{statusList[status] == '退款/售后' && item.refundStatus != 2}}">
+      <view style="border-top: 2rpx solid #F4F4F4;" class="order_item_orderInfo">
+        <view wx:if="{{typeList[item.refundStatus] == '（已拒绝）'}}" class="order_item_orderInfo">商家拒绝退款理由：{{item.refuseReason}}</view>
+        <view wx:if="{{item.refundStatus == 3 || typeList[item.refundStatus] == '（已完成）'}}" class="order_item_orderInfo">
+          {{item.refundMailName}}：{{item.refundMailOrderNo}}</view>
+        <view wx:if="{{typeList[item.refundStatus] == '（已完成）'}}" class="order_item_orderInfo">退款时间：{{item.xsAuctionOrderItem.refundTime}}</view>
+      </view>
+    </block>
+    <view class="order_item_btnList">
+      <view bindtap="contactShop" data-item="{{item}}" class="order_item_btn color9">联系商家</view>
+      <view wx:if="{{statusList[status] == '待发货'}}" bindtap="showReason" data-index="{{index}}" class="order_item_btn color3">申请退款</view>
+      <view wx:if="{{statusList[status] == '待收货'}}" bindtap="sureOrder" data-index="{{index}}" class="order_item_btn colorRed">确认收货</view>
+      <view wx:if="{{statusList[status] == '已完成'}}" bindtap="showReason" data-index="{{index}}" class="order_item_btn color3">申请退货</view>
+      <view wx:if="{{statusList[status] == '退款/售后' && (typeList[item.refundStatus] == '（退款中）' && item.refundStatus == 2) }}" bindtap="showSureReturn"  data-index="{{index}}"
+        class="order_item_btn colorRed">确认退货</view>
+    </view>
+  </view>
+  <!-- 退款退货原因 -->
+  <view hidden="{{!isShowReason}}" class="mask">
+    <view class="reason">
+      <view class="reason_title">
+        <view bindtap="showNotReason" class="reason_title_cancel">取消</view>
+        <view>请选择原因</view>
+        <view bindtap="sureReason" class="reason_title_sure">确定</view>
+      </view>
+      <view class="reason_content">
+        <block wx:for="{{reasonList}}" wx:key="item">
+          <view bindtap="changeReason" data-index="{{index}}" class="reason_content_item">
+            <view>{{item}}</view>
+            <block wx:if="{{item != '其他'}}">
+              <icon wx:if="{{reasonIndex == index}}" type="success" color="#F00" size="42rpx"></icon>
+              <view wx:else class="reason_content_item_icon"></view>
+            </block>
+          </view>
+        </block>
+        <view class="reason_content_textarea">
+          <textarea bindinput="getReasonInfo" bindfocus="textareaFocus" value="{{reasonInfo}}" maxlength="20"
+            placeholder="输入你的退款原因"></textarea>
+          <view>0/20</view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <!-- 确认退货 -->
+  <view hidden="{{!isSureReturn}}" class="mask mask_center">
+    <view class="return">
+      <view class="return_item">
+        <view class="return_item_lable">物流公司</view>
+        <input bindinput="getLogisticsCompany" value="{{logistics.company}}" placeholder="请输入物流公司名字"
+          class="return_item_input" />
+      </view>
+      <view class="return_item">
+        <view class="return_item_lable">快递单号</view>
+        <input bindinput="getLogisticsNumber" value="{{logistics.number}}" placeholder="请输入物流单号"
+          class="return_item_input" />
+      </view>
+      <view class="return_btn">
+        <view bindtap="sureReturn" style="color: #333333;" class="mask_center">确认退货</view>
+        <view class="return_btn_line"></view>
+        <view bindtap="showNotSureReturn" style="color: #999999;" class="mask_center">取消</view>
+      </view>
+    </view>
+  </view>
+</view>

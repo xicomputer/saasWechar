@@ -1,0 +1,50 @@
+<!--pages/shopHome/components/volume/volume.wxml-->
+<!-- <view class="coupon-window-bgc"  catchtouchmove="true">
+        <view class="coupon-window">
+          <scroll-view bindtap="a" scroll-y="true" class="coupon-content-container">
+            <view class="coupon-content-single" wx:for="{{saleCanList}}" wx:key="index">
+              <view class="price">
+                <text>￥</text>
+                <text>{{item.deduct}}</text>
+              </view>
+              <view class="text">
+                <text>满 {{item.confine}} 可用</text>
+                <text>{{item.startTime}}-{{item.endTime}}</text>
+              </view>
+              <image src="https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/basics-New%2F%E4%BC%98%E6%83%A0%E5%88%B8%E5%BC%B9%E7%AA%97_slices%2FGroup%202999%402x.png" mode="aspectFill"></image>
+            </view>
+          </scroll-view>
+          <image class="accept" bindtap="receiveSale" src="https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/basics-New%2F%E4%BC%98%E6%83%A0%E5%88%B8%E5%BC%B9%E7%AA%97_slices%2F%E5%BC%80%E5%BF%83%E6%94%B6%E4%B8%8B.png"></image>
+          <image class="close" src="https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/basics-New%2F%E4%BC%98%E6%83%A0%E5%88%B8%E5%BC%B9%E7%AA%97_slices%2FFrame%402x(1).png" bindtap="closeSale"></image>
+        </view>
+      </view> -->
+      <view>
+         <!-- 内容 -->
+      <view>
+        <view style="width: 710rpx;margin: 20rpx auto;background-color: #fff;display: flex;flex-direction: column;"  wx:for="{{saleCanList}}" wx:key="index">
+          <view style="display: flex;padding: 20rpx;">
+          <view style="background:#FCECED;width:196rpx;height:178rpx;display: flex;align-items: center;justify-content: center;border-radius: 16rpx;position: relative;">
+            <view style="position: absolute;top: 0;left:0;padding: 5rpx 8rpx;border-bottom-right-radius:16rpx;background-color: #fff ;color: red;">满减</view>
+            <image style="width:152rpx;height:118rpx;" src="https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/Saas/youhuijuanlefticon.png" ></image>
+            <view style="position: absolute;color: #fff;margin-left: -50rpx;">{{item.deduct}}元</view>
+          </view>
+           
+            <view style="margin-left: 15rpx;">
+              <view style="font-size: 32rpx;font-weight:900" class="u-line-1"> <text>满 {{item.confine}} 减 {{item.deduct}}</text></view>
+              <view style="font-size: 24rpx;color:#AC754C;"  class="u-line-1">满 {{item.confine}} 可用</view>
+              <view style="color:#AC754C;font-size: 24rpx;">优惠劵时效:{{item.startTime}}-{{item.endTime}}</view>
+              <view style="display: flex;align-items: center;justify-content: space-between;width: 100%;">
+                <view style="font-size: 32rpx;font-weight:900" class="u-line-1"> 
+                  <text style="color: red;font-size: 26rpx;">优惠劵 ￥ <text style="font-size: 32rpx;">{{item.deduct}}</text></text>                
+                </view>
+                <view style="display: flex;background: linear-gradient(to right, #F32821 , #FC5F19);width: 166rpx;height: 52rpx;line-height: 66rpx;align-items: center;justify-content: center;border-radius: 34rpx;" bindtap="receiveSale">
+                <!-- <image style="width:48rpx;height:48rpx;" src="https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/Saas/wxfff.png"></image> -->
+                <text style="color: #fff;font-size: 28rpx;">立即领取</text> 
+              </view>
+              </view>
+            </view>
+          </view>
+         
+        </view>
+      </view>
+      </view>

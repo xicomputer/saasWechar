@@ -1,0 +1,31 @@
+<!--pages/order/logistics/logistics.wxml-->
+<view class="logistics">
+    <view class="logistics-info">
+        <view class="head">
+            <view class="title">快递公司：</view>
+            <view class="desc">{{wlCompany}}</view>
+        </view>
+        <view class="deliver"></view>
+        <view class="head">
+            <view class="title">快递单号：</view>
+            <view class="desc">{{wlNumber}}</view>
+        </view>
+        <view class="logistics-content">
+            <view class="logistics-title">物流情况</view>
+            <view class="deliver"></view>
+            <view class="noMsg" wx:if="{{wlList.length==0}}">{{message}}</view>
+            <view wx:else style="margin-top:40rpx">
+                <view class="item" wx:for="{{wlList}}" wx:key="{{index}}">
+                    <view class="left">
+                        <image class="img" src="{{index==0?'../../img/logistics2.png':'../../img/logistics1.png'}}" />
+                        <view class="hdivider" wx:if="{{index!==(wlList.length-1)}}"></view>
+                    </view>
+                    <view class="right">
+                        <view class="desc">{{item.time}}</view>
+                        <view class="custom">{{item.status}}</view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>

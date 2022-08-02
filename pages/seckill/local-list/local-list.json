@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText":"秒杀同城订单",
+  "enablePullDownRefresh":true,
+  "usingComponents": {
+    "van-popup": "@vant/weapp/popup/index",
+    "van-count-down": "@vant/weapp/count-down/index"
+  }
+}

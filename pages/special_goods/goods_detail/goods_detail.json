@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "商品详情",
+  "usingComponents": {
+      "van-count-down": "@vant/weapp/count-down/index",
+      "add-subtract-num":"/pages/Component/add-subtract-num/add-subtract-num",
+      "auth-get-info":"../../Component/auth-get-info/auth-get-info",
+      "van-popup": "@vant/weapp/popup/index"
+  }
+}

@@ -1,0 +1,248 @@
+<store-close wx:if="{{isClose}}"></store-close>
+<view class="integral-container">
+  <!-- 积分头部 -->
+  <view class="integral-top">
+    <image class="integral-top-img" src="https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/static/integral_img.png" >
+      <navigator url="/pages/Index/integral/integralRule/integralRule?marchantId={{marchantId}}" class="integral-rule">积分规则</navigator>
+    </image>
+  </view>
+  <view class="integral-tool-list-box">
+    <view class="integral-tool-list">
+      <navigator class="integral-tool-item" wx:for="{{toolList}}" wx:key="index" url="{{item.url+'?marchantId='+marchantId}}">
+        <image class="integral-tool-item-img" src="{{item.img}}"></image>
+        <view class="integral-tool-item-text">{{item.text}} {{index==0?userintegral:''}}</view>
+        
+      </navigator>
+    </view>
+  </view>
+  <view class="integral-change-box">
+    <!-- 活动倒计时 -->
+    <view class="integral-content-container activity-container">
+      <view class="integral-title-container">
+        <view class="integral-title-left-box"></view>
+        <view class="integral-title-text">活动结束倒计时</view>
+      </view>
+      <van-count-down use-slot bind:change="changeTime" bind:finish="overActivity" time="{{ signData.countDownTime }}"  class="activity-count-down">
+        <text class="activity-count-down-text" wx:if="{{timeData.days!=0}}">{{timeData.days}}</text>
+        <text wx:if="{{timeData.days!=0}}">天</text>
+        <text class="activity-count-down-text">{{timeData.hours<10?'0'+timeData.hours:timeData.hours}}</text>
+        :<text  class="activity-count-down-text">{{timeData.minutes<10?'0'+timeData.minutes:timeData.minutes}}</text>
+        :<text  class="activity-count-down-text">{{timeData.seconds<10?'0'+timeData.seconds:timeData.seconds}}</text>
+      </van-count-down>
+    </view>
+
+    
+    <!-- 当前参与人数 -->
+    <view class="integral-content-container" style="{{!haveSignIn?'border-radius: 0 0 20rpx 20rpx;position:relative':''}}">
+      <view class="integral-title-container">
+        <view class="integral-title-left-box"></view>
+        <view class="integral-title-text">当前参与人数</view>
+      </view>
+      <scroll-view scroll-x="true" style="width:100%;margin-top:20rpx">
+        <view class="integral-member-list">
+          <image src="{{item.headimgurl}}" class="integral-member-img" wx:for="{{signData.signinUserList}}" wx:key="index"></image>
+        </view>
+      </scroll-view>
+    </view>
+
+    <!-- 七天签到领取积分 -->
+    <view class="integral-content-container"  style="border-radius:20rpx 20rpx 0 0;position:relative;margin-bottom:0rpx">
+      <view class="integral-title-container">
+        <view class="integral-title-left-box"></view>
+        <view class="integral-title-text">七天签到领取积分</view>
+      </view>
+      
+      <block wx:if="{{signData.signinList[nowDay-1].isSignin == 1}}">
+        <view bindtap="signIn" class="integral-sign-in-btn integral-signed-in-btn">已签到</view>
+      </block>
+      <view wx:else bindtap="signIn" class="integral-sign-in-btn">立即签到</view>
+      <view class="integral-sign-in-list">
+        <view class="integral-sign-in-item-box" wx:for="{{signData.signinList}}" wx:key="index">
+            <block wx:if="{{item.isSignin==1 || index == nowDay-1}}">
+              <view class="integral-sign-in-item" style="background: #FFFFFF;">
+                <view class="integral-sign-in-item-status" style="color: #000;">{{item.isSignin==0 && index == nowDay-1?'签到':'已签'}}</view>
+                <image src="/pages/img/index/integral_state1.png" class="integral-sign-in-item-image"></image>
+                <view class="integral-sign-in-add" style="color: #000;">+{{item.score}}</view>
+              </view>
+            </block>
+            <block wx:else>
+              <view class="integral-sign-in-item" style="background: #D8D8D8;border: 2rpx solid #999;">
+                <view class="integral-sign-in-item-left-top" style="background: #FFFFFF;"></view>
+                <view class="integral-sign-in-item-status" style="color: #999;">{{index>nowDay-1?weekList[index]:'未签'}}</view>
+                <image src="/pages/img/index/integral_state2.png" class="integral-sign-in-item-image"></image>
+                <view class="integral-sign-in-add" style="color: #999;">+{{item.score}}</view>
+              </view>
+            </block>
+          <view class="integral-sign-in-progress" wx:if="{{index!=6}}">
+            <view wx:if="{{index < nowDay-1}}" style="width: 100%;" class="integral-sign-in-progress-in"></view>
+            <view wx:if="{{index == nowDay-1}}" style="width: 50%;" class="integral-sign-in-progress-in"></view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+
+
+
+    <!-- 做任务赚积分 -->
+    <view class="integral-task-container">
+      <view  class="integral-task-top">
+        <view class="integral-title-container">
+          <view class="integral-title-left-box"></view>
+          <view class="integral-title-text">做任务赚积分</view>
+        </view>
+        <!-- <view class="integral-title-container">
+          <view class="integral-title-left-box"></view>
+          <view class="integral-title-text">提醒我</view>
+          <image style="width:60rpx;height:60rpx;margin-left:20rpx" src="/pages/img/index/integral4.png"></image>
+        </view> -->
+      </view>
+      <!-- 任务 -->
+      <view class="integral-task-item" wx:for="{{taskList}}" wx:key="index" wx:if="{{item.type!=6}}">
+        <view class="integral-task-item-left">
+          <image style="width:60rpx;height:60rpx;margin-right:12rpx" src="{{item.icon}}"></image>
+          <view class="integral-task-item-content">
+            <view class="integral-task-item-content-top">
+              {{item.name}}
+              <image style="width:40rpx;height:40rpx;margin:0 10rpx" src="/pages/img/index/integral_icon.png"></image>
+              <text wx:if="{{item.type==2}}" style="font-size:20rpx">({{item.description}})</text>
+              <text wx:else>+{{item.score}}</text>
+            </view>
+            <view class="integral-task-item-content-bottom">
+              <view class="integral-task-item-content-bottom-process" wx:if="{{item.limit!=0}}">
+                <view class="integral-task-item-content-bottom-process-state" style="width:{{item.announce/item.limit*100}}%"></view>
+              </view>
+              <text wx:if="{{item.limit!=0}}">（{{item.announce>item.limit?item.limit:item.announce}}/{{item.limit}}）</text>
+              <!-- <text wx:if="{{item.limit==0}}">（已消费xxx元，获得xx积分）</text> -->
+              <text wx:if="{{item.limit==0}}">可累计</text>
+            </view>
+          </view>
+        </view>
+        <view class="integralTask_content_item_right_btn" wx:if="{{item.announce<item.limit||item.limit==0}}" hidden="{{item.type==5||item.type==4}}" bindtap="toFinishTask" data-url="{{item.jump}}">{{item.buttonName}}</view>
+        <button open-type="share" data-url="{{item.jump}}" wx:if="{{item.announce<item.limit||item.limit==0}}" hidden="{{item.type!=5&&item.type!=4}}" class="integralTask_content_item_right_btn" wx:if="{{item.announce<item.limit||item.limit==0}}">{{item.buttonName}}</button>
+        <view class="integralTask_content_item_right_btn" style="background:#999;" wx:else>已完成</view>
+      </view>
+    </view>
+  </view>
+  
+  <!-- 积分可兑换列表 -->
+  <view class="exchange-list-cintainer">
+    <view class="exchange-list-top">
+      <view class="exchange-list-top-title">积分兑换</view>
+      <view class="exchange-list-top-text">积分不停,好礼不断</view>
+    </view>
+    <!-- 商品列表 -->
+    <view class="exchange-goods-list">
+      <view class="exchange-goods-item" wx:for="{{exchangeGoodsList}}" wx:key="index" bindtap="showDetail" data-idx="{{index}}">
+        <image class="exchange-goods-img" src="{{item.imageUuid}}" mode="aspectFill"></image>
+        <view class="exchange-goods-content">
+          <view class="goods-name">{{item.presentName}}</view>
+          <view class="goods-price-box">
+            {{item.score}}积分
+            <view class="goods-type">
+              <view class="goods-type-item" wx:if="{{item.disbursement==1||item.disbursement==3}}">到店领取</view>
+              <view class="goods-type-item" wx:if="{{item.disbursement==2||item.disbursement==3}}" style="margin-left:10rpx">商家配送</view>
+            </view>
+          </view>
+          <view class="goods-bottom-box">
+            <view class="goods-bottom-btn" catchtap="showSelectType" data-idx="{{index}}" style="background:{{item.rest>0&&userintegral>=item.score?'':'#999'}}">
+            {{userintegral<item.score?'积分不足':item.rest==0?'库存不足':'立即兑换'}}</view>
+            <view class="goods-bottom-stock">剩余{{item.rest}}</view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+<!-- 完成任务后弹框 -->
+<taskPop showTaskPop="{{showTaskPop}}" text="{{taskText}}" marchantId="{{marchantId}}"
+  style="position:fixed;top:0;left:0;right:0;z-index:9999"></taskPop>
+<!-- 显示商品详情弹框 -->
+<van-popup show="{{ showGoodsDetail }}" closeable position="bottom" bind:close="closeDetail" close-icon="close" round
+>
+  <view class="goods-detail-container">
+    <image src="{{nowGoodsDetail.imageUuid}}" class="goods-detail-img"  mode="widthFix"></image>
+    <view class="goods-detail-content">
+      <view class="goods-detail-top">
+        <view class="goods-detail-price">
+          <image class="goods-detail-icon" src="/pages/img/index/goods_price_icon.png" />
+          {{nowGoodsDetail.score}}积分
+        </view>
+        <view class="goods-detail-label">剩余{{nowGoodsDetail.rest}}</view>
+        <view class="goods-detail-label" wx:if="{{nowGoodsDetail.disbursement==1||nowGoodsDetail.disbursement==3}}">到店领取</view>
+        <view class="goods-detail-label" wx:if="{{nowGoodsDetail.disbursement==2||nowGoodsDetail.disbursement==3}}">商家配送</view>
+      </view>
+      <view class="goods-detail-name">{{nowGoodsDetail.presentName}}</view>
+      <view class="goods-detail-text">{{nowGoodsDetail.descriptions}}</view>
+      <view class="goods-detail-btn" catchtap="showSelectType" style="background:{{nowGoodsDetail.rest>0&&userintegral>=nowGoodsDetail.score?'':'#999'}}">
+        {{userintegral < nowGoodsDetail.score?'积分不足':nowGoodsDetail.rest==0?'库存不足':'立即兑换'}}
+      </view>
+    </view>
+  </view>
+</van-popup>
+<!-- 显示配送方式弹框 -->
+<van-popup show="{{ showSelectType }}" closeable position="bottom" bind:close="closeType" close-icon="close" round>
+  <view class="selectType">
+    <view class="selectType_title"  hidden="{{hideTabs}}">
+      <block wx:for="{{typeList}}" wx:key="index">
+        <view bindtap="changeType" data-index="{{index}}" class="selectType_title_item {{selectType == index? item.class: ''}}">{{item.name}}</view>
+      </block>
+    </view>
+    <view class="no-select-type" hidden="{{!hideTabs}}">{{selectType?'商家配送':'门店团购'}}</view>
+    <view class="selectType_content">
+      <view class="selectType_content_item" hidden="{{selectType!=0}}">
+        <view class="selectType_content_item_label">到店时间</view>：
+        <view class="selectType_content_item_box" bindtap="showTimeSelect">
+          <view class="selectType_content_item_box_input">
+            <view>{{selectedTime?selectedTime:'请选择到店领取时间'}}</view>
+            <image src="/pages/img/index/arrow_right.png" style="width:24rpx;height:48rpx"></image>
+          </view>
+        </view>
+      </view>
+      <view class="selectType_content_item">
+        <view class="selectType_content_item_label">联系方式</view>：
+        <view class="selectType_content_item_box" bindtap="toSelectAddress">
+          <view class="selectType_contemt_item_box_item" style="border-bottom: 2rpx solid #F7F7F7;">联系人：{{selectType==0?toStoreContactMan:logisticsContactMan}} 
+            <text style="margin-left:20rpx"> {{selectType==0 ?toStoreTel:logisticsTel}}</text>
+            </view>
+          <view class="selectType_contemt_item_box_item">地址：{{selectType==0?toStoreAddress:logisticsAddress}}</view>
+        </view>
+      </view>
+      <view class="selectType_content_item">
+        <view class="selectType_content_item_label">留言</view>：
+        <view class="selectType_content_item_box_textarea">
+          <textarea value="{{messageValue}}" bindinput="getMessageValue" maxlength="50"></textarea>
+          <view>{{messageValue.length<50?messageValue.length:50}}/50</view>
+        </view>
+      </view>
+      <view bindtap="exchangeIn" class="selectType_btn">提交</view>
+    </view>
+  </view>
+</van-popup>
+<!-- 选择到店时间弹框 -->
+<!-- 时间选择 -->
+<van-popup show="{{ showTimeSelect }}" bind:close="closeTimeSelect" position="bottom">
+    <van-datetime-picker
+    type="date"
+    title="请选择年月日"
+    bind:confirm="onInput"
+    bind:cancel="closeTimeSelect"
+    min-date="{{ minDate }}"
+    max-date="{{ maxDate }}"
+    formatter="{{ formatter }}"
+  />
+</van-popup>
+<!-- 活动倒计时 -->
+<van-popup show="{{ isOverTime }}" round position="center">
+    <view class="over-activity-container" style="background-image: url('https://xssj.letterbook.cn/applet/images/integral_overtime_bg.png')">
+      <view class="overtime-title">活动结束</view>
+      <view class="overtime-content">请耐心等待商家发布下一轮活动</view>
+      <view class="overtime-btn" bindtap="closePages">确认</view>
+    </view>
+</van-popup>
+<!-- 签到成功 -->
+<van-overlay show="{{ isFinishSign }}" z-index="999">
+    <view class="sign-in-container" style="background-image: url('https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/basics-New%2F%E9%A6%96%E9%A1%B5_slices%2FMy%2F%E7%AD%BE%E5%88%B0%E9%80%9A%E7%9F%A5.png')">
+      <view class="sign-in-container-btn" bindtap="closeSign">我知道啦！</view>
+    </view>
+</van-overlay>

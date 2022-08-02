@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText":"填写退货信息",
+  "usingComponents": {
+    "van-count-down": "@vant/weapp/count-down/index"
+  }
+}

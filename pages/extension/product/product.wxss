@@ -1,0 +1,72 @@
+/* pages/extension/product/product.wxss */
+page {
+  min-height: 100%;
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  background-color: #f7f7f7 !important;
+}
+
+.u-line-1 {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.u-line-2 {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+.search-container {
+  height: 135rpx;
+}
+
+.search-container .relative {
+  top: 30rpx;
+  position: relative;
+  width: 710rpx;
+  left: 50%;
+  margin-left: -355rpx;
+}
+
+.search-container .relative image {
+  position: absolute;
+  z-index: 10;
+  top: 17rpx;
+  left: 23rpx;
+  width: 28rpx;
+  height: 28rpx;
+}
+
+.search-container .relative .search-input {
+  width: calc(100% - 60rpx);
+  height: 58rpx;
+  border-radius: 20px;
+  background-color: rgb(241, 241, 241);
+  position: absolute;
+  padding-left: 60rpx;
+  color: #ababab;
+  font-size: 26rpx;
+  font-weight: 300;
+}
+
+.search-container .relative text {
+  position: absolute;
+  right: 30rpx;
+  top: 8rpx;
+  color: #f7724a;
+  font-size: 26rpx;
+}
+
+.search-container .relative text::before {
+  content: "";
+  display: inline-block;
+  background-color: #f79a7e;
+  width: 1px;
+  top: 8rpx;
+  height: 33rpx;
+  position: absolute;
+  right: 80rpx;
+}

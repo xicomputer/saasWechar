@@ -1,0 +1,10 @@
+<video src="https://xssj.letterbook.cn/applet/videos/cooperation1.mp4" autoplay="{{true}}" loop="{{true}}" controls="{{false}}" class="video-container">
+  <image class="video-top" src="https://xssj.letterbook.cn/applet/images/video_bg_mengbang.jpg"></image>
+  <view class="video-bottom">
+    <view class="video-content">
+      <view class="video-tile">商家注册申请</view>
+      <view class="video-text">一键注册开店，零售行业一键入驻</view>
+    </view>
+    <navigator url="/pages/BusinessApplication/BusinessApplication" class="video-btn">立即申请</navigator>
+  </view>
+</video>

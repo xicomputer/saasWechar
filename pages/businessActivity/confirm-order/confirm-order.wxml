@@ -1,0 +1,90 @@
+<view class='confirm-order-page-root'>
+    <view class='me-fx-col me-fx-c top-address'>
+        <radio-group  bindchange="radioChange">
+            <view class='me-fx-row me-fx-sb-c'>
+                <label class='me-fx-row me-fx-start-c way-list' 
+                    wx:for='{{radioList}}' wx:key='index'
+                >
+                    <radio value='{{item.value}}' class='radio-elem'/>
+                    <view >{{item.name}}</view>
+                </label>
+            </view>
+        </radio-group>
+
+        <!-- 物流、同城 -->
+        <block wx:if='{{orderTemplate==1 || orderTemplate==2}}'>
+            <view class='me-fx-row me-fx-sb-c address-empty-box' wx:if='{{!fullAddress}}' bindtap='jumpAddressList'>
+                <text class='sel-address-msg'>请选择收货地址</text>
+                <image src='../imgs/right-jiantou.png' class='right-jantou-img'></image>
+            </view>
+            <view class='me-fx-row me-fx-sb-c' wx:else>
+                <image src='../imgs/location-icon.png' class='location-img'></image>
+                <view class='me-fx-1 center-content'>
+                    <view>
+                        <text class='user-name'>{{userShipping.contacts}}</text>
+                        <text class='user-phone'>{{userShipping.contactWay}}</text>
+                    </view>
+                    <view class='address-text'>{{fullAddress}}</view>
+                </view>
+                <image src='../imgs/pen-icon.png' class='pen-icon' bindtap='jumpAddressList'></image>
+            </view>
+        </block>
+
+        <!-- 预订 -->
+        <block wx:if='{{orderTemplate==3}}'>
+            <view class='merchant-address'>商家地址：{{merchantAddress}}</view>
+            <view wx:if='{{showBookTime}}' class='book-time' bindtap='openSelDateTime'>{{showBookTime}}</view>
+            <view wx:else class='book-time' bindtap='openSelDateTime'>请选择预订时间</view>
+        </block>
+        
+    </view>
+
+    <view class='goods-info'>
+        <view class='me-fx-row me-fx-sb'>
+            <image src='{{skuInfo.imageUrl}}' class='goods-img'></image>
+            <view class='me-fx-1 me-fx-col me-fx-sb'>
+                <view class='goods-name'>{{goodsName}}</view>
+                <view class='me-fx-row me-fx-sb-c'>
+                    <text class='specification'>规格：{{skuInfo.skuName}}</text>
+                    <text class='price'>¥{{skuInfo.livePrice}}</text>
+                </view>
+                <!-- <view class='me-fx-row me-fx-end'>
+                    <add-subtract-num def-count='{{buyCount}}' bind:change='countChange'></add-subtract-num>
+                </view> -->
+            </view>
+        </view>
+    </view>
+
+    <view class='attr-list'>
+        <view class='me-fx-row me-fx-sb-c attr-item'>
+            <text class='attr-name'>总金额</text>
+            <text class='amount'>¥{{totalAmount}}</text>
+        </view>
+        <view class='me-fx-row me-fx-sb-c attr-item'>
+            <text class='attr-name'>总运费</text>
+            <text>包邮</text>
+        </view>
+        <view class='me-fx-row me-fx-sb-c attr-item'>
+            <text class='attr-name'>支付方式</text>
+            <text>微信</text>
+        </view>
+    </view>
+
+    <view class='leave-message'>
+        <view>给商家留言</view>
+        <textarea maxlength="30" value='{{message}}' placeholder="30字以内" bindinput='messageChange' class='textarea'></textarea>
+    </view>
+
+    <view class='me-fx-row me-fx-sb-c floot-settlement'>
+        <view>实付:<text class='settlement-amount'>¥{{totalAmount}}</text></view>
+        <button class='settlement-btn' bindtap='settlement'>结算</button>
+    </view>
+</view>
+
+<view wx:if='{{showDateTime}}' class='me-fx-col me-fx-end datetime-picker-box'>
+    <van-datetime-picker type="datetime"  value="{{ currentDate }}"
+        min-date='{{minDate}}' bind:input="onInput"
+        bind:confirm='confirmDateTime' bind:cancel='cancelSelDateTime'
+        title='选择日期时间'
+    />
+</view>

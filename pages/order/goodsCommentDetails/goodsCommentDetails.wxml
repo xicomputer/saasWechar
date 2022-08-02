@@ -1,0 +1,63 @@
+<view class="goodsCommentDetails">
+		<view class="goodsCommentDetails-item">
+			<view class="item-headinfo">
+				<view bindtap="reply" data-id="{{0}}" data-name="{{goodsCommentDetails.nickname}}" data-userid="{{goodsCommentDetails.userId}}" class="headinfo-left">
+					<image src="{{goodsCommentDetails.headimgurl}}" class="headinfo-img"></image>
+				</view>
+				<view class="headinfo-right">
+					<view class="headinfo-name">{{goodsCommentDetails.nickname}}</view>
+					<view class="headinfo-start">
+						<image wx:for="{{5}}" src="../../img/order/start_b{{goodsCommentDetails.grade>index?6-goodsCommentDetails.grade+index:0}}.png" class="start-img" bindtap="changeStartLevel" data-index="{{index+1}}"></image>
+					</view>
+				</view>
+			</view>
+			<view class="item-text">{{goodsCommentDetails.content}}</view>
+			<view class="item-image"wx:if="{{goodsCommentDetails.imagList.length}}">
+				<image wx:for="{{goodsCommentDetails.imagList}}" src="{{item}}" class="image-img" bindtap="zoomImg" data-list="{{goodsCommentDetails.imagList}}" data-src="{{item}}"></image>
+			</view>
+			<view class="item-footer">
+				<view class="footer-time">{{goodsCommentDetails.addTime}}发表</view>
+				<view class="footer-operate">
+					<view class="operate-item">
+						<image src="../../img/comment.png" class="operate-icon"></image>
+						<view class="operate-num">{{goodsCommentDetails.reply}}</view>
+					</view>
+					<view bindtap="liketap" data-id="{{goodsCommentDetails.id}}" data-index="{{0}}" class="operate-item">
+						<image wx:if="{{!goodsCommentDetails.myPraise}}" src="../../img/good.png" class="operate-icon"></image>
+						<image wx:else src="../../img/gooded.png" class="operate-icon"></image>
+						<view class="operate-num">{{goodsCommentDetails.praise}}</view>
+					</view>
+				</view>
+			</view>
+			<view class="item-replay" wx:if="goodsCommentDetails.marchantContent">
+				<view class="item-replay-name">商家回复</view>
+				<view class="item-replay-text">{{goodsCommentDetails.marchantContent}}</view>
+			</view>
+		</view>
+		<view class="goodsCommentDetails-comment">
+			<view class="comment-title">精彩评论</view>
+			<view class="comment-content">
+				<view class="content-info" wx:for="{{commentReply}}" wx:for-item="item" wx:for-index="index" wx:key="index">
+					<view class="info-left">
+						<image bindtap="reply" data-id="{{item.id}}" data-name="{{item.userInfo.nickname}}" data-userid="{{item.userId}}" src="{{item.userInfo.headimgurl}}" class="info-img"></image>
+					</view>
+					<view class="info-right">
+						<view class="info-name">{{item.userInfo.nickname}}</view>
+						<view class="info-text">{{item.content}}</view>
+						<view wx:if="{{item.replytoreplyList.length!=0}}" class="content-reply">
+							<view wx:for="{{item.replytoreplyList}}" wx:for-item="ritem" wx:for-index="rindex" wx:key="rindex" bindtap="reply" data-id="{{item.id}}" data-name="{{ritem.userName}}" data-userid="{{ritem.userId}}" class="replay-box">								
+								<text class="replay-info">{{ritem.userName}}回复{{ritem.userReplyName}}:</text>
+								<text class="replay-text">{{ritem.content}}</text>
+							</view>
+						</view>
+						<view class="footer-time" style="margin-top: 20rpx;">{{item.addTime}}</view>
+					</view>
+				</view>
+			</view>
+		</view>
+		<view class="goodsCommentDetails-footer">
+			<input maxlength="80" placeholder="{{fabu}}" value="{{value}}" focus="{{isfocus}}" bindinput="getvalue" class="footer-input" />
+			<view class="footer-btn" bindtap="fasong">发布</view>
+		</view>
+		<view class="goodsCommentDetails-fill"></view>
+	</view>

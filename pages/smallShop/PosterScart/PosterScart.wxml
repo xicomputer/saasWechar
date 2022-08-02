@@ -1,0 +1,22 @@
+<!-- <view>{{webViewUrl}}</view> -->
+<!-- <web-view src="{{webViewUrl}}"  bindmessage="getMessage"></web-view> -->
+
+<view class='poster-page-box'>
+    <canvas-synthetic class='mySynthetic' canvas-id='canvas_shop_1'
+        canvas-width='{{330}}' canvas-height='{{505}}' canvas-bgcolor='#FA5B3D'
+        imgs='{{imgs}}' bind:generateComplete='getCompleteImg' texts='{{texts}}'
+        showline='{{false}}'
+    ></canvas-synthetic>
+
+    <view class='poster-img-container'>
+        <image src='{{testimgUrl}}'  bindlongtap="longtapPoster" mode='widthFix'
+            style='width:90%;background-color:#fff;margin-top:40rpx;'
+        ></image>
+    </view>
+
+
+    <view class="img_xiaodian">
+        <button wx:if='{{testimgUrl!==""}}' class='save-poster-btn' open-type="share" bindtap='fenxPoster'>分享小店</button>
+        <button wx:if='{{testimgUrl!==""}}' class='save-poster-btn' bindtap='savePoster'>保存海报</button>
+    </view>
+</view>

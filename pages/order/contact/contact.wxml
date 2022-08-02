@@ -1,0 +1,35 @@
+<!--pages/order/contact/contact.wxml-->
+<view class="contact">
+    <scroll-view scroll-y id="chatContent" scroll-into-view="{{toLast}}">
+        <view style="height:1px;width:100%"></view>
+        <view wx:for="{{chatList}}" wx:for-item="item" wx:for-index="index" wx:key="index" id="item{{index+1}}">
+            <view wx:if="{{item.msgFrom==2}}">
+                <view class="chatDatetime" wx:if="{{index==0||item.addTime!=='刚刚'}}">{{ item.addTime }}</view>
+                <view class="chatBox_left">
+                    <image class="chatImg_left" src="{{logoPic}}"/>
+                    <view style="margin-top: 10px;">
+                        <image src="../../img/black_triangle.png" style="height: 10px;width: 10px;" />
+                    </view>
+                    <view class="chatBubble_left">{{ item.content }}</view>
+                </view>
+            </view>
+            <view wx:else>
+                <view class="chatDatetime" wx:if="{{index==0||item.addTime!=='刚刚'}}">{{ item.addTime }}</view>
+                <view class="chatBox_left chatBox_right">
+                    <view class="chatBubble_left chatBubble_right">{{ item.content }}</view>
+                    <view style="margin-top: 10px;">
+                        <image src="../../img/white_triangle.png" style="height: 10px;width: 10px" />
+                    </view>
+                    <image class="chatImg_left chatImg_right" src="{{headimgurl}}"/>
+                </view>
+                <view style="clear:both;"></view>
+            </view>
+        </view>
+        
+    </scroll-view>
+   
+    <view class="chatFooter" >
+        <input   value="{{chatValue}}" bindinput="changInput"   cursor-spacing="30" placeholder="请输入消息..." class="send-content" maxlength="80" />
+        <view class="footerFS" bindtap="fsChat">发送</view>
+    </view>
+</view>

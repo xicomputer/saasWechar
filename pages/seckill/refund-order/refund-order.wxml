@@ -1,0 +1,85 @@
+<view>
+    <view class='top-tab'>
+        <scroll-view scroll-x='{{true}}' class='top-tab-list-scroll'>
+            <view class='me-fx-row tab-list-box'>
+                <view class='me-fx-col me-fx-sb-c tab-item {{item.status==currentStatus?"sel-item":""}}' 
+                    wx:for='{{topTabList}}' wx:key='index' bindtap='switchStatus' data-status='{{item.status}}'
+                >
+                    <text class='me-fx-1 tab-item-name'>{{item.name}}</text>
+                    <view class='unline-box'></view>
+                    <text wx:if='{{item.count}}' class='count-num'>{{item.count}}</text>
+                </view>
+            </view>
+        </scroll-view>
+    </view>
+
+    <view class='order-list' wx:if='{{dataList.length}}'>
+        <view class='order-item' wx:for='{{dataList}}' wx:key='index'>
+            <view class='me-fx-row me-fx-sb-c'>
+                <text>订单号:{{item.orderNumber}}</text>
+                <text class='status-text'>{{item.orderStateText}}</text>
+            </view>
+            <view class='me-fx-row goods-info'>
+                <image src='{{item.bannerImgUrls[0]}}' class='goods-img'></image>
+                <view class='me-fx-1 me-fx-col me-fx-sb right-info'>
+                    <view>
+                        <view class='me-full-text goods-name'>{{item.commodityName}}</view>
+                        <text class='specification'>规格:{{item.skuName}}</text>
+                    </view>
+                    <view class='me-fx-row me-fx-sb-c'>
+                        <text>x{{item.amount}}</text>
+                        <text class='payment-amount'>实付：￥{{item.actualMoney}}</text>
+                    </view>
+                </view>
+            </view>
+            <view class='order-info' wx:if='{{item.showDetail}}'>
+                <view>退货单号:{{item.activityOrderRefundResponse.refundNo}}</view>
+                <view>退款金额:¥{{item.activityOrderRefundResponse.refundMoney}}</view>
+                <view>申请退货时间:{{item.activityOrderRefundResponse.createTime}}</view>
+                <view>退货理由:{{item.activityOrderRefundResponse.refundReason}}</view>
+
+                <view wx:if='{{item.activityOrderRefundResponse.refundStatus==4}}'>{{item.activityOrderRefundResponse.expressCompany}}:{{item.activityOrderRefundResponse.expressNumber}}</view>
+
+                <view wx:if='{{item.activityOrderRefundResponse.refundStatus==3}}'>
+                    <view>商家拒绝时间:2021-07-12 16:21</view>
+                    <view>拒绝理由:{{item.activityOrderRefundResponse.refuseReason}}</view>
+                </view>
+                
+            </view>
+            <view class='me-fx-row me-fx-end-c item-footer'>
+                <button class='btn detail-btn' data-index='{{index}}' bindtap='handleShowDetail'>
+                    订单详情
+                    <image src='../imgs/right-jiantou.png' class='{{showDetail?"up-opint":"down-opint"}}'></image>
+                </button>
+                <button class='btn contact-btn' bindtap='contactMerchant'>联系商家</button>
+                <button  class='btn contact-btn' wx:if='{{item.activityOrderRefundResponse.refundStatus==4}}' data-item='{{item}}' bindtap='jumpLogistics'>查看物流</button>
+                <button class='btn confirm-btn' wx:if='{{item.activityOrderRefundResponse.refundStatus==2}}' data-item='{{item}}' bindtap='openSalesReturnPopup'>确认退货</button>
+            </view>
+        </view>
+    </view>
+    <view wx:else class='me-fx-col me-fx-c-c list-empty-box'>
+        <text>暂无数据</text>
+    </view>
+</view>
+
+
+<!-- 退货时填写快递信息弹窗 -->
+<van-popup show='{{showCourierPopup}}' round='{{true}}' bind:click-overlay='closePopup'
+    close-on-click-overlay="{{true}}" custom-style='border-radius:22rpx'
+>
+    <view class='courier-info-popup'>
+        <view class='me-fx-row me-fx-start-c ipt-item'>
+            <text>物流公司</text>
+            <input class='ipt' type="text" placeholder="请输入物流公司" model:value='{{expressCompany}}'></input>
+        </view>
+        <view class='me-fx-row me-fx-start-c ipt-item'>
+            <text>物流订单</text>
+            <input class='ipt' type="text" placeholder="请输入快递单号" model:value='{{expressNumber}}'></input>
+            <image src='../imgs/sao-ma.png' class='sao-ma-img' bindtap='scanCode'></image>
+        </view>
+        <view class='me-fx-row me-fx-c-c'>
+            <button class='btn cancel-btn' bindtap='closePopup'>取消</button>
+            <button class='btn confirm-btn' bindtap='confrimSalesReturn'>确认发货</button>
+        </view>
+    </view>
+</van-popup>

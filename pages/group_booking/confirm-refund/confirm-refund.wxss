@@ -1,0 +1,45 @@
+/* pages/seckill/confirm-refund/confirm-order.wxss */
+
+page{background-color:#F7F7F7;}
+
+
+.top-info{background-color:#fff;color:#0F0F0F;font-size:24rpx;}
+.top-info .title-info{padding:40rpx;box-sizing:border-box;}
+.top-info .title-info .title-text{font-size:30rpx;font-weight:bold;}
+.top-info .down-time-text{font-size:24rpx;color:#0F0F0F;}
+
+.top-info .address-info{
+    padding:40rpx 20rpx 40rpx 40rpx;
+    box-sizing:border-box;
+    border-top:4rpx solid #E4E4E4;
+}
+
+.top-info .address-info .title-text{font-size:30rpx;font-weight:bold;}
+.top-info .address-info .user-name{margin:10rpx 0;}
+.top-info .address-info .address-text{ margin-right:38rpx;}
+.top-info .address-info .copy-btn{color:#1577FF;}
+
+
+
+.logistics-ipt{margin-top:20rpx;background-color:#fff;}
+.logistics-ipt .ipt-item{
+    height:122rpx;padding:0 20rpx 0 40rpx;
+}
+.logistics-ipt .ipt-item:not(:last-child){border-bottom:4rpx solid #E4E4E4;}
+.logistics-ipt .ipt-item .title-text{
+    font-size:30rpx;font-weight:bold;color:#0F0F0F;
+}
+.logistics-ipt .ipt-item .ipt{font-size:24rpx;}
+.logistics-ipt .ipt-item .sao-ma-img{
+    width:36rpx;height:36rpx;margin-left:30rpx;
+}
+
+
+.footer-btn-box{
+    position:fixed;width:100%;height:118rpx;
+    background-color:#fff;bottom:0;left:0;
+}
+.footer-btn-box .confirm-btn{
+    width:618rpx;height:82rpx;background-color:#F2180C;
+    font-size:32rpx;color:#fff;padding:0;margin:0;line-height:82rpx;
+}

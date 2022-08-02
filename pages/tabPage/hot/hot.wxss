@@ -1,0 +1,35 @@
+/* pages/tabPage/hot/hot.wxss */
+Page{
+    background-color:#F8F8F8;
+}
+
+.hot-page-container{
+    padding:20rpx;box-sizing:border-box;
+}
+
+.video-item{position:relative;}
+.video-item:not(:first-child){
+    margin-top:20rpx;
+}
+
+.video-img{
+    width:344rpx;height:540rpx;
+    background-color:#ccc;
+    border-radius:16rpx;
+}
+
+.item-bottom-box{
+    position:absolute;
+    left:0;bottom:0;padding:20rpx;
+    box-sizing:border-box;
+    width:100%;color:#fff;
+}
+.item-bottom-box .item-daizhi-img{
+    width:32rpx;height:32rpx;margin-right:10rpx;
+}
+.item-bottom-box .title-text{
+    font-size:24rpx;font-weight:bold;
+}
+.item-bottom-box .introduce-text{
+    font-size:20rpx;
+}

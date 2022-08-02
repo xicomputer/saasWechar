@@ -1,0 +1,99 @@
+<view class="list">
+  <view class="list_tab">
+    <block wx:for="{{statusList}}" wx:key="item">
+      <view bindtap="changeTab" data-index="{{index}}" class="list_tab_item {{index == status || (index==0 && status==-1) ? 'list_tab_item_active' : ''}}">
+        {{item}}
+        <view wx:if="{{statusNumList[index] > 0}}" class="list_tab_num">{{statusNumList[index] > 99? '...' : statusNumList[index]}}</view>
+      </view>
+    </block>
+  </view>
+  <view style="height: 56rpx"></view>
+  <block wx:for="{{auctionList}}" wx:key="index">
+    <block wx:if="{{item.status == '1'}}">
+      <view class="list_item_endTime">预计开始时间：{{item.startTime}}</view>
+    </block>
+    <block wx:if="{{statusList[item.status] == '待交保' || item.status == '2'}}">
+      <block wx:if="{{statusList[item.status] == '待交保' && item.auctionStatus != '2'}}">
+        <view class="list_item_endTime">预计开始时间：{{item.startTime}}</view>
+      </block>
+      <block wx:else>
+        <van-count-down use-slot bind:change="changeTime" data-index="{{index}}" bind:finish="overTime" time="{{ item.timeMinutes }}">
+          <view class="list_item_endTime">
+            <text>距结束：</text>
+            <text wx:if="{{item.timeData.days!=0}}">{{item.timeData.days}}</text>
+            <text wx:if="{{item.timeData.days!=0}}">天</text>
+            <text>{{item.timeData.hours<10?'0'+item.timeData.hours:item.timeData.hours}}</text>
+            <text>:</text>
+            <text>{{item.timeData.minutes<10?'0'+item.timeData.minutes:item.timeData.minutes}}</text>
+            <text>:</text>
+            <text>{{item.timeData.seconds<10?'0'+item.timeData.seconds:item.timeData.seconds}}</text>
+          </view>
+        </van-count-down>
+      </block>
+    </block>
+    <block wx:if="{{item.status == '3' || item.status == '4' || item.status == '5'}}">
+      <view class="list_item_endTime">结束时间：{{item.endTime}}</view>
+    </block>
+    <view bindtap="toShop" data-item="{{item}}" class="list_item_shop">
+      <image src="{{item.merchantLogo}}" mode="aspectFill"></image>
+      <view>{{item.merchantName}}</view><mp-badge wx:if="{{item.isRead == 0}}"></mp-badge>
+    </view>
+    <view bindtap="toDetails" data-item="{{item}}" class="list_item">
+      <view class="list_item_image">
+        <image src="{{item.auctionLogo}}" mode="aspectFill"></image>
+        <view>{{item.timeUnit == 1 ? '即时喊' : item.timeUnit == 2 ? '短时喊' : '长时喊'}}</view>
+      </view>
+      <view class="list_item_info">
+        <view class="list_item_up">
+          <view class="list_item_name">
+            {{item.auctionItemName}}
+            <view class="list_item_desc">{{item.desc}}</view>
+          </view>
+          <view style="background: {{statusColorList[item.status]}};" class="list_item_label">{{statusList[item.status]}}</view>
+        </view>
+        <view class="list_item_up">
+          <view class="peopleNumber">
+            <view>预约人数：{{item.reserveNumber}}</view>
+            <view wx:if="{{item.status != '1'}}">参与人数：{{item.personNumber}}</view>
+          </view>
+          <view class="list_item_up_right">
+            <block wx:if="{{item.status == '1'}}">
+              <view class="list_item_startPrice">保底价：￥{{item.startingPrice}}</view>
+            </block>
+            <block wx:else>
+              <view wx:if="{{item.status == '5'}}" class="list_item_nowPrice">成交价：￥{{item.currentPrice}}</view>
+              <view wx:else class="list_item_nowPrice">当前价：￥{{item.currentPrice}}</view>
+            </block>
+            <block wx:if="{{statusList[item.status] != '待交保' && item.status != '1'}}">
+              <view wx:if="{{item.myPrice}}" class="list_item_startPrice">我的出价：￥{{item.myPrice}}</view>
+            </block>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="list_item_down">
+      <view wx:if="{{statusList[item.status] == '待交保' && item.cashDeposit != 0}}" bindtap="toBondPayment" data-item="{{item}}" class="list_item_down_btn">立即支付</view>
+      <view wx:if="{{item.status == '3'}}" bindtap="showAddress" data-index="{{index}}" class="list_item_down_btn">立即支付</view>
+      <view wx:if="{{item.status == '3'}}" class="list_item_down_down">待补款金额：￥{{item.fillingMoney}}</view>
+    </view>
+  </block>
+</view>
+<view hidden="{{!isShowAddress}}" class="mask">
+  <view class="payment_address">
+    <image catchtap="showNotAddress" class="payment_address_close" src="/image/pmhd/icon_close.png"></image>
+    <view catchtap="selectAddress" class="payment_address_item" style="margin-top: 104rpx">
+      <view class="payment_address_lable">收货人：</view>
+      <view class="payment_address_text">
+        {{address.name}}<text style="font-size: 24rpx;"> {{address.tel}}</text>
+      </view>
+    </view>
+    <view catchtap="selectAddress" class="payment_address_item" style="padding-top: 40rpx;">
+      <view class="payment_address_lable">收货地址：</view>
+      <view style="flex: 1;display: flex;justify-content: space-between;align-items: center;">
+        <view class="payment_address_text" style="font-size: 28rpx;font-weight: bold;color: #666666;">{{address.detail}}</view>
+        <image src="/image/pmhd/icon_enter.png" class="payment_address_enter"></image>
+      </view>
+    </view>
+    <view catchtap="toFinalPayment" class="payment_btn">确定地址</view>
+  </view>
+</view>

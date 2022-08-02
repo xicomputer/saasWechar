@@ -1,0 +1,47 @@
+
+<view class="addList">
+    <view class="add_have_list">
+      <no-data text="您还没有添加地址哦！" url="https://xssj.letterbook.cn/applet/images/sj_no_data_img9.png" wx:if="{{!addList.length}}"></no-data>
+      <view wx:else>
+        <view wx:for="{{addList}}" wx:key="index">
+          <van-swipe-cell right-width=" {{65}} ">
+            <view class="add_list" catchtap="backOrder" data-item="{{item}}">
+              <view class="add_top">
+                <view class="add_top_item">
+                  <view class="add_name">{{item.contacts}}</view>
+                  <view class="add_tel">{{item.contactWay}}</view>
+                  <view class="defalut_icon" wx:if="{{item.isDefault==1}}">默认</view>
+                </view>
+              </view>
+              <view class="addressDetail">
+                <view
+                  class="addDetail"
+                >{{item.provincesName}}{{item.cityName}}{{item.areaName}}{{item.address}}</view>
+              </view>
+              <view class="xiu_icon" catchtap="clickEdit" data-item="{{item}}">编辑</view>
+            </view>
+            <view slot="right" bindtap="clickDel" data-id="{{item.shippingId}}" class="del">删除</view>
+          </van-swipe-cell>
+        </view>
+      </view>
+
+      <view class="me-fx-row row_bottom" >
+        <view bindtap="WxSetAddress" class="saveBtn">微信地址</view>
+        <navigator class="addlist-footer-btn" url="../NewAddress/NewAddress">
+          <view class="saveBtn">新建地址</view>
+        </navigator>
+      </view>
+
+    </view>
+
+    <!-- 确认删除的弹窗 -->
+    <view class="delect_bg" wx:if="{{delet_boll}}">
+      <view class="delet_view">
+        <view class="delet_title">确定将这个地址删除？</view>
+        <view class="btn_group">
+          <view class="think_btn" bindtap="close_delet">我再想想</view>
+          <view class="delect_btn" bindtap="sure_delet">删除</view>
+        </view>
+      </view>
+    </view>
+  </view>

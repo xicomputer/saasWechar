@@ -1,0 +1,62 @@
+
+<view> 
+   <!-- 新模板 -->
+    <view>
+        <!-- 排序 -->
+        <!-- <view class="sort">
+            <view>
+                <text>综合排序</text>
+                <image src="../../../static/images/Polygon 1@2x.png"></image>
+            </view>
+            <view>
+                <text>价格</text>
+                <view>
+                    <image src="../../../static/images/Polygon 2@2x.png"></image>
+                    <image src="../../../static/images/Polygon 1@2x.png"></image>
+                </view>
+            </view>
+            <view>
+                <text>销量</text>
+                <view>
+                    <image src="../../../static/images/Polygon 2@2x.png"></image>
+                    <image src="../../../static/images/Polygon 1@2x.png"></image>
+                </view>
+            </view>
+        </view> -->
+        <!-- 瀑布流排版 -->
+        <!-- <view class="goods" >
+            <view  class="single-goods"  wx:for="{{goodsList}}"  wx:key="index" bindtap='toGoodsDetails' data-id='{{item.commodityId}}' style="position: relative;">
+              <view	style="color:#fff;background:#ff0000;border-top-left-radius:15rpx;font-size:22rpx;padding: 6rpx 25rpx;position: absolute;top: 0;border-bottom-right-radius: 50rpx;">{{btnTitle}}</view>
+                <image src="{{item.thumbnail}}"></image>
+                <text class="line-clamp2"> {{item.commodityName}}</text>
+                <view class="price">
+                    <view class="price-new" style="font-size: 24rpx;">
+                        <text class="yang1">￥</text>
+                        <text>{{item.lowPrice}}</text>
+                    </view> -->
+                    <!-- <view class="price-old">
+                        <u-icon name="rmb" color="#999" size="18"></u-icon>
+                        <text>699</text>
+                    </view> -->
+                    <!-- 无商品旧价格 -->
+                <!-- </view>
+            </view>
+        </view> -->
+
+        <!-- 新版猜你喜欢 -->
+         <view class="goods" >
+            <view  class="single-goods"  wx:for="{{goodsList}}"  wx:key="index" bindtap='toGoodsDetails' data-id='{{item.commodityId}}' style="position: relative;">
+              <view	style="color:#fff;background:#ff0000;border-top-left-radius:15rpx;font-size:22rpx;padding: 6rpx 25rpx;position: absolute;top: 0;border-bottom-right-radius: 50rpx;">{{btnTitle}}</view>
+                <image src="{{item.thumbnail}}" mode="aspectFill"></image>
+                <text class="line-clamp2"> {{item.commodityName}}</text>
+                <view class="price">
+                    <view class="price-new" style="font-size: 24rpx;">
+                        <text class="yang1">￥</text>
+                        <text>{{item.lowPrice}}</text>
+                    </view>
+                   
+                </view>
+            </view>
+        </view>
+    </view>
+</view>

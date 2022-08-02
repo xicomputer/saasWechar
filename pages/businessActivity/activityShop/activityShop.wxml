@@ -1,0 +1,66 @@
+<view>
+    <view class="activity-list-container me-fx-col">
+        <block wx:for="{{dataList}}" wx:key="index">
+            <view class="activity-list-info me-fx-col activity-{{item.activityId}}" 
+                bindtap='toDetail' data-atyid='{{item.activityId}}'
+            >
+                <view class="activity-top">
+                    <image mode='aspectFill' class="activity-img" src="{{item.imageUrl}}"></image>
+                    <view class="me-fx-row me-fx-sb-c activity-num down-order-num"  
+                        wx:if='{{item.activityJoinNumberTotal}}'
+                    >
+                        <text class='triangle-box'></text>
+                        <text class="btn_last" >已有{{item.activityJoinNumberTotal}}人下单</text>
+                    </view>
+                    <view class="me-fx-row me-fx-sb-c activity-num"  
+                        wx:if='{{item.residueNumber!=-1}}'
+                    >
+                        <text class='triangle-box'></text>
+                        <text class="btn_last" >{{'剩余名额：'+(item.residueNumber || 0)}}</text>
+                    </view>
+                </view>
+                <view class="activity-foot">
+                    <view style='padding:10rpx;box-sizing:border-box;'>
+                        <view class='me-fx-row me-fx-sb-c foot-line-item'>
+                            <text class='me-full-text activity-shop-name'>活动名称：{{item.templateName}}</text>
+                            <van-count-down time='{{item.diffTimes}}' bind:change="timeChange"
+                                auto-start='{{true}}' use-slot='{{true}}' bind:finish='finishFun'
+                                data-atyid='{{item.activityId}}' data-index='{{index}}'
+                            >
+                                <view class='me-fx-row me-fx-start-c times-text'>
+                                    <text>{{item.state==1?'距开始':'距结束'}}：</text>
+                                    <view class='time-num' wx:if='{{item.times.days}}'>{{item.times.days}}</view>
+                                    <text wx:if='{{item.times.days}}'>天</text>
+                                    <view class='time-num'>{{item.times.hours}}</view>时
+                                    <view class='time-num'>{{item.times.minutes}}</view>分
+                                    <view class='time-num'>{{item.times.seconds}}</view>秒
+                                </view>
+                            </van-count-down>
+                        </view>
+                        <view class='me-fx-row me-fx-sb-c foot-line-item'>
+                            <text class='me-full-text activity-goods-name'>{{item.commodityName}}</text>
+                            <view class='me-fx-row me-fx-c-end price-box'>
+                                <text>活动价:¥</text>
+                                <text class='price-num'>{{item.lowPrice}}</text>
+                            </view>
+                        </view>
+                    </view>
+                    <view wx:for='{{item.meJoinInfo}}' wx:for-item='temp' wx:for-index='ti' wx:key='ti'>
+                        <view class='me-fx-row me-fx-sb-c msg-line-box {{(temp.status==2 || temp.status==3)?"complete":"not-complete"}}'>
+                            <text wx:if='{{temp.status==2 || temp.status==3}}'>您已完成{{temp.alreadyOrder}}单任务，您购买商品已退还金额({{item.meJoinInfo.income}}元) </text>
+                            <text wx:else>已推{{temp.alreadyOrder}}单，商品金额退还{{temp.income}} 只差{{temp.residueOrder}}单赚取商品</text>
+                            <text class='view-detail' data-item='{{temp}}' catchtap='jumpJoinDetail' >查看详情</text>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </block>
+        <view class='me-fx-row me-fx-c-c place-empty' wx:if='{{!dataList.length}}'>
+            <text>暂无数据</text>
+        </view>
+    </view>
+
+
+    <!-- 授权组件 -->
+    <!-- <auth-get-info></auth-get-info> -->
+</view>

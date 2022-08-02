@@ -1,0 +1,4 @@
+<view class="store-close-container">
+  <image src="https://xssj.letterbook.cn/applet/images/store_close_img.png" style="width:500rpx;height:662rpx"></image>
+  <image bindtap="toIndex" src="/pages/img/goods/close.png" style="width:40rpx;height:40rpx;margin-top:100rpx"></image>
+</view>

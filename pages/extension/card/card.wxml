@@ -1,0 +1,70 @@
+<!--pages/extension/card.wxml-->
+<!-- <text>pages/extension/card.wxml</text> -->
+<view>
+  <view style="width: 100%;background: #000;">
+      <view style="display: flex;align-items: center;justify-content: center;flex-direction: column;">
+        <view style="color: white;font-size: 28rpx;margin-top: 20rpx;">
+          微信零钱到账佣金
+        </view>
+        <view  style="color: white;font-size: 72rpx;font-weight: bold;">
+          105
+        </view>
+      </view>
+      
+  </view>
+  <view style="width: 100%;background: rgba(0, 0, 0, 0.719);height: 122rpx;">
+    <view class="member_tool">
+          <navigator class="member_tool_item">
+            <view class="member_tool_item_name">总销售额</view>
+            <view class="member_tool_item_desc">1000</view>
+          </navigator>
+          <view class="member_tool_item_line"></view>
+          <navigator class="member_tool_item" >
+            <view class="member_tool_item_name">总订单</view>
+            <view class="member_tool_item_desc">50</view>
+          </navigator>      
+        </view>
+    </view>
+
+    <view style="width: 100%;background:white;height: 134rpx;">
+    <view class="member_tool" style="height: 134rpx;">
+          <navigator class="member_tool_item">
+            <view class="member_tool_item_name" style="color: #000;font-size: 28rpx;">预估到账佣金</view>
+            <view class="member_tool_item_desc"  style="color: #000;font-size: 36rpx;font-weight: bold;">100</view>
+          </navigator>
+          <view class="member_tool_item_line"></view>
+          <navigator class="member_tool_item" >
+            <view class="member_tool_item_name" style="color: #000;font-size: 28rpx;">已到账佣金</view>
+            <view class="member_tool_item_desc"  style="color: #000;font-size: 36rpx;font-weight: bold;">150</view>
+          </navigator>      
+        </view>
+    </view>
+    <!-- 内容 -->
+    <view>
+       <view style="width: 100%;background: #fff;display: flex;flex-direction: column;margin-top: 20rpx;" wx:for="{{3}}">
+        <view style="display: flex;align-items: center;justify-content: space-between;padding: 20rpx;">
+          <view style="color: #999999;font-size: 22rpx;">
+            订单号：1561561616162652
+          </view>
+          <view style="color:#ff0000;font-size:28rpx">
+            待入账
+          </view>
+        </view>
+        <view style="width:100%;background: #fff;margin-bottom: 20rpx;display: flex;padding: 20rpx;" >
+          <image style="width:116rpx;height:116rpx;" src="https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/Saas/%E7%BB%84%205558%403x.png"></image>
+          <view style="margin-left: 25rpx;display: flex;flex-direction: column;">
+            <view style="font-size: 32rpx;font-weight:900" class="u-line-1">t商品名称商品名称商品名称商品itle</view>
+            <text style="font-size: 24rpx;color:#999999;border-radius: 10rpx;"  class="u-line-1">
+              这里是规格<text>x2</text>
+            </text>
+          </view>
+        </view>
+        <view style="padding:20rpx;font-size: 24rpx;">
+          <view>实付款：500.00</view>
+          <view>购买人：唐文杰 15673553352</view>
+          <view>下单时间：2021/9/20 13:14</view>
+          <view style="color: #ff0000;">分销人员: 谢培 预估到账佣金:￥120</view>
+        </view>
+       </view>
+    </view>
+</view>

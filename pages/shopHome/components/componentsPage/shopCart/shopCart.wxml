@@ -1,0 +1,188 @@
+<!--pages/Index/shopHome/components/componentsPage/shopCart/shopCart.wxml-->
+<view class="cart-main">
+  <!-- <view class="address_Info">
+    <view class="address me-fx-row me-fx-start-c">
+        <image src="../static/path.png"></image>
+        <text>湖南省长沙市开福区</text>
+    </view>
+  </view> -->
+  <view class="item_foot me-fx-row me-fx-start-c " style="bottom:140rpx">
+    <view class="me-fx-row me-fx-sb foot_info" wx:for="{{shopCartlist.length?shopCartlist:1}}" wx:key="marchantId" >
+      <view class="me-fx-row me-fx-start-c"  bindtap="selectAll" >
+        <text class="icon-text iconfont iconBig {{isAll ? 'icon-select1 red-style' : 'icon-selectnor'}}"></text>
+        <text>全选</text>
+      </view>
+      <view class="me-fx-row me-fx-sb me-fx-1 me-fx-start-c">
+        <view class='me-fx-row me-fx-end-c me-fx-1'>合计：<text class="red">￥{{subtotal?subtotal:0}}</text></view>
+        <view class="redbtn"  data-pi="{{index}}" bindtap="handleGoSettlement">结算</view>
+      </view>
+    </view>
+  </view>
+ <!-- 编辑 -->
+    <!-- 
+ <view class="edit-area">
+    <view class="edit-inner">
+      <view class="select-all-area">
+        <text class="click-area" bindtap="selectAll">
+          <text class="icon-text iconfont {{isAll ? 'icon-select1 red-style' : 'icon-selectnor'}}"></text>
+          <text>全选</text>
+        </text>
+      </view>
+      <view class="delet-area">
+        <text class="click-area" bindtap="delete">
+          <text class="icon-text iconfont icon-delete"></text>
+          <text>删除</text>
+        </text>
+      </view>
+    </view> 
+  </view>-->
+
+  <!-- 没有添加商品 -->
+  <no-data text="您还没有添加商品哦！" url="https://xssj.letterbook.cn/applet/images/sj_no_data_img3.png" wx:if="{{!shopCartlist.length}}" height='30'></no-data>
+
+  <view wx:else class="scroll-area">
+    <view class="list-area">
+      <view class="item-area" wx:for="{{shopCartlist}}" wx:key="marchantId">
+        <view class="item-header" data-marchantId="{{item.marchantId}}">
+          <view class="me-fx-row me-fx-sb">
+            <view>
+              <text class="item-header-select-area" data-pid="{{index}}" catchtap="handleGoodsSelect">
+              <text
+                class="item-header-select iconfont iconBig {{item.isSelect ? 'icon-select1 red-style' : 'icon-selectnor'}}"></text>
+              </text>
+              <image class="item-header-img" src="{{cartShop.headImage}}"></image>
+              <text>{{cartShop.appName}}</text>
+            </view>
+            <view class="delet-area">
+              <text class="click-area" bindtap="delete">
+                <text class="icon-text iconfont icon-delete"></text>
+                <text>删除</text>
+              </text>
+            </view>
+          </view>
+        </view>
+        <view class="item-goods">
+          <view class="item-good" wx:for="{{item.commoditys}}" wx:key="commodityId" wx:for-item="goodItem"
+            wx:for-index="goodIndex" bindtap="toGoodsdetail" data-activity="{{goodItem.activityId}}"   data-commodityId="{{goodItem.commodityId}}">
+            <view class="item-good-l">
+              <text class="select-area" data-pid="{{index}}" data-cid="{{goodIndex}}" catchtap="handleGoodItemSelect">
+                <text
+                  class="icon-text iconfont iconBig {{goodItem.isPitch ? 'icon-select1 red-style' : 'icon-selectnor'}}"></text>
+              </text>
+            </view>
+            <view class="item-good-c">
+              <image class="good-img" src="{{goodItem.imageUrl?goodItem.imageUrl:goodItem.thumbnail}}"></image>
+            </view>
+            <view class="item-good-r">
+              <view class="good-title">
+                <text>{{goodItem.commodityName}}</text>
+              </view>
+              <view class="good-model">
+                <text>规格：{{goodItem.itemText}}</text>
+              </view>
+              <view class="me-fx-row me-fx-start-c shop-cart-miaosha" wx:if="{{goodItem.remainingTime}}">
+                <view class="br-miaosha">
+                  <text class="shopcart-miaosha-text">秒杀</text>
+                  <van-count-down use-slot bind:change="changeTime" data-index="{{goodIndex}}" time="{{goodItem.remainingTime*1000}}">
+                    <view class="list_item_onLookers">
+                        <text>距结束</text>
+                        <text wx:if="{{goodItem.timeData.days!=0}}">{{goodItem.timeData.days||0}}</text>
+                        <text wx:if="{{goodItem.timeData.days!=0}}">天</text>
+                        <text>{{goodItem.timeData.hours}}</text>
+                        <text>:</text>
+                        <text>{{goodItem.timeData.minutes}}</text>
+                        <text>:</text>
+                        <text>{{goodItem.timeData.seconds}}</text>
+                    </view>
+                  </van-count-down>
+                </view>
+              </view>
+              <view  class="number-price {{goodItem.remainingTime?'':'mt-cart'}}">
+                <view class="price">
+                  ￥{{(goodItem.activityType==1||(goodItem.activityType==2&&goodItem.isMember))?goodItem.lowPrice:goodItem.originalPrice}}
+                </view>
+                <view class="edit-num">
+                  <!-- 减一 -->
+                  <text class="edit-subtract" data-pi="{{index}}" data-ci="{{goodIndex}}"  
+                    data-type="minus"  catchtap="handleEditNum">
+                    <text class="iconfont icon-minuscircle"></text>
+                  </text>
+                  <text class="num" data-pi="{{index}}" data-ci="{{goodIndex}}" data-type="edit"
+                    catchtap="handleEditNum">{{goodItem.amount}}</text>
+                  <!-- 加一 -->
+                  <text class="edit-add" data-pi="{{index}}" data-ci="{{goodIndex}}" data-type="add"
+                    catchtap="handleEditNum">
+                    <text class="iconfont icon-add"></text>
+                  </text>
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 猜你喜欢 -->
+  <view class='recommend-goods' wx:if='{{likeGoodsList.length}}'>
+    <view class='me-fx-row me-fx-c-c top-title'>
+      <view class='line-x'></view>
+      <view class='point'></view>
+      <view class='title-text'>猜你喜欢</view>
+      <view class='point'></view>
+      <view class='line-x'></view>
+    </view>
+    <!-- <view class='me-fx-row me-fx-sb goods-list'>
+      <view class='goods-item' wx:for='{{likeGoodsList}}' wx:key='index' 
+        bindtap='jumpGoodsDetail' data-item='{{item}}'
+      >
+        <image src='{{item.thumbnail}}' class='goods-img'></image>
+        <view class='name-price-info'>
+          <view class='me-full-text me-full-line2 goods-name'>{{item.commodityName}}</view>
+          <view class='me-fx-row me-fx-sb-c'>
+            <view class='price-box'>
+              <text>￥</text>
+              <text class='price-num'>{{item.originalPrice}}</text>
+            </view>
+            <text class='adorn-point'>...</text>
+          </view>
+        </view>
+      </view>
+    </view> -->
+    <!-- 新版购物车浏览商品6.1 -->
+    <view >
+      <view style="display: flex;align-items: center;width: 700rpx;margin:0 auto;margin-top: 20rpx;" wx:for='{{likeGoodsList}}' wx:key='index' 
+        bindtap='jumpGoodsDetail' data-item='{{item}}'
+      >
+      <image src='{{item.thumbnail}}' style="width: 140rpx;height: 140rpx;"></image>
+        <view style="width: 60%;height: 100%;padding: 20rpx 0;margin-left: 15rpx;display: flex;justify-content: space-between;flex-direction: column;">
+          <view class='u-line-1 goods-name' style="font-size: 24rpx;font-weight: 600;">{{item.commodityName}}</view>
+          <text class="describe u-line-1" style="font-size: 20rpx;color: #999;">{{item.description}}</text>
+
+          <view class='me-fx-row me-fx-sb-c'>
+            <view class='price-box'>
+              <text style="color: red;">￥</text>
+              <text class='price-num' style="color: red;">{{item.originalPrice}}</text>
+            </view>
+            <!-- <text class='adorn-point'>...</text> -->
+          </view>
+          
+        </view>
+        <view style="padding-top: 20rpx;">
+                  <view  style="background-color: #ff0000;color: white;padding: 5rpx 10rpx;border-radius: 10rpx 10rpx 0rpx 0rpx;font-size: 18rpx;font-weight: 600;text-align: center;">{{btnTitle}}</view>
+					      	<view style="text-align: center;border: 2px solid red;font-size: 18rpx;padding: 0 10rpx;border-radius: 0rpx 0rpx 10rpx 10rpx;color: #ff0000;font-size: 18rpx;">在线支付</view>
+                </view>
+      </view>
+    </view>
+  </view>
+
+  <van-toast id="van-toast" />
+  <van-dialog id="van-dialog" />
+  <van-dialog use-slot title="请输入您的内容" show="{{ show1 }}" show-cancel-button bind:close="onClose"
+    bind:confirm="confirm">
+    <view class="num-input">
+      <input type="number" value="{{value}}" maxlength="3" title="" bindinput="handleInput" bindblur="validate" />
+    </view>
+  </van-dialog>
+  <view class="cart_foot"></view>
+</view>

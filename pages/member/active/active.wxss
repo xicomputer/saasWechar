@@ -1,0 +1,100 @@
+.active{
+  min-height: 100vh;
+  background: #F8F8F8;
+  padding-top: 20rpx;
+  box-sizing: border-box;
+}
+.member{
+  width: 710rpx;
+  height: 590rpx;
+  background: #FFFFFF;
+  box-shadow: 0rpx 6rpx 12rpx #F7F7F7;
+  border-radius: 20rpx;
+  margin: 0 auto;
+  padding-left: 30rpx;
+  box-sizing: border-box;
+}
+.member_item{
+  width: 100%;
+}
+.member_title{
+  margin-top: 10rpx;
+  height: 70rpx;
+  line-height: 70rpx;
+  font-size: 24rpx;
+  font-weight: 400;
+  color: #666666;
+  border-bottom: 2rpx solid #F4F4F4;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.member_content{
+  width: 100%;
+}
+.member_content_item{
+  height: 72rpx;
+  border-bottom: 2rpx solid #F4F4F4;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.member_content_item image{
+  width: 14rpx;
+  height: 26rpx;
+  margin-right: 32rpx;
+}
+.member_content_label{
+  width: 64rpx;
+  font-size: 32rpx;
+  font-weight: 400;
+  color: #000000;
+}
+.member_content_input{
+  width: 0;
+  flex: 1;
+  padding: 0 20rpx;
+  box-sizing: border-box;
+  margin: 0 20rpx;
+}
+.member_content_desc{
+  padding: 0 20rpx;
+  border: none;
+  background-color: #fff;
+  width: fit-content;
+  white-space: nowrap;
+  font-size: 24rpx;
+  font-weight: bold;
+  color: #04BE01;
+  margin-right: 18rpx;
+}
+/* 阅读文档 */
+.member_read{
+  margin: 36rpx 0;
+  font-size: 24rpx;
+  font-weight: 400;
+  display: flex;
+  align-items: center;
+}
+.member_read_icon{
+  margin-right: 16rpx;
+}
+.member_read_text{
+  color: #666666;
+}
+.member_read_doc{
+  color: #426EC3;
+}
+/* 激活按钮 */
+.member_btn{
+  width: 658rpx;
+  height: 74rpx;
+  background: #04BE01;
+  border-radius: 16rpx;
+  color: #FFFFFF;
+  font-size: 32rpx;
+  font-weight: 400;
+  line-height: 74rpx;
+  text-align: center;
+  margin: 8rpx auto 0;
+}

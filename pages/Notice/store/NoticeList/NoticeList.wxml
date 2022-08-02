@@ -1,0 +1,21 @@
+<view class="notice-container">
+  <!-- 没有消息 -->
+  <view wx:if="{{!noticeList.length}}" class="no-notice">
+    <image class="no-notice-img" src="/pages/img/no_notice.png"></image>
+    <view class="no-notice-text">暂无消息通知</view>
+  </view>
+  <!-- 有消息 -->
+  <navigator url="/pages/order/contact/contact?logoPic={{item.logoPic}}&marchantId={{item.marchantId}}&marchantName={{item.nickName}}" class="notice-item" wx:for="{{noticeList}}">
+    <image class="notice-item-img" src="{{item.logoPic}}" mode="aspectFill"></image>
+    <view class="notice-content-box">
+      <view class="notice-content-item">
+        <view class="notice-type">{{item.nickName}}</view>
+        <view class="notice-time">{{item.addTime}}</view>
+      </view>
+      <view class="notice-content-item">
+        <view class="notice-content-text">{{item.lastContent1}}</view>
+        <view wx:if="{{item.unread1!=0}}" class="notice-content-number">{{item.unread1}}</view>
+      </view>
+    </view>
+  </navigator>
+</view>

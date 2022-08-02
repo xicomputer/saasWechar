@@ -1,0 +1,77 @@
+<view class="applyReturn">
+    <!-- 购买的商品 -->
+    <view class="goods">
+        <view class="goods-shop">
+            <image src="{{citInfo.logoPic}}" mode="aspectFill" class="shop-logo" />
+            <view class="shop-title">{{citInfo.nickName}}</view>
+            <image src="../../img/back-icon.png" class="shop-enter" />
+        </view>
+        <view class="goods-list">
+            <view class="goods-item" wx:for="{{citInfo.commList}}" wx:key="index">
+                <view class="goods-left">
+                    <image src="{{item.thumbnail}}" mode="aspectFill" class="goods-logo" />
+                </view>
+                <view class="goods-right">
+                    <view class="goods-info">
+                        <view class="goods-name">{{item.commodityName}}</view>
+                        <view class="goods-spec">规格：{{item.itemText}}</view>
+                        <view class="goods-num">数量：{{item.amount}}</view>
+                        <view class="goods-price">￥{{item.actualMoney}}</view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <!-- 退款信息 -->
+    <view class="info">
+        <view class="info-item">
+            <view bindtap="refund" class="info-content" style="justify-content: space-between;">
+                退货原因
+                <view class="info-choose">
+                    <text wx:if="{{reason==''}}">请选择</text>
+                    <text style="color:#333;word-wrap:break-word;" wx:if="{{reason!=''}}">{{reason}}</text>
+                    <image src="../../img/back-icon.png" class="info-enter" />
+                </view>
+            </view>
+            <view class="info-content">
+                退款金额：
+                <text class="info-money">￥{{citInfo.commList[0].actualMoney}}</text>
+            </view>
+            <view class="info-content">
+                补充说明：
+                <input placeholder="选填" value="{{supplementary}}" class="info-input" bindinput="inputText" maxlength="20"/>
+            </view>
+        </view>
+    </view>
+    <!-- 上传图片 -->
+    <!-- <view class="certificate">
+        <view class="certificate-title">上传凭证（最多3张）</view>
+        <view class="content-image">
+            <view wx:for="{{fileList}}" class="image-box" wx:key="index">
+                <image src="{{item.httpAddress}}" class="image-img" bindtap="zoomImg" mode="aspectFill" data-list="{{fileList}}" data-src="{{item.httpAddress}}"></image>
+                <image src="../../img/shanchu.png" class="image-del" bindtap="delImg" data-index="{{index}}"></image>
+            </view>
+            <view wx:if="{{fileList.length<3}}" class="uploadImg" bindtap="uploadImage">
+                <image class="uploadImg-btn" src="/pages/img/order/upload.png"></image>
+            </view>
+        </view>
+    </view> -->
+    <!-- 按钮 -->
+    <view class="btnBox">
+        <view class="btn" bindtap="submit">确定退货</view>
+    </view>
+    <!-- 退货原因 -->
+    <van-popup show="{{ reasonBox }}" bind:close="refundOnClose" round position="bottom" class="reasonBox">
+        <view class="reason-title">退货原因</view>
+        <view class="reason-content">
+            <radio-group bindchange="radioChange">
+                <label class="reason-item" wx:for="{{refundReason}}" wx:key="index">
+                    <view class="reason-name">{{item.name}}</view>
+                    <radio value="{{item.name}}" checked="{{item.checked}}" color="#101010" />
+                </label>
+            </radio-group>
+            <textarea placeholder="输入你的退款原因，20字以内" maxlength="20" bindfocus="inputFocus" bindinput="inputEvent" value="{{inputReason}}" class="reason-textarea"></textarea>
+            <view class="reason-btn" bindtap="sureReason">确认</view>
+        </view>
+    </van-popup>
+</view>

@@ -1,0 +1,213 @@
+/* pages/signInHome/signInHome.wxss */
+.signInHome-cont {
+	width: 690rpx;
+	height: 250rpx;
+	background-color: #ffffff;
+	border-radius: 20rpx;
+	margin-bottom: 30rpx;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.signInHome-cont .text-cont {
+	width: 100%;
+	height: 110rpx;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.signInHome-cont .text-cont .title {
+	font-size: 28rpx;
+	margin-left: 20rpx;
+	color: #333;
+	font-weight: bolder;
+}
+
+.signInHome-cont .text-cont .more {
+	width: 100rpx;
+	display: flex;
+	align-items: center;
+	height: inherit;
+}
+
+.signInHome-cont .text-cont .more>text {
+	font-size: 24rpx;
+	color: #666;
+}
+
+.signInHome-cont .text-cont .more>image {
+	width: 14rpx;
+	height: 25rpx;
+	margin-left: 7rpx;
+	margin-bottom: 3rpx;
+}
+
+.signInHome-cont .signInShow-cont {
+	width: 650rpx;
+	height: 160rpx;
+	display: flex;
+	justify-content: space-between;
+}
+
+.signInHome-cont .signInShow-cont>view {
+	width: 80rpx;
+	height: 122rpx;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+	position: relative;
+}
+
+.signInHome-cont .signInShow-cont view .signInShow-Img {
+	width: 72rpx;
+	height: 72rpx;
+	background-color: rgb(255, 252, 68);
+	border-radius: 50rpx;
+}
+
+.signInHome-cont .signInShow-cont view>text {
+	font-size: 24rpx;
+	color: #666;
+}
+
+.signInHome-cont .signInShow-cont view .signInNumb {
+	position: absolute;
+	top: 14rpx;
+	left: 25rpx;
+	font-size: 28rpx;
+	color: #666;
+}
+
+
+/* 积分乐园内部组件签到样式 */
+.integral-content-container {
+	width: 100%;
+	background: #fff;
+	padding: 16rpx 20rpx;
+	margin-bottom: 12rpx;
+	box-sizing: border-box;
+	border-radius: 16rpx;
+}
+
+.integral-title-container {
+	width: fit-content;
+	display: flex;
+	align-items: center;
+	white-space: nowrap;
+}
+
+.integral-title-left-box {
+	width: 8rpx;
+	height: 28rpx;
+	background: #FBE945;
+	border-radius: 2rpx;
+	margin-right: 16rpx;
+}
+
+.integral-title-text {
+	height: 40rpx;
+	font-size: 28rpx;
+	font-family: PingFang SC;
+	font-weight: bold;
+	color: #333;
+}
+
+.integral-title-left-box {
+	width: 8rpx;
+	height: 28rpx;
+	background: #FBE945;
+	border-radius: 2rpx;
+	margin-right: 16rpx;
+}
+
+.integral-title-text {
+	height: 40rpx;
+	font-size: 28rpx;
+	font-family: PingFang SC;
+	font-weight: bold;
+	color: #333;
+}
+
+.integral-sign-in-btn {
+	width: 112rpx;
+	height: 40rpx;
+	background: #7755FD;
+	border-radius: 20rpx;
+	position: absolute;
+	top: 20rpx;
+	right: 20rpx;
+	font-size: 22rpx;
+	font-family: PingFang SC;
+	font-weight: bold;
+	color: #fff;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.integral-sign-in-list {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    margin: 38rpx 0 14rpx;
+}
+.integral-sign-in-item-box {
+    flex: 1;
+    display: flex;
+    align-items: center;
+}
+.integral-sign-in-item {
+	width: 72rpx;
+	height: 120rpx;
+	background-color: #fff;
+	background-size: 100% 100%;
+	background-repeat: no-repeat;
+	border: 2rpx solid #784AFA;
+	box-sizing: border-box;
+	border-radius: 8rpx;
+	position: relative;
+	overflow: hidden;
+	text-align: center;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+  }
+  
+  .integral-sign-in-item-image {
+	width: 40rpx;
+	height: 40rpx;
+	margin: 8rpx 0 4rpx;
+  }
+  
+  .integral-sign-in-item-status {
+	height: 28rpx;
+	font-size: 20rpx;
+	font-family: PingFang SC;
+	font-weight: bold;
+	line-height: 28rpx;
+	color: #000000;
+	margin-top: 8rpx;
+  }
+  
+  .integral-sign-in-add {
+	height: 28rpx;
+	font-size: 20rpx;
+	font-family: PingFang SC;
+	font-weight: bold;
+	line-height: 28rpx;
+	color: #000000;
+  }
+  
+  .integral-sign-in-progress {
+	width: 28rpx;
+	height: 10rpx;
+	background-color: #EFEDEC;
+  }
+  
+  .integral-sign-in-progress-in {
+	height: 100%;
+	background: #7261FF;
+	/* border-radius: 8rpx; */
+  }

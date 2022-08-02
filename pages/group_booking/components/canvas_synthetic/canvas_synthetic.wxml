@@ -1,0 +1,8 @@
+<!--components/canvas_synthetic/canvas_synthetic.wxml-->
+<view class='canvas-style' style='top:{{-canvasHeight}}px' >
+    <canvas id='{{canvasId}}' 
+        height='{{canvasHeight*4}}px' width='{{canvasWidth*4}}px'
+        style='width:{{canvasWidth}}px;height:{{canvasHeight}}px;'
+    ></canvas>
+</view>
+

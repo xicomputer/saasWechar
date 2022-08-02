@@ -1,0 +1,13 @@
+<!-- 推荐酒店 -->
+<swiper autoplay="{{true}}" class="hotel-swiper" wx:if="{{hotelList.length}}">
+    <block wx:for="{{hotelList}}" wx:key="index">
+      <swiper-item class="hotel-item" style="background-image:url('https://xssj.letterbook.cn/applet/images/index_hotel_bg_img.png')" bindtap="toHotelStore" data-id="{{item.marchantCorrelation.correlationId}}">
+        <view class="index-hotel-name-box">
+          <view class="index-hotel-name-border">
+            <view class="index-hotel-name">{{item.nickName}}</view>
+          </view>
+        </view>
+        <view class="index-hotel-ads">{{item.entirelyAddress}}让你轻松订房</view>
+      </swiper-item>
+    </block>
+  </swiper>

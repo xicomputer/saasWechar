@@ -1,0 +1,5 @@
+<view class='add-subtract-num-container'>
+    <text class='icon icon-jian handle-btn' catchtap='minusHandle'></text>
+    <text class='count-num'>{{count}}</text>
+    <text class='icon icon-add handle-btn' catchtap='addHandle'></text>
+</view>

@@ -1,0 +1,109 @@
+@import '/styles/me_common.wxss';
+
+.activity {
+    width: 600rpx;margin: 0 auto;
+    margin-top: 30rpx;
+}
+.activity_list {
+    flex-wrap: wrap;
+}
+.good-express {
+    position: absolute;
+    top: 18rpx;
+    z-index: 10;
+    color: #fff;
+    left: 45rpx;
+    font-size: 30rpx;
+}
+.good-express::after {
+    content: '';
+    display: inline-block;
+    position: absolute;
+    top: 8rpx;
+    left: 155rpx;
+    width: 2rpx;
+    height: 36rpx;
+    background-color: rgb(224, 40, 40);
+}
+.activitys_Info {
+    height: 85rpx;
+    border-radius: 20rpx;
+    box-shadow: 0px 0px 14px 0px rgba(177, 177, 177, 0.295);
+    width: 100%;
+    color: rgb(90, 90, 90);
+}
+.right-arrow {
+    width: 15rpx;
+    height: 26rpx;
+    position: absolute;
+    left: 631rpx;
+    top: 30rpx;
+}
+.temp-bg1 {
+    background-color: #F69761;
+}
+
+.temp-bg2 {
+    background-color: #FFF7E4;
+    color: #333;
+}
+
+.temp-bg4 {
+    background-color: #5DB6FA;
+}
+
+.temp-bg3 {
+    background-color: #ffffff
+}
+
+.Info_msg {
+    padding: 20rpx 0rpx 20rpx 25rpx;
+    position: relative;
+}
+
+.Info_msg_img {
+    width: 154rpx;
+    height: 48rpx;
+}
+
+.shop_msg_info {
+    padding-left: 40rpx;
+}
+
+.shop_msg {
+    font-size: 20rpx;
+}
+
+.new_msg {
+    font-size: 34rpx;
+    margin-top: 4rpx;
+}
+
+.new_desc {
+    font-size: 20rpx;
+}
+
+.activitys_Info_btn {
+    background-color: #fff;
+    font-size: 20rpx;
+    padding: 14rpx 30rpx;
+    margin-right: 15rpx;
+    border-radius: 6rpx;
+}
+
+.temp-bg1 .activitys_Info_btn {
+    color: #F69761
+}
+
+.temp-bg4 .activitys_Info_btn {
+    color: #5DB6FA
+}
+
+.temp-bg3 .activitys_Info_btn {
+    color: #212121
+}
+.alerts-Img {
+    height: 120rpx;
+    width: 600rpx;
+    margin: 0 auto;
+}

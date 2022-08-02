@@ -1,0 +1,11 @@
+.pay-fail-page{height:100vh;font-size:26rpx;color:#333;}
+
+.pay-fail-bg-img{width:570rpx;height:478rpx;margin-bottom:30rpx;}
+
+.back-hone{
+    width:328rpx;height:88rpx;line-height:88rpx;
+    background-color:#1577FF;color:#fff;
+    font-size:30rpx;margin:170rpx auto 0;padding:0;
+    border-radius:44rpx;
+}
+

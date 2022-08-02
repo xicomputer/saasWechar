@@ -1,0 +1,61 @@
+<view class="hotLive">
+
+    <view class="text">
+        <view>
+            <image src="https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/basics-New%2F%E9%A6%96%E9%A1%B5_slices%2F%E7%9B%B4%E6%92%AD.gif" mode="widthFix"></image>
+            <text>火爆直播</text>
+        </view>
+        <view>
+            <text class="moreLive" bindtap="toMore">更多</text>
+            <image src="https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/basics-New%2F%E9%A6%96%E9%A1%B5_slices%2FVector%402x.png" mode="aspectFill"></image>
+        </view>
+    </view>
+    <!-- 直播个数，数据渲染 -->
+    <view class="live-card">
+        <view class="single-live" bindtap="toLiveRoom" wx:for="{{liveList}}" wx:key="index" data-roomid="{{item.roomid}}">
+            <!-- 左边直播间预览 -->
+            <view class="preview">
+                <view class="tips" style="{{item.color}}">
+                    <image wx:if="{{item.live_status == 101}}" src="https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/basics-New%2F%E9%A6%96%E9%A1%B5_slices%2F%E7%9B%B4%E6%92%AD%E4%B8%AD%E7%9A%84git%E5%9B%BE.gif" mode="widthFix"></image>
+                    <image wx:if="{{item.live_status == 102}}" src="https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/basics-New%2F%E9%A6%96%E9%A1%B5_slices%2F%E7%9B%B4%E6%92%AD%E6%9C%AA%E5%BC%80%E5%A7%8B.png" mode="widthFix"></image>
+                    <image wx:if="{{item.live_status == 103 }}" src="https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/basics-New%2F%E9%A6%96%E9%A1%B5_slices%2F%E7%9B%B4%E6%92%AD%E7%BB%93%E6%9D%9F.png" mode="widthFix"></image>
+                    <image wx:if="{{item.live_status !== 101  && item.live_status !== 102 && item.live_status !== 103}}" src="https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/basics-New%2F%E9%A6%96%E9%A1%B5_slices%2F%E7%9B%B4%E6%92%AD%E7%BB%93%E6%9D%9F.png" mode="widthFix"></image>
+                    <!-- 垫底模块, 两个样式，根据数据变化，红和黑 -->
+                    <text wx:if="{{item.live_status == 101}}">直播中</text>
+                    <text wx:if="{{item.live_status == 102}}">预告</text>
+                    <text wx:if="{{item.live_status == 103}}">已结束</text>
+                    <text wx:if="{{item.live_status == 104}}">禁播</text>
+                    <text wx:if="{{item.live_status == 105}}">暂停中</text>
+                    <text wx:if="{{item.live_status == 106}}">主播离开中</text>
+                    <text wx:if="{{item.live_status == 107}}">已过期</text>
+                    <!-- 直播间状态。101：直播中，102：未开始，103已结束，104禁播，105：暂停，106：异常，107：已过期 -->
+                </view>
+                <image src="{{item.feeds_img}}" mode="aspectFill"></image>
+            </view>
+            <!-- 中间直播描述 -->
+            <view class="middle">
+                <view>
+                    <text>{{item.name}}</text>
+                    <text>{{item.anchor_name}}</text>
+                </view>
+                <view wx:if="{{item.goods.length > 0}}">
+                <!-- 循环出图片 ， 如果数组超过三就把给最后一张图片添加蒙版-->
+                    <image src="{{item.goods[0].cover_img}}"></image>
+                    <image wx:if="{{item.goods.length > 1}}" src="{{item.goods[1].cover_img}}"></image>
+                    <text wx:if="{{item.goods.length > 2}}" >{{item.goods.length}}件</text>
+                    <image wx:if="{{item.goods.length > 2}}"  src="{{item.goods[2].cover_img}}" class="more"></image>
+                </view>
+            </view>
+            <!-- 右边进入按钮，改版后首页没有了 -->
+            <!-- <view class="enter {{item.live_status == 101 ? 'enterColor-active' : 'enterColor-gray'}}">
+                <view>
+                    <text wx:if="{{item.live_status == 101}}">进入</text>
+                    <text wx:else="">回看</text>
+                    <image wx:if="{{item.live_status == 101}}" src="https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/basics-New%2F%E9%A6%96%E9%A1%B5_slices%2FFrame%402x(2).png" mode="widthFix"></image>
+                    <image wx:else src="https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/basics-New%2F%E9%A6%96%E9%A1%B5_slices%2FFrame%402x(3).png" mode="widthFix"></image>
+                </view>
+                <view class="bgc"></view>
+            </view> -->
+        </view>
+    </view>
+</view>

@@ -1,0 +1,74 @@
+<view>
+    <view class='me-fx-col me-fx-c top-address'>
+        <view class='me-fx-row me-fx-sb-c address-empty-box' wx:if='{{!userShipping.id}}'
+            bindtap='jumpAddressList'
+        >
+            <text class='sel-address-msg'>请选择收货地址</text>
+            <image src='../imgs/right-jiantou.png' class='right-jantou-img'></image>
+        </view>
+        <view class='me-fx-row me-fx-sb-c' wx:else bindtap='jumpAddressList'>
+            <image src='../imgs/location-icon.png' class='location-img'></image>
+            <view class='me-fx-1 center-content'>
+                <view>
+                    <text class='user-name'>{{userShipping.contacts}}</text>
+                    <text class='user-phone'>{{userShipping.contactWay}}</text>
+                </view>
+                <view class='address-text'>{{userShipping.fullAddress}}</view>
+            </view>
+            <image src='../imgs/pen-icon.png' class='pen-icon'></image>
+        </view>
+    </view>
+
+    <view class='section-content'>
+        <view class='me-fx-row goods-info'>
+            <image src='{{activityInfo.bannerImgUrls[0]}}' class='goods-img'></image>
+            <view class='me-fx-col me-fx-sb me-fx-1'>
+                <view class='me-full-text me-full-line2 goods-name'>{{activityInfo.commodityName}}</view>
+                <view class='me-fx-row me-fx-sb-c'>
+                    <view>
+                        <text class='now-price'>¥{{skuInfo.livePrice}}</text>
+                        <text class='old-price'>¥{{skuInfo.price}}</text>
+                    </view>
+                    <!-- <text class='people-num'>{{goodsInfo.activityJoinNumberTotal}}人已参与</text> -->
+                </view>
+            </view>
+        </view>
+        
+        <view class='me-fx-col me-fx-c-c join-info'>
+            <view class='me-fx-row me-fx-sb-c'>
+                <image src='../imgs/shizhong-icon.png' class='icon-img'></image>
+                <view class='title-msg'>等待成团，仅剩{{groupInfo.groupOfNumber-groupInfo.groupJoinNumber}}个名额</view>
+            </view>
+            <view class='me-fx-row me-fx-start-c user-list'>
+                <view class='avatar-item' wx:for='{{groupInfo.groupJoinUserHeads}}' wx:key='index'>
+                    <image src='{{item}}' class='user-avatar'></image>
+                    <text class='initiator-user-label' wx:if='{{index==0}}'>团长</text>
+                </view>
+                <image wx:for='{{groupInfo.groupOfNumber-groupInfo.groupJoinNumber}}' wx:for-index='ti' wx:key='ti' src='../imgs/empty-avatar.png' class='empty-avatar-img'></image>
+            </view>
+            <van-count-down time='{{groupInfo.diffTimes}}' use-slot='{{true}}' 
+                auto-start='{{true}}' bind:finish='finishFun' bind:change='changeFun'
+            >
+                <view class='me-fx-row me-fx-c-c down-count-box'>
+                    距结束:
+                    <block wx:if='{{groupInfo.downTimeObj.days!=="00"}}'>
+                        <text class='down-num'>{{groupInfo.downTimeObj.days}}</text>天
+                    </block>
+                    <text class='down-num'>{{groupInfo.downTimeObj.hours}}</text>时
+                    <text class='down-num'>{{groupInfo.downTimeObj.minutes}}</text>分
+                    <text class='down-num'>{{groupInfo.downTimeObj.seconds}}</text>秒
+                </view>
+            </van-count-down>
+            <button class='immediately-join-btn' bindtap='settlement'>立即参团</button>
+            <!-- <view class='prompt-msg'>每人限购1件，您已购买1件，无法再次参团</view> -->
+        </view>
+        <view class="groupbox" bindtap='jumpStrategy'>
+            <image src='../imgs/groupbox.png' class='icon'></image>
+            <text>点击查看拼团攻略</text>
+            <image src='../imgs/groupbox.png' class='icon'></image>
+        </view>
+    </view>
+</view>
+
+<!-- 授权组件 -->
+<auth-get-info></auth-get-info>

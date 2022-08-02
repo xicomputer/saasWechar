@@ -1,0 +1,38 @@
+<view class="comment-list">
+  <!-- 没数据 -->
+  <view wx:if="{{!commentList.length}}" class="no-dynamic">
+    <image class="no-dynamic-img" src="/pages/img/no_notice.png"></image>
+    <view class="no-dynamic-text">暂无更多评论</view>
+  </view>
+  <!-- 有数据 -->
+    <block wx:for="{{commentList}}" wx:key="index">
+      <view class="user-dynamic-itme">
+        <view class="store-info-box">
+          <image class="store-dynamic-logo" src="{{item.headimgurl}}"></image>
+          <view class="store-dynamic-box-info">
+            <view class="user-dynamic-name-box">
+              <view class="user-dynamic-name">{{item.userInfo.nickname}}</view>
+              <image class="user-dynamic-member" wx:if="{{item.isMember}}" src="/pages/img/index/member_icon.png"></image>
+              <!-- <view class="user-dynamic-tip">优质评论</view> -->
+            </view>
+            <view class="user-dynamic-signature">{{item.userInfo.signature||'暂无个性签名'}}</view>
+          </view>
+          <view class="user-info-right-top">
+            <view>{{item.addTime}}</view>
+            <view class="user-info-solid"></view>
+            <view class="user-info-icon" bindtap="operationPraise" data-id="{{item.id}}" data-idx="{{index}}">
+              <image class="store-dynamic-bottom-item-icon" src="{{item.isPraise?'/pages/img/index/dynamic/praised.png':'/pages/img/index/dynamic/praise.png'}}"></image>
+              <text>{{item.praise||'点赞'}}</text>
+            </view>
+          </view>
+        </view>
+        <view class="user-dynamic-text">{{item.content}}</view>
+        <scroll-view style="width:100%;padding-top:20rpx" scroll-x wx:if="{{item.imagList.length}}">
+          <view class="user-img-list">
+            <image class="{{item.imagList.length>=3?'user-img-item user-small-img':'user-img-item'}}" catchtap="imgClick" wx:for="{{item.imagList}}" wx:key="index" wx:for-item="pitem" data-list="{{item.imagList}}" data-src="{{pitem}}" mode="aspectFill" src="{{pitem}}" />
+          </view>
+        </scroll-view>
+      </view>
+    </block>
+  <view wx:if="{{stopLoad&&commentList.length}}" class="no-more">没有更多了~</view>
+</view>

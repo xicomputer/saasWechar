@@ -1,0 +1,29 @@
+<!--pages/shopHome/components/union/union.wxml-->
+<!-- 联盟门店 -->
+<view class='union-shop'>
+    <view class='me-fx-row me-fx-c-c title-box'>
+            <!-- <image class='adorn-img' wx:if="{{tempId != '3'}}" src='{{tempBaseUrl+"temp-img/title_adorn.png"}}'></image> -->
+            <image class='adorn-img' src='../../../static/img_l2.png'></image>
+            <text class='title-text {{"textColor"+tempId}}'>商家联盟</text>
+            <!-- <image class='adorn-img' wx:if="{{tempId != '3'}}" src='{{tempBaseUrl+"temp-img/title_adorn.png"}}'></image> -->
+            <image class='adorn-img' src='../../../static/img_r2.png'></image>
+    </view>
+    <view class='item-box' data-appid='{{item.appletInfo.authorizerAppid}}'  bindtap='jumpApplet'  wx:key="index" wx:for="{{shopList}}">
+        <view class='me-fx-row me-fx-sb-c item-top'>
+            <image class='avatar-img' src='{{item.logoPic}}'></image>
+            <text class='me-fx-1 title-text'>{{item.nickName}}</text>
+            <text class='enter-btn'>进店</text>
+        </view>
+        <view class='me-fx-row me-fx-sb-c'>
+            <view class='me-fx-col me-fx-c-c' wx:for='{{item.commodityList}}'
+                wx:for-item='temp' wx:for-index='ti' wx:key='ti'
+            >
+                <image src='{{temp.thumbnail}}' class='product-img'></image>
+                <view class='me-fx-row me-fx-c-c price-box'>
+                    <text>￥</text>
+                    <text class='price-num'>{{temp.originalPrice}}</text>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>

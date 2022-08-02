@@ -1,0 +1,21 @@
+<view class="butt">
+		<!-- <image src="https://xssj.letterbook.cn/applet/images/auth_bg_img.png" class="auth-bg-img">
+			<text class="auth-bg-text">欢迎登录信书</text>
+			<image class="auth-user-img" src="{{userInfo.headImgUrl?userInfo.headImgUrl:'https://xssj.letterbook.cn/applet/images/xs_auth_logo.png'}}"></image>
+		</image> -->
+
+		<view>
+			<image src='../img/logo2.png' class="auth-bg-img" ></image>
+		</view>
+
+		<!-- <view class="auth-explain-box">
+			<image src="/pages/img/index/auth_true_icon.png" style="width:36rpx;height:36rpx;margin-right:8rpx"></image>
+			需要登录以使用程序</view> -->
+		<!-- <button class="wx-bind-btn" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">微信用户一键登录</button> -->
+		<button class="wx-bind-btn" bindtap="bindGetUserInfo">微信用户一键登录</button>
+		<view bindtap="cancel" class="wx-bind-btn" style="background:#e4e4e4">取消登录</view>
+		<view class="auth-bottom">
+			<image src="/pages/img/index/auth_bottom_icon.png" style="width:24rpx;height:40rpx;margin-right:4rpx"></image>
+			信书平台
+		</view>
+</view>

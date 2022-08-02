@@ -1,0 +1,12 @@
+{
+  "usingComponents": {
+    "van-tab": "@vant/weapp/tab/index",
+    "van-tabs": "@vant/weapp/tabs/index",
+    "van-image": "@vant/weapp/image/index",
+    "to-bottom": "../../Component/toBottom/index",
+    "van-popup": "@vant/weapp/popup/index",
+    "van-count-down": "@vant/weapp/count-down/index"
+  },
+  "navigationBarTitleText": "同城订单",
+  "backgroundTextStyle": "dark"
+}

@@ -1,0 +1,67 @@
+<view class="withdrawal-container">
+	<navigator url="../SelectBankCard/SelectBankCard">
+		<view class="bank-box" wx:if="{{play}}">
+			<image src="{{commission.bankCode}}" class="bank-image"></image>
+			<view class="bangk-info">
+				<view class="bank-name">{{commission.bankName}}</view>
+				<view class="bank-card">尾号{{commission.cardNumber}}{{cardType}}</view>
+			</view>
+			<image src="" class="bank-right-arrow"></image>
+		</view>
+	</navigator>
+
+	<view url="../SelectBankCard/SelectBankCard" wx:if="{{!play}}">
+		<view class="bank-box" bindtap="toSelectBankCard">
+			<view style="display:flex;align-items: flex-end;">
+				<image style="width:90rpx;height:90rpx;border-radius:10rpx" src="{{headImgUrl?headImgUrl:'../img/wx_icon.png'}}"></image>
+				<view class="wx-text-box">
+					<view style="margin-bottom:20rpx">提现至</view>
+					<view>微信</view>
+				</view>
+			</view>
+			<image src="../../img/goin.png" class="bank-right-arrow"></image>
+		</view>
+	</view>
+
+	<view class="withdraw-head">
+		<view class="withdraw-text">提现金额</view>
+		<view class="withdraw-num">
+			<span class="withdraw-icon">￥</span>
+			<input type="number" wx:if="{{money ==0}}" placeholder="提现金额"  disabled="true" bindinput="" class="withdraw-input"  placeholder-style="font-size:20rpx;color:#999999; " />
+			<input type="number" wx:if="{{money !=0}}"value="{{money}}" disabled="true" bindinput="" class="withdraw-input" placeholder="提现金额" placeholder-style="font-size:20rpx;color:#999999; " />
+		</view>
+		<view class="withdraw-cans">
+			<view>余额<span class="balance">￥{{balance}}</span></view>
+			<navigator url="../WithdrawalDetails/WithdrawalDetails">
+				<view class="tixian" bindtap="">
+					<image class="tx-image" src="../../img/tixian.png" alt=""></image><span class="tx_txt">提现记录</span>
+				</view>
+			</navigator>
+		</view>
+		<view class="{{money>0?'btn btn-bg':'btn'}}" bindtap="showApplyToast">申请提现</view>
+	</view>
+	<view class="spread-box">
+		<van-list>
+			<!-- v-for="(item, index) in selectCommission" key="index"bindtap.stop="cli(index)" -->
+			<van-checkbox-group value="{{result}}" bind:change="onChange">
+				<view class="goods-detail" wx:for="{{commissionList}}" wx:key="index">
+					<view class="check">
+					<van-checkbox  name="{{item.marchantId}}" bindtap="toggle" data-id="{{item.marchantId}}" data-index="{{index}}" ></van-checkbox>
+					</view>
+					<image class="goods-image" src="{{item.logoPic}}" data-index="item"></image>
+					<view class="goods-info">
+						<view class="goods-name">{{item.nickName}}</view>
+						<view class="goods-address">佣金{{item.servantsMoney}}</view>
+					</view>
+				</view>
+			</van-checkbox-group>
+		</van-list>
+	</view>
+	<van-popup show="{{showApplied}}" closeable round close-on-click-overlay="false">
+		<view class="apply">
+			<view class="apply-text">提现申请已提交</view>
+			<view class="apply-btn" bindtap="hideApplyToast">确认</view>
+		</view>
+	</van-popup>
+	<van-toast id="van-toast" />
+</view>

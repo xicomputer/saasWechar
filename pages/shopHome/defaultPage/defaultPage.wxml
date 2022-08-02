@@ -1,0 +1,6 @@
+<!--pages/shopHome/defaultPage/defaultPage.wxml-->
+<view class="no-data-container" style='height:{{height}}vh'>
+
+    <image  class="no-data-container-img" mode="heightFix" style='height:{{height-10}}vh' src="https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/Saas/%E7%BB%84%205558%403x.png"></image>
+    <view class="no-data-container-text">商家未开启</view>
+</view>

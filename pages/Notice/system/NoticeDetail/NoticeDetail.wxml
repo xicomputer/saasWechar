@@ -1,0 +1,15 @@
+<view style="width:100%;height:1rpx;background:#e5e5e5"></view>
+<view class="notice-detail-box">
+  <view class="notice-detail-top">
+    <image src="/pages/img/notice/system_notice_img.png" style="width:120rpx;height:120rpx;border-radius:50%;"></image>
+    <view class="notice-detail-right">
+      <view class="notice-detail-name">{{noticeListItem.title}}</view>
+      <view class="notice-detail-time">{{noticeListItem.addTime}}</view>
+    </view>
+  </view>
+  <!-- <view class="notice-detail-title">{{noticeListItem.title}}</view> -->
+  <view class="notice-detail-content">
+    <rich-text wx:if="{{noticeListItem.snapshotText}}" nodes="{{noticeListItem.snapshotText}}"></rich-text>
+    <view wx:else class="notice-content-text">{{noticeListItem.content}}</view>
+  </view>
+</view>

@@ -1,0 +1,41 @@
+.member{
+  margin-left: 20rpx;
+  background-color: #FFFFFF;
+}
+.member_title{
+  height: 84rpx;
+  font-size: 32rpx;
+  font-weight: bold;
+  line-height: 84rpx;
+  color: #000000;
+  border-bottom: 2rpx solid #F4F4F4;
+  margin-bottom: 10rpx;
+}
+.member_item{
+  margin-top: 30rpx;
+  display: flex;
+  align-items: center;
+}
+.member_item_label{
+  width: 200rpx;
+  font-size: 28rpx;
+  font-weight: 400;
+  color: #999999;
+}
+.member_item_desc{
+  font-size: 24rpx;
+  font-weight: 500;
+  color: #333333;
+}
+.member_QA{
+  padding: 80rpx 40rpx 0 20rpx;
+  font-size: 24rpx;
+  font-weight: 500;
+  line-height: 34rpx;
+}
+.member_QA_q{
+  color: #FF0000;
+}
+.member_QA_a{
+  color: #333333;
+}

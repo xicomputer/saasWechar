@@ -1,0 +1,193 @@
+<!--pages/shopHome/components/ToCity/ToCity.wxml-->
+<view wx:if="{{tempId<5}}">
+    <!-- 横排 -->
+    <view class="toCity me-fx-row me-fx-sb {{tempBox}}" wx:if="{{(isToCity && isToStore) || isWuliu}}">
+        <view class="book" 
+            wx:if="{{tempId!=3 && isWuliu && logisticsList.length>0}}"
+        >
+            <!-- <view class="title me-fx-row me-fx-sb me-fx-start-c" 
+                data-type='1' bindtap="jumpGoodsList"
+            >
+                <view class="me-fx-col">
+                    <text class="item_name">物流商品</text>
+                    <text class="item_desc">用户下单需快递取货</text>
+                </view>
+                <image class="right_img" src="../../../static/right.png"></image>
+            </view> -->
+            <view-more-title title='物流商品' title-size='24' 
+                img-name='t{{tempId}}-{{tempId==3?1:tempId}}.png'
+                bind:click='jumpGoodsList' data-type='1'
+            ></view-more-title>
+            <view class="item_desc sub-title">用户下单需快递取货</view>
+
+            <scroll-view scroll-x='true' class="product1_list">
+                <view class="me-fx-row me-fx-start-c">
+                    <block wx:for="{{logisticsList}}" wx:key="index">
+                        <view  class="me-fx-col me-fx-sb-c product_info" data-id="{{item.commodityId}}" bindtap="jumpGoodsDetail"> 
+                            <image class="product_img" src='{{item.thumbnail}}'></image>
+                            <text class="product_name me-full-text">{{item.commodityName}}</text>
+                            <view class="me-fx-row price_info" style="justify-content: flex-start; color: #FF0021; font-weight: bold;"><text class="product_price">￥</text> <text class="price">{{item.lowPrice}}</text></view>
+                        </view>
+                    </block>
+                </view>
+            </scroll-view>
+        </view>
+        <view class="book" wx:if="{{tempId!=1 && tempId!=3.1 &&  isToStore && shopList2.length>0}}">
+            <!-- <view class="title me-fx-row me-fx-sb me-fx-start-c" 
+                data-type='3' bindtap="jumpGoodsList"
+            >
+                <view class="me-fx-col">
+                    <text class="item_name">预订商品</text>
+                    <text class="item_desc">用户需要到店取货或消费</text>
+                </view>
+                <image class="right_img" src="../../../static/right.png"></image>
+            </view> -->
+            <view-more-title title='预订商品' title-size='24' 
+                img-name='t{{tempId}}-{{tempId==3?1:tempId}}.png'
+                bind:click='jumpGoodsList' data-type='3'
+            ></view-more-title>
+            <view class="item_desc sub-title">用户需要到店取货或消费</view>
+
+            <scroll-view scroll-x='true' class="product1_list">
+                <view class="me-fx-row me-fx-start-c">
+                    <block wx:for="{{shopList2}}" wx:key="index">
+                        <view  class="me-fx-col me-fx-sb-c product_info" data-id="{{item.commodityId}}" data-type='3' bindtap="jumpGoodsDetail"> 
+                            <image class="product_img" src='{{item.thumbnail}}'></image>
+                            <text class="product_name me-full-text">{{item.commodityName}}</text>
+                            <view class="me-fx-row price_info" ><text class="product_price">￥</text> <text class="price">{{item.lowPrice}}</text></view>
+                        </view>
+                    </block>
+                </view>
+            </scroll-view>
+        </view>
+        <view class="book" wx:if="{{tempId!=4 && isToCity && shopList.length>0}}">
+            <!-- <view class="title me-fx-row me-fx-sb me-fx-start-c" 
+                data-type='2' bindtap="jumpGoodsList"
+            >
+                <view class="me-fx-col">
+                    <text class="item_name">同城配送商品</text>
+                    <text class="item_desc">用户下单同城可配送</text>
+                </view>
+                <image class="right_img" src="../../../static/right.png" ></image>
+            </view> -->
+            <view-more-title title='同城商品' title-size='24' 
+                img-name='t{{tempId}}-{{tempId==3?1:tempId}}.png'
+                bind:click='jumpGoodsList' data-type='2'
+            ></view-more-title>
+            <view class="item_desc sub-title">用户下单同城可配送</view>
+
+            <scroll-view scroll-x='true' class="product1_list">
+                <view class="me-fx-row me-fx-start-c">
+                    <block wx:for="{{shopList}}" wx:key="index">
+                        <view  class="me-fx-col me-fx-sb-c product_info" data-id="{{item.commodityId}}" data-type='2' bindtap="jumpGoodsDetail"> 
+                            <image class="product_img" src='{{item.thumbnail}}'></image>
+                            <text class="product_name me-full-text">{{item.commodityName}}</text>
+                            <view class="me-fx-row price_info"  style="justify-content: flex-start; color: #FF0021; font-weight: bold;"><text class="product_price">￥</text> <text class="price">{{item.lowPrice}}</text></view>
+                        </view>
+                    </block>
+                </view>
+            </scroll-view>
+        </view>
+    </view>
+
+    
+    <!-- 竖排 -->
+    <view wx:if='{{false}}'  class="toCity me-fx-col">
+        <view class="book2" wx:if="{{isToStore&&shopList2.length>0}}">
+            <view class="book2_title me-fx-row">
+                <view class="me-fx-col title_info" data-type='3' bindtap="jumpGoodsList">
+                    <text class="item2_name">本店可(预订商品)</text>
+                    <view class="me-fx-row me-fx-sb me-fx-start-c">
+                        <text class="item2_desc">用户需要到店取货或消费</text>
+                        <image class="right_img" src="../../../static/right.png"></image>
+                    </view>
+                </view>
+            </view>
+            <scroll-view scroll-x='true' class="product2_list">
+                <view class="me-fx-row me-fx-start-c">
+                    <block wx:for="{{shopList2}}" wx:key="index">
+                        <view  class="me-fx-col me-fx-sb-c product_info" data-id="{{item.commodityId}}" data-type='3' bindtap="jumpGoodsDetail"> 
+                            <image class="product_img" src="{{item.thumbnail}}"></image>
+                            <text class="product_name me-full-text">{{item.commodityName}}</text>
+                            <view class="me-fx-row price_info"><text class="product_price">￥</text> <text class="price">{{item.lowPrice}}</text></view>
+                        </view>
+                    </block>
+                </view>
+            </scroll-view>
+        </view>
+        <view class="book2" wx:if="{{isToCity&&shopList.length>0}}">
+            <view class="book2_title me-fx-row">
+                <view class="me-fx-col title_info" data-type='2' bindtap="jumpGoodsList">
+                    <text class="item2_name">本店可(同城配送商品)</text>
+                    <view class="me-fx-row me-fx-sb me-fx-start-c">
+                        <text class="item2_desc">用户下单同城可配送</text>
+                        <image class="right_img" src="../../../static/right.png"></image>
+                    </view>
+                </view>
+            </view>
+            <scroll-view scroll-x='true' class="product2_list">
+                <view class="me-fx-row me-fx-start-c">
+                    <block wx:for="{{shopList}}" wx:key="index">
+                        <view  class="me-fx-col me-fx-sb-c product_info" data-id="{{item.commodityId}}" data-type='2' bindtap="jumpGoodsDetail"> 
+                            <image class="product_img" src="{{item.thumbnail}}"></image>
+                            <text class="product_name me-full-text">{{item.commodityName}}</text>
+                            <view class="me-fx-row price_info"><text class="product_price">￥</text> <text class="price">{{item.lowPrice}}</text></view>
+                        </view>
+                    </block>
+                </view>
+            </scroll-view>
+        </view>
+    </view>
+</view>
+
+<view class="city" wx:else>
+    <view class="me-fx-col me-fx-c-c list-top-msg {{listTopMsgBg}}">
+        <text>{{msg}}</text>
+        <view>({{address}})</view>
+    </view>
+    <view class="me-fx-row me-fx-sb city" wx:if="{{tempId==5}}">
+        <view class="city_info me-fx-col me-fx-start-c" wx:for='{{shopList}}' wx:key='index' bindtap="rePage" data-id="{{item.commodityId}}">
+            <image src='{{item.thumbnail}}' class='goods-img'></image>
+            <text class="city_desc me-full-text">{{item.description}}</text>
+            <view class="city_pay me-fx-row me-fx-sb me-fx-start-c">
+                <view><text class="class_price">￥</text><text class="logPrice">{{item.lowPrice}}</text></view>
+                <view class="btn_price">{{shopType=="book"?"门店团购":"同城配送"}}</view>
+            </view>
+        </view>
+    </view>
+    <view class="me-fx-row me-fx-sb city" wx:if="{{tempId == 6 }}">
+        <view class="city_info me-fx-col me-fx-start-c" wx:for='{{shopList}}' wx:key='index' bindtap="rePage" data-id="{{item.commodityId}}">
+            <view class="temp2-pro-bg" style="background-image:url('https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/static/class2_short_product.png')">
+                <image src='{{item.thumbnail}}' class='goods-img'></image>
+            </view>
+            <text class="city_desc2 me-full-text">{{item.description}}</text>
+            <view class="city_pay me-fx-row me-fx-sb me-fx-start-c">
+                <view><text class="class_price">￥</text><text class="logPrice">{{item.lowPrice}}</text></view>
+                <view style="background-image:url('https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/static/class2_long_btn.png')" class="temp2_btn_price">{{shopType=="book"?"门店团购":"同城配送"}}</view>
+            </view>
+        </view>
+    </view>
+    <view class="me-fx-row me-fx-sb city " wx:if="{{tempId == 7}}">
+        <view class="city_info3 me-fx-col br_black me-fx-start-c" wx:for='{{shopList}}' wx:key='index' bindtap="rePage" data-id="{{item.commodityId}}">
+            <image src='{{item.thumbnail}}' class='goods-img'></image>
+            <text class="city_desc3 me-full-text">{{item.description}}</text>
+            <view class="city_pay3 me-fx-row me-fx-sb me-fx-start-c">
+               <view class="city_pay3_btn" style="background-image:url('https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/static/temp3_price_btn.png')">{{item.lowPrice}}</view>
+            </view>
+        </view>
+    </view>
+    <view class="me-fx-row me-fx-sb city " wx:if="{{tempId == 8}}">
+        <view class="city_info4 me-fx-col br_black me-fx-start-c" wx:for='{{shopList}}' wx:key='index' bindtap="rePage" data-id="{{item.commodityId}}">
+            <image src='{{item.thumbnail}}' class='goods-img2'></image>
+            <view class="product4-item2-msg me-fx-col" style="background-image:url('https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/static/temp4_info_bg.png')"> 
+                <text class="temp4_price2">￥{{item.lowPrice}}</text>
+            </view>
+            <view class="product4-item2-btn1" style="background-image:url('https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/static/temp4_btn2.png')">
+                <text>{{shopType=="book"?"门店团购":"同城配送"}}</text>
+            </view>
+            <view class="product4-item2-btn2" style="background-image:url('https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/static/temp4_btn1.png')">
+                <text class="me-full-text">{{item.commodityName}}</text>
+            </view>
+        </view>
+    </view>
+</view>

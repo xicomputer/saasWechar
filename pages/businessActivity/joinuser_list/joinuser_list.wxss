@@ -1,0 +1,31 @@
+
+.join-user-list {
+    padding:20rpx 20rpx 50rpx; border-bottom:1rpx solid #F2F2F2;
+    box-sizing:border-box;
+}
+.join-user-list .pushed-item{
+    font-size:30rpx;color:#333;
+    padding:0 20rpx;box-sizing:border-box;
+}
+.join-user-list .pushed-item:not(:last-child){
+    margin-bottom:40rpx;
+}
+.join-user-list .user-avatar-img{
+    width:80rpx;height:80rpx;border-radius:50%;
+    background-color:#ccc;margin-right:20rpx;
+}
+.join-user-list .amount-str{color:#EB1918;font-weight:bold;}
+.join-user-list .service-fee{font-size:20rpx;color:#999;}
+
+
+.list-empty-box{
+    font-size:32rpx;color:#999;height:500rpx;
+}
+
+
+.join-user-list .earnings-msg{
+    font-size:26rpx;color:#fff;
+    border-radius: 0px 24px 24px 0px;
+    background-color:#FF9215;margin:0 20rpx 10rpx 0;
+    padding:5rpx 15rpx;height:46rpx;line-height:46rpx;
+}

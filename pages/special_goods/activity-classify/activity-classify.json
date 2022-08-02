@@ -1,0 +1,10 @@
+{
+  "navigationStyle": "custom",
+  "usingComponents": {
+    "auth-get-info":"../../Component/auth-get-info/auth-get-info"
+    
+  },
+  "singlePage": {
+    "navigationBarFit": "squeezed"
+  }
+}

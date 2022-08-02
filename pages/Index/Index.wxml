@@ -1,0 +1,594 @@
+<store-close wx:if="{{isClose}}"></store-close>
+
+<view class="index" hidden="{{nowTabbarText!='首页'}}">
+  <!-- banner图 -->
+  <swiper wx:if='markerInfo.recommendList' class="swiper" indicator-dots autoplay>
+    <block wx:for="{{markerInfo.recommendList}}" wx:key="index">
+      <swiper-item>
+        <navigator hover-class='none' class="img" 
+          url="/pages/Index/GoodsDetails/GoodsDetails?id={{item.id}}&sid={{item.tempSpecId}}" 
+        >
+          <image src="{{item.thumbnail}}" data-list="{{markerInfo.recommendList}}"
+            data-src="{{item.thumbnail}}" mode="aspectFill" class="img" 
+          />
+          <view wx:if='{{item.description}}' class='description-text'>{{item.description}}</view>
+        </navigator>
+      </swiper-item>
+    </block>
+  </swiper>
+  <swiper wx:else class="swiper" indicator-dots autoplay>
+    <block wx:for="{{markerInfo.homeImg}}" wx:key="index">
+      <swiper-item>
+        <image src="{{item.httpAddress}}" bindtap="imgClick" data-list="{{markerInfo.homeImg}}"
+          data-src="{{item.httpAddress}}" mode="aspectFill" class="img" />
+      </swiper-item>
+    </block>
+  </swiper>
+
+  <!-- 通知栏 -->
+  <view class="notice-bar-container" wx:if="{{noticeContent.length}}">
+    <image src="/pages/img/index/notice_bar.png" style="width:36rpx;height:36rpx"></image>
+    <text class="notice-title-text">公告:</text>
+    <van-notice-bar style="flex:1" color="#ff0000" background="#fff" text="{{noticeContent}}"></van-notice-bar>
+  </view>
+
+  <!-- 关注 -->
+  <view class="follow-container">
+    <view class="follow-user-list">
+      <block wx:for="{{markerInfo.allConcerns}}" wx:key="index">
+        <image class="follow-user-image" style="left: {{28 * index}}rpx;" src="{{item.headimgurl}}"></image>
+        <view wx:if="{{index == 19}}" style="left: {{28 * index}}rpx;"  class="follow-user-image follow-user-more">99+</view>
+      </block>
+    </view>
+    <view bindtap="{{markerInfo.subscribe==0?'showDingYue':''}}" class="follow-btn-container">
+      <image src="{{markerInfo.subscribe==0?'/pages/img/index/store_subscribe.png':'/pages/img/index/store_subscribed.png'}}" style="width:48rpx;height:48rpx"></image>
+      {{markerInfo.subscribe==0?'店铺订阅':'已订阅'}}
+    </view>
+  </view>
+
+  <!-- 商家信息 -->
+  <view class="marchant-info">
+    <view class="label">
+      <view class="label-item" wx:for="{{markerInfo.labelsList}}" wx:key="index">
+        <image src="../img/my/hdui.png" class="icon" />
+        <view class="text">{{item}}</view>
+      </view>
+    </view>
+    <view class="content">
+      <view class="item">
+        <image src="../img/my/ic_clock.png" class="icon" />
+        <text>营业时间:{{markerInfo.openingTime}}-{{markerInfo.closingTime}}</text>
+        <image style="margin-left:20rpx" src="../img/yirenzheng.png" class="renzheng" />
+        <view class="visitor">
+          <image src="../img/visitor.png" class="icon1" />
+          访客{{markerInfo.accessNumber}}
+        </view>
+      </view>
+      <view class="item">
+        <image src="../img/my/ic_dz.png" class="icon" />
+        <text>{{markerInfo.entirelyAddress}}</text>
+      </view>
+      <view class="item">
+        <view>
+          <image src="../img/my/ic_introduce.png" class="icon" />
+        </view>
+        <view class="more-introduce">
+          {{markerInfo.brief}}
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 推荐酒店 -->
+  <hotel wx:if="{{hotelList.length}}" hotelList="{{hotelList}}"></hotel>
+
+  <!-- 推荐零售 -->
+  <retail wx:if="{{shopList.length>0}}" shopList="{{shopList}}"></retail>
+
+  <!-- 积分乐园 -->
+  <view bindtap="toIntergral" wx:if="{{isIntegral&&countDown>0}}"  class="index_integral_box">
+    <view class="index_integral_title" style="background-image: url('https://xssj.letterbook.cn/applet/images/index_task_bg.png')">
+      <van-count-down use-slot bind:change="changeTime" bind:finish="overTime" time="{{ countDown }}">
+        <text wx:if="{{timeData.days!=0}}" class="index_integral_countdown_text" style="padding:4rpx 8rpx">{{timeData.days}}</text><text wx:if="{{timeData.days!=0}}" class="index_integral_countdown">天</text>
+        <text class="index_integral_countdown_text">{{timeData.hours<10?'0'+timeData.hours:timeData.hours}}</text>
+        <text class="index_integral_countdown">:</text>
+        <text  class="index_integral_countdown_text">{{timeData.minutes<10?'0'+timeData.minutes:timeData.minutes}}</text>
+        <text class="index_integral_countdown">:</text>
+        <text  class="index_integral_countdown_text">{{timeData.seconds<10?'0'+timeData.seconds:timeData.seconds}}</text>
+      </van-count-down>
+    </view>
+  </view>
+
+  <!-- 搜索商品 -->
+  <view class="search-container">
+    <navigator class="search-container-content" url="/pages/Index/searchGood/searchGood?marchantId={{marchantId}}">
+      <image src="/pages/img/my/search.png" style="width:52rpx;height:52rpx;margin-right:10rpx"></image>
+      请输入商品名称
+    </navigator>
+    <view class="subscribe-notice" wx:if="{{!markerInfo.subscribe1}}" bindtap="showDingYue1">商品通知</view>
+    <view class="subscribe-notice" style="background:#ccc" wx:if="{{markerInfo.subscribe1}}">已订阅</view>
+  </view>
+
+  <!-- 活动入口 -->
+  <view class='me-fx-row me-fx-sb activity-entery'>
+    <view wx:for='{{activityList}}' wx:key='index' class='activity-item'>
+      <image src='' class='{{activityList.length==1 ? "active-img1":"active-img2"}}'></image>
+    </view>
+  </view>
+
+  <!-- 商品类别 -->
+  <view class="goods">
+    <category1 wx:if="{{goodsList.length&&markerInfo.shopTemplateId==1}}" goodsList="{{goodsList}}" marchantId="{{marchantId}}" orderType="{{orderType}}"></category1>
+    <category2 wx:if="{{goodsList.length&&markerInfo.shopTemplateId==2}}" goodsList="{{goodsList}}" marchantId="{{marchantId}}" orderType="{{orderType}}"></category2>
+    <category3 wx:if="{{goodsList.length&&markerInfo.shopTemplateId==3}}" goodsList="{{goodsList}}" marchantId="{{marchantId}}" orderType="{{orderType}}"></category3>
+    <category4 wx:if="{{goodsList.length&&markerInfo.shopTemplateId==4}}" goodsList="{{goodsList}}" marchantId="{{marchantId}}" orderType="{{orderType}}"></category4>
+    <category5 wx:if="{{goodsList.length&&markerInfo.shopTemplateId==5}}" goodsList="{{goodsList}}" marchantId="{{marchantId}}" orderType="{{orderType}}"></category5>
+    <category6 wx:if="{{goodsList.length&&markerInfo.shopTemplateId==6}}" goodsList="{{goodsList}}" marchantId="{{marchantId}}" orderType="{{orderType}}"></category6>
+    <category7 wx:if="{{goodsList.length&&markerInfo.shopTemplateId==7}}" goodsList="{{goodsList}}" marchantId="{{marchantId}}" orderType="{{orderType}}"></category7>
+    <!-- 商品推荐 -->
+    <view class="recommend">
+      <view class="title" wx:if="{{ltSix.length}}">
+        <view class="tips"></view>
+        <view class="name">本店热卖</view>
+      </view>
+      <view class="ltSix" wx:if="{{ltSix.length}}">
+        <view data-id="{{item.commodityId}}" bindtap="toGoodsDetails" class="item" wx:for="{{ltSix}}"
+          style="{{index == ltSix.length-1?'border-bottom: none':''}}" wx:key="index">
+          <view class="left">
+            <image src="{{item.thumbnail}}" class="img" mode="aspectFill" />
+          </view>
+          <view class="right">
+            <view class="name">{{item.commodityName}}</view>
+            <view class="desc">{{item.description}}</view>
+            <view class="foot">
+              <view class="price">
+                <text class="icon">￥</text>{{item.activityType==1||(item.activityType==2&&item.isMember)?item.lowPrice:item.originalPrice}}
+                <text class="cheaper" wx:if="{{item.activityType==1||(item.activityType==2&&item.isMember)}}">￥{{item.originalPrice}}</text>
+              </view>
+              <view class="cart" catchtap="addCart" data-item="{{item}}">加入购物车</view>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class="lgFive" wx:if="{{lgFive.length}}">
+        <view data-id="{{item.commodityId}}" bindtap="toGoodsDetails" class="item" wx:for="{{lgFive}}" wx:key="index">
+          <image src="{{item.thumbnail}}" class="img" mode="aspectFill" />
+          <view class="name">{{item.commodityName}}</view>
+          <view class="foot">
+            <view class="left">
+              <view class="price">
+                <text class="icon">￥</text>{{item.activityType==1||(item.activityType==2&&item.isMember)?item.lowPrice:item.originalPrice}}
+                <text class="cheaper" wx:if="{{item.activityType==1||(item.activityType==2&&item.isMember)}}">￥{{item.originalPrice}}</text>
+              </view>
+            </view>
+            <view class="right" catchtap="addCart" data-item="{{item}}">
+              <image class="icon" src="../img/shop-cart.png" />
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  
+  <!-- 过去风采 -->
+  <view class="style" wx:if="{{markerInfo.thepointSins.length>0}}">
+    <view class="title">
+      <view class="tips"></view>
+      <view class="name">过去风采</view>
+    </view>
+    <view class="content" wx:for="{{markerInfo.thepointSins}}" wx:key="index">
+      <view class="time" style="{{index==0?'':'margin-top:45rpx'}}">{{item.addTime}}</view>
+      <view class="imaBox">
+        <view class="borderBox left"></view>
+        <swiper class="middle">
+          <block wx:for="{{item.sin}}" wx:for-item="sitem" wx:key="index">
+            <swiper-item>
+              <image class="img" bindtap="imgClick" data-list="{{item.sin}}" data-src="{{sitem.httpAddress}}"
+                mode="aspectFill" src="{{sitem.httpAddress}}" />
+            </swiper-item>
+          </block>
+        </swiper>
+        <view class="borderBox right"></view>
+      </view>
+    </view>
+  </view>
+  <view class="footer">——信书技术支持——</view>
+</view>
+
+<!-- 优惠券 -->
+<view style="{{isDiscount?'':'display:none'}}" class="promotion">
+  <view style="background-image: url('https://xssj.letterbook.cn/applet/images/coupon_bg.png')" class="sale-pop-box">
+    <view class="sale-list-container">
+      <scroll-view scroll-y="true" class="scroll-box">
+        <view class="sale-list">
+          <view class="sale-item" wx:for="{{saleCanList}}" wx:key="index"
+            style="background-image: url('https://xssj.letterbook.cn/applet/images/coupon_item_bg.png')">
+            <view class="sale-left">
+              <view class="sale-price-icon">￥</view>
+              <view class="sale-price-num">{{item.deduct}}</view>
+            </view>
+            <view class="sale-right">
+              <view class="sale-price-desc">满{{item.confine}}可用</view>
+              <view class="sale-price-name">{{item.couponName}}</view>
+              <view class="sale-over-time">过期时间：{{item.endTime}}</view>
+            </view>
+          </view>
+        </view>
+      </scroll-view>
+      <view class="sale-comfirm" bindtap="receiveSale">{{saleState}}</view>
+    </view>
+
+  </view>
+  <image class="sale-close" bindtap="closeSale" src="/pages/img/goods/close.png"></image>
+</view>
+
+<!-- 关注 -->
+<van-overlay show="{{ showFollow }}" z-index="999">
+  <view class="follow-pop-container">
+    <view class="follow-pop" style="background-image: url('https://xssj.letterbook.cn/applet/images/follow-bg.png');">
+      <image src="{{markerInfo.logoPic}}" style="width:128rpx;height:128rpx;border-radius:50%"></image>
+      <view class="follow-name">{{markerInfo.nickName}}</view>
+      <view class="follow-brief">{{markerInfo.brief}}</view>
+      <view class="follow-btn" bindtap="addDelConcerns">关注一下呗</view>
+      <view class="follow-solid"></view>
+      <image bindtap="closeFollow" src="/pages/img/close-s.png" style="width:60rpx;height:60rpx"></image>
+    </view>
+  </view>
+</van-overlay>
+
+<!-- 下单 -->
+<van-popup show="{{ show }}" round closeable position="bottom" bind:close="onClose1" close-on-click-overlay="false">
+  <view class="good-info">
+    <view class="good-des">
+      <view class="good-img">
+        <image class="img" src="{{goodsData.imageUrl?goodsData.imageUrl:goodsData.thumbnail}}"></image>
+      </view>
+      <view class="good-des-inner">
+        <view class="good-price-area">
+          <text class="good-price">￥{{goodsData.activityType==1||(goodsData.activityType==2&&goodsData.isMember)?goodsData.lowPrice:goodsData.originalPrice}}</text>
+          <text wx:if="{{goodsData.activityType==2&&goodsData.isMember}}" style="color:#FF5340;font-size:24rpx;margin-left:20rpx">{{userInfo.memberLeve.discount==10?'普通会员无优惠':userInfo.memberLeve.name+'已优惠￥'+(goodsData.originalPrice*1000-goodsData.lowPrice*1000)/1000}}</text>
+        </view>
+        <view class="good-inventory">
+          库存：<text class="inventory">{{goodsData.stock==-1?'有货':goodsData.stock==0?'暂无库存':goodsData.stock}}</text>
+        </view>
+        <view class="good-select-specifications">
+          <text>{{goodsData.itemText?goodsData.itemText:'请选择规格'}}</text>
+        </view>
+      </view>
+    </view>
+    <view class="good-edit">
+      <view class="good-specifications">
+        <view>
+          <text>规格</text>
+        </view>
+        <scroll-view scroll-y="true" style="max-height:360rpx">
+          <view class="list-black">
+            <view class="list-item {{skuitem.active ? 'active' : ''}}" wx:for="{{skuList}}" wx:for-item="skuitem"
+              wx:key="id" data-index="{{index}}" catchtap="handleSelectSku">
+              <image class="list-item-img" src="{{skuitem.imageUrl?skuitem.imageUrl:skuitem.thumbnail}}">
+              </image>
+              <text>{{skuitem.itemText}}</text>
+            </view>
+          </view>
+        </scroll-view>
+      </view>
+      <view class="by-num">
+        <view>
+          <text>购买数量</text>
+        </view>
+        <view>
+          <text class="edit-num-btn" data-type="minus" catchtap="handleEdit">-</text>
+          <text class="edit-num">{{buyNum}}</text>
+          <text class="edit-num-btn" data-type="add" catchtap="handleEdit">+</text>
+        </view>
+      </view>
+    </view>
+    <view class="btn-area">
+      <view class="btn-area-inner">
+        <button class="btn add-cart-btn" catchtap="handlePopupAddCart">加入购物车</button>
+      </view>
+      <view class="btn-area-inner">
+        <button class="btn buy-btn" catchtap="surexf">立即购买</button>
+      </view>
+    </view>
+  </view>
+</van-popup>
+<navigator wx:if="{{buton}}" url="/pages/shopHome/home/home" class="butt">授权登录</navigator>
+
+<!-- Tabbar栏 -->
+<view class="custom-tab-bar" style="padding-bottom:{{isAdapter?'38rpx':'0rpx'}}">
+  <view class="custom-tab-bar-item" wx:for="{{tabList}}" wx:key="index" wx:if="{{item.isHave}}" bindtap="changeTab" data-text="{{item.text}}">
+    <image style="width:56rpx;height:56rpx;box-shadow: 0rpx 6rpx 12rpx rgba(247, 247, 247, 0.16);" src="{{nowTabbarText==item.text?item.imgActive:item.img}}"></image>
+    <text class="{{nowTabbarText==item.text?'custom-tab-bar-text custom-tab-bar-text-active':'custom-tab-bar-text'}}">{{item.text}}</text>
+  </view>
+</view>
+
+<!-- 活动 -->
+<view class="activity-container" hidden="{{nowTabbarText!='活动'}}">
+  <!-- 喊价 -->
+  <view class="activity-container-type" wx:if="{{auctionList.length}}">
+    <view class="activity-container-top">
+      <text>喊价商品进行中</text>
+      <navigator class="activity-container-top-right" url="/pages/activity/pmhd/list/list?merchantId={{marchantId}}">查看更多>></navigator>
+    </view>
+    <view class="activity-container-goods-box">
+      <block wx:for="{{auctionList}}" wx:key="index">
+        <navigator url="/pages/activity/pmhd/details/details?auctionId={{item.auctionId}}" class="activity-container-item">
+          <image src="{{item.logoImg}}" mode="aspectFill" style="width:100%;height:320rpx;position:relative">
+            <!-- 预约人数 -->
+            <view class="subscribe-box" wx:if="{{item.status == 1}}">预约人数:{{item.reserveNumber||0}}</view>
+            <!-- 起步价 -->
+            <view class="subscribe-box"  wx:if="{{item.status == 2}}" style="background: linear-gradient(180deg, #FA5151 0%, #FF0000 100%);">起歩价:{{item.xsAuctionItem.startingPrice||0}}</view>
+          </image>
+          <view class="activity-container-item-content">
+            <!-- 开喊时间 -->
+            <view class="paimai-time" bind:finish="getAuctionList" wx:if="{{item.status==1}}" style="background:#07C160">
+              <van-count-down time="{{ item.startTime }}" format="开喊时间: DD天HH:mm:ss"></van-count-down>
+            </view>
+            <!-- 距喊品结束 -->
+            <view class="paimai-time" bind:finish="getAuctionList" wx:if="{{item.status==2}}">
+              <van-count-down time="{{ item.endTime1 }}" format="距离喊价结束:DD天HH:mm:ss"></van-count-down></view>
+            <!-- 已结束 -->
+            <view class="paimai-time"  wx:if="{{item.status==3}}" style="background:#999">已结束 {{item.endTime}}</view>
+            <view class="activity-container-item-name">{{item.xsAuctionItem.auctionItemName}}</view>
+            <view class="activity-container-item-explain">{{item.xsAuctionItem.description}}</view>
+            <view class="activity-container-bottom">
+              <view class="activity-container-price">
+                <text style="font-size:24rpx">{{item.auctionPrice? item.status == 3 ? '成交价' :'当前价':'起步价'}}：￥</text>
+                {{item.auctionPrice||item.xsAuctionItem.startingPrice||0}}</view>
+              <view wx:if="{{item.status == 3}}" class="activity-container-btn" style="background: #999999;">已结束</view>
+              <view wx:else class="activity-container-btn">参与</view>
+            </view>
+          </view>
+        </navigator>
+      </block>
+    </view>
+  </view>
+
+
+  <!-- 促销 -->
+  <view class="activity-container-type" wx:if="{{saleGoodsList.length}}">
+    <view class="activity-container-top">
+      <text>促销商品进行中</text>
+      <navigator class="activity-container-top-right" url="/pages/Index/saleList/saleList?marchantId={{marchantId}}&orderType={{orderType}}">查看更多>></navigator>
+    </view>
+    <view class="sale-container-goods-box">
+      <navigator class="sale-container-item" wx:for="{{saleGoodsList}}" wx:key="index" url="/pages/Index/GoodsDetails/GoodsDetails?id={{item.id}}&sid={{item.tempSpecId}}">
+        <image src="{{item.thumbnail}}" mode="aspectFill" style="width:200rpx;height:200rpx;border-radius: 20rpx;"></image>
+        <view class="sale-container-item-content">
+          <view class="sale-container-top">
+            <view class="sale-container-item-name">{{item.commodityName}}</view>
+            <view class="sale-container-item-explain">{{item.description}}</view>
+          </view>
+          <view class="sale-container-bottom">
+            <view class="sale-container-price">
+              <text style="font-size:24rpx">￥</text>{{item.activityType==1?item.lowPrice:item.originalPrice}}</view>
+            <view class="sale-container-btn"  catchtap="goBuy" data-item="{{item}}">购买</view>
+          </view>
+        </view>
+      </navigator>
+    </view>
+  </view>
+  <no-data wx:if="{{!saleGoodsList.length&&!auctionList.length}}" text="暂无活动" url="https://xssj.letterbook.cn/applet/images/sj_no_data_img1.png"></no-data>
+</view>
+
+<!-- 订阅通知 -->
+<view class="dynamic-shop" hidden="{{nowTabbarText!='订阅通知'||userInfo.community==0}}">
+  <!-- 推荐酒店 -->
+  <dynamic-list marchantId="{{marchantId}}" hotelList="{{hotelList}}" commentList="{{commentList}}" storeDynamicList="{{storeDynamicList}}" markerInfo="{{markerInfo}}" status="{{status}}" bind:showDingYue="showDingYue"  hidden="{{userInfo.community==3}}"></dynamic-list>
+  <!-- <image bindtap="toWrite" src="/pages/img/index/write-comment.png" class="right-bottom" hidden="{{userInfo.community==3}}"></image> -->
+  <!-- 小店排行 -->
+  <view class="shop-list-top-box" hidden="{{userInfo.community==2||storeList.length==0}}">
+    <image class="shoop-list-top-img" src="https://xssj.letterbook.cn/applet/images/store-list-img.png"></image>
+  </view>
+  <view class="shop-list" wx:if="{{storeList.length}}" hidden="{{userInfo.community==2}}">
+    <!-- 通知栏 -->
+    <view class="notice-bar-container" wx:if="{{noticeContent.length}}">
+      <image src="/pages/img/index/notice_bar.png" style="width:36rpx;height:36rpx"></image>
+      <text class="notice-title-text">公告:</text>
+      <van-notice-bar style="flex:1;height:56rpx" color="#ff0000" background="#fff" text="{{noticeContent}}">
+      </van-notice-bar>
+    </view>
+    <view wx:for="{{storeList}}" wx:key="index" class="shop-item-box" hidden="{{userInfo.community==2}}">
+      <navigator class="shop-item" url="/pages/smallShop/myShop/myShop?storeId={{item.storeId}}">
+        <view class="shop-item-left">
+          <image class="shop-item-left-logo" src="{{item.headImgUrl}}" mode="aspectFill"></image>
+          <view class="shop-item-left-content">
+            <view>{{item.nickName}}的小店</view>
+          </view>
+        </view>
+        <view class="shop-item-right">
+          <image src="/pages/img/index/huoyue.png" style="margin-bottom:20rpx"></image>
+          <!-- {{item.praise}} -->
+          活跃中
+        </view>
+      </navigator>
+    </view>
+  </view>
+</view>
+
+<!-- 我的 -->
+  <my userInfo="{{userInfo}}" orderNum="{{orderNum}}" cityOrderNum="{{cityOrderNum}}" 
+    toStoreOrderNum="{{toStoreOrderNum}}" noticeNum="{{noticeNum}}" 
+    headList="{{headList}}" toolOrderList="{{toolOrderList}}" 
+    marchantId="{{marchantId}}" bindpagesTo="pagesTo" 
+    bindtoDetail="toDetail" isDistribution="{{markerInfo.isDistribution}}" 
+    isWuliu="{{isWuliu}}" isToCity="{{isToCity}}" isToStore="{{isToStore}}" 
+    wx:if="{{nowTabbarText=='我的'}}"
+  ></my>
+
+  
+<!-- 购物车 -->
+<view class="cart-main" hidden="{{nowTabbarText!='购物车'}}">
+  <!-- 编辑 -->
+  <view class="edit-area">
+    <view class="edit-inner">
+      <view class="select-all-area">
+        <text class="click-area" bindtap="selectAll">
+          <text class="icon-text iconfont {{isAll ? 'icon-select1 red-style' : 'icon-selectnor'}}"></text>
+          <text>全选</text>
+        </text>
+      </view>
+      <view class="delet-area">
+        <text class="click-area" bindtap="delete">
+          <text class="icon-text iconfont icon-delete"></text>
+          <text>删除</text>
+        </text>
+      </view>
+    </view>
+  </view>
+  <!-- 没有添加商品 -->
+  <no-data text="您还没有添加商品哦！" url="https://xssj.letterbook.cn/applet/images/sj_no_data_img3.png" wx:if="{{!shopCartlist.length}}"></no-data>
+  <view wx:else class="scroll-area">
+    <view class="list-area">
+      <view class="item-area" wx:for="{{shopCartlist}}" wx:key="marchantId">
+        <view class="item-header" bindtap="toStore" data-marchantId="{{item.marchantId}}">
+          <text class="item-header-select-area" data-pid="{{index}}" catchtap="handleGoodsSelect">
+            <text
+              class="item-header-select iconfont {{item.isSelect ? 'icon-select1 red-style' : 'icon-selectnor'}}"></text>
+          </text>
+          <image class="item-header-img" src="{{item.logoPic}}"></image>
+          <text>{{item.nickName}}</text>
+        </view>
+        <view class="item-goods">
+          <view class="item-good" wx:for="{{item.commoditys}}" wx:key="commodityId" wx:for-item="goodItem"
+            wx:for-index="goodIndex" bindtap="toGoodsdetail" data-commodityId="{{goodItem.commodityId}}">
+            <view class="item-good-l">
+              <text class="select-area" data-pid="{{index}}" data-cid="{{goodIndex}}" catchtap="handleGoodItemSelect">
+                <text
+                  class="icon-text iconfont {{goodItem.isPitch ? 'icon-select1 red-style' : 'icon-selectnor'}}"></text>
+              </text>
+            </view>
+            <view class="item-good-c">
+              <image class="good-img" src="{{goodItem.imageUrl?goodItem.imageUrl:goodItem.thumbnail}}"></image>
+            </view>
+            <view class="item-good-r">
+              <view class="good-title">
+                <text>{{goodItem.commodityName}}</text>
+              </view>
+              <view class="good-model">
+                <text>规格：{{goodItem.itemText}}</text>
+              </view>
+              <view class="number-price">
+                <view class="price">
+                  ￥{{(goodItem.activityType==1||(goodItem.activityType==2&&goodItem.isMember))?goodItem.lowPrice:goodItem.originalPrice}}
+                </view>
+                <view class="edit-num">
+                  <!-- 减一 -->
+                  <text class="edit-subtract" data-pi="{{index}}" data-ci="{{goodIndex}}" data-type="minus"
+                    catchtap="handleEditNum">
+                    <text class="iconfont icon-minuscircle"></text>
+                  </text>
+                  <text class="num" data-pi="{{index}}" data-ci="{{goodIndex}}" data-type="edit"
+                    catchtap="handleEditNum">{{goodItem.amount}}</text>
+                  <!-- 加一 -->
+                  <text class="edit-add" data-pi="{{index}}" data-ci="{{goodIndex}}" data-type="add"
+                    catchtap="handleEditNum">
+                    <text class="iconfont icon-add"></text>
+                  </text>
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+        <view class="item-footer">
+          <view class="item-footer-l">
+            <text>合计：</text>
+            <text>￥{{item.subtotal}}</text>
+          </view>
+          <view class="item-footer-r">
+            <van-button round class="settlement-btn" data-pi="{{index}}" bindtap="handleGoSettlement">
+              去结算
+            </van-button>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <van-dialog use-slot title="请输入您的内容" show="{{ show1 }}" show-cancel-button bind:close="onClose"
+    bind:confirm="confirm">
+    <view class="num-input">
+      <input type="number" value="{{value}}" maxlength="3" title="" bindinput="handleInput" bindblur="validate" />
+    </view>
+  </van-dialog>
+  <van-toast id="van-toast" />
+  <van-dialog id="van-dialog" />
+</view>
+<!-- 完成任务后弹框 -->
+<taskPop showTaskPop="{{showTaskPop}}" text="{{taskText}}" marchantId="{{marchantId}}"
+  style="position:fixed;top:0;left:0;right:0;z-index:9999"
+></taskPop>
+
+
+<!-- 新品 热卖视频 -->
+<view hidden="{{nowTabbarText!='热卖'}}"
+  class="{{isAdapter?'news-container news-container-sp':'news-container'}}" 
+>
+  <video-list wx:if='{{hotSaleGoodsList.length}}' videoList="{{hotSaleGoodsList}}"></video-list>
+  <no-data text="您还没有热卖视频哦！" url="https://xssj.letterbook.cn/applet/images/sj_no_data_img8.png" wx:else></no-data>
+</view>
+
+
+<!-- 会员 -->
+<view style="background:#fff;min-height:100vh" hidden="{{nowTabbarText!='会员'}}">
+  <!-- 浮窗 -->
+  <view class="right-bottom-btn-container" wx:if="{{userInfo.status==1||isIntegral}}">
+    <image class="right-bottom-btn-img" bindtap="toMember" wx:if="{{userInfo.status==1}}" src="/pages/img/index/right_bottom_icon1.png"></image>
+  </view>
+  <view wx:if="{{!memberGoodsList.length}}" class="no-dynamic">
+    <image class="no-dynamic-img" src="https://xssj.letterbook.cn/applet/images/sj_no_data_img0.png"></image>
+    <view class="no-dynamic-text">暂无会员商品</view>
+  </view>
+
+
+  <view class='member-goods-list' wx:else>
+    <view class='me-fx-row goods-item-box' wx:for="{{memberGoodsList}}" wx:key="index">
+      <image class='goods-img' src='{{item.thumbnail}}'></image>
+      <view class='me-fx-col me-fx-sb goods-info'>
+        <view class='goods-item-top'>
+          <view class='me-fx-row me-fx-start-c'>
+            <image src='' class='logo-img'></image>
+            <view class='goods-name'>{{item.commodityName}}</view>
+          </view>
+          <view class='introduce'>{{item.description}}</view>
+        </view>
+        <view class='me-fx-row me-fx-sb-c goods-item-price'>
+          <view class='price-str'>￥<text class='price-num'>{{ item.lowPrice }}</text></view>
+          <image src='./static/cart.png' class='item-cart'></image>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="daodile">——信书技术支持——</view>
+
+  <!-- <view wx:else class="goods-list">
+    <block wx:for="{{memberGoodsList}}" wx:key="index">
+      <navigator style="{{index % 4 == 0?'':index % 4 == 3?'width: 220rpx;':'width: 220rpx;margin-right: 14rpx'}}" class="good-item" url="/pages/Index/GoodsDetails/GoodsDetails?id={{item.id}}&sid={{item.tempSpecId}}">
+        <van-notice-bar wx:if="{{index % 4 != 0 &&item.isMember}}" scrollable text="{{userInfo.memberLeve.discount==10?'普通会员无优惠':userInfo.memberLeve.name+'已优惠￥'+(item.originalPrice*1000-item.lowPrice*1000)/1000}}"  class="member-lever-box"/>
+        <image class="good-img" src="{{item.thumbnail}}" mode="aspectFill" style="{{index % 4 != 0?'width: 100%;height:166rpx':'width:100%;height:650rpx'}}"></image>
+        <view class="good-info-list">
+          <view class="good-top">
+            <view class="good-name-box">
+              <view class="cuxiao">会员专区</view>
+              <view class="good-name" style="{{index % 4 != 0?'font-size: 26rpx;':''}}">{{item.commodityName}}</view>
+            </view>
+            <view wx:if="{{index % 4 == 0}}" class="good-describe">{{item.description}}</view>
+          </view>
+          <view class="good-bottom">
+            <view class="good-price-box">
+              <view class="good-activity-price" style="{{index % 4 != 0?'font-size: 26rpx;':''}}"><text style="{{index % 4 != 0?'font-size: 20rpx;':'font-size:32rpx'}}">￥</text>{{ item.lowPrice }}</view>
+              <view class="member-sale-container" wx:if="{{index % 4 == 0 &&item.isMember}}">{{userInfo.memberLeve.discount==10?'普通会员无优惠':userInfo.memberLeve.name+'已优惠￥'+(item.originalPrice*1000-item.lowPrice*1000)/1000}}</view>
+            </view>
+            <view class="buy-btn-statu" catchtap="goBuy" data-item="{{item}}" style="{{index % 4 != 0?'font-size: 20rpx;':''}}">购买</view>
+          </view>
+        </view>
+      </navigator>
+    </block> 
+    <view class="daodile">——信书技术支持——</view>
+  </view>-->
+</view>
+
+
+<!-- 推荐 -->
+<recommend wx:if="{{nowTabbarText=='商品推荐'}}" bindrecommendEvent='parseRecommendEvent'></recommend>

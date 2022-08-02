@@ -1,0 +1,11 @@
+{
+  "navigationBarTitleText":"商品详情",
+  "enablePullDownRefresh":true,
+  "usingComponents": {
+    "van-popup": "@vant/weapp/popup/index",
+    "add-subtract-num":"/pages/Component/add-subtract-num/add-subtract-num",
+    "van-count-down": "@vant/weapp/count-down/index",
+    "canvas-synthetic":"../components/canvas_synthetic/canvas_synthetic",
+    "auth-get-info":"../../Component/auth-get-info/auth-get-info"
+  }
+}

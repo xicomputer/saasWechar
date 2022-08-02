@@ -1,0 +1,43 @@
+<!--pages/extension/product/product.wxml-->
+<!-- <text>pages/extension/product/product.wxml</text> -->
+<view>
+   <!-- 搜索 -->
+   <!-- <view>
+    <view class="search-container" style="background-color: #fff;">
+            <view class="relative">
+                <image mode="widthFix" src="https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/Saas/seach.png"></image>
+                <input class="search-input" 	placeholder="请输入搜索关键字" type="text" v-model="search" />
+                <text>搜索</text>
+            </view>
+      </view>
+      <view style="width: 100%;height: 82rpx;box-shadow:0 6rpx 12rpx 2rpx rgba(0, 0, 0, 0.16);display: flex;align-items: center;justify-content: space-around;background: #fff;">
+        <text style="color: red;">佣金</text>
+        <text>销量</text>
+        <text>价格</text>
+      </view>
+   </view> -->
+      
+      <!-- 内容 -->
+      <view>
+        <view style="width: 710rpx;margin: 20rpx auto;background-color: #fff;display: flex;flex-direction: column;" wx:for="{{4}}">
+          <view style="display: flex;padding: 20rpx;">
+            <image style="width:176rpx;height:176rpx;border-radius:8rpx" src="https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/Saas/youhuijuan"></image>
+            <view style="margin-left: 15rpx;">
+              <view style="font-size: 32rpx;font-weight:900" class="u-line-1">t商品名称商品名称商品名称商品itle</view>
+              <view style="font-size: 24rpx;color:#999999;"  class="u-line-1">佣金比例20%</view>
+              <view style="color:#FF0000;font-size: 28rpx;">¥1759.00</view>
+            </view>
+          </view>
+          <view style="display: flex;align-items: center;justify-content: space-between;padding: 20rpx;">
+                <view style="display: flex;background: linear-gradient(to right, #8eeb8e , #04f741);width: 272rpx;height: 66rpx;line-height: 66rpx;align-items: center;justify-content: center;border-radius: 34rpx;">
+                <image style="width:48rpx;height:48rpx;" src="https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/Saas/wxfff.png"></image>
+                <text style="color: #fff;">分享赚钱</text> 
+              </view>
+              <view style="display: flex;background: linear-gradient(to right, #FCD086 , #FDAA18);width: 272rpx;height: 66rpx;line-height: 66rpx;align-items: center;justify-content: center;border-radius: 34rpx;">
+                <!-- <image style="width:48rpx;height:48rpx;" src="https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/Saas/wxfff.png"></image> -->
+                <text style="color: #fff;">预计赚￥0.39</text> 
+              </view>
+          </view>
+        </view>
+      </view>
+</view>

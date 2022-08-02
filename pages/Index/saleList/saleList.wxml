@@ -1,0 +1,107 @@
+<view style="background: #f7f7f7;min-height:100vh">
+  <view wx:if="{{!saleGoodsList.length}}" class="no-dynamic">
+    <image class="no-dynamic-img" src="/pages/img/no_notice.png"></image>
+    <view class="no-dynamic-text">暂无数据</view>
+  </view>
+  <view wx:else class="goods-list">
+    <navigator class="good-item" wx:for="{{saleGoodsList}}" wx:key="index"
+      url="/pages/Index/GoodsDetails/GoodsDetails?id={{item.id}}&sid={{item.tempSpecId}}&activityId={{item.activityId}}">
+      <view class="goods-sale-img">
+        <image class="good-img" src="{{item.thumbnail}}" mode="aspectFill" style="width:100%;height:650rpx"></image>
+        <image class="sale-hot-img" src="https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/static/sale-hot.png"></image>
+      </view>
+      <!-- <view class="sale-header me-fx-row me-fx-start-c">
+        <image class="sale-header-img" src="https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/static/sale-pro-info.png"></image>
+        
+      </view> -->
+      <view class="good-info-list">
+        <view class="good-top">
+          <view class="good-name-box">
+            <view class="cuxiao">秒杀</view>
+            <view class="good-name">{{item.commodityName}}</view>
+          </view>
+          <view class="good-describe">{{item.description}}</view>
+        </view>
+        <view class="good-bottom">
+          <view class="good-price-box">
+            <view class="good-activity-price"><text style="font-size:32rpx">￥</text>{{ item.lowPrice }}</view>
+            <view class="good-original-price">￥{{item.originalPrice}}</view>
+          </view>
+          <view class="rematr-sale">
+            <view>距结束还剩：</view>
+            <van-count-down wx:if="{{item.remainingTime}}" use-slot class="activity-container-content-count-down" time="{{item.remainingTime*1000}}"  bind:change="changeTime" data-index="{{index}}"  >
+              <view class="list_item_onLookers">
+                  <text wx:if="{{item.timeData.days!=0}}">{{item.timeData.days}}</text>
+                  <text wx:if="{{item.timeData.days!=0}}" style="padding-right:10rpx">天</text>
+                  <text class="time-box">{{item.timeData.hours<10?'0'+item.timeData.hours:item.timeData.hours}}</text>
+                  <text class="time-sybmol">:</text>
+                  <text class="time-box">{{item.timeData.minutes<10?'0'+item.timeData.minutes:item.timeData.minutes}}</text>
+                  <text  class="time-sybmol">:</text>
+                  <text class="time-box">{{item.timeData.seconds<10?'0'+item.timeData.seconds:item.timeData.seconds}}</text>
+              </view>
+            </van-count-down>
+          </view>
+        </view>
+      </view>
+    </navigator>
+    <!-- 底部 -->
+    <view class="daodile">——信书技术支持——</view>
+    <!-- 下单 -->
+    <van-popup show="{{ show }}" round closeable position="bottom" bind:close="onClose1" close-on-click-overlay="false">
+      <view class="good-info">
+        <view class="good-des">
+          <view class="good-img">
+            <image class="img" src="{{goodsData.imageUrl?goodsData.imageUrl:goodsData.thumbnail}}"></image>
+          </view>
+          <view class="good-des-inner">
+            <view class="good-price-area">
+              <text class="good-price">￥{{goodsData.activityType==1||(goodsData.activityType==2&&goodsData.isMember)?goodsData.lowPrice:goodsData.originalPrice}}</text>
+              <text wx:if="{{goodsData.activityType==2&&goodsData.isMember}}" style="color:#FF5340;font-size:24rpx;margin-left:20rpx">{{userInfo.memberLeve.discount==10?'普通会员无优惠':userInfo.memberLeve.name+'已优惠￥'+(goodsData.originalPrice*1000-goodsData.lowPrice*1000)/1000}}</text>
+            </view>
+            <view class="good-inventory">
+              库存：<text class="inventory">{{goodsData.liveStock==-1?'有货':goodsData.liveStock==0?'暂无库存':goodsData.liveStock}}</text>
+            </view>
+            <view class="good-select-specifications">
+              <text>{{goodsData.itemText?goodsData.itemText:'请选择规格'}}</text>
+            </view>
+          </view>
+        </view>
+        <view class="good-edit">
+          <view class="good-specifications">
+            <view>
+              <text>规格</text>
+            </view>
+            <scroll-view scroll-y="true" style="max-height:360rpx">
+              <view class="list-black">
+                <view class="list-item {{skuitem.active ? 'active' : ''}}" wx:for="{{skuList}}" wx:for-item="skuitem"
+                  wx:key="id" data-index="{{index}}" catchtap="handleSelectSku">
+                  <image class="list-item-img" src="{{skuitem.imageUrl?skuitem.imageUrl:skuitem.thumbnail}}">
+                  </image>
+                  <text>{{skuitem.itemText}}</text>
+                </view>
+              </view>
+            </scroll-view>
+          </view>
+          <view class="by-num">
+            <view>
+              <text>购买数量</text>
+            </view>
+            <view>
+              <text class="edit-num-btn" data-type="minus" catchtap="handleEdit">-</text>
+              <text class="edit-num">{{buyNum}}</text>
+              <text class="edit-num-btn" data-type="add" catchtap="handleEdit">+</text>
+            </view>
+          </view>
+        </view>
+        <view class="btn-area">
+          <view class="btn-area-inner">
+            <button class="btn add-cart-btn" catchtap="handlePopupAddCart">加入购物车</button>
+          </view>
+          <view class="btn-area-inner">
+            <button class="btn buy-btn" catchtap="surexf">立即购买</button>
+          </view>
+        </view>
+      </view>
+    </van-popup>
+  </view>
+</view>

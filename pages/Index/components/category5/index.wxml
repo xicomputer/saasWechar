@@ -1,0 +1,25 @@
+<view class='classify-list'>
+    <view class='classify-item' wx:for='{{3}}' wx:for-index='ci' wx:key='ci'>
+        <view class='me-fx-row me-fx-sb-c itemp-top'>
+            <view class='me-fx-row me-fx-start-c'>
+                <image src='../../static/goods_line.png' class='goods-icon'></image>
+                <text class='class-title'>百合系列系列</text>
+            </view>
+            <text class='even-more'>更多 ></text>
+        </view>
+        <scroll-view scroll-x='{{true}}' class='goods-scroll'>
+            <view class='me-fx-row goods-list'>
+                <view class='me-fx-col me-fx-c-c goods-item' 
+                    wx:for='{{6}}' wx:key='index'
+                >
+                    <image src='' class='goods-img'></image>
+                    <view class='name'>名称名称名称名名称名称名称名</view>
+                    <view class='me-fx-row me-fx-start-end price'>
+                        <text class='now-price'>￥562</text>
+                        <text class='old-price'>￥689</text>
+                    </view>
+                </view>
+            </view>
+        </scroll-view>
+    </view>
+</view>

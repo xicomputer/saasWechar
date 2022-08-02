@@ -1,0 +1,514 @@
+
+@import '/styles/me_common.wxss';
+
+page{background-color:#F9F9F9;}
+
+.top-msg{height:100rpx;font-size:18rpx;color:#121212;}
+
+.item-box{
+    background-color:#fff;width:710rpx;
+    margin:0 auto 10rpx;border-radius:16rpx;
+    padding:0 10rpx 10rpx;box-sizing:border-box;
+}
+.item-box .activity-img{
+    width:690rpx;height:236rpx;
+    background-color:#ccc;border-radius:20rpx;
+}
+.item-box .item-floor{width:100%;margin-top:18rpx;}
+.item-box .title-text{font-size:32rpx;color:#333;font-weight:bold;}
+.item-box .time-str{font-size:20rpx;color:#333;}
+.item-box .to-view-btn{
+    width:216rpx;height:56rpx;border-radius:28rpx;
+    background-color:#FF4545;color:#fff;
+    text-align:center;line-height:56rpx;font-size:20rpx;
+}
+
+.activity-content{
+    position: relative;
+    padding: 0rpx 0rpx 20rpx;
+}
+.activity-top-bg{
+    height:100rpx;
+    width: 100%;
+}
+.activity-header{
+    background-color: #fff;
+    border-radius: 36rpx;
+    height: 70rpx;
+    padding: 0rpx 20rpx;
+    width: 100%;    
+    box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.13);
+}
+.addName{
+    font-size: 26rpx;
+    color: #000;
+}
+.check-btn{
+  background-color: #FFBB38;
+  color: #fff;
+  font-size: 22rpx;
+  border-radius: 22rpx;
+  width: 144rpx;
+  height: 44rpx;
+  text-align: center;
+  line-height: 44rpx;
+  padding: 10rpx 25rpx;
+}
+.check-btn:first-child{
+  margin-right:20rpx ;
+}
+.swiper-wxcode{
+    background-color: #fff;
+    height: 218rpx;
+    margin: 0rpx 20rpx;
+    border-radius: 16rpx;
+}
+.my_code{
+    position: relative;
+    height: 218rpx;
+    width: 710rpx;
+  }
+  .code_img{
+    height: 218rpx;
+    width: 710rpx;
+    position:absolute;
+    top:0;
+    z-index:9
+  }
+  .code_content{    
+    z-index: 99;
+    position: relative;
+    height: 100%;
+  }
+  .code_left{
+    width: 420rpx;
+    margin: 20rpx;
+    flex-shrink: 0;
+  }
+  .code_left_name{
+    font-weight: bold;
+    font-size: 38rpx;
+    color: #333;
+    text-align: center;
+  }
+  .code_left_desc{
+    font-size: 26rpx;
+    color: #8C8C8C ;
+    -webkit-line-clamp:3;
+  }
+  .code_right_img{
+    width: 120rpx;
+    height: 120rpx;
+    background-color: #E4E4E4;
+  }
+  .code_right_btn{
+    border: 1px solid #000000;
+    border-radius: 8rpx;
+    background-color: #000;
+    color: #fff;
+    font-size: 20rpx;
+    font-weight: bold;
+    text-align: center;
+    margin-top:10rpx ;
+  }
+  .code_right_text{
+    width: 20rpx;
+    font-size: 18rpx;
+    color: #999999;
+    margin-left:20rpx ;
+  }
+  .code-img-text{
+    font-size: 20rpx;
+    color: #8C8C8C;
+  }
+  .activity-info{
+    margin: 20rpx;
+    border-radius: 16rpx;
+    height: 310rpx;
+    background-color: #fff;
+  }
+  /* 促销 */
+  .activity-sale{
+      border: 4px solid #fff;
+      box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.13);
+  }
+.sale-info{
+    height: 100%;   
+}
+.sale-left{
+    width: 160rpx; 
+    font-size: 28rpx;
+    font-weight: bold;
+    flex-shrink: 0;
+}
+.sale-img{
+  width: 100rpx;
+  height: 100rpx;
+  margin-bottom: 20rpx;
+}
+.sale-right{
+  margin-right: 20rpx;
+  justify-content: space-around;
+}
+.sale-box{
+  width:160rpx;
+  height: 260rpx;
+  border-radius: 20rpx;
+  background-color: #F8F8F8;
+  margin-bottom: 10rpx;
+}
+.sale-box-info{
+  position: relative;
+  width: 140rpx;
+  height: 140rpx;
+}
+.sale-pro-img{
+  width: 140rpx;
+  height: 140rpx;
+}
+.sale-text{
+  position: absolute;
+  left: 0rpx;
+  width: 92rpx;
+  height: 30rpx ;
+  font-size: 20rpx;
+  line-height: 30rpx;
+  text-align: center;
+  background-color: #EC0702;
+  border-top-right-radius:16rpx ;
+  border-bottom-right-radius:16rpx ;
+  color: #fff;
+  bottom: 20rpx;
+}
+.sale-money{
+  color: #FF4545;
+  position: absolute;
+  bottom: 0rpx;
+  background: rgba(0,0,0,0.5);
+}
+.sale-symbol{
+  font-size: 26rpx;
+  padding-right: 3rpx;
+}
+.sale-price{
+  font-size: 30rpx;
+  font-weight: bold;
+}
+.activity-container-content-count-down{
+  font-size: 24rpx;
+}
+.time-colck-img{
+  width: 106rpx;
+  height: 106rpx;
+}
+.time-colck-actImg{
+  width: 160rpx;
+  height: 36rpx;
+  padding: 15rpx 0rpx;
+}
+/* 积分 */
+.activity-jifen{
+  border: 4px solid #fff;
+  box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.13);
+  padding: 10rpx;
+}
+.text2{
+  color: #8C8C8C;
+  font-size: 24rpx;
+}
+.text3{
+  color: #FFBB38;
+}
+.jifen-box{
+  border: 4rpx solid #FFBB38;
+  width: 154rpx;
+  height: 228rpx;
+  border-radius: 14rpx;
+}
+.jifen-pro-num{
+  color: #FFBB38;
+  font-size: 28rpx;
+  font-weight: bold;
+}
+.jifen-pro-img{
+  width: 134rpx;
+  height: 134rpx;
+  margin-bottom: 10rpx;
+}
+.jifen-img{
+  width: 316rpx;
+  height: 54rpx;
+}
+.jifen-time{
+  color: #FDAA18;
+  font-size: 22rpx;
+}
+.list_item_jifen{
+  color: #FDAA18;
+  font-size: 22rpx;
+}
+.time-box{
+  margin: 0rpx 5rpx;
+  background-color: #FDAA18;
+  color: #fff;
+  border-radius: 8rpx;
+  padding: 5rpx;
+}
+.jfen-num-info{
+  height: 255rpx;
+}
+.integral-member-img{
+  width: 56rpx;
+  height: 56rpx;
+  border-radius: 50%;
+  margin-right: 8rpx;
+  flex-shrink: 0;
+}
+.title-item-jf{
+  font-size: 22rpx;
+  font-weight: bold;
+}
+.jf-list2{
+  height: 200rpx;
+}
+.integral-member-list{
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  width: 510rpx;
+  overflow-x: scroll;
+}
+.jf-btns>text{
+  background-color:#FDAA18 ;
+  font-size: 24rpx;
+  padding: 5rpx 20rpx;
+  color: #fff;
+  border-radius: 8rpx;
+}
+/* 优惠券 */
+.activity-Coupons{
+  border:4px solid #fff;
+  box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.13);
+  position: relative;
+}
+.activity-Coupons-list{
+  width: 246rpx;
+  height: 120rpx;
+  background-size:100% 100% ;
+}
+.Coupons-list-left{
+  color: #FFFFFF;
+  width: 140rpx;
+}
+.Coupons-list-right{
+  color: #83B3F5;
+  font-weight: bold;
+  font-size: 28rpx;
+  width: 106rpx;
+}
+.Coupons-left-text1{
+  font-size: 28rpx  ;
+}
+.Coupons-left-text2{
+  font-size: 20rpx  ;
+}
+.activity-Coupons-bottom{
+  position: absolute;
+  right: 20rpx;
+  bottom: 10rpx;
+}
+.Coupons-bottom-text{
+  font-size: 24rpx;
+  color: #8C8C8C;
+  padding-right:10rpx ;
+}
+.activity-Coupons-btn{
+  background-color: #1577FF;
+  border-radius: 24rpx;
+  width: 140rpx;
+  height: 48rpx;
+  text-align: center;
+  line-height: 48rpx;
+  color: #ffff;
+  font-size: 22rpx;
+}
+
+/* 喊价 */
+.activity-hanjia{
+  border:4px solid #fff;
+  box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.13);
+  height: 370rpx;
+}
+.hanjia-box{
+  width:226rpx;
+  height: 226rpx;
+  position: relative;
+  border-radius: 20rpx;
+  box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.13);
+  margin-bottom: 10rpx;
+}
+.hanjia-pro-img{
+  width: 200rpx;
+  height: 200rpx;
+}
+.timess{
+  color: #8C8C8C;
+  font-size: 26rpx;
+}
+
+/* 优惠券 */
+/* 优惠 */
+.sale-box-pop{
+  width: 100%;
+  /* height: 600rpx; */
+  padding: 0 35rpx;
+  box-sizing: border-box;
+}
+.sale-title{
+  height: 50rpx;
+  font-size: 36rpx;
+  font-family: PingFang SC;
+  font-weight: bold;
+  line-height: 50rpx;
+  color: #333333;
+  text-align: center;
+  padding-top: 44rpx;
+}
+.scroll-box{
+  width: 100%;
+  max-height: 680rpx;
+}
+.sale-list{
+  width: 100%;
+  padding: 35rpx 30rpx;
+  box-sizing: border-box;
+  border-top: 2rpx solid rgba(226, 226, 226, 1);
+}
+.sale-item{
+  width: 100%;
+  height: 173rpx;
+  display: flex;
+  margin-bottom: 30rpx;
+}
+.sale-list .sale-item:last-child{
+  margin-bottom: 0;
+}
+.coupon-left{
+  width: 35%;
+  height: 100%;
+  font-size: 41rpx;
+  font-family: Source Han Sans CN;
+  font-weight: 500;
+  color: #FFFFFF;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 35rpx 0;
+  box-sizing: border-box;
+}
+.coupon-right{
+  width: 0;
+  flex: 1;
+  padding: 27rpx 10rpx 23rpx 20rpx;
+  box-sizing: border-box;
+}
+.coupon-title{
+  height: 28rpx;
+  font-size: 28rpx;
+  font-family: Source Han Sans CN;
+  font-weight: 500;
+  color: #333333;
+}
+.coupon-time{
+  height: 24rpx;
+  font-size: 24rpx;
+  font-family: Source Han Sans CN;
+  font-weight: 400;
+  color: #999999;
+  margin: 20rpx 0;
+}
+.coupon-state{
+  height: 24rpx;
+  font-size: 24rpx;
+  font-family: Source Han Sans CN;
+  font-weight: 400;
+  color: #CD9535;
+}
+.sale-receive-btn{
+  width: 80%;
+  height: 100rpx;
+  border-radius: 50rpx;
+  background-color: #F78F23;
+  color: #fff;
+  font-size: 40rpx;
+  margin: 20rpx auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.received{
+  background-color: #ccc;
+}
+.butt {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: #000;
+  opacity: -1;
+  z-index: 9999;
+}
+.miaosha{
+  font-size: 22rpx;
+  color: #FF1C1C;
+}
+
+
+
+/* 推三反一活动 */
+.recommend-activity-swiper{
+  height:320rpx;
+}
+.recommend-activity-swiper-item{
+  width:710rpx;margin:0 auto;height:100%;
+}
+.recommend-activity{
+  height:auto;padding:20rpx;height:100%;
+  box-sizing:border-box;font-size:26rpx;
+}
+.recommend-activity .recommend-activity-goods{
+  width:168rpx;height:168rpx;background-color:#ccc;
+}
+.recommend-activity .goods-info{
+  margin-left:16rpx;
+}
+.recommend-activity .goods-info .goods-name{
+  font-size:30rpx;color:#333;font-weight:bold;
+}
+.recommend-activity .goods-info .goods-description{
+  font-size:24rpx;color:#999;
+}
+.recommend-activity .goods-info .goods-price{color:#FFBB38}
+.recommend-activity .goods-info .goods-price-num{
+  font-size:40rpx;font-weight:bold;
+}
+
+.recommend-activity .down-count-box{margin-top:20rpx;}
+.recommend-activity .remaining-times{
+  font-size:24rpx;color:#EB1918;font-weight:bold;
+}
+.recommend-activity .remaining-times .time-str{
+  font-size:24rpx;color:#EB1918;
+}
+.recommend-activity .remaining-times .adorn-box{
+  border-radius:6rpx;margin:0 5rpx;background-color:#EB1918;
+  width:36rpx;height:40rpx;text-align:center;line-height:40rpx;
+  color:#fff;
+}
+
+.recommend-activity  .activity-title{
+  padding:4rpx 20rpx;border-radius:12rpx;
+  background-color:#1577FF;color:#fff;
+}

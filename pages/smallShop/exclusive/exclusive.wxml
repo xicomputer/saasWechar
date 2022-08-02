@@ -1,0 +1,100 @@
+<!--pages/smallShop/exclusive/exclusive.wxml-->
+<view>
+    <view style="width:100%;height:480rpx;margin-top:{{statusAllHeight}}px">
+        <swiper indicator-dots="{{false}}" circular="true" autoplay="true" interval="3000" style="width:100%;height:100%;">
+            <block wx:for="{{fxBannerList}}" wx:key="index">
+                <swiper-item class="swiper-item">
+                    <image src="{{item}}" style="width:100%" />
+                </swiper-item>
+            </block>
+        </swiper>
+    </view>
+    <view class="commission">
+        <view class="commission_top">
+            <view url='/pages/retail/AllRecorder/AllRecorder' style="margin-top:20rpx;text-align:left;padding-left:50rpx">
+                <view class="get-money">总收入</view>
+                <view class="totalPrice price">{{distributionAmount ==''?'0.00':distributionAmount}}(元)</view>
+            </view>
+            <view class="get-container">
+                <text class="get-money">技术总服务费 {{serviceCharge==''?'0.00(元)':serviceCharge+'(元)'}}</text>
+                <text class="get-money">可提现总佣金 {{noWithdrawal==''?'0.00(元)':noWithdrawal+'(元)'}}</text>
+                <text class="get-money">预估佣金总收入 {{stayAmount==''?'0.00(元)':stayAmount+'(元)'}}</text>
+                <text class="get-money">已提现总佣金 {{unWithdrawal==''?'0.00(元)':unWithdrawal+'(元)'}}</text>
+            </view>
+        </view>
+        <view class="fx-exlpain-btn" bindtap="toExlpain">说明<image class="wenhao" src="/pages/img/wenhao.png"></image></view>
+    </view>
+    <view class="tool-container">
+        <view class="tool-title">
+            我的工具
+            <!-- <navigator class="fx-intro" hover-class="none" url="/pages/videoIntro/videoIntro">操作指南<image class="wenhao" src="/pages/img/wenhao.png"></image></navigator> -->
+        </view>
+        <view class="tool-list">
+            <view bindtap="toWithDraw" class="tool-item">
+                <image class="tool-img" src="/pages/img/my/tx.png"></image>
+                <view class="tool-text">立即提现</view>
+            </view>
+            <!-- <navigator class="tool-item" hover-class="none" url="/pages/retail/searchRetailStore/searchRetailStore">
+                <image class="tool-img" src="/pages/img/my/sys.png"></image>
+                <view class="tool-text">添加商家</view>
+            </navigator>
+            <navigator class="tool-item" hover-class="none" url="/pages/verifyStore/verifyStore?accredit={{userInfo.accredit}}">
+                <image class="tool-img" src="/pages/img/my/test.png"></image>
+                <view class="tool-text">审核商家</view>
+            </navigator> -->
+            <navigator class="tool-item" hover-class="none" url="/pages/smallShop/subordinate/subordinate">
+                <image class="tool-img" src="/pages/img/my/fxry.png"></image>
+                <view class="tool-text">小店粉丝</view>
+            </navigator>
+            <navigator class="tool-item" hover-class="none" url="/pages/Notice/Notice">
+                <image class="tool-img" src="/pages/img/my/ziqu.png"></image>
+                <view class="tool-text">消息通知</view>
+                <view class="tool-num" wx:if="{{noticeNum>0}}">{{noticeNum>99?99:noticeNum}}</view>
+            </navigator>
+        </view>
+    </view>
+    <!-- 列表 -->
+    <view class="windowList">
+        <view class="list" wx:for="{{windowList}}" wx:key="index">
+            <myShop binddel="del" propA="{{type}}" itemObj="{{item}}" data-id="{{item.marchantId}}" type="1" />
+        </view>
+        <view wx:if="{{txt&&windowList.legth}}" class="txt">没有更多内容了...</view>
+            
+        <view class="no-spread" wx:if="{{!windowList.length}}">
+            <image class="no-spread-img" src="../img/no_spread.png" />
+            <view class="no-spread-notice">此类商家暂无...</view>
+        </view>
+        
+        <!-- 说明 -->
+        <van-popup show="{{showExplain}}" bind:close="onClose" closeable stayAmount position="bottom" round>
+            <scroll-view scroll-y="true" class="explain">
+                <view class="explain-title">总收入</view>
+                <view class="explain-text">您在平台所获得的佣金总和，不含技术服务费的金额</view>
+                <view class="explain-title" style="margin-top:20rpx">预估佣金收入</view>
+                <view class="explain-text">当用户通过您分享的链接或海报购买商品后，金额即可成为“待入账”金额，用户7天内不退款，款项进入可提现金额。</view>
+                <view class="explain-title" style="margin-top:20rpx">技术服务费</view>
+                <view class="explain-text">分销人员所得佣金25%作为平台的技术支持和硬软件开发，维护等费用，由平台自动扣除</view>
+                <view class="explain-title" style="margin-top:20rpx">提现说明</view>
+                <view class="explain-text">您在本平台目前可提现金额总和，平台自收到您发起的提现申请后审核，审核无误会在申请日起隔日与您转账，如果最近有一条提现申请在审核中，就不能发起新的提现申请</view>
+            </scroll-view>
+        </van-popup>
+        <van-popup show="{{showApp}}" bind:close="onClose" closeable stayAmount position="bottom" round>
+            <view class="apply">
+                <view class="apply-text">提现说明</view>
+                <view class="entryRules">平台显示您的目前可提现金额，您可以发起提现通知，平台将通知商家，由商家为您转账，平台不提供转账功能</view>
+            </view>
+        </van-popup>
+    </view>
+    <view class="foot">
+        <view class="foot_table me-fx-row">
+            <view class="me-fx-col me-fx-1 me-fx-c-c br-r">
+                <image class="foot_table_img" src="/static/image/tabbar/tabbar_010.png"></image>
+                <text class="cur">首页</text>
+            </view>
+            <view class="me-fx-col me-fx-1 me-fx-c-c " bindtap="goScart">
+                <image class="foot_table_img" src="/static/image/tabbar/scart.png"></image>
+                <text>小店</text>
+            </view>
+        </view>
+    </view>
+</view>

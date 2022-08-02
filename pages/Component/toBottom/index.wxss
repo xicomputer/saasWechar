@@ -1,0 +1,9 @@
+/* pages/Component/toBottom/index.wxss */
+.to-bottom{
+  font-size: 20rpx;
+  text-align: center;
+  font-weight: bold;
+  padding-bottom: 30rpx;
+  color: #999;
+  padding: 20rpx 0rpx;
+}

@@ -1,0 +1,38 @@
+<view>
+    <view class='list-box'>
+        <view class='me-fx-row me-fx-sb-c row-item' bindtap='jumpOrderList' data-type='1'>
+            <text>拼团物流订单</text>
+            <view class='me-fx-row me-fx-sb-c'>
+                <view wx:if='{{wuliu>0}}' class='count-num'></view>
+                <image src='../imgs/right-jiantou.png' class='right-jiantou-img'></image>
+            </view>
+        </view>
+        <view class='me-fx-row me-fx-sb-c row-item' bindtap='jumpOrderList' data-type='2'>
+            <text>拼团预订订单</text>
+            <view class='me-fx-row me-fx-sb-c'>
+                <view wx:if='{{yuding>0}}' class='count-num'></view>
+                <image src='../imgs/right-jiantou.png' class='right-jiantou-img'></image>
+            </view>
+        </view>
+        <view class='me-fx-row me-fx-sb-c row-item' bindtap='jumpOrderList' data-type='3'>
+            <text>拼团同城订单</text>
+            <view class='me-fx-row me-fx-sb-c'>
+                <view wx:if='{{tongcheng>0}}' class='count-num'></view>
+                <image src='../imgs/right-jiantou.png' class='right-jiantou-img'></image>
+            </view>
+        </view>
+        <view class='me-fx-row me-fx-sb-c row-item' bindtap='jumpOrderList' data-type='4'>
+            <text>拼团退款/售后订单</text>
+            <view class='me-fx-row me-fx-sb-c'>
+                <view wx:if='{{shouhou>0}}' class='count-num'></view>
+                <image src='../imgs/right-jiantou.png' class='right-jiantou-img'></image>
+            </view>
+        </view>
+        <view class='me-fx-row me-fx-sb-c row-item' bindtap='jumpStrategy'>
+            <text>拼团攻略</text>
+            <view class='me-fx-row me-fx-sb-c'>
+                <image src='../imgs/right-jiantou.png' class='right-jiantou-img'></image>
+            </view>
+        </view>
+    </view>
+</view>

@@ -1,0 +1,253 @@
+<!--pages/tabPage/home/home.wxml-->
+<view class='home-page-container'>
+  <view class='header-container-box'>
+    <view>
+      <!-- 状态栏标题栏 暂位空元素 -->
+      <!-- <view style='height:{{statusBarHeight+menuButtonHeight}}px'></view> -->
+
+      <!-- 头部 -->
+      <view class="home-top-container" >
+        <view style="height:{{statusBarHeight}}px"></view>
+        <view class='me-fx-row me-fx-start-c title-bar' style="height:{{menuButtonHeight}}px">
+          <navigator url='/pages/tabPage/me/me' hover-class="none">
+            <image class='me-img' src='../../img/home_me.png'></image>
+          </navigator>
+          <view class='readme-img-container'>
+            <image class='readme-img' src='../../img/readme.png'></image>
+            <text class='count-text'>已有{{marchantCount}}家店铺入驻</text>
+          </view>
+          
+        </view>
+      </view>
+
+      <view class="search-container">
+        <navigator class="search-container-box" 
+            hover-class="none" style="height:{{menuHeight}}px" 
+            url="/pages/Index/searchShop/searchShop"
+          >
+            <van-icon name="search"  color="#999" size="35rpx" style="position:absolute;left:24px;top:50%;transform:translateY(-50%);" />
+            <text class="search-text">请输入商家名称</text>
+          </navigator>
+      </view>
+
+      <!-- 轮播图 -->
+      <view class="banner-container">
+        <swiper circular="{{true}}" indicator-dots="{{false}}"
+          autoplay="{{true}}" interval="{{3000}}" duration="{{500}}"
+          indicator-color="#999" indicator-active-color="#000"
+          style='height:304rpx;'
+        >
+          <block wx:for="{{bannerList}}" wx:key="index">
+            <swiper-item class='swiper-item-box'>
+              <navigator hover-class='none'
+                url="/pages/Index/GoodsDetails/GoodsDetails?id={{item.id}}&form=home" 
+              >
+                <view class='swiper-img-box'>
+                  <image class="swiper-img" mode='aspectFill'
+                    src="{{item.thumbnail || item.imageUrl}}"
+                  ></image>
+                  <view class='description-text' wx:if='{{item.description}}'>
+                    {{item.description}}
+                  </view>
+                </view>
+              </navigator>
+            </swiper-item>
+          </block>
+        </swiper>
+      </view>
+    </view>
+  </view>
+
+  <!-- 限时抢购 农特产品 -->
+  <view class='rob-farmers-product' 
+    wx:if='{{recommendPaging.robList.length || recommendPaging.farmersList.length}}'
+  >
+    <view class='rob-box' wx:if='{{recommendPaging.robList.length}}'>
+      <view class='me-fx-row me-fx-start-c'>
+        <image class='title-img' src='../../img/index/xianshi.png'></image>
+        <text class='subtitle-text'>精品超值抢购</text>
+      </view>
+      <text class='label-text'>平台推荐</text>
+      <scroll-view scroll-x='true' class='product-list-box' 
+        bindscrolltolower='CommendScrolltolower' data-type='1'
+      >
+        <view class='me-fx-row'>
+          <navigator class='product-item-box' hover-class='none'
+            wx:for='{{recommendPaging.robList}}' wx:key='index' 
+            url="/pages/Index/GoodsDetails/GoodsDetails?id={{item.id}}&form=home" 
+          >
+            <image class='product-img' src='{{item.thumbnail}}'></image>
+            <view class='price'>
+              <text>￥</text>
+              <text class='int-num'>{{item.intPrice}}</text>
+              <text wx:if='{{item.floatPrice}}'>.{{item.floatPrice}}</text>
+            </view>
+          </navigator>
+        </view>
+      </scroll-view>
+    </view>
+    <view wx:if='{{recommendPaging.robList.length}}' class='line-empty-box'></view>
+    <view class='farmers-box' wx:if='{{recommendPaging.farmersList.length}}'>
+      <view class='me-fx-row me-fx-start-c'>
+        <image class='title-img' src='../../img/index/nong.png'></image>
+        <text class='subtitle-text'>三农产品放心购</text>
+      </view>
+      <text class='label-text'>平台推荐</text>
+      <scroll-view scroll-x='true' class='product-list-box'
+        bindscrolltolower='CommendScrolltolower' data-type='2'
+      >
+        <view class='me-fx-row'>
+          <navigator class='product-item-box' hover-class='none'
+            wx:for='{{recommendPaging.farmersList}}' wx:key='index'
+            url="/pages/Index/GoodsDetails/GoodsDetails?id={{item.id}}&form=home" 
+          >
+            <image class='product-img' src='{{item.thumbnail}}'></image>
+            <view class='price'>
+              <text>￥</text>
+              <text class='int-num'>{{item.intPrice}}</text>
+              <text wx:if='{{item.floatPrice}}'>.{{item.floatPrice}}</text>
+            </view>
+          </navigator>
+        </view>
+      </scroll-view>
+    </view>
+  </view>
+  
+  <!-- 推广店铺 -->
+  <view class='promote-shop-box'>
+    <view class='shadow-box focus-store-item' wx:for='{{marchantList}}' wx:key='index'>
+      <view class='me-fx-row me-fx-sb-c item-top'>
+        <view class='me-fx-row me-fx-start-c'>
+          <image src='../../img/my/badge_img.png' class='badge-img'></image>
+          <text class='access-num'>最近访问{{item.accessNumber}}人数</text>
+        </view>
+        <text wx:if='{{item.isHome}}' class='buy-have-label'>购买过</text>
+      </view>
+      <navigator hover-class='none' class='me-fx-row store-info' 
+        url='/pages/shopHome/home/home?marchantId={{item.id}}'
+      >
+        <image src='{{item.logoPic}}' class='store-img'></image>
+        <view class='me-fx-1 me-fx-col me-fx-sb right-content'>
+          <view class='me-fx-row me-fx-sb-x'>
+            <text class='store-name'>{{item.nickName}}</text>
+            <text class='entrance-btn'>进店</text>
+          </view>
+          <view class='label-container'>
+            <text class='label-item' wx:for='{{item.labelsList}}' 
+              wx:for-index='labeli' wx:for-item='labelVal' wx:key='labeli'
+            >{{labelVal}}</text>
+          </view>
+          <view class='business-time' wx:if='{{item.openingTime && item.closingTime}}'
+          >营业时间:{{item.openingTime}}-{{item.closingTime}}</view>
+        </view>
+      </navigator>
+      <view class='me-fx-row'>
+        <scroll-view scroll-x='{{true}}' style='width:{{item.commodity?"435rpx":"auto"}};'
+          bindscrolltolower='scrolltolower' data-index='{{index}}'
+        >
+          <view class='me-fx-row product-list'>
+            <navigator hover-class='none' class='product-item' wx:for='{{item.promotionList}}' 
+              wx:for-index='promotioni' wx:key='promotioni' wx:for-item='promotionTemp' 
+              url="/pages/Index/GoodsDetails/GoodsDetails?id={{promotionTemp.id}}&form=home"
+            >
+              <image src='{{promotionTemp.thumbnail}}' class='product-img'></image>
+              <view class='me-fx-col'>
+                <text class='product-name'>{{promotionTemp.commodityName}}</text>
+                <text class='product-price'>￥{{promotionTemp.lowPrice}}</text>
+              </view>
+            </navigator>
+          </view>
+        </scroll-view>
+
+        <navigator wx:if='{{item.commodity}}' hover-class='none' class='hot-video'
+          url='/pages/shopHome/home/home?marchantId={{item.id}}&nowTabbarText={{1}}'
+        >
+          <view class='video-poster-box'>
+            <image src='{{item.commodity.coverUrl}}' class='video-poster'></image>
+            <image src='../../img/home_play.png' class='play-img'></image>
+          </view>
+          <view class='me-fx-row me-fx-start-c'>
+            <text>正在热卖中</text>
+            <image class='home-live-gif' src='../../img/home_live.gif'></image>
+          </view>
+        </navigator>
+      </view>
+    </view>
+  </view>
+  
+
+  <!-- 分类商品列表 -->
+  <view class='collect-container'>
+    <view wx:if='{{classProductList.length}}' style='top:{{statusBarHeight+menuButtonHeight}}px'
+      class='product-class-tab-box {{fixedContainer?"fixed-utils":""}}'
+    >
+      <scroll-view scroll-x='{{true}}'>
+        <view class='me-fx-row tab-class-list'>
+          <view wx:for='{{marchantTypeList}}' wx:key='index' 
+            class='me-fx-col me-fx-start-c class-item {{currentClassId==item.id?"sel-class-item":""}}' bindtap='swetchTabClass' data-classid='{{item.id}}'
+          >
+            <view class='item-text-box'>
+              <text>{{item.businessName}}</text>
+              <view wx:if='{{currentClassId==item.id}}'>
+                <text class='circle-1'></text>
+                <text class='circle-2'></text>
+                <text class='circle-3'></text>
+              </view>
+            </view>
+            <view class='small-text {{currentClassId==item.id?"sel-small-text":""}}'>{{item.subtitle}}</view>
+            <view class='unline-box {{currentClassId==item.id?"sel-unline-box":""}}'></view>
+          </view>
+        </view>
+      </scroll-view>
+    </view>
+  
+    <view class='collect-product-list'>
+      <view class='left-list-box {{fixedUtils ? "fixed-utils" : ""}}'>
+        <navigator class='collect-product-item' hover-class="none" wx:for='{{classProductList}}' wx:if="{{index%2 == 0}}" wx:key='index' url="/pages/Index/GoodsDetails/GoodsDetails?id={{item.id}}&form=home">
+          <image class='product-img' src='{{item.thumbnail}}'></image>
+          <view style='padding:6px;box-sizing:border-box;'>
+            <view class='product-title'>{{item.commodityName}} </view>
+            <view class='product-price-box'>
+              <view class='price'>
+                <image wx:if='{{item.activityType==2}}' class='promotion-label' 
+                  src='../../img/my/promotion_label.png'
+                ></image>
+                <text>￥</text>
+                <text style='font-size:32rpx;'>{{item.LowPrice||item.originalPrice}}</text>
+              </view>
+              <text style='background-color:#F7F7F7'>{{item.nickName}}</text>
+            </view>
+          </view>
+        </navigator>
+      </view>
+
+      <view class='right-list-box'>
+        <navigator class='collect-product-item' hover-class="none" wx:for='{{classProductList}}' wx:key='index' wx:if="{{index%2 != 0}}" url="/pages/Index/GoodsDetails/GoodsDetails?id={{item.id}}&form=home">
+          <image class='product-img' src='{{item.thumbnail}}' mode="aspectFill"></image>
+          <view style='padding:6px;box-sizing:border-box;'>
+            <view class='product-title'>{{item.commodityName}}</view>
+            <view class='product-price-box'>
+              <view class='price'>
+                <image wx:if='{{item.activityType==2}}' class='promotion-label' 
+                  src='../../img/my/promotion_label.png'
+                ></image>
+                <text>￥</text>
+                <text style='font-size:32rpx;'>{{item.LowPrice||item.originalPrice}}</text>
+              </view>
+              <text style='background-color:#F7F7F7'>{{item.nickName}}</text>
+            </view>
+          </view>
+        </navigator>
+      </view>
+    </view>
+    
+  </view>
+
+  <view class='me-fx-col me-fx-c-c empty-bg-box' wx:if='{{commentList.length==0 && promotionList.length==0 && auctionList.length==0 && likeList.length==0}}'>
+    <image class='empty-bg-img' src='https://xssj.letterbook.cn/applet/images/home_empty_bg.png'></image>
+    <view class='one-text'>你还未关注任何商家</view>
+    <view class='two-text'>快去关注你喜欢的商家吧！</view>
+  </view>
+</view>
+
+<navigator hover-class='none'  wx:if="{{buton}}" url="/pages/shopHome/home/home" class="butt">授权登录</navigator>

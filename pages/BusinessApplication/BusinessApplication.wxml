@@ -1,0 +1,49 @@
+<view class="application">
+		<!-- <video class="application_video"src="https://xssj.letterbook.cn/applet/videos/cooperation.mp4" controls="controls" poster="https://xssj.letterbook.cn/applet/images/video-img.png"></video> -->
+		<view class="application_image">
+			<block wx:for="{{7}}" wx:key="{{index}}">
+				<image src="https://xssj.letterbook.cn/applet/images/features{{index+1}}.png"></image>
+			</block>
+		</view>
+		<view bindtap="toRegister" class="register">
+			<view class="register_box">
+				<view class="register_text">我已付费</view>
+				<view class="register_text">点击去填写注册资料</view>
+			</view>
+		</view>
+		<view class="application_class">
+			<view class="application_class_head">
+				<view>
+					<view class="application_class_title">请选择您入驻平台的分类</view>
+					<view class="application_class_desc">支持线上快递物流、预订自取消费、同城配送订单类型</view>
+				</view>
+				<view class="application_class_icon" bindtap="isShowAllClass" wx:if="{{classList.length>10}}">
+					<view style="margin-right: 10rpx;">{{isShowClassText}}</view>
+					<view class="{{isShowClassText=='展开'?'downTriangle':'upTriangle'}}"></view>
+				</view>
+			</view>
+			<view class="application_class_content" style="{{isShowClassText=='展开'?'overflow-y: hidden;height: 180rpx;':''}}">
+					<view wx:for="{{classList}}" wx:key="{{item.businessName}}"
+						class="{{classIndex==index?'application_class_content_item application_class_content_item_isSctive':'application_class_content_item application_class_content_item_noActive'}}"
+						bindtap="getClassIndex" data-index="{{index}}">
+						{{item.businessName}}
+					</view>
+				</view>
+		</view>
+	<view class="application_btn">
+		<image src="https://xssj.letterbook.cn/applet/images/bigBtn.png"></image>
+		<button wx:if="{{isAuthorization == 1}}" bindtap="toLogin"></button>
+		<button wx:if="{{isAuthorization == 2}}" open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber"></button>
+		<button wx:if="{{isAuthorization == 3}}" bindtap="payment"></button>
+		<view wx:if="{{!isClickBtn}}" ></view>
+	</view>
+	<view class="application_doc">
+		<icon type="success" size="26rpx" color="{{isAgree?'#EC1919':'#999'}}" bindtap="checkIsAgree"></icon>
+		<span bindtap="checkIsAgree">我已阅读并同意</span>
+		<navigator style="color:#EC1919" url="/pages/BusinessSettlement/BusinessSettlement">《信书商家升级入驻服务协议》</navigator>
+	</view>
+	<view class="application_contactus" bindtap="contactUS" data-text="0731-85235016">
+		<image src="https://xssj.letterbook.cn/applet/images/dianhua.png"></image>
+		<span class="application_contactus_tel">联系方式：0731-85235016</span>
+	</view>
+</view>

@@ -1,0 +1,41 @@
+<!--pages/Index/myFootPrint/myFootPrint.wxml-->
+<!-- 我的足迹 -->
+<view class="follow-container" style="{{lookedList.length?'':'visibility:hidden'}}">
+    <image class="follow-title" src="/pages/img/my/looked_store_title.png">我的足迹</image>
+    <scroll-view scroll-y="true" style="height:90vh">
+        <view class="follow-list">
+            <view class="follow-list-cell van-swipe-cell" wx:for="{{lookedList}}" wx:key="index">
+            <view bindtap="toStore" data-id="{{item.id}}" class="follow-item-box">
+                <view class="looked-box">
+                <view class="big-dot">
+                    <view class="small-dot"></view>
+                </view>
+                <view class="looked-time">{{item.updateTime}}</view>
+                </view>
+                <view class="follow-item looked-item">
+                <view style="display:flex">
+                    <image class="touxiang" src="{{item.logoPic}}" mode="aspectFill"></image>
+                    <view class="follow-content">
+                    <view style="display:flex;margin: 14rpx 0 12rpx;align-items:center">
+                        <view class="follow-name">{{item.nickName}}</view>
+                    </view>
+                    <view class="follow-content-info">
+                        <view class="follow-star-list" wx:for="{{5}}" wx:key="index">
+                        <image style="width:20rpx;height:20rpx;margin-right:2rpx" src="/pages/img/my/star.png"></image>
+                        </view>
+                        <text style="font-size: 22rpx;font-weight: 400;line-height: 30rpx;color: #DA502D;height:30rpx;margin-left:4rpx">5分	</text>
+                        <view style="width:1px;height:19rpx;background:#d2d2d2;margin-left:8rpx;margin-right:8rpx"></view>
+                        <view class="looked-man">{{item.accessNumber||0}}访问数</view>
+                    </view>
+                    <view class="label-list">
+                        <view class="label-item" wx:for="{{item.labels}}" wx:key="index">{{item}}</view>
+                    </view>
+                    </view>
+                </view>
+                <view class="follow-content-botton">简介:{{item.brief}}</view>
+                </view>
+            </view>
+            </view>
+        </view>
+    </scroll-view>
+</view>

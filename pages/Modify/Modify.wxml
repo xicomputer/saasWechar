@@ -1,0 +1,9 @@
+<!--pages/Modify/Modify.wxml-->
+<view style="background: #F5F5F5;min-height:100vh">
+  <view class="signature_headers">
+    <!-- <view class="signature_cancel" bindtap="cancel">取消</view> -->
+    <view wx:if="{{active}}" class="signature_determine signature_determine-acative" bindtap="signatureSure">完成</view>
+    <view wx:else class="signature_determine" bindtap="signatureSure">完成</view>
+  </view>
+  <van-field value="{{signatureData}}" type="textarea" bind:input="InputContent" placeholder="请输入个性签名~" maxlength="30" show-word-limit autosize />
+</view>

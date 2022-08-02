@@ -1,0 +1,35 @@
+<!--pages/shopHome/dynamic/dynamic.wxml-->
+<!-- 订阅通知 -->
+<view class="dynamic-shop">
+  <!-- 推荐酒店 -->
+  <dynamic-list orderSwitch="{{orderSwitch}}" marchantId="{{marchantId}}" hotelList="{{hotelList}}" commentList="{{commentList}}" storeDynamicList="{{storeDynamicList}}" markerInfo="{{markerInfo}}" status="{{status}}" bind:showDingYue="showDingYue"  hidden="{{userInfo.community==3}}"></dynamic-list>
+  <!-- <image bindtap="toWrite" src="/pages/img/index/write-comment.png" class="right-bottom" hidden="{{userInfo.community==3}}"></image> -->
+  <!-- 小店排行 -->
+  <view class="shop-list-top-box" hidden="{{userInfo.community==2||storeList.length==0}}">
+    <image class="shoop-list-top-img" src=""></image>
+  </view>
+  <view class="shop-list" wx:if="{{storeList.length}}" hidden="{{userInfo.community==2}}">
+    <!-- 通知栏 -->
+    <view class="notice-bar-container" wx:if="{{noticeContent.length}}">
+      <image src="/pages/img/index/notice_bar.png" style="width:36rpx;height:36rpx"></image>
+      <text class="notice-title-text">公告:</text>
+      <van-notice-bar style="flex:1;height:56rpx" color="#ff0000" background="#fff" text="{{noticeContent}}">
+      </van-notice-bar>
+    </view>
+    <view wx:for="{{storeList}}" wx:key="index" class="shop-item-box" hidden="{{userInfo.community==2}}">
+      <navigator class="shop-item" url="/pages/smallShop/myShop/myShop?storeId={{item.storeId}}">
+        <view class="shop-item-left">
+          <image class="shop-item-left-logo" src="{{item.headImgUrl}}" mode="aspectFill"></image>
+          <view class="shop-item-left-content">
+            <view>{{item.nickName}}的小店</view>
+          </view>
+        </view>
+        <view class="shop-item-right">
+          <image src="/pages/img/index/huoyue.png" style="margin-bottom:20rpx"></image>
+          <!-- {{item.praise}} -->
+          活跃中
+        </view>
+      </navigator>
+    </view>
+  </view>
+</view>

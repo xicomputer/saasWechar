@@ -1,0 +1,56 @@
+<!--pages/signInHome/signInHome.wxml-->
+<!-- 首页签到页面 白色版-->
+<!-- <view class="signInHome-cont" bindtap="goIntegral" wx:if="{{signData.signinUserList.length > 0}}">
+	<view class="text-cont">
+		<text class="title">积分兑换，豪礼等你拿</text>
+		<view class="more">
+			<text>详情</text>
+			<image src="https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/basics-New%2F%E9%A6%96%E9%A1%B5_slices%2FVector%402x.png"></image>
+		</view>
+	</view>
+	<view class="signInShow-cont">
+		<view wx:for="{{signData.signinList}}" wx:key="index">
+			<image wx:if="{{item.isSignin == 0 && item.signinTime !== isSignInToday}}" class="signInShow-Img" src="https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/basics-New%2F%E9%A6%96%E9%A1%B5_slices%2F%E6%9C%AA%E7%AD%BE%E5%88%B0.png"></image>
+			<image wx:if="{{item.isSignin == 1}}" class="signInShow-Img" src="https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/basics-New%2F%E9%A6%96%E9%A1%B5_slices%2F%E5%B7%B2%E7%AD%BE%E5%88%B0.png"></image>
+			<image wx:if="{{item.isSignin == 0 && item.signinTime == isSignInToday}}" class="signInShow-Img" src="https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/basics-New%2F%E9%A6%96%E9%A1%B5_slices%2F%E6%9C%AA%E7%AD%BE%E5%88%B0gif%E5%9B%BE.gif"></image>
+			<text class="signInNumb">+{{item.score}}</text>
+			<text wx:if="{{item.isSignin==1 || index == nowDay-1}}">{{item.isSignin==0 && index == nowDay-1?'签到':'已签'}}</text>
+			<text wx:else>{{index>nowDay-1?weekList[index]:'未签'}}</text>
+		</view>
+	</view>
+</view> -->
+
+
+<!-- 积分乐园内部组件 -->
+
+<view class="integral-content-container" bindtap="goIntegral" wx:if="{{userInfo.integralSettingStatus == 1}}" style="border-radius:20rpx 20rpx 0 0;position:relative;margin-bottom:0rpx">
+	<view class="integral-title-container">
+		<view class="integral-title-left-box"></view>
+		<view class="integral-title-text">七天签到领取积分</view>
+	</view>
+
+	<view class="integral-sign-in-btn">查看详情</view>
+	<view class="integral-sign-in-list">
+		<view class="integral-sign-in-item-box" wx:for="{{signData.signinList}}" wx:key="index">
+			<block wx:if="{{item.isSignin==1 || index == nowDay-1}}">
+				<view class="integral-sign-in-item" style="background: #FFFFFF;">
+					<view class="integral-sign-in-item-status" style="color: #000;">{{item.isSignin==0 && index == nowDay-1?'签到':'已签'}}</view>
+					<image src="/pages/img/index/integral_state1.png" class="integral-sign-in-item-image"></image>
+					<view class="integral-sign-in-add" style="color: #000;">+{{item.score}}</view>
+				</view>
+			</block>
+			<block wx:else>
+				<view class="integral-sign-in-item" style="background: #D8D8D8;border: 2rpx solid #999;">
+					<view class="integral-sign-in-item-left-top" style="background: #FFFFFF;"></view>
+					<view class="integral-sign-in-item-status" style="color: #999;">{{index>nowDay-1?weekList[index]:'未签'}}</view>
+					<image src="/pages/img/index/integral_state2.png" class="integral-sign-in-item-image"></image>
+					<view class="integral-sign-in-add" style="color: #999;">+{{item.score}}</view>
+				</view>
+			</block>
+			<view class="integral-sign-in-progress" wx:if="{{index!=6}}">
+				<view wx:if="{{index < nowDay-1}}" style="width: 100%;" class="integral-sign-in-progress-in"></view>
+				<view wx:if="{{index == nowDay-1}}" style="width: 50%;" class="integral-sign-in-progress-in"></view>
+			</view>
+		</view>
+	</view>
+</view>

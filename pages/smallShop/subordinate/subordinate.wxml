@@ -1,0 +1,49 @@
+<!-- <view wx:if="{{shopName == ''}}" class="noData">
+  <image src="/pages/img/no_notice.png" class="noData-img"></image>
+  <view class="noMore-data">您还没有下级哦~~</view>
+</view> -->
+<view class="subordinate">
+    <!-- <van-search
+      value="{{ value }}"
+      placeholder="请输入用户名称"
+      use-action-slot
+      shape="round"
+      bind:change="onChange"
+      bind:search="onSearch"
+    >
+      <view slot="action" bind:tap="onClick">搜索</view>
+    </van-search> -->
+    <!-- <view class="subordinate-searchText">{{shopName}}</view> -->
+    <!-- <image src="/pages/img/subordinate.png" class="subordinate-searchImg"></image> -->
+  <!-- </input> -->
+  <view class="subordinate-dropDown {{isShowShop?shopList.length==0?'isShow':'':'isShow'}}">
+    <view class="subordinate-dropDown-item" wx:for="{{shopList}}" wx:key="index" bindtap="changeShop" data-index="{{index}}">
+      <image src="{{item.logoPic}}" class="subordinate-dropDown-item-image"></image>
+      <view class="subordinate-dropDown-item-text">{{item.nickName}}</view>
+    </view>
+  </view>
+  <view wx:if="{{subordinateList.length==0}}" class="noData">
+    <image src="/pages/img/no_notice.png" class="noData-img"></image>
+    <view class="noMore-data">您在该商家没有下级哦~~</view>
+  </view>
+  <view wx:else class="subordinate-list">
+    <view class="subordinate-list-item" wx:for="{{subordinateList}}">
+      <image src="{{item.headimgurl}}" class="subordinate-list-item-img"></image>
+      <view class="subordinate-list-item-info">
+        <view class="subordinate-list-item-info-item">
+          <view class="subordinate-list-item-info-item-name">{{item.nickname}}</view>
+          <view class="subordinate-list-item-infoBox">
+            <view class="subordinate-list-item-info-item-time">收藏时间 </view>
+            <view class="subordinate-list-item-info-item-time">{{item.addTime}} </view>
+          </view>
+          <!-- <view class="subordinate-list-item-info-item-price">+￥{{item.earnings}}</view> -->
+        </view>
+        <!-- <view class="subordinate-list-item-info-item">
+       
+          <view class="subordinate-list-item-info-item-text">佣金收益</view>
+        </view> -->
+      </view>
+    </view>
+    <view class="noMore-data">-没有更多了-</view>
+  </view>
+</view>

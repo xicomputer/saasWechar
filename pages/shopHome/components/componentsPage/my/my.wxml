@@ -1,0 +1,216 @@
+<view class="my">
+  <!-- 头部 -->
+  <view class="my_header">
+    <view class="header">
+      <!-- 头像部分 -->
+      <view class="head-portrait">
+        <image class="via" src="{{userInfo.avatarUrl}}"></image>
+        <view>
+          <view class="nameBox">
+            <text class="name">{{userInfo.nickName?userInfo.nickName:'补充信息'}}</text>
+            <!-- 以下为普通会员的接口 -->
+            <!-- <view class="vip" bindtap="toMember" wx:if="{{userInfo.status==1&&userInfo.memberLeve}}">
+              <text wx:if="{{userInfo.status==1&&userInfo.memberLeve}}" class="vipText">{{userInfo.memberLeve.name}}</text>
+              <text wx:if="{{userInfo.status==1&&!userInfo.memberLeve}}" class="vipText">未激活会员</text>
+              <image class="vipImage" mode="aspectFit" src="https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/basics-New%2F%E9%A6%96%E9%A1%B5_slices%2FMy%2FGroup%201099%402x.png" bindtap=""></image>
+            </view> -->
+            <!--  新接口去往卡卷 -->
+            <view class="vip" bindtap="goCoupons" wx:if="{{userInfo.status==1&&userInfo.memberLeve}}">
+              <image class="vipImage" mode="aspectFill" src="https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/basics-New%2F%E9%A6%96%E9%A1%B5_slices%2FMy%2F%E6%88%91%E7%9A%84%E5%8D%A1%E5%8D%B7.png" bindtap=""></image>
+            </view>
+          </view>
+          <!-- 签名接口需要调整 -->
+          <navigator hover-class='none' class="user-modify-btn" url="/pages/Modify/Modify">{{userInfo.signature||'该用户暂未设置签名~'}}</navigator>
+        </view>
+      </view>
+      <!-- 积分和优惠券 -->
+      <!-- <view class="coupons">
+        <view bindtap="{{activityInfo.integralSettingStatus?'goIntegral':''}}" wx:if="{{signData.signinUserList.length > 0}}">
+          <view>
+            <text>积分乐园</text>
+            <text>{{jifenNum?jifenNum:"0"}}</text>
+          </view>
+          <image src="https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/basics-New%2F%E9%A6%96%E9%A1%B5_slices%2FMy%2F%E6%88%91%E7%9A%84%E7%A7%AF%E5%88%86.png"></image>
+        </view>
+        <view bindtap="goCoupons">
+          <view>
+            <text>我的卡卷</text>
+            <text>{{CouponsNum}}</text>
+          </view>
+          <image src="https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/basics-New%2F%E9%A6%96%E9%A1%B5_slices%2FMy%2F%E5%8D%A1%E5%8D%B7.png"></image>
+        </view>
+      </view> -->
+    </view>
+    <image class="header_bgc" src="https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/basics-New%2F%E9%A6%96%E9%A1%B5_slices%2FMy%2F%E5%A4%B4%E9%83%A8%E8%83%8C%E6%99%AF%402x.png"></image>
+  </view>
+
+  <!-- 店铺公告 -->
+  <!-- <view  wx:if="{{list.length>0}}">
+    <swiper style="margin-top:58rpx;" class="notice-box {{noticeBox}} " vertical autoplay circular easing-function='easeInOutCubic'>
+      <swiper-item class='me-fx-row me-fx-start-c notice-content {{contentBox}}' wx:for='{{list}}' wx:key='index'>
+        <text class='icon icon-notice {{textColor}}'></text>
+        <text class='me-fx-1 me-full-text {{textColor}} text_eee'>店铺公告：{{item.content}}</text>
+      </swiper-item>
+    </swiper>
+  </view> -->
+ 
+  <!-- 签到 -->
+  <signInHome userInfo="{{userInfo}}" firstSignInData="{{signData}}"></signInHome>
+  <!-- 普通订单-->
+  <view class="regular-orders">
+    <view class="activity">
+      <text>普通订单</text>
+    </view>
+    <view class="details">
+      <navigator hover-class='none' wx:for="{{deliveryOrderList}}" wx:key="index" url="/pages/order/{{item.page}}/{{item.page}}?activeTab=2&marchantId={{marchantId}}&tabsItem={{index}}">
+        <image src="{{item.icon}}"></image>
+        <text>{{item.name}}</text>
+        <text wx:if="{{item.name == '物流订单' && regularOrdersNum > 0}}" class="orderNumber">{{regularOrdersNum}}</text>
+        <text wx:if="{{item.name == '到店订单' && bookingOrdersNum > 0}}" class="orderNumber">{{bookingOrdersNum}}</text>
+        <text wx:if="{{item.name == '同城订单' && sameOrderNum > 0}}" class="orderNumber">{{sameOrderNum}}</text>
+
+      </navigator>
+      <!-- <view bindtap="toOrder">
+                    <image src="../../../../static/My/到店订单.png"></image>
+                    <text>到店订单</text>
+                </view>
+                <view bindtap="toOrder">
+                    <image src="../../../../static/My/邀一返三.png"></image>
+                    <text>同城订单</text>
+                </view> -->
+    </view>
+  </view>
+
+  <!-- 活动订单 -->
+  <view class="regular-orders">
+    <view class="activity">
+      <text>活动订单</text>
+    </view>
+    <view class="details">
+      <navigator hover-class='none' wx:for="{{toolList}}" wx:key="index" bindtap="toActive" data-idx="{{index}}">
+        <image src="{{item.icon}}"></image>
+        <text>{{item.name}}</text>
+        <!-- <text wx:if="{{item.name == '拼团' && toolsListNums.jsmsOrderCount > 0}}" class="orderNumber">{{toolsListNums.jsmsOrderCount}}</text> -->
+        <text wx:if="{{item.name == '秒杀' && toolsListNums.ttptOrderCount > 0}}" class="orderNumber">{{toolsListNums.ttptOrderCount}}</text>
+        <!-- <text wx:if="{{item.name == '邀一退三' && toolsListNums.tsfyOrderCount > 0}}" class="orderNumber">{{toolsListNums.tsfyOrderCount}}</text> -->
+      </navigator>
+    </view>
+  </view>
+
+  <!-- 会员权益，如果不是会员 -->
+  <view class="regular-orders" wx:if="{{userInfo.status==1&&!userInfo.memberLeve && codeInfo.length > 0}}">
+    <view class="activity">
+      <text>官方粉丝群</text>
+    </view>
+    <view class="details">
+      <navigator class="navwidth" hover-class='none' bindtap="goimg">
+        <image src="https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/basics-New%2F%E9%A6%96%E9%A1%B5_slices%2FMy%2F%E7%A6%8F%E5%88%A9%E7%A4%BE%E7%BE%A4icon.png"></image>
+        <text>官方粉丝群</text>
+      </navigator>
+    </view>
+  </view>
+
+  <!-- 会员权益，如果是会员 -->
+  <view class="memberRight" wx:if="{{userInfo.status==1&&userInfo.memberLeve}}">
+    <view class="rightContent" >
+      <view bindtap="toMember">
+        <text class="memberLevel" >{{userInfo.memberLeve.name}}</text>
+        <text class="currentIntegral">会员积分: {{memberInfo.member.integral || 0}}</text>
+        <view>
+          <text>会员等级</text>
+          <image src="https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/basics-New%2F%E9%A6%96%E9%A1%B5_slices%2FMy%2F%E4%BC%9A%E5%91%98%E6%9D%83%E7%9B%8Amore.png" class="levelMore" mode="widthFix"></image>
+        </view>
+        <image class="memberRight-Img" mode="aspectFill" src="https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/basics-New%2F%E9%A6%96%E9%A1%B5_slices%2FMy%2F%E4%BC%9A%E5%91%98%E6%9D%83%E7%9B%8AImg.png"></image>
+      </view>
+      <view class="memberGoods">
+        <view class="memberGoodsContent">
+          <view bindtap="aciveUrl">
+            <image src="https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/basics-New%2F%E9%A6%96%E9%A1%B5_slices%2FMy%2F%E4%BC%9A%E5%91%98%E5%95%86%E5%93%81icon.png"></image>
+            <text>会员商品</text>
+          </view>
+          <view catchtap="goimg" wx:if="{{codeInfo.length > 0}}">
+            <image src="https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/basics-New%2F%E9%A6%96%E9%A1%B5_slices%2FMy%2F%E7%A6%8F%E5%88%A9%E7%A4%BE%E7%BE%A4icon.png"></image>
+            <text>官方粉丝群</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+
+  <!-- <view class="my_order">
+    <view class="my_order_title">我的工具</view>
+    <view class="my_tool">
+      <block wx:for="{{toolList}}" wx:key="index">
+        <view wx:if="{{!orderSwitch&&item.name=='购物车'}}"></view>
+        <view wx:else class="my_order_content_item my_tool_item" bindtap="pagesTo" data-idx="{{index}}">
+          <image style="width:40rpx;height:40rpx;margin-bottom:6rpx" src="{{item.icon}}"></image>
+          <view>{{item.name}}</view>
+          <view wx:if='{{toolsListNums[item.numKey]>0}}' class='badge-style'></view>
+        </view>
+      </block>
+    </view>
+  </view> -->
+  <!-- 精选服务,由我的工具改版 -->
+  <view class="service">
+    <!-- 文本 -->
+    <view class="text">
+      <text>精选服务</text>
+    </view>
+    <!-- 内容 -->
+    <view class="content">
+      <view class="single" wx:for="{{service}}" wx:key="index" url="{{item.url}}" bindtap="pagesTo" data-idx="{{index}}">
+        <image class="icon" src="{{item.icon}}"></image>
+        <text>{{item.name}}</text>
+        <image class="more-icon" mode="widthFix" src="https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/basics-New%2F%E9%A6%96%E9%A1%B5_slices%2FMy%2Fmore-icon.png"></image>
+      </view>
+    </view>
+  </view>
+ <!-- 以下为原福利社群展示轮播图 -->
+  <!-- <swiper style="height:200rpx" wx:if="{{codeInfo.length>0}}" autoplay="true" interval="3000" duration="1000">
+    <swiper-item wx:for="{{codeInfo}}" wx:key='index' circular>
+      <view class="my_code">
+        <image class="code_img" src="../../../../static/code_bg.png"></image>
+        <view class="me-fx-row code_content">
+          <view class="code_left">
+            <view class="code_left_name me-full-text">{{item.wechatgroupname}}</view>
+            <view class="code_left_desc me-full-text">{{item.describes?item.describes:""}}</view>
+          </view>
+          <view class="me-fx-1 me-fx-row me-fx-c-c">
+            <view class="me-fx-col">
+              <image class="code_right_img" data-src="{{item.wechatgroupqrcode}}" bindtap="goimg" src="{{item.wechatgroupqrcode}}"></image>
+              <text class="code_right_btn" data-src="{{item.wechatgroupqrcode}}" bindtap='saveImg'>保存二维码</text>
+            </view>
+            <text class="code_right_text">点击长按识别</text>
+          </view>
+        </view>
+      </view>
+    </swiper-item>
+  </swiper> -->
+
+
+
+  <!-- <view class='plate-box' style='margin-bottom:10px;'>
+            <view class='plate-title'></view>
+            <view class='nav-list-container'>
+                <navigator hover-class='none' hover-class='none' class='nav-item-box' wx:for='{{reservationList}}' wx:key='index' url="/pages/order/orderListTake/orderListTake?tabsitem={{index}}">
+                    <image class='nav-icon-img' src='{{"../../../image/tabpage/"+item.icon+".png"}}'></image>
+                    <text>{{item.name}}</text>
+                    <view class="number" wx:if="{{toStoreOrderNum[index]}}">{{toStoreOrderNum[index]}}</view>
+                </navigator>
+            </view>
+        </view> -->
+
+  <!-- 我的足迹 -->
+  <!-- <view class='me-fx-row me-fx-sb my_order plate-box'>
+      <view class='my_order_title' style='border:none;'>我的足迹</view>
+      <navigator hover-class='none' hover-class='none' class='more-navigor' 
+        url="/pages/Index/myFootPrint/myFootPrint"
+      >更多>></navigator>
+  </view> -->
+
+  <!-- <image class="my_to_register" 
+    src="/pages/img/my/index_me_store_apply.png" 
+  ></image> -->
+
+</view>

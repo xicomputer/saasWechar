@@ -1,0 +1,20 @@
+<view class="set-up-container">
+  <view class="user-info-box">
+    <image class="user-info-img" src="{{userInfo.avatarUrl}}"></image>
+    <view class="user-info-content">
+      <view class="user-name">{{userInfo.nickName}}</view>
+      <view class="user-modify-box">
+        <text class="user-modify-content">{{userInfo.signature || '还未设置个性签名'}}</text>
+        <navigator class="user-modify-btn" url="/pages/Modify/Modify">编辑</navigator>
+      </view>
+    </view>
+  </view>
+  <navigator class="set-up-item" url="/pages/Address/AddressList/AddressList">
+    <text>地址管理</text>
+    <image src="/pages/img/goin.png" style="width:12rpx;height:20rpx"></image>
+  </navigator>
+  <navigator class="set-up-item" url="/pages/Invoice/InvoiceList/InvoiceList">
+    <text>发票管理</text>
+    <image src="/pages/img/goin.png" style="width:12rpx;height:20rpx"></image>
+  </navigator>
+</view>

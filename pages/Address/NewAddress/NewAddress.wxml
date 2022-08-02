@@ -1,0 +1,86 @@
+<view class="newadd">
+    <view class="add_list_box">
+      <view class="addList">
+        <view class="add_list_title">收货人</view>
+        <input
+          style="padding-left:40px;"
+          class="inputBold"
+          type="text"
+          placeholder="请填写收货人姓名"
+          maxlength="16"
+          placeholder-class="placeholder"
+          bindblur="updateName"
+          value="{{addrname}}"
+        />
+      </view>
+      <view class="addList">
+        <view class="add_list_title">手机号码</view>
+        <input
+          type="tel"
+          placeholder="请填写收货人手机号"
+          placeholder-class="placeholder"
+          maxlength="11"
+          class="inputBold"
+          value="{{addrphone}}"
+          bindblur="updatePhone"
+          blur="animate()"
+        />
+      </view>
+      <view class="addList">
+        <view class="add_list_title">所在地区</view>
+        <input
+          type="text"
+          disabled
+          placeholder="省市区县、乡镇等"
+          placeholder-class="placeholder"
+          class="inputBold"
+          value="{{shop_address}}"
+          bindtap="showAreaList"
+        />
+        <!-- <image catchtap="getPosition" style="width:28rpx;height:28rpx;padding:20rpx" src="/pages/img/order/addr.png"></image> -->
+      </view>
+      <view class="addList">
+        <view class="add_list_title">详细地址</view>
+        <input
+          placeholder="街道、楼牌号等"
+          class="text_area inputBold"
+          placeholder-class="placeholder"
+          bindinput="addrarea"
+          value="{{addrarea}}"
+					maxlength="50"
+        ></input>
+      </view>
+      <view class="default_list">
+        <view class="default_left">
+          <view class="default_text1">设置默认地址</view>
+          <view class="default_text2">提醒：每次下单会默认推荐使用该地址</view>
+        </view>
+        <image
+          src="../../img/xuanze.png"
+          bindtap="onChange"
+          wx:if="{{checked}}"
+          class="check_default_icon"
+        />
+        <image
+          src="../../img/weixuan.png"
+          bindtap="onChange"
+          wx:if="{{!checked}}"
+          class="check_default_icon"
+        />
+      </view>
+    </view>
+		<view class="addlist-footer-btn">
+			<view class="saveBtn" bindtap="saveBtn">保存</view>
+		</view>
+    <van-popup show="{{ showarea }}" bind:close="onClose" position="bottom" custom-style="height: 50%;" z-index="999">
+      <van-area
+      value="areaCode"
+			area-list="{{ areaList }}"
+			columns-placeholder="{{ ['请选择', '请选择', '请选择'] }}"
+			bind:cancel ="cancel"
+			bind:confirm ="confirm"
+      wx:if="{{showarea}}"
+		/>
+    </van-popup>
+    <!-- <view class="shadow" wx:if="{{showarea}}" bindtap="cancel"></view> -->
+  </view>

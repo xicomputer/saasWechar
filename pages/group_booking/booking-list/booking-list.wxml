@@ -1,0 +1,112 @@
+<!--pages/group_booking/booking-list/booking-list.wxml-->
+
+<view>
+    <view class='top-tab'>
+        <scroll-view scroll-x='{{true}}' class='top-tab-list-scroll'>
+            <view class='me-fx-row tab-list-box'>
+                <view class='me-fx-col me-fx-sb-c tab-item {{item.status==currentStatus?"sel-item":""}}' 
+                    wx:for='{{topTabList}}' wx:key='index' bindtap='switchStatus' data-status='{{item.status}}'
+                >
+                    <text class='me-fx-1 tab-item-name'>{{item.name}}</text>
+                    <view class='unline-box'></view>
+                    <text wx:if='{{item.count}}' class='count-num'>{{item.count}}</text>
+                </view>
+            </view>
+        </scroll-view>
+    </view>
+
+    <view class='order-list' wx:if='{{dataList.length}}'>
+        <view class='order-item' wx:for='{{dataList}}' wx:key='index' data-item='{{item}}' >
+            <view class='me-fx-row me-fx-sb-c'>
+                <text>订单号:{{item.orderNumber}}</text>
+                <text class='status-text'>{{item.orderStateText}}</text>
+            </view>
+            <view class='me-fx-row goods-info'>
+                <image src='{{item.bannerImgUrls[0]}}' class='goods-img'></image>
+                <view class='me-fx-1 me-fx-col me-fx-sb'>
+                    <view>
+                        <view class='me-full-text goods-name'>{{item.commodityName}}</view>
+                        <text class='specification'>规格:{{item.skuName}}</text>
+                    </view>
+                    <view class='me-fx-row me-fx-sb-c'>
+                        <text>￥{{item.price}}</text>
+                        <text>x{{item.amount}}</text>
+                    </view>
+                </view>
+            </view>
+            <view class='me-fx-row me-fx-end payment-amount'>
+                <text>实付：￥{{item.actualMoney}}</text>
+            </view>
+
+            <view class='order-show-info'>
+                <view>预计到店时间：{{item.arriveTime}}</view>
+                <view>联系人：{{item.shippingInfo.contacts}}   {{item.shippingInfo.contactsWay}}</view>
+                <view>商家地址：{{merchantAddress}}</view>
+                <view>留言：{{item.message || '没有留言'}}</view>
+            </view>
+
+            <view class='me-fx-row me-fx-end-c item-footer'>
+                <van-count-down time='{{item.downTimes}}' use-slot='{{true}}' auto-start='{{true}}'
+                    bind:finish='finishFun' bind:change='changeFun' data-index='{{index}}'
+                    wx:if='{{item.orderState===0 && item.isDelete!=1}}'
+                >
+                    <view class='me-fx-row me-fx-start-c down-content' wx:if='{{item.downTimes>0}}'>
+                        <image src='../../img/shizhong.png' class='shi-zhong-icon'></image>
+                        <text>支付剩余：{{item.downTimeObj.minutes}}分{{item.downTimeObj.seconds}}秒</text>
+                    </view>
+                    <view wx:else class='down-content'>待付款订单已过期</view>
+                </van-count-down>
+
+                <!-- <button class='btn blue-btn' wx:if='{{item.orderState==1 || item.orderState==2 || item.orderState==4}}' data-item='{{item}}' catchtap='contactMerchant'>联系商家</button> -->
+
+                <button class='btn blue-btn' wx:if='{{item.isDelete==1 || item.orderState==3 || item.orderState==0}}' data-item='{{item}}'  catchtap='delOrder'>删除订单</button>
+                <!-- <button class='btn blue-btn' data-item='{{item}}' catchtap='openWhyList' wx:if='{{item.orderState==0 && item.isDelete!=1}}'>取消订单</button> -->
+
+                <!-- <button class='btn red-btn' data-item='{{item}}' catchtap='openWhyList' wx:if='{{(item.orderState==4 || item.orderState==1) && item.isEnd!=1 }}'>{{item.activityOrderRefundResponse?'查看售后':'申请退款'}}</button> -->
+
+                <button class='btn red-btn' wx:if='{{item.orderState==0 && item.isDelete!=1}}' data-item='{{item}}' catchtap='goPay'>去支付</button>
+                <button class='btn red-btn' wx:if='{{item.orderState==1}}' data-item='{{item}}' catchtap='showVerificationCode'>核销码</button>
+                <button class='btn yellow-btn' wx:if='{{item.orderState==2}}' data-item='{{item}}' catchtap='confirmDelivery'>确认收货</button>
+                <!-- <button class='btn last-btn' wx:if='{{item.orderState==4}}' data-item='{{item}}'  catchtap='jumpEvaluate'>去评价</button> -->
+                <button class='btn yellow-btn' wx:if='{{item.isDelete==1 || item.orderState==3}}' data-item='{{item}}'  catchtap='jumpGoodsDetail'>再次拼单</button>
+            </view>
+        </view>
+    </view>
+    <view wx:else class='me-fx-col me-fx-c-c list-empty-box'>
+        <text>暂无数据</text>
+    </view>
+</view>
+
+
+<!-- 取消订单原因弹窗 -->
+<van-popup show='{{showCancelWhy}}' round='{{true}}' bind:click-overlay='closePopup'
+    close-on-click-overlay="{{true}}" position='bottom' 
+    custom-style='border-radius:24rpx 24rpx 0 0;'
+>
+    <view class='cancel-why-content'>
+        <view class='me-fx-row me-fx-sb-c top-box'>
+            <text class='cancel-btn' bindtap='closePopup'>取消</text>
+            <text class='title-text'>{{popupTitle}}</text>
+            <text class='confirm-btn' bindtap='popupConfrimHandle'>确认</text>
+        </view>
+        <view class='radio-list'>
+            <view class='me-fx-row me-fx-start-c why-item' wx:for='{{whyList}}' wx:key='index'
+                bindtap='selectWhy' data-whynum='{{item.whyNum}}'
+            >
+                <view class='radio-box {{item.whyNum==whyNum?"checked-radio":""}}'></view>
+                <text>{{item.content}}</text>
+            </view>
+            <textarea class='why-textarea' value='{{reasonText}}' bindinput='textareaChange' ></textarea>
+        </view>
+    </view>
+</van-popup>
+
+
+
+<view wx:if='{{showCodeBox}}' class='me-fx-col me-fx-c-c verification-code-box'
+    bindtap='hideCodeBox'
+>   
+    <view class='code-container'>
+        <canvas class='verification-code-img' canvas-id="myQrcode"></canvas>
+    </view>
+</view>

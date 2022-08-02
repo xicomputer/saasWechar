@@ -1,0 +1,17 @@
+<!--pages/shopHome/components/view-more-title/view-more-title.wxml-->
+
+
+<view class='component-box'>
+    <!-- <image  bindtap='emitEvent' src='{{imgUrl}}' class='btn-container-img'></image> -->
+    <view class='me-fx-row me-fx-sb-c title-box'>
+        <view  bindtap='emitEvent'>
+            <text class='title-text' style='color:{{titleColor}};'>{{title}}</text>
+            <text wx:if='{{subTitle}}' class='sub-title-text' style='color:{{titleColor}}'>{{subTitle}}</text>
+        </view>
+        
+        <view  bindtap='emitEvent' class='me-fx-row me-fx-c-c more-text' wx:if="{{addPd !=3.1}}">
+            <text>更多</text>
+            <text class='icon icon-right right-icon'></text>
+        </view>
+    </view>
+</view>

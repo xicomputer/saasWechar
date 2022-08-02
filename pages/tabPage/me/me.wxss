@@ -1,0 +1,181 @@
+/* pages/tabPage/me/me.wxss */
+page{height:100vh;}
+.me-page-container{background-color:#F7F7F7;min-height:100%;}
+
+
+/* 导航容器 */
+.plate-box{
+    padding:20rpx;box-sizing:border-box;
+    background-color:#fff;border-radius:16rpx;
+}
+.plate-box .plate-title{
+    font-size:28rpx;color:#333;font-weight:bold;
+    padding-bottom:20rpx;border-bottom:1rpx solid #E4E4E4;
+}
+.plate-box .nav-list-container{
+    display:flex; flex-wrap:wrap;
+}
+.plate-box .nav-item-box{
+    display:flex;flex-direction:column;justify-content:center;
+    font-size:24rpx;color:#333;align-items:center;
+    width:20%;position: relative;
+}
+.plate-box .nav-item-box .nav-icon-img{
+    width:90rpx;height:90rpx;
+}
+.nav-item-box .number {
+    width: 26rpx;
+    height: 26rpx;
+    line-height: 26rpx;
+    background: #FFFFFF;
+    border: 1px solid #FF1C30;
+    border-radius: 50%;
+    font-size: 22rpx;
+    font-family: PingFang SC;
+    font-weight: 400;
+    color: #FF1D2E;
+    opacity: 1;
+    position: absolute;
+    top: 6rpx;
+    right: 30rpx;
+    text-align: center;
+  }
+  .noticeNum{
+    width: 32rpx;
+    height: 32rpx;
+    line-height: 32rpx;
+    background: #06A9FD;
+    border-radius: 50%;
+    font-size: 22rpx;
+    font-family: PingFang SC;
+    font-weight: 400;
+    color: #FFFFFF;
+    position: absolute;
+    top: 8rpx;
+    right: -12rpx;
+    text-align: center;
+  }
+
+/* 头部 */
+.top-content-box{
+    position:relative;height:480rpx;
+}
+.top-content-box .top-box-bg{
+    height:480rpx;width:100%;
+    background: linear-gradient(271deg, #F95244 0%, #FF1400 100%);
+    border-bottom-left-radius: 50% 30rpx;border-bottom-right-radius: 50% 30rpx;
+}
+.top-content-box .content-box{
+    position:absolute;top:0;left:0;height:450rpx;
+    padding:50rpx 20rpx 0;width:100%;box-sizing:border-box;
+}
+.top-content-box .content-box .user-base-info{
+    display:flex;align-items:center;
+}
+.top-content-box .content-box .user-base-info .avatar-img{
+    width:140rpx;height:140rpx;background-color:#ccc;
+    border-radius:50%;margin-right:30rpx;
+    overflow:hidden;
+}
+
+.top-content-box .content-box .user-name-info{
+    display:flex;flex-direction:column;height: 140rpx;
+    justify-content:space-around;flex:1;position: relative;
+    color:#F4F4F4;font-size:22rpx;
+}
+.top-content-box .content-box .name-box{
+    display:flex;justify-content:space-between;
+    align-items:flex-end;
+}
+.top-content-box .content-box .name-box .user-name{
+    font-size:40rpx;overflow: hidden;white-space: nowrap;
+    text-overflow: ellipsis;width:50%;
+}
+.top-content-box .content-box .me-top-nav-icon{
+    width:40rpx;height:44rpx;
+}
+.top-content-box .content-box .logistics-order-plate{
+   position:absolute;bottom:-70rpx;left:20rpx;
+   width:710rpx;
+}
+
+
+/* 剩余其他版块部分 */
+.residue-plate-container{
+    margin-top:60rpx;padding:0 20rpx 30rpx;
+    box-sizing:border-box;
+}
+
+/* 工具 */
+.more-navigor{
+    font-size:24rpx;color:#333;
+}
+.scroll-x-box{
+    border-top:1rpx solid #E4E4E4;
+    padding-top:16rpx;
+    height: 300rpx;
+}
+.scroll-item{
+    width:562rpx;height:300rpx;flex-shrink:0;
+    border-radius:16rpx;position:relative;
+}
+.scroll-item:not(:first-child){margin-left:14rpx;}
+.footprint-bg-img{ width:100%;height:100%;}
+.scroll-item .item-content{
+    position:absolute;left:0;top:0;
+    width:100%;height:100%;
+    padding:12rpx 14rpx;
+    box-sizing:border-box;
+}
+.scroll-item .item-content .dot-box{
+    width:18rpx;height:18rpx;border-radius:50%;
+    background-color:#fff;
+}
+.scroll-item .item-content .time-str{
+    font-size:22rpx;color:#fff;
+    font-weight:bold;margin-left:10rpx;
+}
+
+.scroll-item .item-content .shop-info-box{
+    border-radius:18rpx;overflow:hidden;
+}
+.scroll-item .item-content .shop-info-img{
+    width:272rpx;height:248rpx;
+    background-color:#ccc;
+}
+.scroll-item .item-content .shop-info-content{
+    font-size:20rpx;color:#999;
+    background-color:#fff;
+    padding:8rpx;box-sizing:border-box;
+}
+.scroll-item .item-content .shop-title{
+    font-size:28rpx;color:#333;font-weight:bold;line-height: 40rpx;
+    overflow: hidden;text-overflow: ellipsis;width: 246rpx;
+    white-space: nowrap;
+}
+.scroll-item .item-content .shop-visits-num{
+    font-size:24rpx;color:#333;font-weight:bold;line-height: 34rpx;
+}
+.scroll-item .item-content .address-text{-webkit-line-clamp: 2;margin-bottom:5rpx;line-height: 28rpx;}
+.scroll-item .item-content .describe-text{-webkit-line-clamp: 3;}
+
+
+
+/* 登录 */
+.butt {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: #000;
+    opacity: -1;
+    z-index: 9999;
+  }
+
+  .nav-icon-img2{
+    width: 20px;
+    height: 20px;
+    margin-bottom: 3px;
+    margin-top: 10rpx;
+}

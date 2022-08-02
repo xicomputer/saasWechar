@@ -1,0 +1,265 @@
+<!-- 活动列表组件 -->
+
+<view class='activity-list'>
+    <!-- <view class='me-fx-row me-fx-c-c top-msg'>商家为你推荐好货，支持全国发货</view>
+    <view class='item-box' wx:for='{{activityList}}' wx:key='index' bindtap="aciveUrl"  data-url="{{item.linkUrl}}">
+        <view class='me-fx-col me-fx-start-c'>
+            <image src='{{item.imgUrl}}' class='activity-img'></image>
+            <view class='me-fx-row me-fx-sb-c item-floor'>
+                <view>
+                    <view class='title-text'>{{item.name}}</view>
+                 <view class='time-str'>2021·07·03-2021·08·03</view> 
+                </view>
+                <text class='to-view-btn'>立即查看</text>
+            </view>
+        </view>
+    </view> -->
+    <view class="activity-content">
+        <view class="activity-top-bg me-fx-row me-fx-c-c"  wx:if="{{commentList2s.length>0}}">
+            <view class="activity-header me-fx-row me-fx-start-c me-fx-sb">
+            <!-- <text class="me-full-text addName">{{commentList2s[0].content}}</text> -->
+                <swiper style="height:70rpx;width:100%" class="notice-box {{noticeBox}} " vertical autoplay circular easing-function='easeInOutCubic'>
+                    <swiper-item class='me-fx-row me-fx-start-c notice-content {{contentBox}}' wx:for='{{commentList2s}}' wx:key='index'>
+                        <text class='me-full-text addName'>{{item.content}}</text>
+                    </swiper-item>
+                </swiper>
+                <view style="flex-shrink:0;">
+                    <text class="check-btn"  bindtap="showDingyue">活动订阅</text>
+                    <text class="check-btn"  bindtap="aciveUrl"  data-url="/pages/shopHome/dynamic/dynamic">立即查看</text>
+                </view>
+            </view>
+        </view>
+        
+        
+        <!-- <view class="me-fx-row me-fx-c-c" wx:if="{{codeInfo.length>0}}">
+            <swiper style="height:200rpx;width:710rpx;" autoplay="true" interval="3000" duration="1000">
+            <swiper-item wx:for="{{codeInfo}}" wx:key='index' circular>
+            <view class="my_code" >
+                <image class="code_img" src="../../../static/code_bg.png"></image>
+                <view class="me-fx-row code_content">
+                    <view class="code_left">
+                    <view class="code_left_name me-full-text">{{item.wechatgroupname}}</view>
+                    <view class="code_left_desc me-full-text">{{item.describes?item.describes:""}}</view>
+                    </view>
+                    <view class="me-fx-1 me-fx-row me-fx-c-c">
+                    <view class="me-fx-col">
+                        <image class="code_right_img"  data-src="{{item.wechatgroupqrcode}}"  bindtap="goimg" src="{{item.wechatgroupqrcode}}"></image>
+                        <text class="code_right_btn" bindtap='saveImg' data-src="{{item.wechatgroupqrcode}}">保存二维码</text>
+                    </view>
+                    <text class="code_right_text">点击长按识别</text>
+                    </view>
+                </view>
+            </view>
+            </swiper-item>
+        </swiper> 
+        </view> -->
+        <!-- 秒杀 促销 -->
+        <view class="activity-sale activity-info" wx:if="{{activityInfo.promotionStatus && saleGoodsList.length}}" bindtap="aciveUrl" data-url="/pages/Index/saleList/saleList" >
+            <view class="me-fx-row me-fx-start-c sale-info">
+                <view class="sale-left me-fx-col me-fx-c-c">
+                    <image class="sale-img" src="https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/static/clock2.gif"></image>
+                    <image class="time-colck-img" src="https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/static/time-colck-item.png"></image>
+                </view>
+                <view class="me-fx-row me-fx-start-c me-fx-1" style="margin-right:10rpx;justify-content: space-around;">
+                    <block  wx:for="{{saleGoodsList}}" wx:key="index" >
+                        <view wx:if="{{index<3}}" class="me-fx-col me-fx-c-c" >
+                            <view class="sale-box me-fx-c-c me-fx-col">
+                                <view class="sale-box-info">
+                                    <image class="sale-pro-img" src="{{item.thumbnail}}"></image>
+                                    <view class="me-fx-row sale-money me-fx-start-c">
+                                        <text class="sale-price">￥{{ item.lowPrice }}</text>
+                                    </view>
+                                </view>
+                                <image class="time-colck-actImg" src="https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/static/time-colck-active.png"> </image>
+                                <van-count-down wx:if="{{item.remainingTime}}"  data-index="{{index}}"  use-slot bind:change="onChange"  time="{{ item.remainingTime*1000}}"  >
+                                    <view class="activity-container-content-count-down">
+                                        <text wx:if="{{item.timeData.days>0}}">{{ item.timeData.days }}天</text>
+                                        <text>{{ item.timeData.hours }}:</text>
+                                        <text>{{ item.timeData.minutes }}:</text>
+                                        <text>{{ item.timeData.seconds }}</text>
+                                    </view>
+                                </van-count-down>
+                            </view>
+                        </view>
+                    </block>
+                </view>
+            </view>
+        </view>
+        <!-- 积分 -->
+        <view class="activity-jifen activity-info"  wx:if="{{activityInfo.integralSettingStatus}}" bindtap="aciveUrl" data-url="/pages/Index/integral/integral">
+            <view class="me-fx-row me-fx-start-c me-fx-sb">
+                <image class="jifen-img" src="https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/static/jifen-active.png"></image>
+                <view class="jifen-time me-fx-row me-fx-start-c">
+                    <text>距结束还剩：</text>
+                    <van-count-down use-slot bind:change="changeJfTime" data-index="{{index}}" time="{{signData.countDownTime}}">
+                        <view class="list_item_jifen">
+                            <text wx:if="{{JifentimeData.days!=0}}">{{JifentimeData.days}}</text>
+                            <text wx:if="{{JifentimeData.days!=0}}">天</text>
+                            <text class="time-box">{{JifentimeData.hours<10?'0'+JifentimeData.hours:JifentimeData.hours}}</text>
+                            <text>:</text>
+                            <text class="time-box">{{JifentimeData.minutes<10?'0'+JifentimeData.minutes:JifentimeData.minutes}}</text>
+                            <text>:</text>
+                            <text class="time-box">{{JifentimeData.seconds<10?'0'+JifentimeData.seconds:JifentimeData.seconds}}</text>
+                        </view>
+                    </van-count-down>
+                </view>
+            </view>
+            <view class="me-fx-row me-fx-start-c jfen-num-info">
+                <view class="sale-left me-fx-col me-fx-c-c">
+                    <image class="sale-img" src="https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/static/jifen.gif"></image>
+                    <text class="text2">当前积分:</text>
+                    <text class="text3">{{jifenNum}}</text>
+                </view>
+                <!-- <view class="me-fx-row sale-right me-fx-start-c me-fx-1" >
+                    <block wx:if="{{index<3}}"  wx:for="{{exchangeGoodsList}}" wx:key="index" >
+                        <view class="me-fx-col me-fx-c-c" >
+                            <view class="jifen-box me-fx-c-c me-fx-col">
+                                <image class="jifen-pro-img" src="{{item.imageUuid}}"></image>
+                                <text class="jifen-pro-num me-full-text">{{item.score}}积分</text>
+                            </view>
+                        </view>
+                    </block>
+                </view> -->
+                <view class="me-fx-col me-fx-sb jf-list2">
+                    <text class="title-item-jf">当前参与用户</text>
+                    <view class="integral-member-list">
+                        <image src="{{item.headimgurl}}" class="integral-member-img" wx:for="{{signData.signinUserList}}" wx:key="index"></image>
+                    </view>
+                    <text class="title-item-jf">当前任务</text>
+                    <view class="jf-btns me-fx-row me-fx-sb">
+                        <text>签到</text>
+                        <text>去分享</text>
+                        <text>去购买</text>
+                        <text>去邀请</text>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <!-- 喊价 -->
+        <view class="activity-hanjia activity-info" wx:if="{{activityInfo.hasActive}}" bindtap="aciveUrl"  data-url="/pages/activity/pmhd/list/list">
+            <view class="me-fx-row me-fx-start-c sale-info">
+                <view class="sale-left me-fx-col me-fx-c-c">
+                    <image class="sale-img" src="https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/static/hanjia.gif"></image>
+                    <text>喊价</text>
+                    <text class="text2">当前有:</text>
+                    <text class="text3">{{auctionNum}}</text>
+                    <text class="text2">商品正在喊价</text>
+                </view>
+                <view class="me-fx-row sale-right me-fx-start-c me-fx-1">
+                    <block  wx:for="{{auctionList}}" wx:key="index" >
+                        <view wx:if="{{index<2}}" class="me-fx-col me-fx-c-c">
+                            <view class="hanjia-box me-fx-c-c me-fx-col">
+                                <image mode="aspectFill" class="hanjia-pro-img" src="{{item.logoImg}}"></image>
+                            </view>
+                            <view class="timess">剩余时间</view>
+                            <block wx:if="{{item.status != '3'}}">
+                                <van-count-down use-slot bind:change="changeTime" data-index="{{index}}" time="{{ item.timeMinutes }}">
+                                    <view class="list_item_onLookers">
+                                        <text wx:if="{{item.timeData.days!=0}}">{{item.timeData.days}}</text>
+                                        <text wx:if="{{item.timeData.days!=0}}">天</text>
+                                        <text>{{item.timeData.hours<10?'0'+item.timeData.hours:item.timeData.hours}}</text>
+                                        <text>:</text>
+                                        <text>{{item.timeData.minutes<10?'0'+item.timeData.minutes:item.timeData.minutes}}</text>
+                                        <text>:</text>
+                                        <text>{{item.timeData.seconds<10?'0'+item.timeData.seconds:item.timeData.seconds}}</text>
+                                    </view>
+                                </van-count-down>
+                            </block>
+                        </view>
+                    </block>
+                </view>
+            </view>
+        </view>
+        <!-- 优惠券 -->
+        <view class="activity-Coupons activity-info" wx:if="{{saleCanList.length>0}}">
+            <view class="me-fx-row me-fx-start-c sale-info">
+                <view class="sale-left me-fx-col me-fx-c-c">
+                    <image class="sale-img" src="https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/static/activity-juan.png"></image>
+                    <text>优惠券</text>
+                </view>
+                <view class="me-fx-row sale-right me-fx-start-c me-fx-1">
+                    <block wx:if="{{index<2}}"  wx:for="{{saleCanList}}" wx:key="index" >
+                        <view class="activity-Coupons-list me-fx-row" style="background-image:url('https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/static//Coupons-act-bg.png')">
+                            <view class="me-fx-col me-fx-c-c Coupons-list-left">
+                                <text class="Coupons-left-text1">{{item.deduct}}</text>
+                                <text class="Coupons-left-text2">满{{item.confine}}可用</text>
+                            </view>
+                            <text class="Coupons-list-right me-fx-row me-fx-c-c">优惠券</text>
+                        </view>
+                    </block>
+                </view>
+            </view>
+            <view class="me-fx-row activity-Coupons-bottom me-fx-start-c">
+                <text class="Coupons-bottom-text">您有优惠券尚未领取</text>
+                <text class="activity-Coupons-btn" bindtap="showSale">立即领取</text>
+            </view>
+        </view>
+
+        <!-- 推三反一活动 -->
+        <swiper indicator-dots indicator-color='#E4E4E4' indicator-active-color='#FFBB38' autoplay circular class='recommend-activity-swiper' wx:if='{{willList.length}}'>
+            <swiper-item class='recommend-activity-swiper-item' wx:for='{{willList}}' wx:key='index'>
+                <navigator url='/pages/businessActivity/activityShop/activityShop?activityId={{item.activityId}}' hover-class="none"
+                    class='activity-info recommend-activity'
+                    wx:if='{{item}}'
+                >
+                    <view class='me-fx-row'>
+                        <image mode='aspectFill' class='recommend-activity-goods' src='{{item.detailImgUrls[0]}}'></image>
+                        <view class='me-fx-1 goods-info'>
+                            <view class='me-full-text goods-name'>{{item.commodityName}}</view>
+                            <view class='me-full-text goods-description'>{{item.description}}</view>
+                            <view class='goods-price'>
+                                <text>最高可赚:</text>
+                                <text class='goods-price-num'>{{item.commodityPrice}}元</text>
+                            </view>
+                        </view>
+                    </view>
+                    <view class='me-fx-row me-fx-sb-c down-count-box'>
+                        <view class='me-fx-row me-fx-c-c remaining-times'>
+                            距结束：
+                            <van-count-down time='{{item.diffTimes}}' data-index='{{index}}'
+                                auto-start='{{true}}' use-slot='{{true}}' 
+                                bind:change="recommendTimeChange"
+                            >
+                                <view class='me-fx-row me-fx-c-c time-str'>
+                                    <view class='adorn-box'>{{item.times.days}}</view>天
+                                    <view class='adorn-box'>{{item.times.hours}}</view>时
+                                    <view class='adorn-box'>{{item.times.minutes}}</view>分
+                                    <view class='adorn-box'>{{item.times.seconds}}</view>秒
+                                </view>
+                            </van-count-down>
+                        </view>
+                        <text class='activity-title'>{{item.templateName || '邀三退一'}}</text>
+                    </view>
+                </navigator>
+            </swiper-item>
+        </swiper>
+        
+    </view>
+    
+    <van-popup show="{{ showSale }}" bind:close="closeSale" round closeable position="bottom">
+        <view class="sale-box-pop">
+            <view class="sale-title">优惠券</view>
+            <scroll-view scroll-y="true" class="scroll-box">
+                <view class="sale-list">
+                    <view class="sale-item" wx:for="{{saleCanList}}" wx:key="index" bindtap="selectSale" data-index="{{index}}" style="background-image:url(https://xssj.letterbook.cn/applet/images/sale_bg_sub.png);background-size:100% 173rpx;background-repeat:no-repeat;">
+                        <view class="coupon-left">
+                        <view>￥{{item.deduct}}</view>
+                        <view style="font-size:24rpx;margin-left:18rpx">满{{item.confine}}元使用</view>
+                        </view>
+                        <view class="coupon-right">
+                        <view class="coupon-title">{{item.couponName}}</view>
+                        <view class="coupon-time">截止日期：{{item.endTime}}</view>
+                        <view class="coupon-state">{{item.isDraw==1?'已领取':'未领取'}}</view>
+                        </view>
+                    </view>
+                </view>
+            </scroll-view>
+            <view bindtap="receiveSale" wx:if="{{!receivedSale}}" class="sale-receive-btn">
+            立即领取
+            </view>
+            <view bindtap="receivedSale" wx:if="{{receivedSale}}" class="sale-receive-btn received">
+            已领取
+            </view>
+        </view>
+    </van-popup>
+</view>

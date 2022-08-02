@@ -1,0 +1,25 @@
+<view class="details">
+  <view class="details_title">
+    <image src="{{dynamicData.userInfo.headimgurl}}" mode="aspectFill" class="details_title_left"></image>
+    <view class="details_title_right">
+      <view class="details_title_name">
+        <view>{{dynamicData.userInfo.nickname}}</view>
+        <image wx:if="{{dynamicData.isMember}}" src="/pages/img/index/member_icon.png"></image>
+      </view>
+      <view class="details_title_sign">{{dynamicData.userInfo.signature}}</view>
+    </view>
+  </view>
+  <view class="details_content">{{dynamicData.content}}</view>
+  <view class="details_image">
+    <block wx:for="{{dynamicData.imagList}}" wx:for-item="pitem" wx:for-index="pindex" wx:key="pindex">
+      <image src="{{pitem}}" catchtap="imgClick" data-list="{{dynamicData.imagList}}" data-src="{{pitem}}" mode="aspectFill"></image>
+    </block>
+  </view>
+  <view class="details_foot">
+    <view class="details_foot_left">发布时间：{{dynamicData.addTime}}  </view>
+    <view class="details_foot_right" bindtap="operationPraise">
+      <image src="{{dynamicData.isPraise?'/pages/img/gooded.png':'/pages/img/index/dynamic_icon_4.png'}}"></image>
+      <view>{{dynamicData.praise}}</view>
+    </view>
+  </view>
+</view>

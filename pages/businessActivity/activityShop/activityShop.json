@@ -1,0 +1,11 @@
+{
+  "navigationBarTitleText": "邀三退一",
+  "enablePullDownRefresh":true,
+  "usingComponents": {
+    "van-tab": "@vant/weapp/tab/index",
+    "van-tabs": "@vant/weapp/tabs/index",
+    "van-count-down": "@vant/weapp/count-down/index",
+    "count-down":"../components/countdown/countdown",
+    "auth-get-info":"../../Component/auth-get-info/auth-get-info"
+  }
+}

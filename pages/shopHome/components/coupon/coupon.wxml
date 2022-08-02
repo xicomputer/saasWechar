@@ -1,0 +1,11 @@
+<!-- <view class="coupon-container">
+	<image src="../../../static/images/Group 2913@2x.png" bindtap="members"></image>
+</view> -->
+
+<!-- <view class="coupon-container">
+	<image src="https://xinshusj-1301305452.cos.ap-guangzhou.myqcloud.com/basics-New%2F%E9%A6%96%E9%A1%B5_slices%2FGroup%202913%402x.png"  bindtap="aciveUrl"  data-url="/pages/shopHome/member/member"></image>
+</view> -->
+
+<view bindtap="aciveUrl"  data-url="/pages/shopHome/member/member" style="width: 90rpx;height:90rpx;position: absolute;z-index: 9999;margin-left: -45rpx;"></view>
+
+

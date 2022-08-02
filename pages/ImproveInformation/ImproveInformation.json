@@ -1,0 +1,13 @@
+{
+  "usingComponents": {
+    "van-uploader": "@vant/weapp/uploader/index",
+    "van-field": "@vant/weapp/field/index",
+    "van-area": "@vant/weapp/area/index",
+    "van-popup": "@vant/weapp/popup/index",
+    "van-sidebar": "@vant/weapp/sidebar/index",
+  "van-sidebar-item": "@vant/weapp/sidebar-item/index",
+  "van-dialog": "@vant/weapp/dialog/index"
+  },
+  "navigationBarTitleText": "注册"
+  
+}

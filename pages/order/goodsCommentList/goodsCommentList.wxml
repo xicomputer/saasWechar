@@ -1,0 +1,60 @@
+<no-data text="您还没有进行评价哦！" url="https://xssj.letterbook.cn/applet/images/sj_no_data_img7.png" wx:if="{{!goodsCommentList.length}}"></no-data>
+<view wx:else class="goodsCommentList">
+	<view wx:if="{{commodityId}}" class="goodsCommentList-point">
+		<view class="point-left">
+			<view class="point-left-averageGrade">{{averageGrade}}</view>
+			<view class="point-left-text">分</view>
+		</view>
+		<view class="point-right">
+			<view class="point-right-highGrade">
+				<view class="highGrade-desc">好评</view>
+				<view class="highGrade-progressBox">
+					<view class="highGrade-progress" style="width:{{highGrade}}"></view>
+				</view>
+				<view class="highGrade-point">{{highGrade}}</view>
+			</view>
+			<view class="point-right-bottomGrade">
+				<view class="bottomGrade-desc">差评</view>
+				<view class="bottomGrade-progressBox">
+					<view class="bottomGrade-progress" style="width:{{bottomGrade=='无差评'?'0%':bottomGrade}}"></view>
+				</view>
+				<view class="bottomGrade-point">{{bottomGrade=='无差评'?'无差评':bottomGrade}}</view>
+			</view>
+		</view>
+	</view>
+		<view class="goodsCommentList-item" wx:for="{{goodsCommentList}}">
+			<view class="item-headinfo">
+				<view class="headinfo-left">
+					<image src="{{item.headimgurl}}" class="headinfo-img"></image>
+				</view>
+				<view class="headinfo-right">
+					<view class="headinfo-name">{{item.nickname}}</view>
+					<view class="headinfo-start">
+						<image wx:for="{{5}}" wx:for-item="sitem" wx:for-index="sindex" src="../../img/order/start_b{{item.grade>sindex?6-item.grade+sindex:0}}.png" class="start-img" bindtap="changeStartLevel" data-index="{{sindex+1}}"></image>
+					</view>
+				</view>
+			</view>
+			<view class="item-text">{{item.content}}</view>
+			<view class="item-image" wx:if="{{item.imagList.length}}">
+				<image wx:for="{{item.imagList}}" wx:for-item="iitem" src="{{iitem}}" class="image-img" bindtap="zoomImg" data-list="{{item.imagList}}" data-src="{{iitem}}"></image>
+			</view>
+			<view class="item-footer">
+				<view class="footer-time">{{item.addTime}}发表</view>
+				<view class="footer-operate">
+					<item bindtap="toComment" data-item="{{item}}" class="operate-item">
+						<image src="../../img/comment.png" class="operate-icon"></image>
+						<view class="operate-num">{{item.reply}}</view>
+					</item>
+					<view bindtap="liketap" data-index="{{index}}" data-id="{{item.id}}" class="operate-item">
+						<image wx:if="{{!item.myPraise}}" src="../../img/good.png" class="operate-icon"></image>
+						<image wx:else src="../../img/gooded.png" class="operate-icon"></image>
+						<view class="operate-num">{{item.praise}}</view>
+					</view>
+				</view>
+			</view>
+			<view class="item-replay" wx:if="{{goodsCommentDetails.marchantContent}}">
+				<view class="item-replay-name">商家回复</view>
+				<view class="item-replay-text">{{item.marchantContent}}</view>
+			</view>
+		</view>
+	</view>

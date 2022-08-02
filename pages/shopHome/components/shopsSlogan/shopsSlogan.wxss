@@ -1,0 +1,119 @@
+
+.support {
+	font-size: 20rpx;
+    text-align: center;
+    color: rgb(0, 0, 0);
+    height: 60rpx;
+    /* background-color: rgb(150, 73, 73); */
+	font-weight: bold;
+}
+
+.more-icon {
+	width: 14rpx !important;
+	height: 26rpx !important; 
+  
+  }
+.shops-slogan {
+	width: 100%;
+    background-color: #fff;
+    padding: 52rpx 30rpx 140rpx 30rpx;
+    box-sizing: border-box;
+  }
+  .slogan-container {
+	  /* background-color: #fff; */
+	  border-radius: 20rpx 20rpx 0 0 ;
+	  display: flex;
+	  align-items: center;
+	  flex-direction: column;
+  }
+  .shops-slogan .text {
+	width: 400rpx;
+    height: 140rpx;
+	display: flex;
+	flex-direction: column;
+  }
+  .shops-slogan .text text:nth-of-type(1) {
+	font-size: 38rpx;
+	color: #505050;
+	font-weight: 900;
+  }
+  .shops-slogan .text text:nth-of-type(2) {
+	font-size: 24rpx;
+	color: rgb(151, 151, 151);
+  }
+  
+  /* .shops-slogan .slogan-container .text view {
+	width: 115rpx;
+	height: inherit;
+	display: flex;
+	align-items: center;
+  }
+  
+  .shops-slogan .slogan-container .text view text {
+	font-size: 26rpx;
+	margin-right: 5rpx;
+	color: #ababab;
+  } */
+
+  
+  .shops-slogan .slogan-container .single {
+	width: 700rpx;
+	/* height: 570rpx; */
+	background-color: rgb(243 243 243);
+	border-radius: 20rpx;
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	padding-bottom: 20rpx;
+	margin-bottom: 30rpx;
+  }
+  .shops-slogan .slogan-container .single image {
+	  width: 700rpx;
+	  height: 376rpx;
+	  border-radius: 20rpx 20rpx 0 0;
+  }
+  .shops-slogan .slogan-container .single text {
+	  font-size: 28rpx;
+	  width: 636rpx;
+	  /* height: 160rpx; */
+	  margin-top: 28rpx;
+	  letter-spacing: 1rpx;
+  }
+  .default {
+	  width: 100vw;
+	  height: 100vh;
+	  background-color: #fff;
+	  position: relative;
+  }
+  .default text {
+	  position: absolute;
+	  top: 800rpx;
+    left: 200rpx;
+}
+  
+  .default image {
+	  position: absolute;
+	  top: 260rpx;
+    left: 70rpx;
+  }
+  /* 视频模块 */
+  .video {
+    position: relative;
+	display: flex;
+	justify-content: center;
+	margin-bottom: 40rpx;
+}
+.video video {
+    width: 690rpx;
+    height: 394rpx;
+	border-radius: 10px;
+	z-index: 1;
+}
+.video .video-img {
+    position: absolute;
+    top: -36rpx;
+    left: 0;
+    width: 100%;
+    height: 396rpx;
+}
+  

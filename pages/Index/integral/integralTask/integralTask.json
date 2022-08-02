@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+    "taskPop": "/pages/Index/integral/components/integralTask/integralTask",
+    "van-popup": "@vant/weapp/popup/index",
+    "van-datetime-picker": "@vant/weapp/datetime-picker/index"
+  },
+  "navigationBarTitleText": "积分任务"
+}

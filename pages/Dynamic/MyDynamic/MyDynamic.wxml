@@ -1,0 +1,41 @@
+<view style="width:100%;height:1rpx;background:#e5e5e5"></view>
+<view wx:if="{{!dynamicList.length}}" class="no-dynamic">
+  <image class="no-dynamic-img" src="/pages/img/no_notice.png"></image>
+	<view class="no-dynamic-text">您还没有发表动态……</view>
+</view>
+<view wx:else>
+  <view class="dynamic-item" wx:for="{{dynamicList}}" wx:for-item="item" wx:for-index="index" wx:key="index">
+    <view class="dynamic-top">
+      <view class="touxiang-box">
+        <image class="my-touxiang" mode="aspectFill" src="{{item.userInfo.headimgurl}}"></image>
+        <image wx:if="{{item.userInfo.sex==1}}" class="sex" src="../../img/man.png"></image>
+        <image wx:if="{{item.userInfo.sex==2}}" class="sex" src="../../img/woman.png"></image>
+      </view>
+      <view class="my-info-box">
+        <view class="name-box">
+          {{item.userInfo.nickname}}
+          <!-- <image class="set" src="../../img/set.png"></image> -->
+        </view>
+        <view class="autograngh">{{item.userInfo.signature}}</view>
+      </view>
+    </view>
+    <rich-text nodes="{{item.content}}" class="dynamic-text"></rich-text>
+    <view class="dynamic-img-list">
+      <image class="dynamic-img-item" mode="aspectFill" lazy-load wx:for="{{item.picture}}" wx:for-item="pitem" wx:for-index="pindex" wx:key="pindex" src="{{pitem}}" bindtap="imgClick" data-list="{{item.picture}}" data-src="{{pitem}}"></image>
+    </view>
+    <view class="dynamic-bottom">
+      <view class="dynamic-time">{{item.addTime}}</view>
+      <view class="dynamic-zan-box">
+        <view class="comment" bindtap="toComment" data-item="{{item}}">
+          <image style="width:30rpx;height:28rpx;" src="../../img/comment.png"></image>
+          <view class="comment-text">{{item.reply==0?'评论':item.reply}}</view>
+        </view>
+        <view class="comment dianzan" bindtap="liketap" data-id="{{item.id}}" data-index="{{index}}">
+          <image style="width:30rpx;height:28rpx" wx:if="{{item.isPraise}}" src="../../img/gooded.png"></image>
+          <image style="width:30rpx;height:28rpx" wx:else src="../../img/good.png"></image>
+          <view class="comment-text">{{item.praise==0?'赞':item.praise}}</view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

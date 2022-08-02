@@ -1,0 +1,18 @@
+
+<view class='me-fx-row me-fx-c-c'>
+    <canvas id='activityPosterCanvas' canvas-id="activityPosterCanvas"
+        class='poster-canvas' style='width:{{cWidth}}px;height:{{cHeight}}px'
+        width='{{cWidth*2}}px' height='{{cHeight*2}}px'
+    ></canvas>
+</view>
+
+<view class='me-fx-col me-fx-c-c section-content'>
+    <view class='me-fx-row me-fx-c-c posters-img-box'>
+        <image src='{{posterImg}}' class='posters-img'></image>
+    </view>
+
+    <view wx:if='{{posterImg}}'>
+        <button class='save-btn' bindtap='savePoster'>保存海报</button>
+    </view>
+</view>
+

@@ -1,0 +1,117 @@
+<view>
+    <!-- 头部分类导航 -->
+    <view class='classity-nav-box' wx:if='{{!classId}}'>
+        <scroll-view class='top-nav-scroll' scroll-x='{{true}}'>
+            <view class='me-fx-row nav-list-box'>
+                <view class='me-fx-col me-fx-sb-c class-item {{nowClassId==item.id?"sel-item":""}}' 
+                    wx:for='{{classNavList}}' wx:key='index' data-classid='{{item.id}}'
+                    bindtap='switchClass'
+                >
+                    <text class='me-fx-1 me-fx-row me-fx-c-c'>{{item.classifyName}}</text>
+                    <view class='under-line'></view>
+                </view>
+            </view>
+        </scroll-view>
+    </view>
+
+    <!-- 秒杀 -->
+    <view class='ms-data-list-box' wx:if='{{type=="JSMS" && dataList.length}}'>
+        <block wx:for='{{dataList}}' wx:key='index'>
+            <view class='me-fx-row ms-item-box' bindtap='jumpDetail' data-activityid='{{item.activityId}}'>
+                <image src='{{item.imageUrl}}' class='goods-img'></image>
+                <view class='me-fx-1 me-fx-col me-fx-sb'>
+                    <view>
+                        <van-count-down use-slot bind:change="changeTime" data-index="{{index}}" 
+                            time="{{ item.diffTimes }}" bind:finish='finishFun'
+                        >
+                            <view class='down-time'>
+                                <text>{{item.state==1?'距开始':'距结束'}}:</text>
+                                <text wx:if='{{item.times.days!=="00"}}'>{{item.times.days}}天</text>
+                                <text>{{item.times.hours}}:{{item.times.minutes}}:{{item.times.seconds}}</text>
+                            </view>
+                        </van-count-down>
+                        <view class='me-full-text goods-name'>{{item.commodityName}}</view>
+                    </view>
+                    <view class='me-fx-row me-fx-sb-end'>
+                        <view class='me-fx-row me-fx-c-c price-box'>
+                            <view class='now-price'>
+                                <text>￥</text>
+                                <text class='now-price-num'>{{item.lowPrice}}</text>
+                                <view class='now-price-tite'>
+                                    秒杀价 <text class='triangle-box'></text>
+                                </view>
+                            </view>
+                            <text class='old-price'>¥{{item.price}}</text>
+                        </view>
+                        <view class='me-fx-col me-fx-c-c qg-btn'>
+                            <view>立即抢购</view>
+                            <view class='me-fx-row me-fx-c-c progress-box'>
+                                <progress percent='{{item.percentNum}}' font-size='14rpx' stroke-width='2'
+                                    activeColor='#fff' backgroundColor='#FE8987' class='me-fx-1'
+                                ></progress>
+                                <text class='percentage-num'>{{item.percentNum}}%</text>
+                            </view>
+                            
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </block>
+    </view>
+
+
+    <!-- 拼团 -->
+    <view class='pt-data-list-box' wx:if='{{type=="TTPT" && dataList.length}}'>
+        <block wx:for='{{dataList}}' wx:key='index'>
+            <view class='me-fx-row pt-item-box' bindtap='jumpDetail' data-activityid='{{item.activityId}}'>
+                <image src='{{item.imageUrl}}' class='goods-img'></image>
+                <view class='me-fx-1 me-fx-col me-fx-sb'>
+                    <view class='goods-name-info'>
+                        <view class='me-full-text goods-name'>{{item.classifyName}}</view>
+                        <view class='label-text'>{{item.groupOfNumber}}人团</view>
+                    </view>
+                    <view class='center-info'>
+                        <image class='pt-adorn-bg' src='../../img/pt-adorn.png'></image>
+                        <view class='me-fx-row me-fx-sb upper-content'>
+                            <text class='old-price'>¥{{item.price}}</text>
+                            <van-count-down use-slot bind:change="changeTime" data-index="{{index}}" bind:finish='finishFun'
+                                time="{{ item.diffTimes }}"
+                            >
+                                <view class='down-timeing'>
+                                    <text>{{item.state==1?'距开始':'距结束'}}:</text>
+                                    <text wx:if='{{item.times.days!=="00"}}'>{{item.times.days}}天</text>
+                                    <text>{{item.times.hours}}:{{item.times.minutes}}:{{item.times.seconds}}</text>
+                                </view>
+                            </van-count-down>
+                        </view>
+                        
+                        <view class='save-info'>
+                            <image class='pt-adorn-jiantou-bg' src='../../img/pt-adorn-jiantou.png'></image>
+                            <view class='me-fx-col me-fx-c-c upper-content'>
+                                <view>立省</view>
+                                <view class='save-num'>{{item.saveAmount}}</view>
+                            </view>
+                        </view>
+                    </view>
+                    <view class='me-fx-row item-footer'>
+                        <view class='now-price'>
+                            <text class='symbol-text'>￥</text>
+                            <text class='price-num'>{{item.lowPrice}}</text>
+                            <text>起</text>
+                        </view>
+                        <text class='pin-btn'>拼一单</text>
+                    </view>
+                </view>
+            </view>
+        </block>
+    </view>
+
+
+
+    <!-- <view class='me-fx-col me-fx-c-c'  wx:if='{{dataList.length==0}}'> 
+        <no-data text="该分类暂无活动商品" url="https://xssj.letterbook.cn/applet/images/sj_no_data_img3.png"></no-data>
+    </view> -->
+    
+</view>
+
+
